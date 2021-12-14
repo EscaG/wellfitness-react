@@ -1,0 +1,75 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container {
+	// padding-left: 15px;
+	// padding-right: 15px;
+	// max-width: 1170px;
+	// margin: 0 auto;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	// margin-left: -15px;
+	// margin-right: -15px;
+}
+
+[class*="col-"] {
+	// padding-left: 15px;
+	// padding-right: 15px;
+	width: 100%;
+}
+
+.content {
+	padding: 12px;
+	background-color: pink;
+	margin-bottom: 30px;
+}
+
+$points: (
+	"xs": 576px,
+	"sm": 768px,
+	"md": 992px,
+	"lg": 1200px,
+	"xlg": 1440px,
+);
+
+@mixin media($point) {
+	@media (min-width: $point) {
+		@content;
+	}
+}
+
+.d-block {
+	display: block;
+}
+.d-none {
+	display: none;
+}
+
+@for $i from 1 through 12 {
+	.col-#{$i} {
+		width: 100 / 12 * $i * 1%;
+	}
+}
+
+@each $key, $point in $points {
+	@include media($point) {
+		@for $i from 1 through 12 {
+			.col-#{$key}-#{$i} {
+				width: 100 / 12 * $i * 1%;
+			}
+		}
+
+		.d-#{$key}-block {
+			display: block;
+		}
+		.d-#{$key}-none {
+			display: none;
+		}
+	}
+}

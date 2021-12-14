@@ -1,0 +1,57 @@
+@font-face {
+	font-family: "Inter-Variable";
+	font-display: swap;
+	src: url("./fonts/Inter-VariableFont.woff") format("woff"), url("./fonts/Inter-VariableFont.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: "WazzardM";
+	font-display: swap;
+	src: url("./fonts/MazzardM-Regular.woff") format("woff"), url("./fonts/MazzardM-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+}
+$fontFamily: "Inter-Variable";
+$minWidth: 320px;
+$maxWidth: 1920;
+$maxWidthContainer: 1410;
+$md1: $maxWidthContainer + 30;
+$md2: 991.98;
+$md3: 767.98;
+$md4: 575.98;
+
+#root {
+	font-family: $fontFamily, sans-serif;
+	width: 100%;
+	margin: auto;
+	height: 100%;
+	min-height: 100vh;
+	// overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+._container {
+	width: 100%;
+	max-width: $md1 + px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+@media (max-width: ($md3+px)) {
+	._container {
+		padding: 0 10px;
+	}
+}
+
+// header {
+// 	background-color: gray;
+// 	height: 200px;
+// }
+// footer {
+// 	background-color: lime;
+// 	height: 200px;
+// }
+.page {
+	flex: 1 1 auto;
+}
