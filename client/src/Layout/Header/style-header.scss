@@ -382,6 +382,9 @@ $md4: 575.98;
 			&:hover use {
 				fill: rgb(255, 0, 0);
 			}
+			@media (max-width: 576px) {
+				display: none;
+			}
 		}
 
 		&_favorites {
@@ -391,6 +394,9 @@ $md4: 575.98;
 			}
 			&:hover use {
 				fill: rgb(255, 0, 0);
+			}
+			@media (max-width: 576px) {
+				display: none;
 			}
 		}
 
