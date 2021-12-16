@@ -28,6 +28,11 @@ import gantel from './img/club/gantel.png';
 import medicine from './img/club/medicine.png';
 import massage from './img/club/massage.png';
 
+import promFirst from './img/promotion/first.png';
+import promSecond from './img/promotion/second.png';
+import promThird from './img/promotion/third.png';
+import promFourth from './img/promotion/fourth.png';
+
 
 
 
@@ -105,6 +110,68 @@ export const PageHome = () => {
 			imgSrc: gantel,
 			name: "Свободные веса"
 		}]);
+	const [promotionSlides, setPromotionSlides] = useState([
+		{
+			imgSrc: promFirst,
+			availability: "В наличии",
+			description: "Велотренажер CardioPower S35",
+			rating: "5",
+			price: {
+				fullPrice: "1 134 999 ",
+				sharePrice: "999 999 "
+			}
+		},
+		{
+			imgSrc: promSecond,
+			availability: "В наличии",
+			description: "Велотренажер CardioPower T20 Plus",
+			rating: "5",
+			price: {
+				fullPrice: "1 254 999 ",
+				sharePrice: "1 099 999 "
+			}
+		},
+		{
+			imgSrc: promThird,
+			availability: "Нет в наличии",
+			description: "Беговая дорожка CardioPower T30 Plus",
+			rating: "4",
+			price: {
+				fullPrice: "1 199 999 ",
+				sharePrice: null
+			}
+		},
+		{
+			imgSrc: promFourth,
+			availability: "Осталось мало",
+			description: "Беговая дорожка CardioPower S10",
+			rating: "5",
+			price: {
+				fullPrice: "1 010 999 ",
+				sharePrice: "849 999 "
+			}
+		},
+		{
+			imgSrc: promFourth,
+			availability: "Скоро ожидается",
+			description: "Беговая дорожка CardioPower S01",
+			rating: "0",
+			price: {
+				fullPrice: "1 134 999 ",
+				sharePrice: null
+			}
+		},
+		{
+			imgSrc: promFourth,
+			availability: "В наличии",
+			description: "Беговая дорожка CardioPower S35",
+			rating: "5",
+			price: {
+				fullPrice: "1 134 999 ",
+				sharePrice: "999 999 "
+			}
+		},
+	]);
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -114,9 +181,21 @@ export const PageHome = () => {
 		swipeToSlide: true,
 		waitForAnimate: false,
 		autoplay: true,
-		autoplaySpeed: 4000,
-		pauseOnHover: true
+		autoplaySpeed: 3000,
+		pauseOnHover: true,
+		fade: true
 	};
+	const settingsPromotion = {
+		className: "center",
+		centerMode: true,
+		infinite: true,
+		centerPadding: "100px",
+		slidesToShow: 4,
+		speed: 500,
+		autoplay: true,
+		autoplaySpeed: 2000,
+		// pauseOnHover: true
+	}
 	return (
 		<div className='page-home'>
 			{/* // ! Секция со слайдером */}
@@ -169,6 +248,48 @@ export const PageHome = () => {
 						)}
 					</div>
 					<Link to="/" className='article__link' href="#">Все категории</Link>
+				</div>
+				{/* //todo Акционный слайдер */}
+				<div className="article-promotion promotion" >
+					<div className='promotion__header'>
+						<h3 className="article__caption promotion__header_flex">Акция</h3>
+						<Link className='promotion__header_link' to="/" >Новинки</Link>
+						<Link className='promotion__header_link' to="/" >Мы рекомендуем</Link>
+					</div>
+
+					<Slider  {...settingsPromotion}>
+						{promotionSlides.map((item, index) =>
+							<div key={index++} className='promotion__slider-item item-slider'>
+								<div className="item-slider__image">
+									<img style={{ "width": "100%" }} src={item.imgSrc} alt="slide" />
+								</div>
+								<div className="item-slider__description description-item">
+									<div className="description-item__availability">
+										<span className={item.availability !== "Скоро ожидается" ? 'description-item__dots' : ""}>{item.availability}</span>
+										{item.availability === "В наличии" && <span>Есть в шоу-руме</span>}
+										{item.availability === "Осталось мало" && <span>Есть в шоу-руме</span>}
+										<span></span>
+									</div>
+									<div className="description-item__name">{item.description}</div>
+									<div className="description-item_rating">Рейтинг {item.rating}</div>
+									<div className="desription-item__price-button price-button">
+										{/* <p className="">{item.price.fullPrice}</p> */}
+										{item.price.sharePrice ?
+											<div className="price-button__price">
+												<s>{item.price.sharePrice}  &#8372;</s>
+												<p>{item.price.fullPrice} &#8372;</p>
+											</div>
+											:
+											<div className="price-button__price">
+												<p>{item.price.fullPrice} &#8372;</p>
+											</div>
+										}
+										<div className="price-button__button">В корзину</div>
+									</div>
+								</div>
+							</div>
+						)}
+					</Slider>
 				</div>
 			</article>
 		</div>
