@@ -33,7 +33,11 @@ import promSecond from './img/promotion/second.png';
 import promThird from './img/promotion/third.png';
 import promFourth from './img/promotion/fourth.png';
 
+import iconPercent from './img/icons/percent.png';
+import iconLike from './img/icons/like.png';
+import iconNew from './img/icons/new.png';
 
+import svgGroup from './img/icons/iconsSvgGroup.svg';
 
 
 
@@ -186,13 +190,13 @@ export const PageHome = () => {
 		fade: true
 	};
 	const settingsPromotion = {
-		className: "center",
+		className: "center promotion-slider",
 		centerMode: true,
 		infinite: true,
 		centerPadding: "100px",
 		slidesToShow: 4,
 		speed: 500,
-		autoplay: true,
+		autoplay: false,
 		autoplaySpeed: 2000,
 		// pauseOnHover: true
 	}
@@ -217,7 +221,6 @@ export const PageHome = () => {
 					<div className='grid__home setting-home'>
 
 						{homeImages.map((img, index) =>
-							// <div className={"home__grid-item_i" + index + " home__grid-item"} key={index++} >
 							<Link
 								className={"grid__item_i" + index + " grid__item"}
 								key={index++}
@@ -225,7 +228,6 @@ export const PageHome = () => {
 								<h3 className={"grid__item_header" + index + " grid__item_header"}>{img.name}</h3>
 								<img className={"grid__item_image_m" + index + " grid__item_image"} src={img.imgSrc} alt="home training" />
 							</Link>
-							//{/* </div> */ }
 						)}
 
 					</div>
@@ -235,8 +237,8 @@ export const PageHome = () => {
 				<div className='article-club club'>
 					<h3 className='article__caption'>Для фитнес клубов</h3>
 					<div className='grid__club seetting-club'>
+
 						{clubImages.map((img, index) =>
-							// <div className={"grid__item_i" + index + " grid__item"} key={index++} >
 							<Link
 								className={"grid__item_i" + index + " grid__item grid__item_club" + index}
 								key={index++}
@@ -244,8 +246,8 @@ export const PageHome = () => {
 								<h3 className={"grid__item_header" + index + " grid__item_header grid__item_header_club" + index}>{img.name}</h3>
 								<img className={"grid__item_image_m" + index + " grid__item_image grid__item_image_club" + index} src={img.imgSrc} alt="home training" />
 							</Link>
-							//{/* </div> */ }
 						)}
+
 					</div>
 					<Link to="/" className='article__link' href="#">Все категории</Link>
 				</div>
@@ -257,9 +259,34 @@ export const PageHome = () => {
 						<Link className='promotion__header_link' to="/" >Мы рекомендуем</Link>
 					</div>
 
-					<Slider  {...settingsPromotion}>
+					<Slider className='promotion' {...settingsPromotion}>
 						{promotionSlides.map((item, index) =>
 							<div key={index++} className='promotion__slider-item item-slider'>
+
+								<div className="item-slider__icons icons-slider">
+									<div className='icons-slider__list'>
+										<Link to="/" className='icons-slider__item translate'><img src={iconPercent} alt="credit" /></Link>
+										<Link to="/" className='icons-slider__item translate'><img src={iconLike} alt="like" /></Link>
+										<Link to="/" className='icons-slider__item translate'><img src={iconNew} alt="new" /></Link>
+									</div>
+
+									<div className='icons-slider__list'>
+										<Link className='icons-slider__item icons-slider__item_svg' to="/">
+											<svg className='bottom-footer__column_icons' width="17" height="17" >
+												<title>comparisons</title>
+												<use xlinkHref={svgGroup + "#comparisonHome"}></use>
+											</svg>
+										</Link>
+										<Link className='icons-slider__item icons-slider__item_svg' to="/">
+											<svg className='bottom-footer__column_icons' width="21" height="17" >
+												<title>heart</title>
+												<use xlinkHref={svgGroup + "#heart"}></use>
+											</svg>
+										</Link>
+									</div>
+
+								</div>
+
 								<div className="item-slider__image">
 									<img style={{ "width": "100%" }} src={item.imgSrc} alt="slide" />
 								</div>
@@ -270,7 +297,7 @@ export const PageHome = () => {
 										{item.availability === "Осталось мало" && <span>Есть в шоу-руме</span>}
 										<span></span>
 									</div>
-									<div className="description-item__name">{item.description}</div>
+									<Link to="/" className="description-item__name">{item.description}</Link>
 									<div className="description-item_rating">Рейтинг {item.rating}</div>
 									<div className="desription-item__price-button price-button">
 										{/* <p className="">{item.price.fullPrice}</p> */}
@@ -284,7 +311,9 @@ export const PageHome = () => {
 												<p>{item.price.fullPrice} &#8372;</p>
 											</div>
 										}
-										<div className="price-button__button">В корзину</div>
+										<div className="price-button__button">
+											<button>Купить</button>
+										</div>
 									</div>
 								</div>
 							</div>
