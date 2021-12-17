@@ -196,7 +196,7 @@ export const PageHome = () => {
 		centerPadding: "100px",
 		slidesToShow: 4,
 		speed: 500,
-		autoplay: false,
+		autoplay: true,
 		autoplaySpeed: 2000,
 		// pauseOnHover: true
 	}
@@ -258,67 +258,93 @@ export const PageHome = () => {
 						<Link className='promotion__header_link' to="/" >Новинки</Link>
 						<Link className='promotion__header_link' to="/" >Мы рекомендуем</Link>
 					</div>
+					<div className='promotion__slider'>
 
-					<Slider className='promotion' {...settingsPromotion}>
-						{promotionSlides.map((item, index) =>
-							<div key={index++} className='promotion__slider-item item-slider'>
 
-								<div className="item-slider__icons icons-slider">
-									<div className='icons-slider__list'>
-										<Link to="/" className='icons-slider__item translate'><img src={iconPercent} alt="credit" /></Link>
-										<Link to="/" className='icons-slider__item translate'><img src={iconLike} alt="like" /></Link>
-										<Link to="/" className='icons-slider__item translate'><img src={iconNew} alt="new" /></Link>
+						<Slider  {...settingsPromotion}>
+							{promotionSlides.map((item, index) =>
+								<div key={index++} className='promotion__slider-item item-slider'>
+
+									<div className="item-slider__icons icons-slider">
+										<div className='icons-slider__list'>
+											<Link to="/" className='icons-slider__item translate'><img src={iconPercent} alt="credit" /></Link>
+											<Link to="/" className='icons-slider__item translate'><img src={iconLike} alt="like" /></Link>
+											<Link to="/" className='icons-slider__item translate'><img src={iconNew} alt="new" /></Link>
+										</div>
+
+										<div className='icons-slider__list'>
+											<Link className='icons-slider__item icons-slider__item_svg' to="/">
+												<svg className='bottom-footer__column_icons' width="17" height="17" >
+													<title>comparisons</title>
+													<use xlinkHref={svgGroup + "#comparisonHome"}></use>
+												</svg>
+											</Link>
+											<Link className='icons-slider__item icons-slider__item_svg' to="/">
+												<svg className='bottom-footer__column_icons' width="21" height="17" >
+													<title>heart</title>
+													<use xlinkHref={svgGroup + "#heart"}></use>
+												</svg>
+											</Link>
+										</div>
+
 									</div>
 
-									<div className='icons-slider__list'>
-										<Link className='icons-slider__item icons-slider__item_svg' to="/">
-											<svg className='bottom-footer__column_icons' width="17" height="17" >
-												<title>comparisons</title>
-												<use xlinkHref={svgGroup + "#comparisonHome"}></use>
-											</svg>
-										</Link>
-										<Link className='icons-slider__item icons-slider__item_svg' to="/">
-											<svg className='bottom-footer__column_icons' width="21" height="17" >
-												<title>heart</title>
-												<use xlinkHref={svgGroup + "#heart"}></use>
-											</svg>
-										</Link>
+									<div className="item-slider__image">
+										<img style={{ "width": "100%" }} src={item.imgSrc} alt="slide" />
 									</div>
+									<div className="item-slider__description description-item">
+										<div className="description-item__availability">
 
-								</div>
+											{item.availability === "В наличии" && <span className='description-item__dots_green'>
+												{item.availability}
+												<span className='description-item__dots_green_1'></span>
+												<span className='description-item__dots_green_2'></span>
+												<span className='description-item__dots_green_3'></span>
+											</span>}
 
-								<div className="item-slider__image">
-									<img style={{ "width": "100%" }} src={item.imgSrc} alt="slide" />
-								</div>
-								<div className="item-slider__description description-item">
-									<div className="description-item__availability">
-										<span className={item.availability !== "Скоро ожидается" ? 'description-item__dots' : ""}>{item.availability}</span>
-										{item.availability === "В наличии" && <span>Есть в шоу-руме</span>}
-										{item.availability === "Осталось мало" && <span>Есть в шоу-руме</span>}
-										<span></span>
-									</div>
-									<Link to="/" className="description-item__name">{item.description}</Link>
-									<div className="description-item_rating">Рейтинг {item.rating}</div>
-									<div className="desription-item__price-button price-button">
-										{/* <p className="">{item.price.fullPrice}</p> */}
-										{item.price.sharePrice ?
-											<div className="price-button__price">
-												<s>{item.price.sharePrice}  &#8372;</s>
-												<p>{item.price.fullPrice} &#8372;</p>
+											{item.availability === "Нет в наличии" && <span className='description-item__dots_red'>
+												{item.availability}
+												<span className='description-item__dots_red_1'></span>
+												<span className='description-item__dots_red_2'></span>
+												<span className='description-item__dots_red_3'></span>
+											</span>}
+
+											{item.availability === "Осталось мало" && <span className='description-item__dots_orange'>
+												{item.availability}
+												<span className='description-item__dots_orange_1'></span>
+												<span className='description-item__dots_orange_2'></span>
+												<span className='description-item__dots_orange_3'></span>
+											</span>}
+
+											{item.availability === "Скоро ожидается" && <span className='description-item__wait'>{item.availability}</span>}
+
+											{item.availability !== "Скоро ожидается" &&
+												<span className='description-item__showRoom'>Есть в шоу-руме</span>}
+
+										</div>
+										<Link to="/" className="description-item__name">{item.description}</Link>
+										<div className="description-item__rating">Рейтинг {item.rating}</div>
+										<div className="desription-item__price-button price-button">
+											{item.price.sharePrice ?
+												<div className="price-button__price">
+													<div className='price-button__shareprice'>{item.price.sharePrice}  &#8372;</div>
+													<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
+												</div>
+												:
+												<div className="price-button__price">
+													<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
+												</div>
+											}
+											<div >
+												<button className="price-button__button">Купить</button>
 											</div>
-											:
-											<div className="price-button__price">
-												<p>{item.price.fullPrice} &#8372;</p>
-											</div>
-										}
-										<div className="price-button__button">
-											<button>Купить</button>
 										</div>
 									</div>
 								</div>
-							</div>
-						)}
-					</Slider>
+							)}
+						</Slider>
+					</div>
+					<Link to="/" className='article__link' href="#">Все товары по акции</Link>
 				</div>
 			</article>
 		</div>
