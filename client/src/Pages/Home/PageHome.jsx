@@ -37,12 +37,34 @@ import iconPercent from './img/icons/percent.png';
 import iconLike from './img/icons/like.png';
 import iconNew from './img/icons/new.png';
 
-import svgGroup from './img/icons/iconsSvgGroup.svg';
+import heart from './img/icons/heart.svg';
+import comparison from './img/icons/comparison.svg';
+
+import bannerFirst from './img/banner/banner1.png';
+import bannerSecond from './img/banner/banner2.png';
+import bannerThird from './img/banner/banner3.png';
+
+import brand1 from './img/brands/brand1.png';
+import brand2 from './img/brands/brand2.png';
+import brand3 from './img/brands/brand3.png';
+import brand4 from './img/brands/brand4.png';
+import brand5 from './img/brands/brand5.png';
+import brand6 from './img/brands/brand6.png';
+import brand7 from './img/brands/brand7.png';
+import brand8 from './img/brands/brand8.png';
+import brand9 from './img/brands/brand9.png';
+import brand10 from './img/brands/brand10.png';
+import brand11 from './img/brands/brand11.png';
+import brand12 from './img/brands/brand12.png';
+import brand13 from './img/brands/brand13.png';
+import brand14 from './img/brands/brand14.png';
+import brand15 from './img/brands/brand15.png';
 
 
 
 
 export const PageHome = () => {
+	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
 	const [slides, setSlides] = useState([firstSlide, secondSlide, thirdSlide, fourthSlide]);
 	const [homeImages, setHomeImages] =
 		useState([{
@@ -191,6 +213,7 @@ export const PageHome = () => {
 	};
 	const settingsPromotion = {
 		className: "center promotion-slider",
+		arrows: false,
 		centerMode: true,
 		infinite: true,
 		centerPadding: "100px",
@@ -199,6 +222,34 @@ export const PageHome = () => {
 		autoplay: true,
 		autoplaySpeed: 2000,
 		// pauseOnHover: true
+		responsive: [
+			{
+				breakpoint: 1400,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1,
+
+					// infinite: true,
+					// dots: true
+				}
+			},
+			{
+				breakpoint: 1150,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					initialSlide: 1
+				}
+			},
+			{
+				breakpoint: 800,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					centerPadding: "0px",
+				}
+			}
+		]
 	}
 	return (
 		<div className='page-home'>
@@ -276,13 +327,13 @@ export const PageHome = () => {
 											<Link className='icons-slider__item icons-slider__item_svg' to="/">
 												<svg className='bottom-footer__column_icons' width="17" height="17" >
 													<title>comparisons</title>
-													<use xlinkHref={svgGroup + "#comparisonHome"}></use>
+													<use xlinkHref={comparison + "#comparison"}></use>
 												</svg>
 											</Link>
 											<Link className='icons-slider__item icons-slider__item_svg' to="/">
 												<svg className='bottom-footer__column_icons' width="21" height="17" >
 													<title>heart</title>
-													<use xlinkHref={svgGroup + "#heart"}></use>
+													<use xlinkHref={heart + "#heart"}></use>
 												</svg>
 											</Link>
 										</div>
@@ -347,6 +398,54 @@ export const PageHome = () => {
 					<Link to="/" className='article__link' href="#">Все товары по акции</Link>
 				</div>
 			</article>
+			<section className="section-ideas__home-page section-ideas">
+				<div className="section-ideas__block">
+					<h3 className='article__caption section-ideas__caption'>Идеи и подборки</h3>
+					<div className="section-ideas__banner banner-home">
+						<div className="banner-home__first">
+							<Link to="/"><img src={bannerFirst} alt="banner" /></Link>
+						</div>
+						<div className="banner-home__second">
+							<Link to="/"><img src={bannerSecond} alt="banner" /></Link>
+						</div>
+						<div className="banner-home__third">
+							<Link to="/"><img src={bannerThird} alt="banner" /></Link>
+						</div>
+					</div>
+					<Link className='article__link section-ideas__link' to="/">Полная подборка</Link>
+				</div>
+			</section>
+			<section className="section-brands__home-page section-brands">
+				<h3 className='article__caption'>Популярные бренды</h3>
+				<ul className="section-brands__list">
+					<li className="section-brands__item">
+						<Link to="/">Беговые дорожки</Link>
+					</li>
+					<li className="section-brands__item">
+						<Link to="/">Эллиптические тренажеры</Link>
+					</li>
+					<li className="section-brands__item">
+						<Link to="/">Велотренажеры</Link>
+					</li>
+					<li className="section-brands__item">
+						<Link to="/">Силовые тренажеры</Link>
+					</li>
+					<li className="section-brands__item">
+						<Link to="/">Батуты</Link>
+					</li>
+					<li className="section-brands__item">
+						<Link to="/">Игровые столы</Link>
+					</li>
+				</ul>
+				<div className="section-brands__brands-list-home brands-list-home">
+					{brands.map(item =>
+						<div key={item} className="brands-list-home__item">
+							<img className='brands-list-home__image' src={item} alt="" />
+						</div>
+
+					)}
+				</div>
+			</section>
 		</div>
 	)
 
