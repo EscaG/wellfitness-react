@@ -104,7 +104,7 @@ export const Footer = () => {
 										<a href="tel:88001234567" className='contacts__link'>8(800)123-22-33</a>
 										<span className='contacts__descript'>для Украины</span>
 									</li>
-									<li><a href="#" className='contacts__call'>Заказать звонок</a></li>
+									<li><a href="#" className='contacts__calls'>Заказать звонок</a></li>
 								</ul>
 							</div>
 							<div className="contacts-footer__column email col-xs-6 col-sm-3 col-md-12 col-lg-12">

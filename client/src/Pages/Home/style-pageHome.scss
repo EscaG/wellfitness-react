@@ -3,18 +3,13 @@
 .slider-section {
 	margin: auto;
 	overflow: hidden;
+	margin: 0 0 30px 0;
 }
 .article {
 	&__homePage {
 		max-width: 1440px;
 		padding: 110px 15px 0 15px;
 		margin: auto;
-		@media (max-width: 992px) {
-			padding: 0 20px;
-		}
-		@media (max-width: 768px) {
-			padding: 0 10px;
-		}
 	}
 	// Стили для все оглавлений на всей странице
 	&__caption {
@@ -41,6 +36,19 @@
 		&:hover {
 			background-color: #f53b49;
 			color: #fff;
+		}
+	}
+	@media (max-width: 992px) {
+		&__homePage {
+			padding: 0 20px;
+		}
+	}
+	@media (max-width: 768px) {
+		&__homePage {
+			padding: 0 10px;
+		}
+		&__caption {
+			font-size: 22px;
 		}
 	}
 }
@@ -80,7 +88,7 @@
 		background: #fff;
 		&_header {
 			position: absolute;
-			width: 120px;
+			width: 144px;
 			top: 27px;
 			left: 20px;
 			font-size: 20px;
@@ -148,6 +156,9 @@
 }
 .club {
 	margin: 120px 0 0 0;
+	@media (max-width: 768px) {
+		margin: 70px 0 0 0;
+	}
 }
 .grid {
 	&__club {
@@ -192,7 +203,9 @@
 	&__header {
 		display: flex;
 		align-items: center;
-		& > a {
+		margin: 0 0 15px 0;
+
+		&_link {
 			margin: 0 30px 0 0;
 			color: #828282;
 			font-size: 20px;
@@ -200,9 +213,17 @@
 		}
 		&_flex {
 			margin: 0 30px 0 0;
+			// width: 100%;
 		}
 		@media (max-width: 576px) {
 			flex-direction: column;
+			align-items: flex-start;
+			&_flex {
+				margin: 0 0 20px 0;
+			}
+			&_link {
+				margin: 0 0 5px 0;
+			}
 		}
 	}
 	&__slider-item {
@@ -269,7 +290,7 @@
 			fill: #858fa4;
 		}
 		&:hover use {
-			fill: red;
+			fill: #f53b49;
 		}
 	}
 }
@@ -405,36 +426,53 @@
 	justify-content: space-between;
 	flex-wrap: wrap;
 	margin: 0 0 30px 0;
+	// div {
+	// 	width: 100%;
+	// }
 	img {
 		width: 100%;
 	}
 	&__first {
+		// flex: 1;
 	}
 	&__second {
+		// flex: 1;
 	}
 	&__third {
+		// flex: 1;
 	}
 }
 .section-brands {
 	max-width: 1440px;
 	padding: 0 15px 0 15px;
-	margin: auto;
+	margin: 0 auto 30px auto;
+	overflow: auto;
 	&__list {
 		margin: 0 0 30px 0;
+		display: flex;
 	}
 	&__item {
-		display: inline-block;
+		// display: inline-block;
 		margin: 0 30px 0 0;
 		font-variation-settings: "wght" 500;
 		a {
 			font-size: 16px;
 			color: #384255;
+			white-space: nowrap;
 		}
+	}
+	&__cap {
+		margin: auto;
+	}
+	&__hr {
+		padding: 0 0 30px 15px;
+		border-bottom: 1px solid rgba(133, 143, 164, 0.2);
+		border-radius: 1px;
 	}
 }
 .brands-list-home {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(234px, 1fr));
+	grid-template-columns: repeat(5, minmax(234px, 1fr));
 	column-gap: 3px;
 	&__item {
 		position: relative;
@@ -450,6 +488,258 @@
 	}
 }
 
+.help-home {
+	max-width: 1440px;
+	padding: 0 15px 0 15px;
+	margin: 135px auto 30px auto;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+
+	&__card {
+		position: relative;
+		padding: 35px 45px 30px 45px;
+		display: flex;
+		justify-content: center;
+		overflow: hidden;
+		text-align: center;
+		background-color: #fff;
+		border: 1px solid #858fa433;
+		border-radius: 6px;
+		&:hover {
+			justify-content: space-between;
+			padding: 30px 0 0 35px;
+			margin: -20px 0 0 0;
+			background-color: #f53b49;
+			text-align: left;
+		}
+		use {
+			fill: #f53b49;
+		}
+		&:hover use {
+			fill: #fff;
+		}
+		&:hover .main-helphome {
+			&__header {
+				color: #fff;
+			}
+			&__description {
+				color: #f6f6f6;
+			}
+			&__link {
+				justify-content: start;
+				// margin: 0 0 20px 0;
+			}
+			a {
+				color: #fff;
+			}
+			use {
+				stroke: #fff;
+			}
+		}
+	}
+	&__card:hover > &__hover {
+		position: relative;
+		transform: translateX(0);
+	}
+	&__main {
+		svg {
+			margin: 0 0 27px 0;
+		}
+	}
+	&__hover {
+		padding: 30% 0 0 0;
+		position: absolute;
+		display: flex;
+		align-items: flex-end;
+		// height: 100%;
+		top: 0;
+		right: 0;
+		transition: 0.3s;
+		transform: translateX(100%);
+		img {
+			height: 100%;
+		}
+	}
+	@media (max-width: 1300px) {
+		grid-template-columns: repeat(2, 1fr);
+		margin: 60px auto 30px auto;
+		&__card {
+			&:hover {
+				margin: 0;
+			}
+		}
+		&__hover {
+			padding: 0 0 0 0;
+		}
+	}
+	@media (max-width: 992px) {
+		&__card {
+			padding: 30px 40px 30px 40px;
+			&:hover {
+				padding: 25px 0 0 25px;
+			}
+		}
+		&__main {
+			svg {
+				margin: 0 0 20px 0;
+			}
+		}
+		&__hover {
+			padding: 15% 0 0 0;
+		}
+	}
+	@media (max-width: 768px) {
+		grid-template-columns: repeat(1, 1fr);
+		&__hover {
+			padding: 0 0 0 0;
+		}
+	}
+	@media (max-width: 576px) {
+		&__card {
+			// padding: 30px 40px 30px 40px;
+			&:hover {
+				padding: 20px 0 0 20px;
+			}
+		}
+		&__card:hover .main-helphome {
+			margin: 0 0 10px 0;
+		}
+		&__hover {
+			// padding: 25% 0 0 0;
+		}
+	}
+}
+.main-helphome {
+	&__header {
+		margin: 0 0 10px 0;
+		font-size: 20px;
+		color: #1a1a25;
+		font-variation-settings: "wght" 800;
+	}
+	&__description {
+		margin: 0 0 20px 0;
+		color: #384255;
+		font-size: 16px;
+	}
+	&__link {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 0 10px 0;
+		use {
+			stroke: #f53b49;
+		}
+		svg {
+			// align-self: center;
+			margin: 0;
+		}
+	}
+	a {
+		color: #f53b49;
+		margin: 0 8px 0 0;
+	}
+	@media (max-width: 768px) {
+		&__header {
+			font-size: 16px;
+		}
+		&__description {
+			font-size: 14px;
+		}
+	}
+}
+.about-home {
+	max-width: 1440px;
+	padding: 0 15px 0 15px;
+	margin: 0 auto 30px auto;
+	display: flex;
+	background: url("./img/map.png");
+	background-position: right;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 600px;
+	&__presentation {
+		flex: 1.3;
+		align-self: center;
+		display: flex;
+		flex-direction: column;
+	}
+	&__empty {
+		flex: 2;
+	}
+	&__title {
+	}
+	&__subtitle {
+		font-size: 34px;
+		margin: 0 0 20px 0;
+	}
+	&__description {
+		margin: 0 0 40px 0;
+		font-size: 18px;
+	}
+	&__link {
+		align-self: flex-start;
+	}
+	@media (max-width: 1300px) {
+		flex-direction: column;
+		background-position: bottom;
+		margin: 100px 0 0 0;
+		&__presentation {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		&__title {
+			flex: 0 1 100%;
+		}
+		&__subtitle {
+			flex: 0 1 50%;
+			font-size: 24px;
+			padding: 0 20px 0 0;
+		}
+		&__description {
+			flex: 0 1 50%;
+		}
+		&__link {
+			// flex: 0 1 100%;
+			align-self: flex-start;
+		}
+		&__empty {
+			// display: none;
+		}
+	}
+	@media (max-width: 992px) {
+		&__presentation {
+			flex-direction: column;
+			flex-wrap: nowrap;
+		}
+		&__title {
+			font-size: 22px;
+			margin: 0 0 20px 0;
+			flex: unset;
+		}
+		&__subtitle {
+			font-size: 18px;
+			padding: 0;
+			flex: unset;
+		}
+		&__description {
+			font-size: 14px;
+			margin: 0 0 20px 0;
+			flex: unset;
+		}
+		&__link {
+		}
+		&__empty {
+		}
+	}
+	@media (max-width: 768px) {
+		margin: 80px 0 0 0;
+		height: 600px;
+	}
+	@media (max-width: 576px) {
+		height: 500px;
+	}
+}
 .slick-initialized.promotion-slider .slick-slide {
 	padding: 0 10px;
 }

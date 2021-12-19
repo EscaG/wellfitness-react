@@ -43,6 +43,7 @@ import comparison from './img/icons/comparison.svg';
 import bannerFirst from './img/banner/banner1.png';
 import bannerSecond from './img/banner/banner2.png';
 import bannerThird from './img/banner/banner3.png';
+import bannerFourth from './img/banner/banner4.png';
 
 import brand1 from './img/brands/brand1.png';
 import brand2 from './img/brands/brand2.png';
@@ -60,12 +61,54 @@ import brand13 from './img/brands/brand13.png';
 import brand14 from './img/brands/brand14.png';
 import brand15 from './img/brands/brand15.png';
 
+import helpCall from './img/icons/help-call.svg';
+import helpHand from './img/icons/help-hand.svg';
+import helpHelp from './img/icons/help-help.svg';
+import helpSport from './img/icons/help-sport.svg';
+import phone from './img/icons/phone.png';
 
+import arrowlink from './img/icons/arrow-link.svg';
 
 
 export const PageHome = () => {
 	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
 	const [slides, setSlides] = useState([firstSlide, secondSlide, thirdSlide, fourthSlide]);
+	const helpHome = [{
+		imgSrc: helpCall,
+		width: "59",
+		height: "59",
+		imgId: "help-call",
+		header: "Помощь покупателю",
+		description: "Узнайте как приобрести товар, способы доставки и оплаты, а также условия гарантии.",
+		link: "Подробнее"
+	},
+	{
+		imgSrc: helpHand,
+		width: "60",
+		height: "60",
+		imgId: "help-hand",
+		header: "Заявка на сервис",
+		description: "Оставьте заявку на проведение гарантийного и постгарантийного ремонта.",
+		link: "Оставить заявку"
+	},
+	{
+		imgSrc: helpHelp,
+		width: "59",
+		height: "59",
+		imgId: "help-help",
+		header: "Личный кабинет партнера B2B",
+		description: "Личный кабинет дилера с доступом к информационным материалам.",
+		link: "Стать партнером"
+	},
+	{
+		imgSrc: helpSport,
+		width: "64",
+		height: "55",
+		imgId: "help-sport",
+		header: "Выставочный зал",
+		description: "Оставьте заявку на посещение шоу-рума в Москве.",
+		link: "Записаться"
+	}]
 	const [homeImages, setHomeImages] =
 		useState([{
 			imgSrc: treadmill,
@@ -199,7 +242,7 @@ export const PageHome = () => {
 		},
 	]);
 	const settings = {
-		dots: true,
+		dots: false,
 		infinite: true,
 		speed: 1000,
 		slidesToShow: 1,
@@ -234,19 +277,29 @@ export const PageHome = () => {
 				}
 			},
 			{
-				breakpoint: 1150,
+				breakpoint: 992,
 				settings: {
+					centerPadding: "70px",
 					slidesToShow: 2,
 					slidesToScroll: 1,
 					initialSlide: 1
 				}
 			},
 			{
-				breakpoint: 800,
+				breakpoint: 768,
 				settings: {
+					centerPadding: "0px",
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					initialSlide: 1
+				}
+			},
+			{
+				breakpoint: 576,
+				settings: {
+					centerPadding: "40px",
 					slidesToShow: 1,
 					slidesToScroll: 1,
-					centerPadding: "0px",
 				}
 			}
 		]
@@ -262,7 +315,7 @@ export const PageHome = () => {
 						</div>
 					)}
 				</Slider>
-				<div style={{ "height": "30px" }}></div>
+				{/* <div style={{ "height": "30px" }}></div> */}
 			</section>
 			{/* // ! Главное содержимое странички */}
 			<article className='article__homePage'>
@@ -406,7 +459,7 @@ export const PageHome = () => {
 							<Link to="/"><img src={bannerFirst} alt="banner" /></Link>
 						</div>
 						<div className="banner-home__second">
-							<Link to="/"><img src={bannerSecond} alt="banner" /></Link>
+							<Link to="/"><img src={bannerFourth} alt="banner" /></Link>
 						</div>
 						<div className="banner-home__third">
 							<Link to="/"><img src={bannerThird} alt="banner" /></Link>
@@ -415,8 +468,10 @@ export const PageHome = () => {
 					<Link className='article__link section-ideas__link' to="/">Полная подборка</Link>
 				</div>
 			</section>
+			<div className="section-brands section-brands__cap">
+				<h3 className='article__caption '>Популярные бренды</h3>
+			</div>
 			<section className="section-brands__home-page section-brands">
-				<h3 className='article__caption'>Популярные бренды</h3>
 				<ul className="section-brands__list">
 					<li className="section-brands__item">
 						<Link to="/">Беговые дорожки</Link>
@@ -442,10 +497,58 @@ export const PageHome = () => {
 						<div key={item} className="brands-list-home__item">
 							<img className='brands-list-home__image' src={item} alt="" />
 						</div>
-
 					)}
 				</div>
 			</section>
+			<div className="section-brands section-brands__hr">
+				<Link className='article__link' to="/">Все бренды</Link>
+			</div>
+
+			<section className='section-help__home-page help-home'>
+				{helpHome.map((item, index) =>
+					<div className='help-home__card' key={index}>
+						<div className='help-home__main main-helphome'>
+
+							<svg className={"main-helphome__" + item.imgId} width={item.width} height={item.height}>
+								<title>heart</title>
+								<use xlinkHref={item.imgSrc + "#" + item.imgId}></use>
+							</svg>
+							<h3 className='main-helphome__header'>{item.header}</h3>
+							<p className='main-helphome__description'>{item.description}</p>
+							<div className='main-helphome__link'>
+								<Link to="/">{item.link}</Link>
+								<svg className='' width="9" height="11">
+									<title>heart</title>
+									<use xlinkHref={arrowlink + "#arrow-link"}></use>
+								</svg>
+							</div>
+						</div>
+						<div className='help-home__hover'><img src={phone} alt="phone" /></div>
+					</div>
+				)}
+			</section>
+			<section className="section-about__home-page about-home">
+				<div className="about-home__presentation">
+					<h4 className='article__caption about-home__title'>О компании</h4>
+					<div className='about-home__subtitle'>
+						Надежный партнер с 2005 года для сотен компаний от Калининграда до Владивостока.
+					</div>
+
+					<div className='about-home__description'>
+						<p>
+							Оптима Импорт — один из самых крупных импортеров фитнес-оборудования, эксклюзивно представляет на российском рынке ведущих мировых производителей: Sole Fitness, Optima Fitness, Halley, Marcy, SKI Simulator и др.
+						</p>
+						<br />
+						<p>
+							Мы предлагаем широкий спектр самой современной и качественной продукции как для домашнего, так и для коммерческого фитнеса.
+						</p>
+					</div>
+
+					<Link className='article__link about-home__link' to='/'>Подробнее о компании</Link>
+				</div>
+				<div className="about-home__empty"></div>
+			</section>
+
 		</div>
 	)
 
