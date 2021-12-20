@@ -69,6 +69,8 @@ import phone from './img/icons/phone.png';
 
 import arrowlink from './img/icons/arrow-link.svg';
 
+import partner from './img/partner.png';
+
 
 export const PageHome = () => {
 	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
@@ -297,7 +299,7 @@ export const PageHome = () => {
 			{
 				breakpoint: 576,
 				settings: {
-					centerPadding: "40px",
+					centerPadding: "0px",
 					slidesToShow: 1,
 					slidesToScroll: 1,
 				}
@@ -531,7 +533,7 @@ export const PageHome = () => {
 				<div className="about-home__presentation">
 					<h4 className='article__caption about-home__title'>О компании</h4>
 					<div className='about-home__subtitle'>
-						Надежный партнер с 2005 года для сотен компаний от Калининграда до Владивостока.
+						Надежный партнер с 2005 года для сотен компаний от Калининграда до Владивостока.
 					</div>
 
 					<div className='about-home__description'>
@@ -548,7 +550,15 @@ export const PageHome = () => {
 				</div>
 				<div className="about-home__empty"></div>
 			</section>
-
+			<section className="section-partner__home-page partner-home">
+				<div className='partner-home__left'>
+					<img className='partner-home__image' src={partner} alt="partner" />
+				</div>
+				<div className='partner-home__right'>
+					<div>Станьте нашим партнером <span className='partner-home__right_red'>и получите возможность</span> представлять нашу продукцию в вашем регионе.</div>
+					<Link className='article__link partner-home__link' to='/'>Стать партнером</Link>
+				</div>
+			</section	>
 		</div>
 	)
 

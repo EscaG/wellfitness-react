@@ -364,6 +364,9 @@
 		color: #909cb5;
 		margin: 0 0 16px 0;
 	}
+	@media (max-width: 576px) {
+		padding: 10px;
+	}
 }
 .price-button {
 	display: flex;
@@ -490,7 +493,7 @@
 
 .help-home {
 	max-width: 1440px;
-	padding: 0 15px 0 15px;
+	padding: 0 20px 0 20px;
 	margin: 135px auto 30px auto;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -513,6 +516,7 @@
 			text-align: left;
 		}
 		use {
+			transition: 0.6s;
 			fill: #f53b49;
 		}
 		&:hover use {
@@ -532,7 +536,7 @@
 			a {
 				color: #fff;
 			}
-			use {
+			&__link use {
 				stroke: #fff;
 			}
 		}
@@ -589,6 +593,7 @@
 		}
 	}
 	@media (max-width: 768px) {
+		padding: 0 10px;
 		grid-template-columns: repeat(1, 1fr);
 		&__hover {
 			padding: 0 0 0 0;
@@ -649,7 +654,7 @@
 }
 .about-home {
 	max-width: 1440px;
-	padding: 0 15px 0 15px;
+	padding: 0 20px;
 	margin: 0 auto 30px auto;
 	display: flex;
 	background: url("./img/map.png");
@@ -682,7 +687,7 @@
 	@media (max-width: 1300px) {
 		flex-direction: column;
 		background-position: bottom;
-		margin: 100px 0 0 0;
+		margin: 100px auto 30px auto;
 		&__presentation {
 			flex-direction: row;
 			flex-wrap: wrap;
@@ -733,13 +738,73 @@
 		}
 	}
 	@media (max-width: 768px) {
-		margin: 80px 0 0 0;
-		height: 600px;
+		padding: 0 10px;
+		margin: 80px auto 30px auto;
+		height: 550px;
 	}
 	@media (max-width: 576px) {
 		height: 500px;
 	}
 }
+
+.partner-home {
+	max-width: 1410px;
+	padding: 0 20px;
+	margin: 0 auto 30px auto;
+	display: flex;
+	background-color: #1a1a25;
+	&__left {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+	}
+	&__image {
+		height: 80%;
+	}
+	&__right {
+		padding: 70px 0 0 0;
+		flex: 1;
+		color: #fff;
+		font-size: 36px;
+		font-variation-settings: "wght" 500;
+		&_red {
+			color: #f53b49;
+		}
+	}
+	&__link {
+		margin: 30px 0 30px 0;
+		color: #fff;
+		border: 2px solid #fff;
+		&:hover {
+			color: #f53b49;
+			border: 2px solid #f53b49;
+			background-color: unset;
+		}
+	}
+	@media (max-width: 992px) {
+		&__left {
+			justify-content: start;
+		}
+		&__image {
+			height: unset;
+			width: 80%;
+		}
+		&__right {
+			padding: 50px 0 0 0;
+			font-size: 24px;
+		}
+	}
+	@media (max-width: 768px) {
+		&__right {
+			font-size: 18px;
+		}
+	}
+	@media (max-width: 576px) {
+		flex-direction: column-reverse;
+	}
+}
+
 .slick-initialized.promotion-slider .slick-slide {
 	padding: 0 10px;
 }
