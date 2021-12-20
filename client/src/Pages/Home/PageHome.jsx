@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './style-pageHome.scss';
+import './slick.css';
 import firstSlide from './img/slider/first-slide.png';
 import secondSlide from './img/slider/second-slide.png';
 import thirdSlide from './img/slider/third-slide.png';
@@ -71,10 +72,55 @@ import arrowlink from './img/icons/arrow-link.svg';
 
 import partner from './img/partner.png';
 
+import newsHome1 from './img/news/news-home1.jpg';
+import newsHome2 from './img/news/news-home2.jpg';
+import newsHome3 from './img/news/news-home3.jpg';
+import newsHome4 from './img/news/news-home4.jpg';
+import ArrowRight from './ArrowRight';
+import ArrowLeft from './ArrowLeft';
+
 
 export const PageHome = () => {
 	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
 	const [slides, setSlides] = useState([firstSlide, secondSlide, thirdSlide, fourthSlide]);
+	const newsHome = [
+		{
+			imgSrc: newsHome1,
+			title: "В продажу поступили тренажеры Nautilus",
+			description: "Представляем тренажеры Nautilus 626 серии.",
+			date: "2021.07.18",
+		},
+		{
+			imgSrc: newsHome2,
+			title: "В продажу поступили тренажеры Nautilus",
+			description: "Представляем тренажеры Nautilus 626 серии.",
+			date: "2021.07.18",
+		},
+		{
+			imgSrc: newsHome3,
+			title: "В продажу поступили тренажеры Nautilus",
+			description: "Представляем тренажеры Nautilus 626 серии.",
+			date: "2021.07.18",
+		},
+		{
+			imgSrc: newsHome4,
+			title: "В продажу поступили тренажеры Nautilus",
+			description: "Представляем тренажеры Nautilus 626 серии.",
+			date: "2021.07.18",
+		},
+		{
+			imgSrc: newsHome1,
+			title: "В продажу поступили тренажеры Nautilus",
+			description: "Представляем тренажеры Nautilus 626 серии.",
+			date: "2021.07.18",
+		},
+		{
+			imgSrc: newsHome2,
+			title: "В продажу поступили тренажеры Nautilus",
+			description: "Представляем тренажеры Nautilus 626 серии.",
+			date: "2021.07.18",
+		},
+	]
 	const helpHome = [{
 		imgSrc: helpCall,
 		width: "59",
@@ -245,6 +291,7 @@ export const PageHome = () => {
 	]);
 	const settings = {
 		dots: false,
+		arrows: false,
 		infinite: true,
 		speed: 1000,
 		slidesToShow: 1,
@@ -258,24 +305,27 @@ export const PageHome = () => {
 	};
 	const settingsPromotion = {
 		className: "center promotion-slider",
-		arrows: false,
+		arrows: true,
 		centerMode: true,
 		infinite: true,
 		centerPadding: "100px",
 		slidesToShow: 4,
+		slidesToScroll: 1,
 		speed: 500,
 		autoplay: true,
 		autoplaySpeed: 2000,
-		// pauseOnHover: true
+		initialSlide: 1,
 		responsive: [
 			{
 				breakpoint: 1400,
 				settings: {
 					slidesToShow: 3,
-					slidesToScroll: 1,
-
-					// infinite: true,
-					// dots: true
+				}
+			},
+			{
+				breakpoint: 1100,
+				settings: {
+					slidesToShow: 2,
 				}
 			},
 			{
@@ -283,7 +333,6 @@ export const PageHome = () => {
 				settings: {
 					centerPadding: "70px",
 					slidesToShow: 2,
-					slidesToScroll: 1,
 					initialSlide: 1
 				}
 			},
@@ -292,8 +341,6 @@ export const PageHome = () => {
 				settings: {
 					centerPadding: "0px",
 					slidesToShow: 2,
-					slidesToScroll: 1,
-					initialSlide: 1
 				}
 			},
 			{
@@ -301,7 +348,6 @@ export const PageHome = () => {
 				settings: {
 					centerPadding: "0px",
 					slidesToShow: 1,
-					slidesToScroll: 1,
 				}
 			}
 		]
@@ -559,6 +605,29 @@ export const PageHome = () => {
 					<Link className='article__link partner-home__link' to='/'>Стать партнером</Link>
 				</div>
 			</section	>
+			<section className="section-news__home-page news-home">
+				<div className='news-home__title'>
+					<h3 className='article__caption news-home__caption'>Новости</h3>
+					<Link className='news-home__blog' to="/">Блог</Link>
+				</div>
+				<div className="news-home__slider">
+					<Slider {...settingsPromotion}>
+						{newsHome.map((item, index) =>
+							<div className='news-home__card ' key={index++}>
+								<div className='news-home__item-image'>
+									<img className='news-home__image' src={item.imgSrc} alt="news" />
+								</div>
+								<div>
+									<h4 className='news-home__title-card'>{item.title}</h4>
+									<p className='news-home__description'>{item.description}</p>
+									<span className='news-home__date'>{item.date}</span>
+								</div>
+							</div>
+						)}
+					</Slider>
+				</div>
+				<Link className='article__link' to='/'>Все новости</Link>
+			</section>
 		</div>
 	)
 

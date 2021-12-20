@@ -83,9 +83,14 @@
 		justify-content: flex-end;
 		overflow: hidden;
 		height: 100%;
-		border: 1px solid #000;
+		border: 1px solid #fff;
 		border-radius: 6px;
 		background: #fff;
+		transition: border, box-shadow 0.3s;
+		&:hover {
+			border: 1px solid lightgray;
+			box-shadow: 0 2px 5px gray;
+		}
 		&_header {
 			position: absolute;
 			width: 144px;
@@ -422,6 +427,12 @@
 			border: 2px solid #f53b49;
 			background-color: #1a1a25;
 		}
+	}
+	@media (max-width: 992px) {
+		padding: 100px 0 60px 0;
+	}
+	@media (max-width: 576px) {
+		padding: 80px 0 40px 0;
 	}
 }
 .banner-home {
@@ -802,6 +813,51 @@
 	}
 	@media (max-width: 576px) {
 		flex-direction: column-reverse;
+	}
+}
+
+.news-home {
+	max-width: 1410px;
+	padding: 0 20px;
+	margin: 110px auto 60px auto;
+	&__title {
+		margin: 0 0 30px 0;
+		display: flex;
+		align-items: center;
+	}
+	&__blog {
+		font-size: 20px;
+		color: #828282;
+		font-variation-settings: "wght" 800;
+	}
+	&__caption {
+		margin: 0 40px 0 0;
+	}
+	&__slider {
+		margin: 0 0 30px;
+	}
+	&__card {
+		display: flex;
+		flex-direction: column;
+		color: #384255;
+	}
+	&__item-image {
+		margin: 0 0 20px 0;
+	}
+	&__image {
+		width: 100%;
+	}
+	&__title-card {
+		margin: 0 0 10px 0;
+		font-size: 20px;
+		font-variation-settings: "wght" 800;
+	}
+	&__description {
+		margin: 0 0 10px 0;
+		font-size: 16px;
+	}
+	&__date {
+		opacity: 0.5;
 	}
 }
 
