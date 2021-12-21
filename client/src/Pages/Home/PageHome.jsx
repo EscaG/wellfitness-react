@@ -45,6 +45,7 @@ import bannerFirst from './img/banner/banner1.png';
 import bannerSecond from './img/banner/banner2.png';
 import bannerThird from './img/banner/banner3.png';
 import bannerFourth from './img/banner/banner4.png';
+import bannerFifth from './img/banner/banner5.png';
 
 import brand1 from './img/brands/brand1.png';
 import brand2 from './img/brands/brand2.png';
@@ -499,18 +500,28 @@ export const PageHome = () => {
 					<Link to="/" className='article__link' href="#">Все товары по акции</Link>
 				</div>
 			</article>
+			{/* //!  ИДЕИ И ПОДБОРКИ */}
 			<section className="section-ideas__home-page section-ideas">
 				<div className="section-ideas__block">
 					<h3 className='article__caption section-ideas__caption'>Идеи и подборки</h3>
 					<div className="section-ideas__banner banner-home">
 						<div className="banner-home__first">
+							<Link to="/"><img src={bannerThird} alt="banner" /></Link>
+						</div>
+						<div className="banner-home__first-big">
 							<Link to="/"><img src={bannerFirst} alt="banner" /></Link>
 						</div>
 						<div className="banner-home__second">
 							<Link to="/"><img src={bannerFourth} alt="banner" /></Link>
 						</div>
+						<div className="banner-home__second-big">
+							<Link to="/"><img src={bannerSecond} alt="banner" /></Link>
+						</div>
 						<div className="banner-home__third">
 							<Link to="/"><img src={bannerThird} alt="banner" /></Link>
+						</div>
+						<div className="banner-home__third-big">
+							<Link to="/"><img src={bannerFifth} alt="banner" /></Link>
 						</div>
 					</div>
 					<Link className='article__link section-ideas__link' to="/">Полная подборка</Link>
@@ -519,6 +530,7 @@ export const PageHome = () => {
 			<div className="section-brands section-brands__cap">
 				<h3 className='article__caption '>Популярные бренды</h3>
 			</div>
+			{/* //!  БРЕНДЫ */}
 			<section className="section-brands__home-page section-brands">
 				<ul className="section-brands__list">
 					<li className="section-brands__item">
@@ -551,7 +563,7 @@ export const PageHome = () => {
 			<div className="section-brands section-brands__hr">
 				<Link className='article__link' to="/">Все бренды</Link>
 			</div>
-
+			{/* //!  ПОМОЩЬ ПОКУПАТЕЛЮ */}
 			<section className='section-help__home-page help-home'>
 				{helpHome.map((item, index) =>
 					<div className='help-home__card' key={index}>
@@ -575,6 +587,7 @@ export const PageHome = () => {
 					</div>
 				)}
 			</section>
+			{/* //!  О КОМПАНИИ */}
 			<section className="section-about__home-page about-home">
 				<div className="about-home__presentation">
 					<h4 className='article__caption about-home__title'>О компании</h4>
@@ -596,6 +609,7 @@ export const PageHome = () => {
 				</div>
 				<div className="about-home__empty"></div>
 			</section>
+			{/* //!  СТАНЬ НАШИМ ПАРТНЕРОМ */}
 			<section className="section-partner__home-page partner-home">
 				<div className='partner-home__left'>
 					<img className='partner-home__image' src={partner} alt="partner" />
@@ -605,6 +619,7 @@ export const PageHome = () => {
 					<Link className='article__link partner-home__link' to='/'>Стать партнером</Link>
 				</div>
 			</section	>
+			{/* //! НОВОСТИ */}
 			<section className="section-news__home-page news-home">
 				<div className='news-home__title'>
 					<h3 className='article__caption news-home__caption'>Новости</h3>

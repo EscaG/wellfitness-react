@@ -438,22 +438,48 @@
 .banner-home {
 	display: flex;
 	justify-content: space-between;
-	flex-wrap: wrap;
 	margin: 0 0 30px 0;
-	// div {
-	// 	width: 100%;
-	// }
+
 	img {
 		width: 100%;
 	}
 	&__first {
-		// flex: 1;
+	}
+	&__first-big {
+		display: none;
 	}
 	&__second {
-		// flex: 1;
+		padding: 0 15px;
+	}
+	&__second-big {
+		display: none;
 	}
 	&__third {
-		// flex: 1;
+	}
+	&__third-big {
+		display: none;
+	}
+	@media (max-width: 768px) {
+		flex-direction: column;
+		&__first {
+			display: none;
+		}
+		&__first-big {
+			display: block;
+		}
+		&__second {
+			display: none;
+		}
+		&__second-big {
+			display: block;
+			margin: 20px 0;
+		}
+		&__third {
+			display: none;
+		}
+		&__third-big {
+			display: block;
+		}
 	}
 }
 .section-brands {
