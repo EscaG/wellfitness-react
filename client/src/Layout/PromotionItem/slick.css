@@ -1,0 +1,56 @@
+.slick-prev,
+.slick-next{
+	background: #FFFFFF;
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.07), 0px 0px 25px rgba(0, 0, 0, 0.1);
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	z-index: 3;
+	background-repeat: no-repeat;
+	background-position: center;
+	opacity: 0.6;
+}
+.slick-next{
+	right: 0;
+	background-image: url('./img/icons/arrow-right.svg');
+}
+.slick-prev{
+	left: 0;
+	background-image: url('./img/icons/arrow-left.svg');
+	
+}
+.slick-next:hover,
+.slick-prev:hover{
+	opacity: 1;
+
+}
+.slick-next:hover,
+.slick-prev:hover,
+.slick-next:focus,
+.slick-prev:focus{
+	background: #FFFFFF;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.slick-prev:hover,
+.slick-prev:focus{
+	background-image: url('./img/icons/arrow-left.svg');
+}
+.slick-next:hover,
+.slick-next:focus{
+	background-image: url('./img/icons/arrow-right.svg');
+	/* background-repeat: no-repeat;
+		background-position: center; */
+}
+.slick-prev:before,
+.slick-next:before{
+	all:unset;
+}
+/* @media (max-width: 1300px) {
+	.slick-prev{
+		left: 30px;
+	}
+	.slick-next{
+		right: 30px;
+	}	
+} */

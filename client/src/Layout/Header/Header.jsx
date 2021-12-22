@@ -197,9 +197,22 @@ export const Header = () => {
 				<div className="bottom-header__content _container">
 					<div className="bottom-header__column">
 						<div className="bottom-header__categories categories-select">
-							<select name="" className="categories-select__item_home categories-select__item" id="">
+
+							{/* <select name="" className="categories-select__item_home categories-select__item" id="">
 								<option value="">Для дома</option>
-								{/* <!-- 	<option value="">Беговые дорожки</option>
+							</select>
+							<select name="" className="categories-select__item_club categories-select__item" id="">
+								<option value="">Для фитнес клуба</option>
+							</select> */}
+
+							<Link to='/forhome'>Для дома</Link>
+							<Link to='/forclub'>Для фитнес клуба</Link>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{/* <!-- 	<option value="">Беговые дорожки</option>
 						<option value="">Эллиптические тренажеры</option>
 						<option value="">Велотренажеры</option>
 						<option value="">Горнолыжные тренажеры</option>
@@ -209,11 +222,8 @@ export const Header = () => {
 						<option value="">Игровые столы</option>
 						<option value="">Массажные кресла</option>
 						<option value="">Фитнес аксессуары</option> --> */}
-							</select>
-							<span></span>
-							<select name="" className="categories-select__item_club categories-select__item" id="">
-								<option value="">Для фитнес клуба</option>
-								{/* <!-- <option value="">Кардиотренажеры</option>
+
+			{/* <!-- <option value="">Кардиотренажеры</option>
 						<option value="">Силовые тренажеры</option>
 						<option value="">Функциональный тренинг</option>
 						<option value="">Свободные веса</option>
@@ -222,15 +232,6 @@ export const Header = () => {
 						<option value="">Реабилитация и спортивная медицина</option>
 						<option value="">Оборудование для бассейна</option>
 						<option value="">Средства гигиены</option> --> */}
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-
-
 			{/* <Link to="/" > Main</Link >
 				<Link to="/about" >О компании</Link> */}
 		</header >

@@ -1,9 +1,9 @@
-// import logo from './logo.svg';
 import "./resetstyle.scss";
 import "./bootstrap.scss"
 import './App.scss';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import { Footer } from "./Layout/Footer/Footer";
 import { Header } from "./Layout/Header/Header";
 import { PageHome } from './Pages/Home/PageHome';
@@ -15,6 +15,8 @@ import PageSupport from "./Pages/Support/PageSupport";
 import PageBlog from "./Pages/Blog/PageBlog";
 import PageShowroom from "./Pages/Showroom/PageShowroom";
 import PageContacts from "./Pages/Contacts/PageContacts";
+import CatalogForHome from "./Pages/CatalogForHome/CatalogForHome";
+import CatalogForClub from "./Pages/CatalogForClub/CatalogForClub";
 
 function App() {
 	return (
@@ -33,6 +35,8 @@ function App() {
 					<Route path="/blog" element={<PageBlog />} />
 					<Route path="/showroom" element={<PageShowroom />} />
 					<Route path="/contacts" element={<PageContacts />} />
+					<Route path="/forhome" element={<CatalogForHome />} />
+					<Route path="/forclub" element={<CatalogForClub />} />
 				</Routes>
 			</main>
 

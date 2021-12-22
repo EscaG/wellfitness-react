@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
+import PromotionItem from '../../Layout/PromotionItem/PromotionItem';
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './style-pageHome.scss';
@@ -29,17 +31,6 @@ import gantel from './img/club/gantel.png';
 import medicine from './img/club/medicine.png';
 import massage from './img/club/massage.png';
 
-import promFirst from './img/promotion/first.png';
-import promSecond from './img/promotion/second.png';
-import promThird from './img/promotion/third.png';
-import promFourth from './img/promotion/fourth.png';
-
-import iconPercent from './img/icons/percent.png';
-import iconLike from './img/icons/like.png';
-import iconNew from './img/icons/new.png';
-
-import heart from './img/icons/heart.svg';
-import comparison from './img/icons/comparison.svg';
 
 import bannerFirst from './img/banner/banner1.png';
 import bannerSecond from './img/banner/banner2.png';
@@ -77,11 +68,12 @@ import newsHome1 from './img/news/news-home1.jpg';
 import newsHome2 from './img/news/news-home2.jpg';
 import newsHome3 from './img/news/news-home3.jpg';
 import newsHome4 from './img/news/news-home4.jpg';
-import ArrowRight from './ArrowRight';
-import ArrowLeft from './ArrowLeft';
+import Modal from '../../Layout/ModalWindow/Modal';
+import IdeasSection from '../../Layout/IdeasSection/IdeasSection';
 
 
 export const PageHome = () => {
+	const [modalActive, setModalActive] = useState(false);
 	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
 	const [slides, setSlides] = useState([firstSlide, secondSlide, thirdSlide, fourthSlide]);
 	const newsHome = [
@@ -228,68 +220,7 @@ export const PageHome = () => {
 			imgSrc: gantel,
 			name: "Свободные веса"
 		}]);
-	const [promotionSlides, setPromotionSlides] = useState([
-		{
-			imgSrc: promFirst,
-			availability: "В наличии",
-			description: "Велотренажер CardioPower S35",
-			rating: "5",
-			price: {
-				fullPrice: "1 134 999 ",
-				sharePrice: "999 999 "
-			}
-		},
-		{
-			imgSrc: promSecond,
-			availability: "В наличии",
-			description: "Велотренажер CardioPower T20 Plus",
-			rating: "5",
-			price: {
-				fullPrice: "1 254 999 ",
-				sharePrice: "1 099 999 "
-			}
-		},
-		{
-			imgSrc: promThird,
-			availability: "Нет в наличии",
-			description: "Беговая дорожка CardioPower T30 Plus",
-			rating: "4",
-			price: {
-				fullPrice: "1 199 999 ",
-				sharePrice: null
-			}
-		},
-		{
-			imgSrc: promFourth,
-			availability: "Осталось мало",
-			description: "Беговая дорожка CardioPower S10",
-			rating: "5",
-			price: {
-				fullPrice: "1 010 999 ",
-				sharePrice: "849 999 "
-			}
-		},
-		{
-			imgSrc: promFourth,
-			availability: "Скоро ожидается",
-			description: "Беговая дорожка CardioPower S01",
-			rating: "0",
-			price: {
-				fullPrice: "1 134 999 ",
-				sharePrice: null
-			}
-		},
-		{
-			imgSrc: promFourth,
-			availability: "В наличии",
-			description: "Беговая дорожка CardioPower S35",
-			rating: "5",
-			price: {
-				fullPrice: "1 134 999 ",
-				sharePrice: "999 999 "
-			}
-		},
-	]);
+
 	const settings = {
 		dots: false,
 		arrows: false,
@@ -353,6 +284,8 @@ export const PageHome = () => {
 			}
 		]
 	}
+
+
 	return (
 		<div className='page-home'>
 			{/* // ! Секция со слайдером */}
@@ -386,7 +319,9 @@ export const PageHome = () => {
 					</div>
 					<Link to="/" className='article__link' href="#">Все категории</Link>
 				</div>
+
 				{/* //todo каталог для клуба */}
+
 				<div className='article-club club'>
 					<h3 className='article__caption'>Для фитнес клубов</h3>
 					<div className='grid__club seetting-club'>
@@ -405,128 +340,11 @@ export const PageHome = () => {
 					<Link to="/" className='article__link' href="#">Все категории</Link>
 				</div>
 				{/* //todo Акционный слайдер */}
-				<div className="article-promotion promotion" >
-					<div className='promotion__header'>
-						<h3 className="article__caption promotion__header_flex">Акция</h3>
-						<Link className='promotion__header_link' to="/" >Новинки</Link>
-						<Link className='promotion__header_link' to="/" >Мы рекомендуем</Link>
-					</div>
-					<div className='promotion__slider'>
-
-
-						<Slider  {...settingsPromotion}>
-							{promotionSlides.map((item, index) =>
-								<div key={index++} className='promotion__slider-item item-slider'>
-
-									<div className="item-slider__icons icons-slider">
-										<div className='icons-slider__list'>
-											<Link to="/" className='icons-slider__item translate'><img src={iconPercent} alt="credit" /></Link>
-											<Link to="/" className='icons-slider__item translate'><img src={iconLike} alt="like" /></Link>
-											<Link to="/" className='icons-slider__item translate'><img src={iconNew} alt="new" /></Link>
-										</div>
-
-										<div className='icons-slider__list'>
-											<Link className='icons-slider__item icons-slider__item_svg' to="/">
-												<svg className='bottom-footer__column_icons' width="17" height="17" >
-													<title>comparisons</title>
-													<use xlinkHref={comparison + "#comparison"}></use>
-												</svg>
-											</Link>
-											<Link className='icons-slider__item icons-slider__item_svg' to="/">
-												<svg className='bottom-footer__column_icons' width="21" height="17" >
-													<title>heart</title>
-													<use xlinkHref={heart + "#heart"}></use>
-												</svg>
-											</Link>
-										</div>
-
-									</div>
-
-									<div className="item-slider__image">
-										<img style={{ "width": "100%" }} src={item.imgSrc} alt="slide" />
-									</div>
-									<div className="item-slider__description description-item">
-										<div className="description-item__availability">
-
-											{item.availability === "В наличии" && <span className='description-item__dots_green'>
-												{item.availability}
-												<span className='description-item__dots_green_1'></span>
-												<span className='description-item__dots_green_2'></span>
-												<span className='description-item__dots_green_3'></span>
-											</span>}
-
-											{item.availability === "Нет в наличии" && <span className='description-item__dots_red'>
-												{item.availability}
-												<span className='description-item__dots_red_1'></span>
-												<span className='description-item__dots_red_2'></span>
-												<span className='description-item__dots_red_3'></span>
-											</span>}
-
-											{item.availability === "Осталось мало" && <span className='description-item__dots_orange'>
-												{item.availability}
-												<span className='description-item__dots_orange_1'></span>
-												<span className='description-item__dots_orange_2'></span>
-												<span className='description-item__dots_orange_3'></span>
-											</span>}
-
-											{item.availability === "Скоро ожидается" && <span className='description-item__wait'>{item.availability}</span>}
-
-											{item.availability !== "Скоро ожидается" &&
-												<span className='description-item__showRoom'>Есть в шоу-руме</span>}
-
-										</div>
-										<Link to="/" className="description-item__name">{item.description}</Link>
-										<div className="description-item__rating">Рейтинг {item.rating}</div>
-										<div className="desription-item__price-button price-button">
-											{item.price.sharePrice ?
-												<div className="price-button__price">
-													<div className='price-button__shareprice'>{item.price.sharePrice}  &#8372;</div>
-													<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
-												</div>
-												:
-												<div className="price-button__price">
-													<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
-												</div>
-											}
-											<div >
-												<button className="price-button__button">Купить</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							)}
-						</Slider>
-					</div>
-					<Link to="/" className='article__link' href="#">Все товары по акции</Link>
-				</div>
+				<PromotionItem />
 			</article>
 			{/* //!  ИДЕИ И ПОДБОРКИ */}
-			<section className="section-ideas__home-page section-ideas">
-				<div className="section-ideas__block">
-					<h3 className='article__caption section-ideas__caption'>Идеи и подборки</h3>
-					<div className="section-ideas__banner banner-home">
-						<div className="banner-home__first">
-							<Link to="/"><img src={bannerThird} alt="banner" /></Link>
-						</div>
-						<div className="banner-home__first-big">
-							<Link to="/"><img src={bannerFirst} alt="banner" /></Link>
-						</div>
-						<div className="banner-home__second">
-							<Link to="/"><img src={bannerFourth} alt="banner" /></Link>
-						</div>
-						<div className="banner-home__second-big">
-							<Link to="/"><img src={bannerSecond} alt="banner" /></Link>
-						</div>
-						<div className="banner-home__third">
-							<Link to="/"><img src={bannerThird} alt="banner" /></Link>
-						</div>
-						<div className="banner-home__third-big">
-							<Link to="/"><img src={bannerFifth} alt="banner" /></Link>
-						</div>
-					</div>
-					<Link className='article__link section-ideas__link' to="/">Полная подборка</Link>
-				</div>
-			</section>
+			<IdeasSection />
+
 			<div className="section-brands section-brands__cap">
 				<h3 className='article__caption '>Популярные бренды</h3>
 			</div>
