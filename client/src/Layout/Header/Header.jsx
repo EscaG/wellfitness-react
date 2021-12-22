@@ -138,10 +138,10 @@ export const Header = () => {
 
 						<div className="middle-header__column">
 							<div className="middle-header__catalog catalog-header">
-								<a data-da=".adaptive-menu__main-menu, 1330, 0" href=""
-									className="catalog-header__item_catalog catalog-header__item"><span>Каталог</span></a>
-								<a data-da=".top-header__contacts, 1331, 0" href=""
-									className="catalog-header__item_search catalog-header__item"></a>
+								<Link to='/' data-da=".adaptive-menu__main-menu, 1330, 0"
+									className="catalog-header__item_catalog catalog-header__item"><span>Каталог</span></Link>
+								<Link to='/' data-da=".top-header__contacts, 1331, 0" href=""
+									className="catalog-header__item_search catalog-header__item"></Link>
 							</div>
 						</div>
 						<div className="middle-header__column">
