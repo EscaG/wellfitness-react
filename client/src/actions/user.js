@@ -31,13 +31,8 @@ export const login = (email, password) => {
 			dispatch(setUser(response.data.user));
 			localStorage.setItem('token', response.data.accessToken);
 			console.log(localStorage.getItem('token'));
-			console.log("user = ",response.data.user);
-			// document.cookie = "refreshToken="+response.data.refreshToken;
-			document.cookie = "refreshToken=response.data.refreshToken";
-			// console.log(response.data.refreshToken);
-			console.log(response)
 		} catch (error) {
-			// console.log(error.response.data.message);
+			console.log(error.response.data.message);
 		}
 	}
 

@@ -1,7 +1,7 @@
 import "./resetstyle.scss";
 import "./bootstrap.scss"
 import './App.scss';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
 import {checkAuth} from './actions/user';
@@ -20,12 +20,13 @@ import PageContacts from "./Components/Pages/Contacts/PageContacts";
 import CatalogForHome from "./Components/Pages/CatalogForHome/CatalogForHome";
 import CatalogForClub from "./Components/Pages/CatalogForClub/CatalogForClub";
 import {LoginForm} from "./Components/Pages/Login/LoginForm";
+import Modal from "./Components/Layout/ModalWindow/Modal";
 
 function App() {
 	const isAuth = useSelector(state => state.user.isAuth);
 	console.log(isAuth)
 	const dispatch = useDispatch();
-
+	const [activeModal, setActiveModal] = useState(true);
 	useEffect(() => {
 
 		console.log("APP")
@@ -44,12 +45,12 @@ function App() {
 			<main className="page">
 
 				<Routes>
-					Условие которое отправляет на логин если вы не зарегестрированы
-					{!isAuth ?
-						<Route path="/" element={<Navigate to='/login' replace/>}/>
-						:
-						<Route path="/" element={<PageHome/>}/>
-					}
+					{/*Условие которое отправляет на логин если вы не зарегестрированы*/}
+					{/*{!isAuth ?*/}
+					{/*	<Route path="/" element={<Navigate to='/login' replace/>}/>*/}
+					{/*	:*/}
+					{/*	<Route path="/" element={<PageHome/>}/>*/}
+					{/*}*/}
 					<Route path="/" element={<PageHome/>}/>
 					<Route path="brands/*" element={<PageBrands/>}/>
 					<Route path="service" element={<PageService/>}/>
