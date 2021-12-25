@@ -9,25 +9,25 @@ const ApiError = require('../exceptions/api-error');
 class UserService {
 
 	async registration(email, password) {
-		const candidate = await UserModel.findOne({ email });
+		const candidate = await UserModel.findOne({email});
 		if (candidate) {
 			throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
 		}
 		const hashPassword = await bcrypt.hash(password, 3);
 		const activationlink = uuid.v4();
 
-		const user = await UserModel.create({ email, password: hashPassword, activationlink });
+		const user = await UserModel.create({email, password: hashPassword, activationlink});
 		await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationlink}`);
 
 		const userDto = new UserDto(user);
-		const tokens = tokenService.generateTokens({ ...userDto });
+		const tokens = tokenService.generateTokens({...userDto});
 		await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-		return { ...tokens, user: userDto }
+		return {...tokens, user: userDto}
 	}
 
 	async activate(activationLink) {
-		const user = await UserModel.findOne({ activationLink });
+		const user = await UserModel.findOne({activationLink});
 		if (!user) {
 			throw ApiError.BadRequest('Некорректная ссылка активации');
 		}
@@ -36,7 +36,7 @@ class UserService {
 	}
 
 	async login(email, password) {
-		const user = await UserModel.findOne({ email });
+		const user = await UserModel.findOne({email});
 		if (!user) {
 			throw ApiError.BadRequest('Пользователь с таким email не найден');
 		}
@@ -45,10 +45,10 @@ class UserService {
 			throw ApiError.BadRequest('Неверный пароль');
 		}
 		const userDto = new UserDto(user);
-		const tokens = await tokenService.generateTokens({ ...userDto });
+		const tokens = await tokenService.generateTokens({...userDto});
 
 		await tokenService.saveToken(userDto.id, tokens.refreshToken);
-		return { ...tokens, user: userDto }
+		return {...tokens, user: userDto}
 	}
 
 	async logout(refreshToken) {
@@ -62,15 +62,19 @@ class UserService {
 		}
 		const userData = tokenService.validateRefreshToken(refreshToken);
 		const tokenFromDb = await tokenService.findToken(refreshToken);
-		if (!userData || !tokenFromDb) {
-			throw ApiError.UnauthorizedError();
-		}
+
+		console.log("user = ", userData);
+		console.log("refresh = ", refreshToken);
+		console.log("tokenFromDb = ", tokenFromDb);
+		// if (!userData || !tokenFromDb) {
+		// 	throw ApiError.UnauthorizedError();
+		// }
 		const user = await UserModel.findById(userData.id);
 		const userDto = new UserDto(user);
-		const tokens = await tokenService.generateTokens({ ...userDto });
+		const tokens = await tokenService.generateTokens({...userDto});
 
 		await tokenService.saveToken(userDto.id, tokens.refreshToken);
-		return { ...tokens, user: userDto }
+		return {...tokens, user: userDto}
 	}
 
 	async getAllUsers() {

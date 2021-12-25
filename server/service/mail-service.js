@@ -25,7 +25,7 @@ class MailService {
 				`
 					<div>
 						<h1>Для активации перейдите по ссылку</h1>
-						<a href='${link}'>${link}</a> 
+						<a href='${link}'>wellfitness</a> 
 					</div>
 				`
 		})
