@@ -1,0 +1,84 @@
+.page-profile {
+	max-width: 1440px;
+	padding: 110px 15px 100px 15px;
+	margin: auto;
+}
+.profile {
+	&__wrapper {
+		display: flex;
+	}
+	&__title {
+		color: #1a1a25;
+		// margin: 0 0 60px 0;
+		padding: 0 0 24px 0;
+		font-size: 38px;
+		font-variation-settings: "wght" 800;
+		border-bottom: 2px solid rgba(133, 143, 164, 0.2);
+	}
+	&__main {
+		flex: 2;
+	}
+	&__mycontact {
+		flex: 1;
+	}
+}
+.main-profile {
+	border-right: 2px solid rgba(133, 143, 164, 0.2);
+	padding: 30px 30px 0 0;
+}
+.menu-profile {
+	&__list {
+	}
+	&__item {
+		display: inline-block;
+		margin: 0 12px 0 0;
+	}
+	&__link {
+		display: inline-block;
+		padding: 8px 20px;
+		background-color: #fff;
+		font-variation-settings: "wght" 700;
+		color: #384255;
+		border-radius: 4px;
+		transition: 0.3s;
+		&:hover {
+			background-color: #f53b49;
+			color: #fff;
+		}
+	}
+}
+.mycontact-profile {
+	padding: 50px 0 0 30px;
+	&__name,
+	&__email,
+	&__phone {
+		color: #384255;
+	}
+	&__name {
+		margin: 0 0 12px 0;
+		font-size: 18px;
+		font-variation-settings: "wght" 600;
+	}
+	&__email,
+	&__phone {
+		font-size: 16px;
+	}
+	&__email {
+		margin: 0 0 5px 0;
+	}
+	&__phone {
+		margin: 0 0 12px 0;
+	}
+	&__settings,
+	&__logout {
+		display: block;
+		color: #4b7ee8;
+		font-variation-settings: "wght" 700;
+		margin: 0 0 12px 0;
+		background-color: inherit;
+	}
+	&__settings {
+	}
+	&__logout {
+	}
+}

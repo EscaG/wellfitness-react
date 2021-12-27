@@ -1,25 +1,33 @@
-import React, {useState} from 'react'
-import {Link} from "react-router-dom";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
 import AdaptiveMenu from "../AdaptiveMenu/AdaptiveMenu";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import Modal from "../../ModalWindow/Modal";
-import {LoginForm} from "../../../Pages/Login/LoginForm";
+import { LoginForm } from "../../../Pages/Login/LoginForm";
 
 export default function TopHeader() {
-	const isAuth = useSelector(state => state.user.isAuth);
-	const [activeModal, setActiveModal] = useState(false);
 
+
+	const isAuth = useSelector(state => state.user.isAuth);
+	const user = useSelector(state => state.user.currentUser);
+	console.log("состояние логина = ", isAuth);
+
+	const [activeModal, setActiveModal] = useState(false);
+	const [isModal, setIsModal] = useState(false)
 
 	return (
 		<div className="header__top top-header">
-			<Modal active={activeModal} setActive={setActiveModal}>
-				<LoginForm/>
-			</Modal>
+			{isModal &&
+				<Modal active={activeModal} setActive={setActiveModal} setDisplay={setIsModal} >
+					<LoginForm modalClass={"modallogin"} />
+				</Modal>
+			}
 			<div className="top-header__content _container">
 				{/* <!-- левый блок с логотипом --> */}
 				<div className="top-header__column top-header__column_logo">
-					<Link to="/" className="top-header__logo"><img src={logo} alt="logo"/></Link>
+					<Link to="/" className="top-header__logo"><img src={logo} alt="logo" /></Link>
 					<select data-da=" .adaptive-menu__login , 1329, 0" name="" id="" className="top-header__city">
 						<option value="">Николаев</option>
 						<option value="">Киев</option>
@@ -31,7 +39,7 @@ export default function TopHeader() {
 				{/* <!-- правый блок с контактами --> */}
 				<div className="top-header__column">
 					{/* <-- Адаптивное меню --> */}
-						<AdaptiveMenu></AdaptiveMenu>
+					<AdaptiveMenu></AdaptiveMenu>
 
 
 					<div className="top-header__contacts contacts-header">
@@ -51,23 +59,27 @@ export default function TopHeader() {
 							</div>
 						</div>
 
-						{!isAuth ?
-							<div className="contacts-header__column">
-								{/*<Link to={'login'} data-da=" .adaptive-menu__login , 1330, 1" href=""*/}
-								{/*			className="contacts-header__login"><span>Войти</span>*/}
-								{/*</Link>*/}
-								<button  data-da=" .adaptive-menu__login , 1330, 1"
-												 onClick={()=>setActiveModal(!activeModal)}
-											className="contacts-header__login"><span>Войти</span>
-								</button>
-							</div>
-							:
-							<div className="contacts-header__column">
-								<Link to={'/login'} data-da=" .adaptive-menu__login , 1330, 1" href=""
-											className="contacts-header__persona"><span>Александр</span>
+						<div className="contacts-header__column">
+
+							{/* <button data-da=" .adaptive-menu__login , 1330, 1"
+									onClick={() => { setIsModal(!isModal); setActiveModal(true) }}
+									className="contacts-header__login"><span>Войти</span>
+								</button> */}
+							{!isAuth ?
+								<Link to='/login' data-da=" .adaptive-menu__login , 1330, 1"
+									className="contacts-header__login"><span>Войти</span>
 								</Link>
-							</div>
-						}
+
+								:
+								<Link to='/profile/main' data-da=" .adaptive-menu__login , 1330, 1"
+									className="contacts-header__persona"><span>{user.email}</span>
+								</Link>
+							}
+							{/* <Link to='/login' data-da=" .adaptive-menu__login , 1330, 1"
+								className="contacts-header__login"><span>Войти</span>
+							</Link> */}
+
+						</div>
 
 					</div>
 

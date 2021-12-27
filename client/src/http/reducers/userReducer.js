@@ -21,8 +21,8 @@ export default function userReducer(state = defaultState, action) {
 				isAuth: true
 			}
 		case LOGOUT:
-			const response = $api.post(API_URL + "/api/logout")
-			localStorage.removeItem('token')
+			$api.post(API_URL + "/api/logout");
+			localStorage.removeItem('token');
 			return {
 				...state,
 				currentUser: {},

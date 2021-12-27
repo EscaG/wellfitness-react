@@ -1,0 +1,75 @@
+.login-form.modallogin {
+	position: relative;
+	margin: 0;
+	.login-form {
+		&__close {
+			display: block;
+			cursor: pointer;
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			height: 16px;
+			width: 16px;
+			&:after,
+			&:before {
+				content: "";
+				position: absolute;
+				top: -3px;
+				left: 40%;
+				background-color: #858fa4;
+				height: 23px;
+				width: 3px;
+				border-radius: 15px;
+			}
+			&:after {
+				transform: rotate(45deg);
+			}
+			&:before {
+				transform: rotate(-45deg);
+			}
+		}
+	}
+}
+
+.login-form {
+	padding: 60px 70px;
+	max-width: 600px;
+	margin: 100px auto;
+	text-align: center;
+	background-color: #fff;
+	&__close {
+		display: none;
+	}
+	input {
+		display: block;
+		padding: 10px 20px;
+		margin: 0 0 20px 0;
+		width: 100%;
+		font-size: 16px;
+		color: #909cb5;
+		background: #f7f7f7;
+		border: 1px solid rgba(144, 156, 181, 0.3);
+		border-radius: 6px;
+	}
+	&__forgot {
+		display: inline-block;
+		margin: 0 0 20px 0;
+		color: #909cb5;
+		font-variation-settings: "wght" 500;
+	}
+	&__login {
+		display: inline-block;
+		margin: 0 0 12px 0;
+		padding: 12px 68px;
+		font-variation-settings: "wght" 700;
+		border-radius: 4px;
+		color: #fff;
+		background-color: #f53b49;
+	}
+	&__registration {
+		// display: block;
+		color: #4b7ee8;
+		background-color: inherit;
+		font-variation-settings: "wght" 500;
+	}
+}

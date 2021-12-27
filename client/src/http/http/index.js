@@ -4,7 +4,8 @@ const API_URL = process.env.REACT_APP_BASE_URL;
 
 const $api = axios.create({
 	API_URL,
-	withCredentials : true});
+	withCredentials: true
+});
 
 $api.interceptors.request.use((config) => {
 	config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`

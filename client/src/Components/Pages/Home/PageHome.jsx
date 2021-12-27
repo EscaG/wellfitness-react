@@ -32,11 +32,11 @@ import medicine from './img/club/medicine.png';
 import massage from './img/club/massage.png';
 
 
-import bannerFirst from './img/banner/banner1.png';
-import bannerSecond from './img/banner/banner2.png';
-import bannerThird from './img/banner/banner3.png';
-import bannerFourth from './img/banner/banner4.png';
-import bannerFifth from './img/banner/banner5.png';
+// import bannerFirst from './img/banner/banner1.png';
+// import bannerSecond from './img/banner/banner2.png';
+// import bannerThird from './img/banner/banner3.png';
+// import bannerFourth from './img/banner/banner4.png';
+// import bannerFifth from './img/banner/banner5.png';
 
 import brand1 from './img/brands/brand1.png';
 import brand2 from './img/brands/brand2.png';
@@ -68,12 +68,12 @@ import newsHome1 from './img/news/news-home1.jpg';
 import newsHome2 from './img/news/news-home2.jpg';
 import newsHome3 from './img/news/news-home3.jpg';
 import newsHome4 from './img/news/news-home4.jpg';
-import Modal from '../../Layout/ModalWindow/Modal';
+// import Modal from '../../Layout/ModalWindow/Modal';
 import IdeasSection from '../../Layout/IdeasSection/IdeasSection';
 
 
 export const PageHome = () => {
-	const [modalActive, setModalActive] = useState(false);
+	// const [modalActive, setModalActive] = useState(false);
 	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
 	const [slides, setSlides] = useState([firstSlide, secondSlide, thirdSlide, fourthSlide]);
 	const newsHome = [

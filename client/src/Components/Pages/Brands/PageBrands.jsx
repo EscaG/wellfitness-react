@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import {Link, NavLink, Route, Routes} from 'react-router-dom';
-import {LoginForm} from "../Login/LoginForm";
+import React, { useState } from 'react'
+import { Link, Route, Routes } from 'react-router-dom';
+// import {LoginForm} from "../Login/LoginForm";
 import Modal from "../../Layout/ModalWindow/Modal";
 
 export function PageBrands() {
@@ -10,7 +10,7 @@ export function PageBrands() {
 		<div>
 			<Link to='login' >Login</Link>
 			<Routes>
-				<Route path="login" element={<Modal active={activeModel} setActive={setActiveModel}/>}/>
+				<Route path="login" element={<Modal active={activeModel} setActive={setActiveModel} />} />
 			</Routes>
 		</div>
 	)
