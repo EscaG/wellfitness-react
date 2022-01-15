@@ -4,6 +4,7 @@ import $api from "../http";
 const API_URL = process.env.REACT_APP_BASE_URL;
 
 const SET_USER = "SET_USER";
+const UPDATE_USER = "UPDATE_USER";
 const LOGOUT = "LOGOUT";
 
 const defaultState = {
@@ -20,6 +21,8 @@ export default function userReducer(state = defaultState, action) {
 				currentUser: action.payload,
 				isAuth: true
 			}
+		case UPDATE_USER:
+			return;
 		case LOGOUT:
 			$api.post(API_URL + "/api/logout");
 			localStorage.removeItem('token');
@@ -34,4 +37,5 @@ export default function userReducer(state = defaultState, action) {
 }
 
 export const setUser = user => ({ type: SET_USER, payload: user });
+export const updateUser = res => ({ type: UPDATE_USER, payload: res });
 export const logout = () => ({ type: LOGOUT });

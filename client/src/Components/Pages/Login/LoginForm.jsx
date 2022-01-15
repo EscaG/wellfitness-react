@@ -13,7 +13,6 @@ export function LoginForm({ modalClass }) {
 	const [surname, setSurname] = useState("");
 	const [name, setName] = useState("");
 	const [registrationBtn, setRegistrationBtn] = useState(false);
-
 	const isAuth = useSelector(state => state.user.isAuth);
 	const user = useSelector(state => state.user.currentUser);
 	const dispatch = useDispatch();
@@ -30,11 +29,9 @@ export function LoginForm({ modalClass }) {
 	const loginFun = () => {
 		dispatch(login(email, password));
 		goProfile();
-
-
 	}
 	const registrationFun = () => {
-		dispatch(registration(email, password));
+		dispatch(registration(email, password, surname, name));
 		if (isAuth) closeModal()
 	}
 

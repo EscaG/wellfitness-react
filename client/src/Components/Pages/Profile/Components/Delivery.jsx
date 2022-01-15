@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Delivery() {
 	return (
-		<div>
+		<section className=''>
 			Delivery
-		</div>
+		</section>
 	)
 }

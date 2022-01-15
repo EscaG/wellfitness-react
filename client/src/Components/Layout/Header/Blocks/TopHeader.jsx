@@ -72,7 +72,7 @@ export default function TopHeader() {
 
 								:
 								<Link to='/profile/main' data-da=" .adaptive-menu__login , 1330, 1"
-									className="contacts-header__persona"><span>{user.email}</span>
+									className="contacts-header__persona"><span>{user.name}</span>
 								</Link>
 							}
 							{/* <Link to='/login' data-da=" .adaptive-menu__login , 1330, 1"

@@ -25,8 +25,10 @@ import MyProfile from "./Components/Pages/Profile/Components/MyProfile";
 import Delivery from "./Components/Pages/Profile/Components/Delivery";
 import Orders from "./Components/Pages/Profile/Components/Orders";
 import Discount from "./Components/Pages/Profile/Components/Discount";
+import Bonuses from "./Components/Pages/Profile/Components/Bonuses";
 import Instructions from "./Components/Pages/Profile/Components/Instructions";
 import Appeals from "./Components/Pages/Profile/Components/Appeals";
+import EditProfile from "./Components/Pages/Profile/Components/EditProfile/EditProfile";
 // import Modal from "./Components/Layout/ModalWindow/Modal";
 
 function App() {
@@ -44,20 +46,18 @@ function App() {
 	// 	return currentUser ? <Navigate to="/" replace /> : children;
 	// };
 
-
+	// {/*Условие которое отправляет на логин если вы не зарегестрированы*/}
+	// 				{/*{!isAuth ?*/}
+	// 				{/*	<Route path="/" element={<Navigate to='/login' replace/>}/>*/}
+	// 				{/*	:*/}
+	// 				{/*	<Route path="/" element={<PageHome/>}/>*/}
+	// 				{/*}*/}
 	return (
-
 		<BrowserRouter>
 			<Header />
 			<main className="page">
-
 				<Routes>
-					{/*Условие которое отправляет на логин если вы не зарегестрированы*/}
-					{/*{!isAuth ?*/}
-					{/*	<Route path="/" element={<Navigate to='/login' replace/>}/>*/}
-					{/*	:*/}
-					{/*	<Route path="/" element={<PageHome/>}/>*/}
-					{/*}*/}
+
 					<Route path="/" element={<PageHome />} />
 					<Route path="brands/*" element={<PageBrands />} />
 					<Route path="service" element={<PageService />} />
@@ -69,23 +69,20 @@ function App() {
 					<Route path="contacts" element={<PageContacts />} />
 					<Route path="forhome" element={<CatalogForHome />} />
 					<Route path="forclub" element={<CatalogForClub />} />
-
 					<Route path="login" element={<LoginForm />} />
 
 					<Route path="profile" element={<ProfilePage />} >
 						<Route path="main" element={<MyProfile />} />
 						<Route path="delivery" element={<Delivery />} />
 						<Route path="orders" element={<Orders />} />
-						<Route path="discount" element={<MyProfile />} />
-						<Route path="bonuses" element={<Discount />} />
+						<Route path="discount" element={<Discount />} />
+						<Route path="bonuses" element={<Bonuses />} />
 						<Route path="instructions" element={<Instructions />} />
 						<Route path="appeals" element={<Appeals />} />
+						<Route path="editprofile" element={<EditProfile />} />
 					</Route>
-
-
 				</Routes>
 			</main>
-
 			<Footer />
 		</BrowserRouter>
 	);
