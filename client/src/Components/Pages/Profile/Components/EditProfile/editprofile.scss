@@ -33,7 +33,28 @@
 		row-gap: 20px;
 		column-gap: 30px;
 	}
-	input {
+	&__save-edit {
+		display: inline-block;
+		// margin: 0 0 30px 0;
+		// width: 142px;
+		padding: 0 20px;
+		height: 42px;
+		text-align: center;
+		line-height: 38px;
+		font-size: 14px;
+		font-variation-settings: "wght" 700;
+		border-radius: 4px;
+		color: #f53b49;
+		border: 2px solid #f53b49;
+		background-color: inherit;
+		transition: 0.5s;
+		&:hover {
+			background-color: #f53b49;
+			color: #fff;
+		}
+	}
+	input,
+	select {
 		display: block;
 		width: 100%;
 		padding: 10px 10px;
@@ -55,7 +76,7 @@
 	}
 	span {
 		display: inline-block;
-		margin: 0 0 8px 0;
+		margin: 0 0 8px 3px;
 	}
 	&__loadinfo {
 		padding: 12px 10px;
@@ -67,5 +88,12 @@
 		&__address {
 			grid-column: span 1;
 		}
+	}
+}
+#user {
+	&__surname,
+	&__name {
+		font-weight: bold;
+		font-size: 18px;
 	}
 }

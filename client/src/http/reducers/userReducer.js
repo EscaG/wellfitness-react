@@ -43,7 +43,7 @@ export default function userReducer(state = defaultState, action) {
 				errorMessage: ''
 			};
 		case LOGOUT:
-			$api.post(API_URL + "/api/logout");
+			$api.post(API_URL + "/logout");
 			localStorage.removeItem('token');
 			return {
 				...state,

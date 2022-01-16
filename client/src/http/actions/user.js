@@ -9,13 +9,14 @@ const API_URL = process.env.REACT_APP_BASE_URL;
 export const registration = (email, password, surname, name) => {
 	return async dispatch => {
 		try {
-			const response = await $api.post(API_URL + '/api/registration', {
+			const response = await $api.post(API_URL + '/registration', {
 				email,
 				password,
 				surname,
 				name
 			});
 			dispatch(setUser(response.data.user));
+			localStorage.setItem('token', response.data.accessToken);
 			// alert(response.data.message);
 		} catch (error) {
 			// alert(error.response?.data?.message);
@@ -27,7 +28,7 @@ export const registration = (email, password, surname, name) => {
 export const login = (email, password) => {
 	return async dispatch => {
 		try {
-			const response = await $api.post(API_URL + '/api/login', {
+			const response = await $api.post(API_URL + '/login', {
 				email,
 				password
 			});
@@ -46,7 +47,7 @@ export const checkAuth = () => {
 	return async dispatch => {
 		try {
 			// axios.defaults.withCredentials = true;
-			const response = await $api.get(API_URL + '/api/refresh',
+			const response = await $api.get(API_URL + '/refresh',
 				{ withCredentials: true }
 			);
 			dispatch(setUser(response.data.user));
@@ -60,7 +61,7 @@ export const checkAuth = () => {
 export const editUser = (email, surname, name, phone, data) => {
 	return async dispatch => {
 		try {
-			const response = await $api.put(API_URL + '/api/update',
+			const response = await $api.put(API_URL + '/update',
 				{ email, surname, name, phone, data });
 			dispatch(updateUser(response.data.user));
 		} catch (error) {
@@ -72,10 +73,10 @@ export const editUser = (email, surname, name, phone, data) => {
 // export const editAndUpdateUser = (email, surname, name, phone, data) => {
 // 	return async dispatch => {
 // 		try {
-// 			const response = await $api.put(API_URL + '/api/update',
+// 			const response = await $api.put(API_URL + '/update',
 // 				{ email, surname, name, phone, data });
 // 			dispatch(updateUser(response.data.user));
-// 			const responseAuth = await $api.get(API_URL + '/api/refresh');
+// 			const responseAuth = await $api.get(API_URL + '/refresh');
 // 			dispatch(setUser(responseAuth.data.user));
 // 			localStorage.setItem('token', responseAuth.data.accessToken);
 // 		} catch (error) {

@@ -20,6 +20,7 @@ import PageContacts from "./Components/Pages/Contacts/PageContacts";
 import CatalogForHome from "./Components/Pages/CatalogForHome/CatalogForHome";
 import CatalogForClub from "./Components/Pages/CatalogForClub/CatalogForClub";
 import { LoginForm } from "./Components/Pages/Login/LoginForm";
+import RegistrationForm from "./Components/Pages/Login/RegistrationForm";
 import ProfilePage from "./Components/Pages/Profile/ProfilePage";
 import MyProfile from "./Components/Pages/Profile/Components/MyProfile";
 import Delivery from "./Components/Pages/Profile/Components/Delivery";
@@ -70,6 +71,7 @@ function App() {
 					<Route path="forhome" element={<CatalogForHome />} />
 					<Route path="forclub" element={<CatalogForClub />} />
 					<Route path="login" element={<LoginForm />} />
+					<Route path="registration" element={<RegistrationForm />} />
 
 					<Route path="profile" element={<ProfilePage />} >
 						<Route path="main" element={<MyProfile />} />

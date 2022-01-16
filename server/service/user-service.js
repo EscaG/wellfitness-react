@@ -26,13 +26,18 @@ class UserService {
 		return { ...tokens, user: userDto }
 	}
 
-	async activate(activationLink) {
-		const user = await UserModel.findOne({ activationLink });
+	async activate(activationlink) {
+		console.log("activationLink", activationlink)
+		const user = await UserModel.findOne({ activationlink });
+		console.log("user", user.activationlink);
+
 		if (!user) {
 			throw ApiError.BadRequest('Некорректная ссылка активации');
 		}
 		user.isActivated = true;
-		await user.save();
+		await user.save(function (err) {
+			console.log(err);
+		});
 	}
 
 	async login(email, password) {
