@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login, registration, checkAuth } from '../../../http/actions/user';
 import { logout } from '../../../http/reducers/userReducer';
 import Modal from "../../Layout/ModalWindow/Modal";
+import LoginCard from './layout/LoginCard';
 import './style-loginform.scss';
 
 export function LoginForm({ modalClass }) {
@@ -12,13 +13,16 @@ export function LoginForm({ modalClass }) {
 	const [password, setPassword] = useState("");
 	const [surname, setSurname] = useState("");
 	const [name, setName] = useState("");
+
 	const [registrationBtn, setRegistrationBtn] = useState(false);
 	const isAuth = useSelector(state => state.user.isAuth);
 	const user = useSelector(state => state.user.currentUser);
+	const { errorMessage } = useSelector(state => state.user);
+
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const goProfile = () => navigate('/profile/main');
 
+	const goProfile = () => navigate('/profile/main');
 
 	const closeModal = () => {
 		if (document.querySelector(".modal")) {
@@ -26,10 +30,7 @@ export function LoginForm({ modalClass }) {
 		}
 	}
 
-	const loginFun = () => {
-		dispatch(login(email, password));
-		goProfile();
-	}
+
 	const registrationFun = () => {
 		dispatch(registration(email, password, surname, name));
 		if (isAuth) closeModal()
@@ -39,30 +40,40 @@ export function LoginForm({ modalClass }) {
 	return (
 
 		<section className={modalClass ? 'login-form ' + modalClass : 'login-form'}>
+			{/* <div>
+				<button className='login-form__login' onClick={() => loginFun("escagt82@gmail.com", "1111")}>Войти</button>
+				<button className='mycontact-profile__logout' onClick={() => { dispatch(logout()) }}>Выйти</button>
+				{isAuth ?
+					<h1>Login true</h1>
+					:
+					<h1>Login false</h1>
+				}
+			</div> */}
 			{!registrationBtn ?
-				<div id='registrationform'>
-					{/* <div className="login-form__close" onClick={() => closeModal()}>					</div> */}
-					{/* <button style={{ padding: "10px" }} onClick={() => dispatch(logout())}>Выйти</button> */}
-					<h2 className='article__caption'>Вход в личный кабинет</h2>
-					<input
-						onChange={e => setEmail(e.target.value)}
-						value={email}
-						type="email" placeholder="Ваша почта"
-						name="email"
-						required />
-					<input
-						onChange={e => setPassword(e.target.value)}
-						value={password}
-						type="password" placeholder="Пароль"
-						name="password"
-						required />
-					<Link to='/' className='login-form__forgot'>Забыли пароль?</Link>
-					<br />
-					<button className='login-form__login' onClick={() => loginFun()}>Войти</button>
-					<br />
-					<button type='button' className='login-form__registration' onClick={() => setRegistrationBtn(!registrationBtn)}>Зарегистрироваться</button>
-					{/* <button style={{ padding: "10px" }} onClick={() => dispatch(checkAuth())}>Refresh token</button> */}
-				</div>
+				// <div id='registrationform'>
+				// 	<h2 className='article__caption'>Вход в личный кабинет</h2>
+				// 	<input
+				// 		onChange={e => setEmail(e.target.value)}
+				// 		value={email}
+				// 		type="email" placeholder="Ваша почта"
+				// 		name="email"
+				// 		required />
+				// 	<input
+				// 		onChange={e => setPassword(e.target.value)}
+				// 		value={password}
+				// 		type="password" placeholder="Пароль"
+				// 		name="password"
+				// 		required />
+				// 	<Link to='/' className='login-form__forgot'>Забыли пароль?</Link>
+				// 	<br />
+				// 	<button className='login-form__login' onClick={() => loginFun()}>Войти</button>
+				// 	<br />
+				// 	<button type='button' className='login-form__registration' onClick={() => setRegistrationBtn(!registrationBtn)}>Зарегистрироваться</button>
+				// </div>
+				<LoginCard
+					// loginFun={loginFun}
+					setRegistrationBtn={setRegistrationBtn}
+				/>
 				:
 				<div id='loginform'>
 					<div className="login-form__close" onClick={() => closeModal()}>					</div>

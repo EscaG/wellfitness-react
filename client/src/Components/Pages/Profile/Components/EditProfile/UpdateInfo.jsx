@@ -11,6 +11,9 @@ export default function UpdateInfo({ user, updateProfile }) {
 	const [address, setAddress] = useState(user.data.address);
 	// const [isEdit, setIsEdit] = useState(false);
 
+	const upToServer = () => {
+		updateProfile(email, surname, name, phone, { birthday, gender, city, address })
+	}
 
 	return (
 		<div>
@@ -21,7 +24,7 @@ export default function UpdateInfo({ user, updateProfile }) {
 			<div className='editprofile-block__grid grid-editprofile'>
 				<div>
 					<span>Телефон</span>
-					<input value={user.phone} placeholder={user?.phone && user.phone} onChange={(e) => setPhone(e.target.value)} type="text" />
+					<input value={phone} placeholder={user?.phone && user.phone} onChange={(e) => setPhone(e.target.value)} type="text" />
 				</div>
 				<div>
 					<span>E-mail</span>
@@ -44,7 +47,7 @@ export default function UpdateInfo({ user, updateProfile }) {
 					<input value={address} onChange={(e) => setAddress(e.target.value)} type="text" />
 				</div>
 			</div>
-			<button onClick={() => updateProfile(surname, name, phone, { birthday, gender, city, address })}>Сохранить</button>
+			<button onClick={() => upToServer()}>Сохранить</button>
 		</div>
 	)
 }

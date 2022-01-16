@@ -6,11 +6,11 @@ import { logout } from '../../../http/reducers/userReducer';
 import { useSelector } from "react-redux";
 export default function ProfilePage() {
 	const setActiveLink = ({ isActive }) => isActive ? "active-link" : '';
-	const user = useSelector(state => state.user.currentUser);
+	const { currentUser, isLoading } = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const goLogin = () => navigate('/login');
-	console.log(user);
+	console.log(currentUser, isLoading);
 	return (
 		<div className='page-profile profile'>
 			<h1 className='profile__title'>Личный кабинет</h1>
@@ -43,8 +43,9 @@ export default function ProfilePage() {
 				</section>
 
 				<section className='profile__mycontact mycontact-profile'>
-					<div className='mycontact-profile__name'>{user.surname} {user.name}</div>
-					<div className='mycontact-profile__email'>{user.email}</div>
+					{!currentUser.isActivated && <h3 style={{ marginBottom: "20px", color: "red" }}>Активируйте аккаунт</h3>}
+					<div className='mycontact-profile__name'>{currentUser.surname} {currentUser.name}</div>
+					<div className='mycontact-profile__email'>{currentUser.email}</div>
 					<div className="mycontact-profile__phone">+7 (900) 000-00-00</div>
 					<NavLink className={'mycontact-profile__settings ' + setActiveLink} to='editprofile'>Редактировать профиль</NavLink>
 					<button className='mycontact-profile__logout' onClick={() => { dispatch(logout()); goLogin() }}>Выйти</button>

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { setUser, updateUser } from '../reducers/userReducer';
+// import axios from 'axios';
+import { errorUser, setUser, updateUser } from '../reducers/userReducer';
 import $api from "../http";
 // import {AuthResponse} from "../http/models/response/AuthResponse";
 // import {API_URL} from "../http/http";
@@ -18,7 +18,8 @@ export const registration = (email, password, surname, name) => {
 			dispatch(setUser(response.data.user));
 			// alert(response.data.message);
 		} catch (error) {
-			alert(error.response?.data?.message);
+			// alert(error.response?.data?.message);
+			dispatch(errorUser(error?.response?.data?.message));
 		}
 	}
 }
@@ -36,6 +37,7 @@ export const login = (email, password) => {
 			console.log(localStorage.getItem('token'));
 		} catch (error) {
 			// console.log(error?.response?.data?.message);
+			dispatch(errorUser(error?.response?.data?.message));
 		}
 	}
 }
@@ -50,28 +52,37 @@ export const checkAuth = () => {
 			dispatch(setUser(response.data.user));
 			localStorage.setItem('token', response.data.accessToken);
 		} catch (error) {
-
+			// dispatch(errorUser(error?.response?.data?.message));
 		}
 	}
 }
 
-export const editUser = (surname, name, phone, data) => {
+export const editUser = (email, surname, name, phone, data) => {
 	return async dispatch => {
 		try {
 			const response = await $api.put(API_URL + '/api/update',
-				{ surname, name, phone, data });
-			dispatch(updateUser(response));
+				{ email, surname, name, phone, data });
+			dispatch(updateUser(response.data.user));
 		} catch (error) {
-
+			dispatch(errorUser(error?.response?.data?.message));
 		}
 	}
 }
 
-export const editAndUpdateUser = (surname, name, phone, data) => {
-	editUser(surname, name, phone, data);
-	checkAuth();
+// export const editAndUpdateUser = (email, surname, name, phone, data) => {
+// 	return async dispatch => {
+// 		try {
+// 			const response = await $api.put(API_URL + '/api/update',
+// 				{ email, surname, name, phone, data });
+// 			dispatch(updateUser(response.data.user));
+// 			const responseAuth = await $api.get(API_URL + '/api/refresh');
+// 			dispatch(setUser(responseAuth.data.user));
+// 			localStorage.setItem('token', responseAuth.data.accessToken);
+// 		} catch (error) {
 
-}
+// 		}
+// 	}
+// }
 
 
 

@@ -66,9 +66,7 @@ class UserService {
 		console.log("user = ", userData);
 		console.log("refresh = ", refreshToken);
 		console.log("tokenFromDb = ", tokenFromDb);
-		// if (!userData || !tokenFromDb) {
-		// 	throw ApiError.UnauthorizedError();
-		// }
+
 		const user = await UserModel.findById(userData.id);
 		const userDto = new UserDto(user);
 		const tokens = await tokenService.generateTokens({ ...userDto });
@@ -82,19 +80,20 @@ class UserService {
 		return users;
 	}
 
-	async updateUser(response, email, surname, name, phone, data){
-		const user = await UserModel.updateOne(
-			{ email },
-			{surname,name,phone,data}
-			// ,
-			// function (err, result) {
-			// 	if (err) { console.log(err);  response.send(err); }
-			// 	response.send(result);
-			// }
-			);
+	async updateUser(email, surname, name, phone, data) {
+		await UserModel.updateOne({ email }, { surname, name, phone, data });
+
+		const user = await UserModel.findOne({ email });
 		if (!user) {
 			throw ApiError.BadRequest('Пользователь с таким email не найден');
 		}
+
+		const userDto = new UserDto(user);
+		const tokens = await tokenService.generateTokens({ ...userDto });
+
+		await tokenService.saveToken(userDto.id, tokens.refreshToken);
+		return { ...tokens, user: userDto }
+
 
 	}
 
