@@ -3,11 +3,21 @@
 	position: relative;
 	color: #384255;
 	font-size: 16px;
-}
-.avatar-block {
-	padding: 0 20px 0 0;
-	// flex: 1;
-	// width: 100px;
+	.avatar-block {
+		padding: 0 20px 0 0;
+	}
+	@media (max-width: 576px) {
+		flex-direction: column;
+		.avatar-block {
+			align-self: center;
+			padding: 0;
+			margin: 0 0 20px 0;
+			img {
+				height: 150px;
+				width: 150px;
+			}
+		}
+	}
 }
 .editprofile-block {
 	flex: 1 1 auto;
