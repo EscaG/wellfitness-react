@@ -3,8 +3,12 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const router = require('./router/index');
+const authRouter = require('./router/auth.routes');
+const productRouterFood = require('./router/productRout');
+const productRouter = require('./router/product.routes');
+const fileRouter = require('./router/file.routes');
 const path = require('path');
+const multer = require('multer');
 // var logger = require('morgan');
 const errorMiddleware = require('./middlewares/error-middleware');
 
@@ -17,14 +21,22 @@ app.use(cors({
 	credentials: true,
 	origin: process.env.CLIENT_URL
 }));
-app.use('/api', router);
+app.use(express.static("public"));
+app.use(multer({ dest: "public/upload" }).single("fileData"));
+// роутинг
+app.use('/api', authRouter);
+app.use('/api', productRouter);
+app.use('/api', productRouterFood);
+app.use('/api', fileRouter);
 app.use(errorMiddleware);
+// выгрузка index.html для всех запросов на хосте
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.get('*', (req, res) => {
 		res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 	});
 }
+
 const DB_URI = "mongodb+srv://fitness:Acorn4ika@wellfitness.skx4x.mongodb.net/WellFitness?retryWrites=true&w=majority";
 const start = async () => {
 	try {

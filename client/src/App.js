@@ -30,6 +30,9 @@ import Bonuses from "./Components/Pages/Profile/Components/Bonuses";
 import Instructions from "./Components/Pages/Profile/Components/Instructions";
 import Appeals from "./Components/Pages/Profile/Components/Appeals";
 import EditProfile from "./Components/Pages/Profile/Components/EditProfile/EditProfile";
+import ProductCatalog from "./Components/Layout/testproduct/productCatalog";
+import ProductHook from "./Components/Layout/testproduct/ProductHook";
+import { getProduct } from "./http/actions/product";
 // import Modal from "./Components/Layout/ModalWindow/Modal";
 
 function App() {
@@ -40,7 +43,9 @@ function App() {
 
 	useEffect(() => {
 		console.log("APP")
-		if (localStorage.getItem('token')) dispatch(checkAuth())
+		dispatch(getProduct());
+		if (localStorage.getItem('token')) dispatch(checkAuth());
+
 	}, []);
 
 	// const SignInWrapper = ({ children, currentUser }) => {
@@ -60,7 +65,9 @@ function App() {
 				<Routes>
 
 					<Route path="/" element={<PageHome />} />
-					<Route path="brands/*" element={<PageBrands />} />
+					{/* <Route path="brands/*" element={<PageBrands />} /> */}
+					{/* <Route path="brands/*" element={<ProductCatalog />} /> */}
+					<Route path="brands/*" element={<ProductHook />} />
 					<Route path="service" element={<PageService />} />
 					<Route path="services" element={<PageUslugi />} />
 					<Route path="support" element={<PageSupport />} />

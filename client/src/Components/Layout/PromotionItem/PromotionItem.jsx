@@ -13,74 +13,14 @@ import iconNew from './img/icons/new.png';
 import heart from './img/icons/heart.svg';
 import comparison from './img/icons/comparison.svg';
 
-import promFirst from './img/first.png';
-import promSecond from './img/second.png';
-import promThird from './img/third.png';
-import promFourth from './img/fourth.png';
+import { useSelector } from 'react-redux';
 
 export default function PromotionItem() {
-	const [promotionSlides, setPromotionSlides] = useState([
-		{
-			imgSrc: promFirst,
-			availability: "В наличии",
-			description: "Велотренажер CardioPower S35",
-			rating: "5",
-			price: {
-				fullPrice: "1 134 999 ",
-				sharePrice: "999 999 "
-			}
-		},
-		{
-			imgSrc: promSecond,
-			availability: "В наличии",
-			description: "Велотренажер CardioPower T20 Plus",
-			rating: "5",
-			price: {
-				fullPrice: "1 254 999 ",
-				sharePrice: "1 099 999 "
-			}
-		},
-		{
-			imgSrc: promThird,
-			availability: "Нет в наличии",
-			description: "Беговая дорожка CardioPower T30 Plus",
-			rating: "4",
-			price: {
-				fullPrice: "1 199 999 ",
-				sharePrice: null
-			}
-		},
-		{
-			imgSrc: promFourth,
-			availability: "Осталось мало",
-			description: "Беговая дорожка CardioPower S10",
-			rating: "5",
-			price: {
-				fullPrice: "1 010 999 ",
-				sharePrice: "849 999 "
-			}
-		},
-		{
-			imgSrc: promFourth,
-			availability: "Скоро ожидается",
-			description: "Беговая дорожка CardioPower S01",
-			rating: "0",
-			price: {
-				fullPrice: "1 134 999 ",
-				sharePrice: null
-			}
-		},
-		{
-			imgSrc: promFourth,
-			availability: "В наличии",
-			description: "Беговая дорожка CardioPower S35",
-			rating: "5",
-			price: {
-				fullPrice: "1 134 999 ",
-				sharePrice: "999 999 "
-			}
-		},
-	]);
+	// const [isLoaded, setIsLoaded] = useState(false);
+	// const [error, setError] = useState("");
+
+	const products = useSelector(state => state.product.currentProduct);
+
 	const settingsPromotion = {
 		className: "center promotion-slider",
 		arrows: true,
@@ -141,7 +81,7 @@ export default function PromotionItem() {
 
 
 				<Slider  {...settingsPromotion}>
-					{promotionSlides.map((item, index) =>
+					{products.map((item, index) =>
 						<div key={index++} className='promotion__slider-item item-slider'>
 
 							<div className="item-slider__icons icons-slider">
@@ -169,39 +109,43 @@ export default function PromotionItem() {
 							</div>
 
 							<div className="item-slider__image">
-								<img style={{ "width": "100%" }} src={item.imgSrc} alt="slide" />
+								{/* {item.gallery.map(imgSrc => */}
+
+								<img key={"1231165654"} style={{ "width": "100%" }} src={"http://localhost:5000/" + item.gallery[0]} alt="slide" />
+								{/* )} */}
 							</div>
 							<div className="item-slider__description description-item">
 								<div className="description-item__availability">
 
-									{item.availability === "В наличии" && <span className='description-item__dots_green'>
-										{item.availability}
+									{item.availability && <span className='description-item__dots_green'>
+										В наличии
 										<span className='description-item__dots_green_1'></span>
 										<span className='description-item__dots_green_2'></span>
 										<span className='description-item__dots_green_3'></span>
+										<span className='description-item__showRoom'>&nbsp; Есть в шоу-руме</span>
 									</span>}
 
-									{item.availability === "Нет в наличии" && <span className='description-item__dots_red'>
-										{item.availability}
+									{!item.availability && <span className='description-item__dots_red'>
+										Нет в наличии
 										<span className='description-item__dots_red_1'></span>
 										<span className='description-item__dots_red_2'></span>
 										<span className='description-item__dots_red_3'></span>
 									</span>}
 
-									{item.availability === "Осталось мало" && <span className='description-item__dots_orange'>
+									{/* {item.availability === "Осталось мало" && <span className='description-item__dots_orange'>
 										{item.availability}
 										<span className='description-item__dots_orange_1'></span>
 										<span className='description-item__dots_orange_2'></span>
 										<span className='description-item__dots_orange_3'></span>
-									</span>}
+									</span>} */}
 
-									{item.availability === "Скоро ожидается" && <span className='description-item__wait'>{item.availability}</span>}
+									{/* {item.availability === "Скоро ожидается" && <span className='description-item__wait'>{item.availability}</span>}
 
 									{item.availability !== "Скоро ожидается" &&
-										<span className='description-item__showRoom'>Есть в шоу-руме</span>}
+										<span className='description-item__showRoom'>Есть в шоу-руме</span>} */}
 
 								</div>
-								<Link to="/" className="description-item__name">{item.description}</Link>
+								<Link to="/" className="description-item__name">{item.name}</Link>
 								<div className="description-item__rating">Рейтинг {item.rating}</div>
 								<div className="desription-item__price-button price-button">
 									{item.price.sharePrice ?
@@ -227,3 +171,73 @@ export default function PromotionItem() {
 		</div>
 	)
 }
+
+
+
+
+
+
+
+
+// const [promotionSlides, setPromotionSlides] = useState([
+// 	{
+// 		imgSrc: promFirst,
+// 		availability: "В наличии",
+// 		description: "Велотренажер CardioPower S35",
+// 		rating: "5",
+// 		price: {
+// 			fullPrice: "1 134 999 ",
+// 			sharePrice: "999 999 "
+// 		}
+// 	},
+// 	{
+// 		imgSrc: promSecond,
+// 		availability: "В наличии",
+// 		description: "Велотренажер CardioPower T20 Plus",
+// 		rating: "5",
+// 		price: {
+// 			fullPrice: "1 254 999 ",
+// 			sharePrice: "1 099 999 "
+// 		}
+// 	},
+// 	{
+// 		imgSrc: promThird,
+// 		availability: "Нет в наличии",
+// 		description: "Беговая дорожка CardioPower T30 Plus",
+// 		rating: "4",
+// 		price: {
+// 			fullPrice: "1 199 999 ",
+// 			sharePrice: null
+// 		}
+// 	},
+// 	{
+// 		imgSrc: promFourth,
+// 		availability: "Осталось мало",
+// 		description: "Беговая дорожка CardioPower S10",
+// 		rating: "5",
+// 		price: {
+// 			fullPrice: "1 010 999 ",
+// 			sharePrice: "849 999 "
+// 		}
+// 	},
+// 	{
+// 		imgSrc: promFourth,
+// 		availability: "Скоро ожидается",
+// 		description: "Беговая дорожка CardioPower S01",
+// 		rating: "0",
+// 		price: {
+// 			fullPrice: "1 134 999 ",
+// 			sharePrice: null
+// 		}
+// 	},
+// 	{
+// 		imgSrc: promFourth,
+// 		availability: "В наличии",
+// 		description: "Беговая дорожка CardioPower S35",
+// 		rating: "5",
+// 		price: {
+// 			fullPrice: "1 134 999 ",
+// 			sharePrice: "999 999 "
+// 		}
+// 	},
+// ]);
