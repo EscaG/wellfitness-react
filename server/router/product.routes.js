@@ -8,7 +8,7 @@ router.put('/products', cProduct.put);
 router.delete('/products', cProduct.delete);
 
 router.get('/seed', cProduct.seed);
-
+router.get('/products/autocomplete',cProduct.autocomplete); // Для автозаполнения формы
 
 
 module.exports = router;

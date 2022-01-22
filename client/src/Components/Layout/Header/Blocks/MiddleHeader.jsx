@@ -1,10 +1,16 @@
-import React from 'react'
-import {Link} from "react-router-dom";
+import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 import comparison from "../img/comparison.svg";
 import favorites from "../img/favorites.svg";
 import cart from "../img/cart.svg";
+import Modal from '../../ModalWindow/Modal';
+import AutocompleteHeader from '../AutocompleteSearch/AutocompleteHeader';
 
 export default function MiddleHeader() {
+
+	const [modalActive, setModalActive] = useState(false);
+
+
 	return (
 		<div className="header__middle middle-header">
 			<div className="middle-header__content _container">
@@ -14,9 +20,22 @@ export default function MiddleHeader() {
 					<div className="middle-header__column">
 						<div className="middle-header__catalog catalog-header">
 							<Link to='/' data-da=".adaptive-menu__main-menu, 1330, 0"
-										className="catalog-header__item_catalog catalog-header__item"><span>Каталог</span></Link>
-							<Link to='/' data-da=".top-header__contacts, 1331, 0" href=""
-										className="catalog-header__item_search catalog-header__item"></Link>
+								className="catalog-header__item_catalog catalog-header__item"><span>Каталог</span></Link>
+
+							<button
+								onClick={() => setModalActive(true)}
+								data-da=".top-header__contacts, 1331, 0"
+								className="catalog-header__item_search catalog-header__item"
+							>
+
+							</button>
+							{modalActive ?
+								<Modal active={modalActive} setActive={setModalActive}>
+									<AutocompleteHeader />
+								</Modal>
+								: null
+							}
+
 						</div>
 					</div>
 					<div className="middle-header__column">

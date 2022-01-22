@@ -1,0 +1,36 @@
+.autocomplete-header {
+	&__main {
+		width: 100vw;
+		color: #1a1a25;
+	}
+	&__block {
+		max-width: 1440px;
+		margin: auto;
+		padding: 0 15px 57px 15px;
+		border: 1px solid #000;
+	}
+}
+.search-container {
+	position: relative;
+	&__onbtn {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		display: flex;
+	}
+	button {
+		background: inherit;
+		// background: url("../img/close.svg") 100% 50% no-repeat;
+	}
+	input {
+		color: #1a1a25;
+		font-size: 16px;
+		width: 100%;
+		display: block;
+		padding: 14px 56px 14px 56px;
+		border-bottom: 1px solid rgba(133, 143, 164, 0.15);
+		border-radius: 1px;
+		background: url("../img/search.svg") 0 50% no-repeat;
+	}
+}

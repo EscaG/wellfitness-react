@@ -6,6 +6,7 @@ const Product = new Schema({
 	availability: Boolean,
 	gallery: [],
 	rating: Number,
+	slug: String,
 	price: {
 		fullPrice: String,
 		sharePrice: String

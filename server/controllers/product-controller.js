@@ -63,6 +63,29 @@ exports.delete = function (request, response) {
 	);
 }
 
+exports.autocomplete = function (request, response) {
+	const searchProduct = request.query.searchProduct;
+	// /api/product?searchProduct=Samsung
+	console.log("searchProduct: " + searchProduct);
+	if (searchProduct.length < 2) {
+		response.json([]);
+		return;
+	}
+	ProductModel.find({name: {$regex: searchProduct, "$options": "-i"}},
+		function (err, allData) {
+			if (err) {
+				console.log(err);
+				response.json(err);
+				return;
+			}
+			response.json(allData);
+		}
+	);
+
+	//response.send("Ok");
+}
+
+
 exports.seed = function (request, response) {
 	console.log("SEED");
 	let product1 = new ProductModel();

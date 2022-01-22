@@ -10,7 +10,7 @@ export function openMenu() {
 		document.querySelector('.adaptive-menu').classList.toggle('_active');
 		// document.getElementsByTagName("body")[0].classList.toggle("lock");
 		document.body.classList.toggle("lock");
-		// возвращаю содержимое бургер меню в исходноеположение
+		// возвращаю содержимое бургер меню в исходное положение
 		document.querySelector(".adaptive-menu__login").classList.remove("_disactive");
 		document.querySelector(".adaptive-menu__main-menu").classList.remove("_disactive");
 		document.querySelector(".catalog-header__item_catalog").classList.remove("_disactive");

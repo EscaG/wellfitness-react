@@ -33,6 +33,7 @@ import EditProfile from "./Components/Pages/Profile/Components/EditProfile/EditP
 import ProductCatalog from "./Components/Layout/testproduct/productCatalog";
 import ProductHook from "./Components/Layout/testproduct/ProductHook";
 import { getProduct } from "./http/actions/product";
+import ProductCardPage from "./Components/Pages/ProductCard/ProductCardPage";
 // import Modal from "./Components/Layout/ModalWindow/Modal";
 
 function App() {
@@ -77,6 +78,8 @@ function App() {
 					<Route path="contacts" element={<PageContacts />} />
 					<Route path="forhome" element={<CatalogForHome />} />
 					<Route path="forclub" element={<CatalogForClub />} />
+					<Route path="product/:slug/:id" element={<ProductCardPage />} />
+
 					<Route path="login" element={<LoginForm />} />
 					<Route path="registration" element={<RegistrationForm />} />
 
