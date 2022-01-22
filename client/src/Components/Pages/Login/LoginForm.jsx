@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../../http/actions/user';
@@ -14,8 +14,16 @@ export function LoginForm() {
 	const navigate = useNavigate();
 
 	const loginFunc = () => dispatch(login(email, password));
-	const goProfile = () => navigate('/profile/main');
+	const goProfile = () => navigate('/profile/main', { replace: true });
 	const goRegistration = () => navigate('/registration');
+
+
+	useEffect(() => {
+		if (isAuth) {
+
+			goProfile()
+		}
+	}, [isAuth]);
 
 	return (
 		<section className='login-form'>
@@ -38,7 +46,7 @@ export function LoginForm() {
 				<button className='login-form__login' onClick={() => loginFunc()}>Войти</button>
 				<br />
 				{errorMessage && <div > {errorMessage}</div>}
-				{isAuth && goProfile()}
+				{/* {isAuth && goProfile()} */}
 				<button type='button' className='login-form__registration' onClick={() => goRegistration()}>Зарегистрироваться</button>
 			</div>
 

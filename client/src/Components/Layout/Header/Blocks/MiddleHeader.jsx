@@ -5,11 +5,15 @@ import favorites from "../img/favorites.svg";
 import cart from "../img/cart.svg";
 import Modal from '../../ModalWindow/Modal';
 import AutocompleteHeader from '../AutocompleteSearch/AutocompleteHeader';
+import { useDispatch, useSelector } from 'react-redux';
+import { setConditionAutocomplite } from '../../../../http/reducers/modalReducerAutocomplite';
 
 export default function MiddleHeader() {
 
 	const [modalActive, setModalActive] = useState(false);
-
+	const isModal = useSelector(state => state.modalAutocomplete.currentCondition);
+	console.log(isModal);
+	const dispatch = useDispatch();
 
 	return (
 		<div className="header__middle middle-header">
@@ -21,20 +25,21 @@ export default function MiddleHeader() {
 						<div className="middle-header__catalog catalog-header">
 							<Link to='/' data-da=".adaptive-menu__main-menu, 1330, 0"
 								className="catalog-header__item_catalog catalog-header__item"><span>Каталог</span></Link>
-
-							<button
-								onClick={() => setModalActive(true)}
+							<div
+								style={{ display: "inline-block" }}
 								data-da=".top-header__contacts, 1331, 0"
-								className="catalog-header__item_search catalog-header__item"
 							>
 
-							</button>
-							{modalActive ?
-								<Modal active={modalActive} setActive={setModalActive}>
-									<AutocompleteHeader />
-								</Modal>
-								: null
-							}
+								<button
+									onClick={() => dispatch(setConditionAutocomplite(true))}
+									className="catalog-header__item_search catalog-header__item"
+								>
+
+								</button>
+								{isModal ?
+									<Modal active={isModal}>		<AutocompleteHeader />		</Modal>
+									: null}
+							</div>
 
 						</div>
 					</div>

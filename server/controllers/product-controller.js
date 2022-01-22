@@ -84,6 +84,20 @@ exports.autocomplete = function (request, response) {
 
 	//response.send("Ok");
 }
+exports.getById = function (request, response) {
+	let id = request.params.id;
+	console.log("Run GET");
+	ProductModel.findById(id,
+		function (err, allData) {
+			if (err) {
+				console.log(err);
+				response.json(err);
+				return;
+			}
+			response.json(allData);
+		}
+	);
+}
 
 
 exports.seed = function (request, response) {

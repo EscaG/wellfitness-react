@@ -3,11 +3,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import productReducer from "./productReducer";
 import userReducer from "./userReducer";
+import modalAutocompliteReducer from "./modalReducerAutocomplite";
 // import uploadReducer from "./uploadReducer";
 
 const rootReducer = combineReducers({
 	user: userReducer,
 	product: productReducer,
+	modalAutocomplete: modalAutocompliteReducer
 	// upload: uploadReducer
 })
 

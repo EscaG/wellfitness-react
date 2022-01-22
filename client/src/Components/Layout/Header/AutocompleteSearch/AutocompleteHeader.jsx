@@ -1,10 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import "./style-autocompleteheader.scss";
 import clearText from "../img/close.svg";
+import AutocompleteItem from './AutocompleteItem';
+import { useDispatch } from 'react-redux';
+import { setConditionAutocomplite } from '../../../../http/reducers/modalReducerAutocomplite';
 export default function AutocompleteHeader() {
 
 	const [searchProduct, setSearchProduct] = useState("");
 	const [products, setProducts] = useState([]);
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (document.getElementById("search-autocomplete")) {
@@ -45,7 +50,8 @@ export default function AutocompleteHeader() {
 	}
 
 	const clearAutocomplete = () => {
-		document.getElementById("search-autocomplete").value = "";
+		// document.getElementById("search-autocomplete").value = "";
+		dispatch(setConditionAutocomplite(false))
 	}
 
 	return (
@@ -59,7 +65,8 @@ export default function AutocompleteHeader() {
 				</div>
 				<ul>
 					{products.map(product =>
-						<div key={product._id}>{product.name}</div>
+						// <div key={product._id}>{product.name}</div>
+						<AutocompleteItem key={product._id} product={product} />
 					)}
 					<li></li>
 				</ul>
