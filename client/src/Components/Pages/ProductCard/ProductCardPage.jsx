@@ -8,8 +8,8 @@ import './style-productcard.scss';
 
 
 export default function ProductCardPage() {
+
 	const [product, setProduct] = useState({});
-	// const isModal = useSelector(state => state.modalAutocomplete.currentCondition);
 	const dispatch = useDispatch();
 	let params = useParams();
 
@@ -17,32 +17,33 @@ export default function ProductCardPage() {
 
 	useEffect(() => {
 		dispatch(setConditionAutocomplite(false));
+		async function getProduct(id) {
 
-		fetch("http://localhost:5000/api/product/byid/" + params.id)
-			.then(res => {
-				// console.log(res);
-				return res.json();
-			})
-			.then(res => {
-				setProduct(res);
-				// setIsLoad(true);
-				console.log(res);
-			})
-			.catch(err =>
-				console.log(err))
+			await fetch("http://localhost:5000/api/product/byid/" + id)
+				.then(res => {
+					// console.log(res);
+					return res.json();
+				})
+				.then(res => {
+					setProduct(res);
+					// setIsLoad(true);
+					console.log(res);
+				})
+				.catch(err =>
+					console.log(err))
+		};
+		getProduct(params.id)
 
 	}, [params.id]);
-
-
-	// useEffect(() => {
-	// },
-	// [params.id]);
 
 
 
 	return (
 		<article className='page-productcard'>
-			<Presentation product={product} />
+			{/* {product.name} */}
+			{product &&
+				<Presentation product={product} />
+			}
 		</article>
 	);
 }
