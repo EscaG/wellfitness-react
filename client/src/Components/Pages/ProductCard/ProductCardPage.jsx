@@ -8,7 +8,7 @@ import './style-productcard.scss';
 
 
 export default function ProductCardPage() {
-
+	const asd = "http://localhost:5000";
 	const [product, setProduct] = useState({});
 	const dispatch = useDispatch();
 	let params = useParams();
@@ -19,7 +19,7 @@ export default function ProductCardPage() {
 		dispatch(setConditionAutocomplite(false));
 		async function getProduct(id) {
 
-			await fetch("http://localhost:5000/api/product/byid/" + id)
+			await fetch("/api/product/byid/" + id)
 				.then(res => {
 					// console.log(res);
 					return res.json();
