@@ -117,7 +117,7 @@ exports.seed = function (request, response) {
 	product1.rating = 5;
 	product1.price = {fullPrice: "1 134 999 ", sharePrice: "999 999 "};
 	product1.configuration = {
-		size: "1500 &times; 2000",
+		size: "1500x2000",
 		weight: "150",
 		color: "Черный",
 		frameColor: "Черный",
@@ -220,11 +220,11 @@ exports.seed = function (request, response) {
 	product2.rating = 5;
 	product2.price = {fullPrice: "1 134 999 ", sharePrice: null};
 	product2.configuration = {
-		size: "1500 &times; 2000",
-		weight: "150",
-		color: "Черный",
-		frameColor: "Черный",
-		upholsteryColor: "Черный"
+		size: "1700x2000",
+		weight: "500",
+		color: "Графит",
+		frameColor: "Белый",
+		upholsteryColor: "Красный"
 	};
 	product2.characteristics = {
 		main: {
@@ -323,11 +323,11 @@ exports.seed = function (request, response) {
 	product3.rating = 5;
 	product3.price = {fullPrice: "1 199 999 ", sharePrice: "1 099 199"};
 	product3.configuration = {
-		size: "1500 &times; 2000",
-		weight: "150",
-		color: "Черный",
-		frameColor: "Черный",
-		upholsteryColor: "Черный"
+		size: "1900x2000",
+		weight: "800",
+		color: "Белый",
+		frameColor: "Белый",
+		upholsteryColor: "Графит"
 	};
 	product3.characteristics = {
 		main: {
@@ -426,11 +426,11 @@ exports.seed = function (request, response) {
 	product4.rating = 5;
 	product4.price = {fullPrice: "1 049 999 ", sharePrice: "849 999"};
 	product4.configuration = {
-		size: "1500 &times; 2000",
-		weight: "150",
-		color: "Черный",
+		size: "1500x2000",
+		weight: "500",
+		color: "Красный",
 		frameColor: "Черный",
-		upholsteryColor: "Черный"
+		upholsteryColor: "Графит"
 	};
 	product4.characteristics = {
 		main: {
@@ -471,7 +471,7 @@ exports.seed = function (request, response) {
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
-			]
+			] 
 		},
 		additional: {
 			name: "Дополнительные характеристики",

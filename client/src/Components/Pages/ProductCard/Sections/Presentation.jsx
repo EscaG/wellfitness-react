@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -6,14 +6,27 @@ import MainImage from '../../../Layout/SpriteIcons/MainImage';
 import SpriteIcons from '../../../Layout/SpriteIcons/SpriteIcons';
 
 export default function Presentation({ product }) {
-	const { name, gallery, price, characteristics, brand, availability } = product;
+	const { name, gallery, price, characteristics, brand, availability, configuration } = product;
 	const [previewImage, setPreviewImage] = useState('');
 	const [entity, setEntity] = useState(1);
+	const [radioWeight, setRadioWeight] = useState(null);
+	const [radioSize, setRadioSize] = useState(null);
+	const [radioColor, setRadioColor] = useState(null);
+	const [radioColorFrame, setRadioColorFrame] = useState(null);
+	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
 	console.log(product);
 
-	const showPreview = (imgSrc) => {
-		setPreviewImage(imgSrc)
-	}
+	useLayoutEffect(() => {
+		setRadioSize(configuration && configuration.size);
+		setRadioWeight(configuration && configuration.weight);
+		setRadioColor(configuration && configuration.color);
+		setRadioColorFrame(configuration && configuration.frameColor);
+		setRadioColorUpholstery(configuration && configuration.upholsteryColor);
+	}, [product]);
+
+	console.log(configuration && configuration.weight);
+	console.log(radioWeight, radioSize);
+
 
 	useEffect(() => {
 		if (!availability) {
@@ -22,6 +35,9 @@ export default function Presentation({ product }) {
 		}
 	}, []);
 
+	const showPreview = (imgSrc) => {
+		setPreviewImage(imgSrc)
+	}
 
 	const onChangeEntity = (e) => {
 		let myNumber = Number(e.target.value);
@@ -45,6 +61,23 @@ export default function Presentation({ product }) {
 		if (entity > 1) {
 			setEntity(entity => entity - 1)
 		}
+	}
+	const changeRadioSize = (e) => {
+		setRadioSize(e.target.value)
+
+	}
+	const changeRadioWeight = (e) => {
+		setRadioWeight(e.target.value)
+	}
+
+	const changeRadioColor = (e) => {
+		setRadioColor(e.target.value)
+	}
+	const changeRadioColorFrame = (e) => {
+		setRadioColorFrame(e.target.value);
+	}
+	const changeRadioColorUpholstery = (e) => {
+		setRadioColorUpholstery(e.target.value);
 	}
 
 	const settingsPromotion = {
@@ -97,7 +130,7 @@ export default function Presentation({ product }) {
 	}
 
 	return (
-		<article className='page-productcard__presentation presentation-product'>
+		<section className='page-productcard__presentation presentation-product'>
 			<div style={{ backgroundColor: "#fff" }}>
 
 
@@ -106,7 +139,7 @@ export default function Presentation({ product }) {
 				{/* //! флекс, разделяющий картинки от описания */}
 				<div className="presentation-product__wrapper wrapper-showroom">
 					{/* //! блок с картинками*/}
-					<section className="wrapper-showroom__gallery gallery-view">
+					<div className="wrapper-showroom__gallery gallery-view">
 						<div className='gallery-view__allgallery'>
 
 							<div className="gallery-view__main-img">
@@ -123,9 +156,9 @@ export default function Presentation({ product }) {
 							</div>
 						</div>
 
-					</section>
+					</div>
 					{/* //! блок с первыми характеристиками*/}
-					<section className="wrapper-showroom__all-configaration configaration-all">
+					<div className="wrapper-showroom__all-configaration configaration-all">
 						{/* //todo бренд */}
 						<div className='configaration-all__brand'>
 							<div>
@@ -186,8 +219,14 @@ export default function Presentation({ product }) {
 									</span>}
 								</div>
 								<div className='block-price-presentation__price-block'>
-									<h3 className='block-price-presentation__fullprice'>{price && price.fullPrice} &#8372;</h3>
-									<h3 className='block-price-presentation__shareprice'>{price?.sharePrice && (price.sharePrice + String.fromCharCode(parseInt('0x20B4', 16)))}</h3>
+									{price?.sharePrice ?
+										<>
+											<h3 className='block-price-presentation__shareprice'>{price?.sharePrice && price.sharePrice} &#8372;</h3>
+											<h3 className='block-price-presentation__fullprice'>{price?.fullPrice && price.fullPrice + String.fromCharCode(parseInt('0x20B4', 16))}</h3>
+										</>
+										:
+										<h3 className='block-price-presentation__fullprice stock'>{price?.fullPrice && price.fullPrice + String.fromCharCode(parseInt('0x20B4', 16))}</h3>
+									}
 								</div>
 								<div className="block-price-presentation__cart-block cart-presentation">
 									<div className='cart-presentation__wrapper'>
@@ -200,11 +239,212 @@ export default function Presentation({ product }) {
 									</div>
 								</div>
 							</div>
-
 						</div>
-					</section>
+						{/* //todo  будет цена и кнопка купить */}
+						<div className='presentation-product__configuration'>
+							<h3 className='presentation-product__title'>Конфигурация</h3>
+							<div className="presentation-product__items items-configuration">
+								<div className="presentation-product__size items-configuration__item">
+									<div className='items-configuration__parameter-name'>Размер, см</div>
+									<div className='items-configuration__parameter-option'>
+										<div>
+											<input
+												checked={radioSize === "1500x2000" ? true : false}
+												onChange={(e) => changeRadioSize(e)}
+												value="1500x2000"
+												className='items-configuration__checkbox' type="radio" name="size-radio" id="size-first" />
+											<label className='items-configuration__label' htmlFor="size-first">1500 &times; 2000</label>
+										</div>
+										<div>
+											<input
+												checked={radioSize === "1700x2000" ? true : false}
+												onChange={(e) => changeRadioSize(e)}
+												value="1700x2000"
+												className='items-configuration__checkbox' type="radio" name="size-radio" id="size-second" />
+											<label className='items-configuration__label' htmlFor="size-second">1700 &times; 2000</label>
+										</div>
+										<div>
+											<input
+												checked={radioSize === "1900x2000" ? true : false}
+												onChange={(e) => changeRadioSize(e)}
+												value="1900x2000"
+												className='items-configuration__checkbox' type="radio" name="size-radio" id="size-third" />
+											<label className='items-configuration__label' htmlFor="size-third">1900 &times; 2000</label>
+										</div>
+									</div>
+								</div>
+								<div className="presentation-product__weight items-configuration__item">
+									<div className='items-configuration__parameter-name'>Вес стека, г</div>
+									<div className='items-configuration__parameter-option'>
+										<div>
+											<input
+												onChange={(e) => changeRadioWeight(e)}
+												checked={radioWeight === "150" ? true : false}
+												value="150"
+												className='items-configuration__checkbox' type="radio" name="weight-radio" id="weight-first" />
+											<label className='items-configuration__label' htmlFor="weight-first">150</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioWeight(e)}
+												checked={radioWeight === "500" ? true : false}
+												value="500"
+												className='items-configuration__checkbox' type="radio" name="weight-radio" id="weight-second" />
+											<label className='items-configuration__label' htmlFor="weight-second">500</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioWeight(e)}
+												checked={radioWeight === "800" ? true : false}
+												value="800"
+												className='items-configuration__checkbox' type="radio" name="weight-radio" id="weight-third" />
+											<label className='items-configuration__label' htmlFor="weight-third">800</label>
+										</div>
+									</div>
+								</div>
+								{/* //todo Основной  цвет */}
+								<div className="presentation-product__color items-configuration__item">
+									<div className='items-configuration__parameter-name'>Цвет</div>
+									<div className='items-configuration__parameter-option'>
+										<div>
+											<input
+												onChange={(e) => changeRadioColor(e)}
+												checked={radioColor === "Черный" ? true : false}
+												value="Черный"
+												className='items-configuration__checkbox' type="radio" name="color-radio" id="color-first" />
+											<label className='items-configuration__label color' htmlFor="color-first">
+												<span style={{ backgroundColor: "black" }}></span>
+												Черный</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioColor(e)}
+												checked={radioColor === "Графит" ? true : false}
+												value="Графит"
+												className='items-configuration__checkbox' type="radio" name="color-radio" id="color-second" />
+											<label className='items-configuration__label color' htmlFor="color-second">
+												<span style={{ backgroundColor: "#505050" }}></span>
+												Графит</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioColor(e)}
+												checked={radioColor === "Белый" ? true : false}
+												value="Белый"
+												className='items-configuration__checkbox' type="radio" name="color-radio" id="color-third" />
+											<label className='items-configuration__label color' htmlFor="color-third">
+												<span style={{ backgroundColor: "white" }}></span>
+												Белый</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioColor(e)}
+												checked={radioColor === "Красный" ? true : false}
+												value="Красный"
+												className='items-configuration__checkbox' type="radio" name="color-radio" id="color-fourth" />
+											<label className='items-configuration__label color' htmlFor="color-fourth">
+												<span style={{ backgroundColor: "red" }}></span>
+												Красный</label>
+										</div>
+									</div>
+								</div>
+								{/* //todo Цвет рамы */}
+								<div className="presentation-product__framecolor items-configuration__item">
+									<div className='items-configuration__parameter-name'>Цвет рамы</div>
+									<div className='items-configuration__parameter-option'>
+										<div>
+											<input
+												onChange={(e) => changeRadioColorFrame(e)}
+												checked={radioColorFrame === "Черный" ? true : false}
+												value="Черный"
+												className='items-configuration__checkbox' type="radio" name="framecolor-radio" id="framecolor-first" />
+											<label className='items-configuration__label color' htmlFor="framecolor-first">
+												<span style={{ backgroundColor: "black" }}></span>
+												Черный</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioColorFrame(e)}
+												checked={radioColorFrame === "Графит" ? true : false}
+												value="Графит"
+												className='items-configuration__checkbox' type="radio" name="framecolor-radio" id="framecolor-second" />
+											<label className='items-configuration__label color' htmlFor="framecolor-second">
+												<span style={{ backgroundColor: "#505050" }}></span>
+												Графит</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioColorFrame(e)}
+												checked={radioColorFrame === "Белый" ? true : false}
+												value="Белый"
+												className='items-configuration__checkbox' type="radio" name="framecolor-radio" id="framecolor-third" />
+											<label className='items-configuration__label color' htmlFor="framecolor-third">
+												<span style={{ backgroundColor: "white" }}></span>
+												Белый</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioColorFrame(e)}
+												checked={radioColorFrame === "Красный" ? true : false}
+												value="Красный"
+												className='items-configuration__checkbox' type="radio" name="framecolor-radio" id="framecolor-fourth" />
+											<label className='items-configuration__label color' htmlFor="framecolor-fourth">
+												<span style={{ backgroundColor: "red" }}></span>
+												Красный</label>
+										</div>
+									</div>
+								</div>
+								{/* //todo Цвет обивки */}
+								<div className="presentation-product__upholsterycolor items-configuration__item">
+									<div className='items-configuration__parameter-name'>Цвет обивки</div>
+									<div className='items-configuration__parameter-option'>
+										<div>
+											<input
+												onChange={(e) => changeRadioColorUpholstery(e)}
+												checked={radioColorUpholstery === "Черный" ? true : false}
+												value="Черный"
+												className='items-configuration__checkbox' type="radio" name="upholsterycolor-radio" id="upholsterycolor-first" />
+											<label className='items-configuration__label color' htmlFor="upholsterycolor-first">
+												<span style={{ backgroundColor: "black" }}></span>
+												Черный</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioColorUpholstery(e)}
+												checked={radioColorUpholstery === "Графит" ? true : false}
+												value="Графит"
+												className='items-configuration__checkbox' type="radio" name="upholsterycolor-radio" id="upholsterycolor-second" />
+											<label className='items-configuration__label color' htmlFor="upholsterycolor-second">
+												<span style={{ backgroundColor: "#505050" }}></span>
+												Графит</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioColorUpholstery(e)}
+												checked={radioColorUpholstery === "Белый" ? true : false}
+												value="Белый"
+												className='items-configuration__checkbox' type="radio" name="upholsterycolor-radio" id="upholsterycolor-third" />
+											<label className='items-configuration__label color' htmlFor="upholsterycolor-third">
+												<span style={{ backgroundColor: "white" }}></span>
+												Белый</label>
+										</div>
+										<div>
+											<input
+												onChange={(e) => changeRadioColorUpholstery(e)}
+												checked={radioColorUpholstery === "Красный" ? true : false}
+												value="Красный"
+												className='items-configuration__checkbox' type="radio" name="upholsterycolor-radio" id="upholsterycolor-fourth" />
+											<label className='items-configuration__label color' htmlFor="upholsterycolor-fourth">
+												<span style={{ backgroundColor: "red" }}></span>
+												Красный</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</article >
+		</section >
 	);
 }
