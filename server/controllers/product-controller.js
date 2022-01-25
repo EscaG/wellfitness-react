@@ -1,5 +1,6 @@
 const ProductModel = require("../models/product-model");
 const FileController = require("./fileController");
+const uuid = require('uuid');
 
 // Create => POST
 exports.post = function (request, response) {
@@ -106,14 +107,23 @@ exports.seed = function (request, response) {
 	product1.brand ="/storage/brands/bowflex.png";
 	product1.name = "Беговая дорожка CardioPower S20";
 	product1.availability = false;
-	product1.gallery = ["/storage/products/first.png",
-		"/storage/products/second.png",
-		"/storage/products/third.png",
-		"/storage/products/fourth.png",
-		"/storage/products/first.png",
-		"/storage/products/second.png",
-		"/storage/products/third.png",
-		"/storage/products/fourth.png"];
+	product1.gallery = [
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/first.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/second.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/third.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/fourth.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/first.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/second.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/third.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/fourth.png"}];
 	product1.rating = 5;
 	product1.price = {fullPrice: "1 134 999 ", sharePrice: "999 999 "};
 	product1.configuration = {
@@ -209,14 +219,23 @@ exports.seed = function (request, response) {
 	product2.brand ="/storage/brands/boxingbar.png";
 	product2.name = "Беговая дорожка CardioPower S10";
 	product2.availability = true;
-	product2.gallery = ["/storage/products/first.png",
-		"/storage/products/second.png",
-		"/storage/products/third.png",
-		"/storage/products/fourth.png",
-		"/storage/products/first.png",
-		"/storage/products/second.png",
-		"/storage/products/third.png",
-		"/storage/products/fourth.png"];
+	product2.gallery = [
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/first.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/second.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/third.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/fourth.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/first.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/second.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/third.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/fourth.png"}];
 	product2.rating = 5;
 	product2.price = {fullPrice: "1 134 999 ", sharePrice: null};
 	product2.configuration = {
@@ -312,14 +331,23 @@ exports.seed = function (request, response) {
 	product3.brand ="/storage/brands/cardiopower.png";
 	product3.name = "Беговая дорожка CardioPower S35";
 	product3.availability = false;
-	product3.gallery = ["/storage/products/first.png",
-		"/storage/products/second.png",
-		"/storage/products/third.png",
-		"/storage/products/fourth.png",
-		"/storage/products/first.png",
-		"/storage/products/second.png",
-		"/storage/products/third.png",
-		"/storage/products/fourth.png"];
+	product3.gallery = [
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/first.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/second.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/third.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/fourth.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/first.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/second.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/third.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/fourth.png"}];
 	product3.rating = 5;
 	product3.price = {fullPrice: "1 199 999 ", sharePrice: "1 099 199"};
 	product3.configuration = {
@@ -415,14 +443,23 @@ exports.seed = function (request, response) {
 	product4.brand ="/storage/brands/doublefish.png";
 	product4.name = "Беговая дорожка CardioPower S01";
 	product4.availability = true;
-	product4.gallery = ["/storage/products/first.png",
-		"/storage/products/second.png",
-		"/storage/products/third.png",
-		"/storage/products/fourth.png",
-		"/storage/products/first.png",
-		"/storage/products/second.png",
-		"/storage/products/third.png",
-		"/storage/products/fourth.png"];
+	product4.gallery = [
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/first.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/second.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/third.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/fourth.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/first.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/second.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/third.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/fourth.png"}];
 	product4.rating = 5;
 	product4.price = {fullPrice: "1 049 999 ", sharePrice: "849 999"};
 	product4.configuration = {
@@ -471,7 +508,7 @@ exports.seed = function (request, response) {
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
-			] 
+			]
 		},
 		additional: {
 			name: "Дополнительные характеристики",

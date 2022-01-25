@@ -111,7 +111,7 @@ export default function PromotionItem() {
 							<div className="item-slider__image">
 								{/* {item.gallery.map(imgSrc => */}
 
-								<img key={"1231165654"} style={{ "width": "100%" }} src={"http://localhost:5000/" + item.gallery[0]} alt="slide" />
+								<img key={"1231165654"} style={{ "width": "100%" }} src={item.gallery[0].image} alt="slide" />
 								{/* )} */}
 							</div>
 							<div className="item-slider__description description-item">

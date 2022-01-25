@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MainImage from '../../../Layout/SpriteIcons/MainImage';
 import SpriteIcons from '../../../Layout/SpriteIcons/SpriteIcons';
+import './presentation.scss';
 
 export default function Presentation({ product }) {
 	const { name, gallery, price, characteristics, brand, availability, configuration } = product;
@@ -14,6 +15,7 @@ export default function Presentation({ product }) {
 	const [radioColor, setRadioColor] = useState(null);
 	const [radioColorFrame, setRadioColorFrame] = useState(null);
 	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
+	const [imageId, setImageId] = useState("");
 	console.log(product);
 
 	useLayoutEffect(() => {
@@ -22,6 +24,7 @@ export default function Presentation({ product }) {
 		setRadioColor(configuration && configuration.color);
 		setRadioColorFrame(configuration && configuration.frameColor);
 		setRadioColorUpholstery(configuration && configuration.upholsteryColor);
+		setImageId(gallery && gallery[0].id)
 	}, [product]);
 
 	console.log(configuration && configuration.weight);
@@ -35,15 +38,15 @@ export default function Presentation({ product }) {
 		}
 	}, []);
 
-	const showPreview = (imgSrc) => {
+	const showPreview = (id, imgSrc) => {
 		setPreviewImage(imgSrc)
+		setImageId(id);
 	}
 
 	const onChangeEntity = (e) => {
 		let myNumber = Number(e.target.value);
 		if (e.target.value <= 99) {
 			setEntity(myNumber)
-
 		} else if (myNumber > 99) {
 			setEntity(99)
 		} else if (myNumber === 0) {
@@ -81,49 +84,40 @@ export default function Presentation({ product }) {
 	}
 
 	const settingsPromotion = {
-		// className: "center promotion-slider",
+		className: "presentation-slider",
 		arrows: true,
 		centerMode: false,
 		infinite: true,
-		slidesToShow: 7,
+		slidesToShow: 6,
 		slidesToScroll: 1,
 		speed: 500,
-		autoplay: true,
+		autoplay: false,
 		autoplaySpeed: 2000,
-		initialSlide: 1,
+		initialSlide: 0,
 		responsive: [
 			{
-				breakpoint: 1400,
+				breakpoint: 1300,
 				settings: {
-					slidesToShow: 3,
+					slidesToShow: 5,
 				}
 			},
-			{
-				breakpoint: 1100,
-				settings: {
-					slidesToShow: 2,
-				}
-			},
+
 			{
 				breakpoint: 992,
 				settings: {
-					centerPadding: "70px",
-					slidesToShow: 2,
-					initialSlide: 1
+					slidesToShow: 4,
 				}
 			},
 			{
 				breakpoint: 768,
 				settings: {
-					centerPadding: "0px",
-					slidesToShow: 2,
+					slidesToShow: 6,
 				}
 			},
 			{
 				breakpoint: 576,
 				settings: {
-					centerPadding: "0px",
-					slidesToShow: 1,
+					slidesToShow: 5,
 				}
 			}
 		]
@@ -143,13 +137,13 @@ export default function Presentation({ product }) {
 						<div className='gallery-view__allgallery'>
 
 							<div className="gallery-view__main-img">
-								<MainImage image={previewImage ? previewImage : gallery && gallery[0]} />
+								<MainImage image={previewImage ? previewImage : gallery && gallery[0].image} />
 							</div>
 							<div className="gallery-view__preview">
 								<Slider {...settingsPromotion}>
 									{gallery && gallery.map((imgSrc, index) =>
-										<div onClick={() => showPreview(imgSrc)} className='preview-product' key={Date.now() + index}>
-											<MainImage image={imgSrc} />
+										<div onClick={() => showPreview(imgSrc.id, imgSrc.image)} id={imgSrc.id} className={imageId === imgSrc.id ? 'preview-product active' : 'preview-product'} key={Date.now() + index}>
+											<MainImage image={imgSrc.image} />
 										</div>
 									)}
 								</Slider>
@@ -244,6 +238,7 @@ export default function Presentation({ product }) {
 						<div className='presentation-product__configuration'>
 							<h3 className='presentation-product__title'>Конфигурация</h3>
 							<div className="presentation-product__items items-configuration">
+								{/* //todo Размер */}
 								<div className="presentation-product__size items-configuration__item">
 									<div className='items-configuration__parameter-name'>Размер, см</div>
 									<div className='items-configuration__parameter-option'>
@@ -273,6 +268,7 @@ export default function Presentation({ product }) {
 										</div>
 									</div>
 								</div>
+								{/* //todo Вес */}
 								<div className="presentation-product__weight items-configuration__item">
 									<div className='items-configuration__parameter-name'>Вес стека, г</div>
 									<div className='items-configuration__parameter-option'>

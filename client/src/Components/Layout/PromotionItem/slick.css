@@ -9,6 +9,7 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	opacity: 0.6;
+	transition: .3s;
 }
 .slick-next{
 	right: 0;
@@ -17,7 +18,6 @@
 .slick-prev{
 	left: 0;
 	background-image: url('./img/icons/arrow-left.svg');
-	
 }
 .slick-next:hover,
 .slick-prev:hover{
@@ -39,18 +39,8 @@
 .slick-next:hover,
 .slick-next:focus{
 	background-image: url('./img/icons/arrow-right.svg');
-	/* background-repeat: no-repeat;
-		background-position: center; */
 }
 .slick-prev:before,
 .slick-next:before{
 	all:unset;
 }
-/* @media (max-width: 1300px) {
-	.slick-prev{
-		left: 30px;
-	}
-	.slick-next{
-		right: 30px;
-	}	
-} */

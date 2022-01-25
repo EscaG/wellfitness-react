@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setConditionAutocomplite } from '../../../http/reducers/modalReducerAutocomplite';
+import Description from './Sections/Description';
 import Presentation from './Sections/Presentation';
 import './style-productcard.scss';
 
 
 export default function ProductCardPage() {
-	const asd = "http://localhost:5000";
 	const [product, setProduct] = useState({});
 	const dispatch = useDispatch();
 	let params = useParams();
@@ -44,6 +44,7 @@ export default function ProductCardPage() {
 			{product &&
 				<Presentation product={product} />
 			}
+			<Description />
 		</article>
 	);
 }
