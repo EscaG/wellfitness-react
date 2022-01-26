@@ -40,6 +40,7 @@ function App() {
 	// const isAuth = useSelector(state => state.user.isAuth);
 	// console.log(isAuth)
 	const dispatch = useDispatch();
+
 	// const [activeModal, setActiveModal] = useState(true);
 
 	useEffect(() => {

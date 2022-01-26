@@ -27,8 +27,8 @@ export default function Presentation({ product }) {
 		setImageId(gallery && gallery[0].id)
 	}, [product]);
 
-	console.log(configuration && configuration.weight);
-	console.log(radioWeight, radioSize);
+	// console.log(configuration && configuration.weight);
+	// console.log(radioWeight, radioSize);
 
 
 	useEffect(() => {
@@ -90,6 +90,7 @@ export default function Presentation({ product }) {
 		infinite: true,
 		slidesToShow: 6,
 		slidesToScroll: 1,
+		waitForAnimate: false,
 		speed: 500,
 		autoplay: false,
 		autoplaySpeed: 2000,
@@ -105,7 +106,7 @@ export default function Presentation({ product }) {
 			{
 				breakpoint: 992,
 				settings: {
-					slidesToShow: 4,
+					slidesToShow: 5,
 				}
 			},
 			{

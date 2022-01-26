@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setConditionAutocomplite } from '../../../http/reducers/modalReducerAutocomplite';
+import Characteristics from './Sections/Characteristics';
 import Description from './Sections/Description';
+import MenuList from './Sections/MenuList';
 import Presentation from './Sections/Presentation';
 import './style-productcard.scss';
 
@@ -25,7 +27,10 @@ export default function ProductCardPage() {
 					return res.json();
 				})
 				.then(res => {
-					setProduct(res);
+					if (res) {
+
+						setProduct(res);
+					}
 					// setIsLoad(true);
 					console.log(res);
 				})
@@ -40,11 +45,17 @@ export default function ProductCardPage() {
 
 	return (
 		<article className='page-productcard'>
-			{/* {product.name} */}
 			{product &&
-				<Presentation product={product} />
+				<>
+					<Presentation product={product} />
+					<div id='scrollable-content '>
+
+						<MenuList />
+						<Description product={product} />
+						<Characteristics product={product} />
+					</div>
+				</>
 			}
-			<Description />
 		</article>
 	);
 }

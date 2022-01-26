@@ -33,7 +33,8 @@ const Product = new Schema({
 			list:[] //{id,name, value}
 		}
 	},
-	presentation: [] //{id,name, value}
+	presentation: [], //{id,name,image,value}
+	slider:[]
 })
 
 module.exports = mongoose.model("Product", Product);

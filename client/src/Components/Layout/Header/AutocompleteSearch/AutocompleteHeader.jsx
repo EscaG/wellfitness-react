@@ -24,7 +24,7 @@ export default function AutocompleteHeader() {
 	}, []);
 
 	const searchUsers = useDebounce(async (value) => {
-		await fetch("http://localhost:5000/api/products/autocomplete?searchProduct=" + value)
+		await fetch("/api/products/autocomplete?searchProduct=" + value)
 			.then(res => {
 				return res.json()
 			})

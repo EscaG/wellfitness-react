@@ -1,60 +1,61 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Link as LinkScroll } from 'react-scroll';
 import './description.scss';
 
-export default function Description() {
-	const [focusLink, setFocusLink] = useState(null);
+export default function Description({ product }) {
+	const { presentation, slider } = product;
 
-	const activeLink = (e) => {
-		setFocusLink(e.target.id)
-	}
+	useEffect(() => {
+
+	}, [product]);
+
+	const settings = {
+		className: "description-clider",
+		dots: true,
+		arrows: false,
+		infinite: true,
+		speed: 1000,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		swipeToSlide: true,
+		waitForAnimate: false,
+		autoplay: true,
+		autoplaySpeed: 3000,
+		pauseOnHover: true,
+		fade: true
+	};
+
 	return (
 		<section className='page-productcard__description description-productcard'>
-			<ul className='description-productcard__menu-list list-productcard'>
-				<li className='list-productcard__item'>
-					<a
-						onClick={(e) => activeLink(e)}
-						href="#" id='description-link-dec'
-						className={focusLink === "description-link-dec" ? "list-productcard__link active" : 'list-productcard__link'}>Описание</a>
-				</li>
-				<li className='list-productcard__item'>
-					<a
-						onClick={(e) => activeLink(e)}
-						href="#" id='description-link-char'
-						className={focusLink === "description-link-char" ? "list-productcard__link active" : 'list-productcard__link'}>Характеристики</a>
-				</li>
-				<li className='list-productcard__item'>
-					<a
-						onClick={(e) => activeLink(e)}
-						href="#" id='description-link-feed'
-						className={focusLink === "description-link-feed" ? "list-productcard__link active" : 'list-productcard__link'}>Отзывы</a>
-				</li>
-				<li className='list-productcard__item'>
-					<a
-						onClick={(e) => activeLink(e)}
-						href="#" id='description-link-del'
-						className={focusLink === "description-link-del" ? "list-productcard__link active" : 'list-productcard__link'}>Доставка и оплата</a>
-				</li>
-				<li className='list-productcard__item'>
-					<a
-						onClick={(e) => activeLink(e)}
-						href="#" id='description-link-cred'
-						className={focusLink === "description-link-cred" ? "list-productcard__link active" : 'list-productcard__link'}>Расрочка</a>
-				</li>
-				<li className='list-productcard__item'>
-					<a
-						onClick={(e) => activeLink(e)}
-						href="#" id='description-link-ser'
-						className={focusLink === "description-link-ser" ? "list-productcard__link active" : 'list-productcard__link'}>Услуги</a>
-				</li>
-				<li className='list-productcard__item'>
-					<a
-						onClick={(e) => activeLink(e)}
-						href="#" id='description-link-buy'
-						className={focusLink === "description-link-buy" ? "list-productcard__link active" : 'list-productcard__link'}>Покупают вместе</a>
-				</li>
-			</ul>
-		</section>
+
+			<div className='description-productcard__description-block descript-productcard' id='description-productcard'>
+				{presentation && presentation.map((item, index) => (
+					<div key={item.id} className={'descript-productcard__item descript-productcard__item' + index}>
+						<div className='descript-productcard__text'>
+							{item.name && <h4 className='descript-productcard__title'>{item.name}</h4>}
+
+							<div className='descript-productcard__value' dangerouslySetInnerHTML={{ __html: item.value }}></div>
+
+						</div>
+						<div id={'runs' + index}><img src={item.image} alt="product" /></div>
+
+					</div>
+
+				))}
+			</div>
+			<div className='description-productcard__slider'>
+				<Slider {...settings}>
+					{slider && slider.map((slide, index) =>
+						<div key={slide.id}>
+							<img src={slide.image} alt="product" />
+						</div>
+					)}
+				</Slider>
+			</div>
+		</section >
 	);
 }
