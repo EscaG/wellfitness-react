@@ -5,9 +5,8 @@ export default function SpriteIcons({ icon }) {
 
 	switch (icon) {
 		case "left":
-
 			return (
-				<svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<svg id='left' width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M14 6.5H1M1 6.5L6.42466 1M1 6.5L6.42466 12" stroke="#F53B49" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 				</svg>
 			);
@@ -52,14 +51,15 @@ export default function SpriteIcons({ icon }) {
 					<circle cx="18" cy="18" r="18" fill="#2FC509" />
 					<path d="M12.4375 15V23H10.625L7.73438 18.7969H7.6875V23H5.51562V15H7.35938L10.2031 19.1875H10.2656V15H12.4375ZM13.4648 23V15H19.2305V16.75H15.6367V18.125H18.9336V19.875H15.6367V21.25H19.2148V23H13.4648ZM22.3389 23L19.9795 15H22.4014L23.4951 19.9219H23.5576L24.8545 15H26.7607L28.0576 19.9375H28.1201L29.2139 15H31.6357L29.2764 23H27.1982L25.8389 18.5312H25.7764L24.417 23H22.3389Z" fill="white" />
 				</svg>
-
 			);
+		case "star":
+			return (
+				<svg id="star" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+					<path d="M23.9986 5L17.8856 17.4776L4 19.4911L14.0589 29.3251L11.6544 43L23.9986 36.4192L36.3454 43L33.9586 29.3251L44 19.4911L30.1913 17.4776L23.9986 5Z" strokeWidth="4" strokeLinejoin="round" />
+				</svg>
+			)
 		default:
 			break;
 	}
-	// return (
-	// 	<div>
 
-	// 	</div>
-	// )
 }

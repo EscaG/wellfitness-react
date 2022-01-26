@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { setConditionAutocomplite } from '../../../http/reducers/modalReducerAutocomplite';
 import Characteristics from './Sections/Characteristics';
 import Description from './Sections/Description';
+import FeedBack from './Sections/FeedBack';
 import MenuList from './Sections/MenuList';
 import Presentation from './Sections/Presentation';
 import './style-productcard.scss';
@@ -48,12 +49,10 @@ export default function ProductCardPage() {
 			{product &&
 				<>
 					<Presentation product={product} />
-					<div id='scrollable-content '>
-
-						<MenuList />
-						<Description product={product} />
-						<Characteristics product={product} />
-					</div>
+					<MenuList />
+					<Description product={product} />
+					<Characteristics product={product} />
+					<FeedBack />
 				</>
 			}
 		</article>

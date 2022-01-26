@@ -9,43 +9,43 @@ export default function MenuList() {
 			<ul className='list-productcard__list'>
 				<li className='list-productcard__item'>
 					<LinkScroll
-						to='description-productcard' smooth={true} spy={true} duration={500} offset={-50} activeClass={"active"}
+						to='description-productcard' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
 						className="list-productcard__link"
 					>Описание</LinkScroll>
 				</li>
 				<li className='list-productcard__item'>
 					<LinkScroll
-						to='characteristic-productcard' smooth={true} spy={true} duration={500} offset={-50} activeClass={"active"}
+						to='characteristic-productcard' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
 						className="list-productcard__link"
 					>Характеристики</LinkScroll>
 				</li>
 				<li className='list-productcard__item'>
 					<LinkScroll
-						to='runs0' smooth={true} spy={true} duration={500} offset={-50} activeClass={"active"}
+						to='feedback-produc' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
 						className="list-productcard__link"
 					>Отзывы</LinkScroll>
 				</li>
 				<li className='list-productcard__item'>
 					<LinkScroll
-						to='runs0' smooth={true} spy={true} duration={500} offset={-50} activeClass={"active"}
+						to='' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
 						className="list-productcard__link"
 					>Доставка и оплата</LinkScroll>
 				</li>
 				<li className='list-productcard__item'>
 					<LinkScroll
-						to='runs0' smooth={true} spy={true} duration={500} offset={-50} activeClass={"active"}
+						to='' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
 						className="list-productcard__link"
 					>Расрочка</LinkScroll>
 				</li>
 				<li className='list-productcard__item'>
 					<LinkScroll
-						to='runs0' smooth={true} spy={true} duration={500} offset={-50} activeClass={"active"}
+						to='' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
 						className="list-productcard__link"
 					>Услуги</LinkScroll>
 				</li>
 				<li className='list-productcard__item'>
 					<LinkScroll
-						to='runs0' smooth={true} spy={true} duration={500} offset={-50} activeClass={"active"}
+						to='' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
 						className="list-productcard__link"
 					>Покупают вместе</LinkScroll>
 				</li>

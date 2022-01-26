@@ -148,22 +148,22 @@ exports.seed = function (request, response) {
 			name: "Основные характеристики",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Тип дорожки:",
 					value: "Домашняя"
 				},
 				{
-					id: Date.now() + 2,
+					id: "ad"+uuid.v4(),
 					name: "Мощность двигателя:",
 					value: "2,0 л.с."
 				},
 				{
-					id: Date.now() + 3,
+					id: "ad"+uuid.v4(),
 					name: "Тип двигателя:",
 					value: "DC"
 				},
 				{
-					id: Date.now() + 4,
+					id: "ad"+uuid.v4(),
 					name: "Регулировка скорости:",
 					value: "0,8-14 км/ч"
 				},
@@ -173,12 +173,12 @@ exports.seed = function (request, response) {
 			name: "Мультимедиа",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Аудиосистема MP3:",
 					value: "есть"
 				},
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
@@ -188,12 +188,12 @@ exports.seed = function (request, response) {
 			name: "Дополнительные характеристики",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Беговое полотно:",
 					value: "2-х слойное"
 				},
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Беговое полотно (ДхШ):",
 					value: "1200 х 450 мм"
 				},
@@ -273,22 +273,22 @@ exports.seed = function (request, response) {
 			name: "Основные характеристики",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Тип дорожки:",
 					value: "Домашняя"
 				},
 				{
-					id: Date.now() + 2,
+					id: "ad"+uuid.v4(),
 					name: "Мощность двигателя:",
 					value: "2,0 л.с."
 				},
 				{
-					id: Date.now() + 3,
+					id: "ad"+uuid.v4(),
 					name: "Тип двигателя:",
 					value: "DC"
 				},
 				{
-					id: Date.now() + 4,
+					id: "ad"+uuid.v4(),
 					name: "Регулировка скорости:",
 					value: "0,8-14 км/ч"
 				},
@@ -298,12 +298,12 @@ exports.seed = function (request, response) {
 			name: "Мультимедиа",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Аудиосистема MP3:",
 					value: "есть"
 				},
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
@@ -313,12 +313,12 @@ exports.seed = function (request, response) {
 			name: "Дополнительные характеристики",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Беговое полотно:",
 					value: "2-х слойное"
 				},
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Беговое полотно (ДхШ):",
 					value: "1200 х 450 мм"
 				},
@@ -398,22 +398,22 @@ exports.seed = function (request, response) {
 			name: "Основные характеристики",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Тип дорожки:",
 					value: "Домашняя"
 				},
 				{
-					id: Date.now() + 2,
+					id: "ad"+uuid.v4(),
 					name: "Мощность двигателя:",
 					value: "2,0 л.с."
 				},
 				{
-					id: Date.now() + 3,
+					id: "ad"+uuid.v4(),
 					name: "Тип двигателя:",
 					value: "DC"
 				},
 				{
-					id: Date.now() + 4,
+					id: "ad"+uuid.v4(),
 					name: "Регулировка скорости:",
 					value: "0,8-14 км/ч"
 				},
@@ -423,12 +423,12 @@ exports.seed = function (request, response) {
 			name: "Мультимедиа",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Аудиосистема MP3:",
 					value: "есть"
 				},
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
@@ -438,12 +438,12 @@ exports.seed = function (request, response) {
 			name: "Дополнительные характеристики",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Беговое полотно:",
 					value: "2-х слойное"
 				},
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Беговое полотно (ДхШ):",
 					value: "1200 х 450 мм"
 				},
@@ -523,22 +523,22 @@ exports.seed = function (request, response) {
 			name: "Основные характеристики",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Тип дорожки:",
 					value: "Домашняя"
 				},
 				{
-					id: Date.now() + 2,
+					id: "ad"+uuid.v4(),
 					name: "Мощность двигателя:",
 					value: "2,0 л.с."
 				},
 				{
-					id: Date.now() + 3,
+					id: "ad"+uuid.v4(),
 					name: "Тип двигателя:",
 					value: "DC"
 				},
 				{
-					id: Date.now() + 4,
+					id: "ad"+uuid.v4(),
 					name: "Регулировка скорости:",
 					value: "0,8-14 км/ч"
 				},
@@ -548,12 +548,12 @@ exports.seed = function (request, response) {
 			name: "Мультимедиа",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Аудиосистема MP3:",
 					value: "есть"
 				},
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Консоль:",
 					value: "LCD 7 дюймовый дисплей"
 				},
@@ -563,12 +563,12 @@ exports.seed = function (request, response) {
 			name: "Дополнительные характеристики",
 			list: [
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Беговое полотно:",
 					value: "2-х слойное"
 				},
 				{
-					id: Date.now() + 1,
+					id: "ad"+uuid.v4(),
 					name: "Беговое полотно (ДхШ):",
 					value: "1200 х 450 мм"
 				},

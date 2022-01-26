@@ -30,9 +30,9 @@ export default function Description({ product }) {
 	};
 
 	return (
-		<section className='page-productcard__description description-productcard'>
+		<section className='page-productcard__description description-productcard' id='description-productcard'>
 
-			<div className='description-productcard__description-block descript-productcard' id='description-productcard'>
+			<div className='description-productcard__description-block descript-productcard' >
 				{presentation && presentation.map((item, index) => (
 					<div key={item.id} className={'descript-productcard__item descript-productcard__item' + index}>
 						<div className='descript-productcard__text'>
