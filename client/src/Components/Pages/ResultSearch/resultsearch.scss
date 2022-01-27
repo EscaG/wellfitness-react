@@ -1,0 +1,10 @@
+.page-result-search {
+	max-width: 1440px;
+	padding: 0 15px;
+	margin: auto;
+	&__wrapper {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 30px;
+	}
+}

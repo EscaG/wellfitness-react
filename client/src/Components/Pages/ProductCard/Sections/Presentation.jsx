@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import MainImage from '../../../Layout/SpriteIcons/MainImage';
 import SpriteIcons from '../../../Layout/SpriteIcons/SpriteIcons';
 import './presentation.scss';
+import { Link as LinkScroll } from 'react-scroll';
 
 export default function Presentation({ product }) {
 	const { name, gallery, price, characteristics, brand, availability, configuration } = product;
@@ -193,7 +194,9 @@ export default function Presentation({ product }) {
 									)}
 								</ul>
 
-								<button className='price-characteristics__btn-all'>Все характеристики</button>
+								<LinkScroll
+									to='characteristic-productcard' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
+									className='price-characteristics__btn-all'>Все характеристики</LinkScroll>
 							</div>
 
 							{/* //todo  будет цена и кнопка купить */}

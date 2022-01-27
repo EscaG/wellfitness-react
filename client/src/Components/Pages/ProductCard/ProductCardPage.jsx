@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setConditionAutocomplite } from '../../../http/reducers/modalReducerAutocomplite';
+import PromotionItem from '../../Layout/PromotionItem/PromotionItem';
 import Characteristics from './Sections/Characteristics';
 import Description from './Sections/Description';
 import FeedBack from './Sections/FeedBack';
@@ -53,6 +54,7 @@ export default function ProductCardPage() {
 					<Description product={product} />
 					<Characteristics product={product} />
 					<FeedBack />
+					<PromotionItem />
 				</>
 			}
 		</article>

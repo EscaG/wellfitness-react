@@ -71,7 +71,7 @@ export default function PromotionItem() {
 		]
 	}
 	return (
-		<div className="article-promotion promotion" >
+		<div className="article-promotion promotion" id='promotion-layout'>
 			<div className='promotion__header'>
 				<h3 className="article__caption promotion__header_flex">Акция</h3>
 				<Link className='promotion__header_link' to="/" >Новинки</Link>

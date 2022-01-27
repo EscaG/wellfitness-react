@@ -45,7 +45,7 @@ export default function MenuList() {
 				</li>
 				<li className='list-productcard__item'>
 					<LinkScroll
-						to='' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
+						to='promotion-layout' smooth={true} spy={true} duration={500} offset={-30} activeClass={"active"}
 						className="list-productcard__link"
 					>Покупают вместе</LinkScroll>
 				</li>

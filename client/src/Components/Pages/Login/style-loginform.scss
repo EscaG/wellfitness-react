@@ -67,10 +67,16 @@
 		color: #fff;
 		background-color: #f53b49;
 	}
+	&__login:focus {
+		box-shadow: 0 0 3px blue;
+	}
 	&__registration {
 		// display: block;
 		color: #4b7ee8;
 		background-color: inherit;
 		font-variation-settings: "wght" 500;
+	}
+	&__registration:focus {
+		text-shadow: 0 0 1px blue;
 	}
 }

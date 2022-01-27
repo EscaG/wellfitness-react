@@ -35,9 +35,10 @@ class UserService {
 			throw ApiError.BadRequest('Некорректная ссылка активации');
 		}
 		user.isActivated = true;
-		await user.save(function (err) {
-			console.log(err);
-		});
+		user.save();
+		// await user.save(function (err) {
+		// 	console.log(err);
+		// });
 	}
 
 	async login(email, password) {

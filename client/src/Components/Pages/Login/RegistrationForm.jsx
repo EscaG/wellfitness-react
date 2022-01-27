@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { registration } from '../../../http/actions/user';
@@ -8,12 +10,23 @@ export default function RegistrationForm() {
 	const [password, setPassword] = useState("");
 	const [surname, setSurname] = useState("");
 	const [name, setName] = useState("");
+	const emailRef = useRef();
 	const { errorMessage, isAuth } = useSelector(state => state.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const goProfile = () => navigate('/profile/main');
 	const goLogin = () => navigate('/login');
 
+	useEffect(() => {
+		emailRef.current.focus();
+	}, [])
+
+	useEffect(() => {
+		if (isAuth) {
+
+			goProfile()
+		}
+	}, [isAuth])
 
 	const registrationFunc = () => {
 		console.log("состояние регистрации = ", isAuth);
@@ -22,9 +35,10 @@ export default function RegistrationForm() {
 
 	return (
 		<section className='registration-form '>
-			<div id='registrationform'>
+			<form onSubmit={e => e.preventDefault()} id='registrationform'>
 				<h2 className='article__caption'>Регистрация</h2>
 				<input
+					ref={emailRef}
 					onChange={e => setEmail(e.target.value)}
 					value={email}
 					name='email'
@@ -50,11 +64,11 @@ export default function RegistrationForm() {
 					required />
 				<button className='login-form__login' onClick={() => registrationFunc()}>Регистрация</button>
 				{errorMessage && <div > {errorMessage}</div>}
-				{isAuth && goProfile()}
+				{/* {isAuth && goProfile()} */}
 				<br />
 				<button type='button' className='login-form__registration'
 					onClick={() => goLogin()}>У меня есть аккаунт</button>
-			</div>
+			</form>
 		</section>
 
 	)
