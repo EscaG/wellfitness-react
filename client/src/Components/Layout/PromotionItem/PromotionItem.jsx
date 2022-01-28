@@ -70,6 +70,7 @@ export default function PromotionItem() {
 			}
 		]
 	}
+
 	return (
 		<div className="article-promotion promotion" id='promotion-layout'>
 			<div className='promotion__header'>
@@ -145,7 +146,8 @@ export default function PromotionItem() {
 										<span className='description-item__showRoom'>Есть в шоу-руме</span>} */}
 
 								</div>
-								<Link to="/" className="description-item__name">{item.name}</Link>
+								{/* let url = '/product/' + encodeURI(name) + "/" + _id; */}
+								<Link to={"/product/" + encodeURI(item.name) + "/" + item._id} className="description-item__name">{item.name}</Link>
 								<div className="description-item__rating">Рейтинг {item.rating}</div>
 								<div className="desription-item__price-button price-button">
 									{item.price.sharePrice ?

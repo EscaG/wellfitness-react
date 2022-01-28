@@ -26,7 +26,7 @@ export default function ResultSearch() {
 			<h2>Результаты поиска</h2>
 			<div className='page-result-search__wrapper'>
 
-				{products.map((item, index) =>
+				{products && products.map((item, index) =>
 					<div key={index++} className='promotion__slider-item item-slider'>
 
 						<div className="item-slider__icons icons-slider">
@@ -88,20 +88,9 @@ export default function ResultSearch() {
 									<span className='description-item__dots_red_3'></span>
 								</span>}
 
-								{/* {item.availability === "Осталось мало" && <span className='description-item__dots_orange'>
-											{item.availability}
-											<span className='description-item__dots_orange_1'></span>
-											<span className='description-item__dots_orange_2'></span>
-											<span className='description-item__dots_orange_3'></span>
-										</span>} */}
-
-								{/* {item.availability === "Скоро ожидается" && <span className='description-item__wait'>{item.availability}</span>}
-	
-										{item.availability !== "Скоро ожидается" &&
-											<span className='description-item__showRoom'>Есть в шоу-руме</span>} */}
 
 							</div>
-							<Link to="/" className="description-item__name">{item.name}</Link>
+							<Link to={"/product/" + encodeURI(item.name) + "/" + item._id} className="description-item__name">{item.name}</Link>
 							<div className="description-item__rating">Рейтинг {item.rating}</div>
 							<div className="desription-item__price-button price-button">
 								{item.price.sharePrice ?

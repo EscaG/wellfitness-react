@@ -29,10 +29,8 @@ export default function ProductCardPage() {
 					return res.json();
 				})
 				.then(res => {
-					if (res) {
-
-						setProduct(res);
-					}
+					if (res) { setProduct(res) }
+					document.body.scrollIntoView();
 					// setIsLoad(true);
 					console.log(res);
 				})
