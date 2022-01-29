@@ -126,27 +126,27 @@ export const Footer = () => {
 				<div className="bottom-footer__content _container ">
 					{/* //? Контент разделен на 4 ровные колонки */}
 					{/* <div className="bottom-footer__column bottom-footer__column_logo col-xs-4 col-sm-4 col-md-3 col-lg-3"> */}
-					<div className="bottom-footer__column bottom-footer__column_logo ">
+					<div className="bottom-footer__column bottom-footer__column logo ">
 						<img className='bottom-footer__logo' src={logo} alt="logo" />
 						<div className='bottom-footer__rights'>© WellFitness. 2007 Все права защищены</div>
 					</div>
 					{/* <div className="bottom-footer__column col-xs-4 col-sm-4 col-md-3 col-lg-3"> */}
 					<div className="bottom-footer__column social-column">
 						<ul className="bottom-footer__list list">
-							<li className='list__item_social social'><a href="">
-								<svg className='bottom-footer__column_icons' width="24" height="24" >
+							<li className='list__item social'><a href="">
+								<svg className='bottom-footer__column icons' width="24" height="24" >
 									<title>instagram</title>
 									<use xlinkHref={instagram + "#instagram"}></use>
 								</svg>
 							</a></li>
-							<li className='list__item_social social'><a href="">
-								<svg className='bottom-footer__column_icons' width="24" height="24" >
+							<li className='list__item social'><a href="">
+								<svg className='bottom-footer__column icons' width="24" height="24" >
 									<title>facebook</title>
 									<use xlinkHref={facebook + "#facebook"}></use>
 								</svg>
 							</a></li>
-							<li className='list__item_social social'><a href="">
-								<svg className='bottom-footer__column_icons' width="24" height="24" >
+							<li className='list__item social'><a href="">
+								<svg className='bottom-footer__column icons' width="24" height="24" >
 									<title>youtube</title>
 									<use xlinkHref={youtube + "#youtube"}></use>
 								</svg>
@@ -164,26 +164,26 @@ export const Footer = () => {
 					{/* <div className="bottom-footer__column col-xs-4 col-sm-4 col-md-3 col-lg-3"> */}
 					<div className="bottom-footer__column payment-column">
 						<ul className="bottom-footer__list list">
-							<li className='list__item_payment payment'><a href="#">
-								<svg className='bottom-footer__column_icons' width="40" height="40" >
+							<li className='list__item payment'><a href="#">
+								<svg className='bottom-footer__column icons' width="40" height="40" >
 									<title>visa</title>
 									<use xlinkHref={visa + "#visa"}></use>
 								</svg>
 							</a></li>
-							<li className='list__item_payment payment'><a href="#">
-								<svg className='bottom-footer__column_icons' width="40" height="40" >
+							<li className='list__item payment'><a href="#">
+								<svg className='bottom-footer__column icons' width="40" height="40" >
 									<title>mastercard</title>
 									<use xlinkHref={mastercard + "#mastercard"}></use>
 								</svg>
 							</a></li>
-							<li className='list__item_payment payment'><a href="#">
-								<svg className='bottom-footer__column_icons' width="30" height="32" >
+							<li className='list__item payment'><a href="#">
+								<svg className='bottom-footer__column icons' width="30" height="32" >
 									<title>planet</title>
 									<use xlinkHref={planet + "#planet"}></use>
 								</svg>
 							</a></li>
-							<li className='list__item_payment payment'><a href="#">
-								<svg className='bottom-footer__column_icons' width="55" height="20" >
+							<li className='list__item payment'><a href="#">
+								<svg className='bottom-footer__column icons' width="55" height="20" >
 									<title>paypal</title>
 									<use xlinkHref={paypal + "#paypal"}></use>
 								</svg>

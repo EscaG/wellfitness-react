@@ -4,8 +4,8 @@ import { setConditionAutocomplite } from '../../../http/reducers/modalReducerAut
 import './modal-style.scss';
 
 export default function Modal({ active, children }) {
-	const isModal = useSelector(state => state.modalAutocomplete.currentCondition);
-	console.log(isModal);
+	// const isModal = useSelector(state => state.modalAutocomplete.currentCondition);
+	// console.log(isModal);
 	const dispatch = useDispatch();
 
 	useEffect(() => {

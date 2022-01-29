@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import "./style-autocompleteheader.scss";
-import clearText from "../img/close.svg";
+import close from "../img/close.svg";
 import AutocompleteItem from './AutocompleteItem';
 import { useDispatch } from 'react-redux';
 import { setConditionAutocomplite } from '../../../../http/reducers/modalReducerAutocomplite';
 import SpriteIcons from '../../SpriteIcons/SpriteIcons';
 import { useNavigate } from 'react-router-dom';
-import { setSearch } from '../../../../http/reducers/searchReducer';
+// import { setSearch } from '../../../../http/reducers/searchReducer';
 
 
 export default function AutocompleteHeader() {
@@ -87,7 +87,7 @@ export default function AutocompleteHeader() {
 						</button>
 					</div>
 					<div className='search-container__onclose'>
-						<button onClick={() => closeModalAutocomplete()}><img src={clearText} alt="clear" /></button>
+						<button onClick={() => closeModalAutocomplete()}><img src={close} alt="clear" /></button>
 					</div>
 				</div>
 				{

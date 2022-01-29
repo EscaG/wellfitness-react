@@ -203,7 +203,7 @@ exports.seed = function (request, response) {
 	product1.presentation = [
 		{
 			id: "p"+ uuid.v4(),
-			image: "/storage/presentation/presentation-first.jpg",
+			image: "/storage/presentation/presentation-first.png",
 			value:"Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
 		},
 		{
@@ -328,7 +328,7 @@ exports.seed = function (request, response) {
 	product2.presentation = [
 		{
 			id: "p"+ uuid.v4(),
-			image: "/storage/presentation/presentation-first.jpg",
+			image: "/storage/presentation/presentation-first.png",
 			value:"Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
 		},
 		{
@@ -453,7 +453,7 @@ exports.seed = function (request, response) {
 	product3.presentation = [
 		{
 			id: "p"+ uuid.v4(),
-			image: "/storage/presentation/presentation-first.jpg",
+			image: "/storage/presentation/presentation-first.png",
 			value:"Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
 		},
 		{
@@ -578,7 +578,7 @@ exports.seed = function (request, response) {
 	product4.presentation = [
 		{
 			id: "p"+ uuid.v4(),
-			image: "/storage/presentation/presentation-first.jpg",
+			image: "/storage/presentation/presentation-first.png",
 			value:"Беговые дорожки Bowflex Results Series ™ это самые совершенные технологии, высочайшее качество и полноценная синхронизация данных."
 		},
 		{

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import "./style-header.scss";
 import DynamicAdapt from '../dynamicAdapt_dev';
-import { openMenu } from "./js/burger";
+// import { openMenu } from "./js/burger";
 // import {useDispatch, useSelector} from "react-redux";
 import TopHeader from "./Blocks/TopHeader";
 import MiddleHeader from "./Blocks/MiddleHeader";
@@ -13,7 +13,7 @@ import BottomHeader from "./Blocks/BottomHeader";
 export const Header = () => {
 	useEffect(() => {
 		// Открываю и закрываю меню
-		openMenu();
+		// openMenu();
 		new DynamicAdapt("max").init();
 	}, []);
 

@@ -6,14 +6,15 @@ import "slick-carousel/slick/slick-theme.css";
 import './slick.css';
 import './style-promotionsection.scss';
 
-import iconPercent from './img/icons/percent.png';
-import iconLike from './img/icons/like.png';
-import iconNew from './img/icons/new.png';
+// import iconPercent from './img/icons/percent.png';
+// import iconLike from './img/icons/like.png';
+// import iconNew from './img/icons/new.png';
 
-import heart from './img/icons/heart.svg';
-import comparison from './img/icons/comparison.svg';
+// import heart from './img/icons/heart.svg';
+// import comparison from './img/icons/comparison.svg';
 
 import { useSelector } from 'react-redux';
+import ProductCardItem from '../ProductCardItem/ProductCardItem';
 
 export default function PromotionItem() {
 	// const [isLoaded, setIsLoaded] = useState(false);
@@ -33,6 +34,7 @@ export default function PromotionItem() {
 		autoplay: true,
 		autoplaySpeed: 2000,
 		initialSlide: 1,
+		waitForAnimate: false,
 		responsive: [
 			{
 				breakpoint: 1400,
@@ -74,98 +76,102 @@ export default function PromotionItem() {
 	return (
 		<div className="article-promotion promotion" id='promotion-layout'>
 			<div className='promotion__header'>
-				<h3 className="article__caption promotion__header_flex">Акция</h3>
-				<Link className='promotion__header_link' to="/" >Новинки</Link>
-				<Link className='promotion__header_link' to="/" >Мы рекомендуем</Link>
+				<h3 className="article__caption promotion__header flex">Акция</h3>
+				<Link className='promotion__header link' to="/" >Новинки</Link>
+				<Link className='promotion__header link' to="/" >Мы рекомендуем</Link>
 			</div>
 			<div className='promotion__slider'>
 
 
 				<Slider  {...settingsPromotion}>
-					{products.map((item, index) =>
-						<div key={index++} className='promotion__slider-item item-slider'>
+					{products.map((product, index) =>
+						<ProductCardItem
+							key={product._id}
+							product={product}
+						/>
+						// <div key={index++} className='promotion__slider-item item-slider'>
 
-							<div className="item-slider__icons icons-slider">
-								<div className='icons-slider__list'>
-									<Link to="/" className='icons-slider__item translate'><img src={iconPercent} alt="credit" /></Link>
-									<Link to="/" className='icons-slider__item translate'><img src={iconLike} alt="like" /></Link>
-									<Link to="/" className='icons-slider__item translate'><img src={iconNew} alt="new" /></Link>
-								</div>
+						// 	<div className="item-slider__icons icons-slider">
+						// 		<div className='icons-slider__list'>
+						// 			<Link to="/" className='icons-slider__item translate'><img src={iconPercent} alt="credit" /></Link>
+						// 			<Link to="/" className='icons-slider__item translate'><img src={iconLike} alt="like" /></Link>
+						// 			<Link to="/" className='icons-slider__item translate'><img src={iconNew} alt="new" /></Link>
+						// 		</div>
 
-								<div className='icons-slider__list'>
-									<Link className='icons-slider__item icons-slider__item_svg' to="/">
-										<svg className='bottom-footer__column_icons' width="17" height="17" >
-											<title>comparisons</title>
-											<use xlinkHref={comparison + "#comparison"}></use>
-										</svg>
-									</Link>
-									<Link className='icons-slider__item icons-slider__item_svg' to="/">
-										<svg className='bottom-footer__column_icons' width="21" height="17" >
-											<title>heart</title>
-											<use xlinkHref={heart + "#heart"}></use>
-										</svg>
-									</Link>
-								</div>
+						// 		<div className='icons-slider__list'>
+						// 			<Link className='icons-slider__item icons-slider__item_svg' to="/">
+						// 				<svg className='bottom-footer__column_icons' width="17" height="17" >
+						// 					<title>comparisons</title>
+						// 					<use xlinkHref={comparison + "#comparison"}></use>
+						// 				</svg>
+						// 			</Link>
+						// 			<Link className='icons-slider__item icons-slider__item_svg' to="/">
+						// 				<svg className='bottom-footer__column_icons' width="21" height="17" >
+						// 					<title>heart</title>
+						// 					<use xlinkHref={heart + "#heart"}></use>
+						// 				</svg>
+						// 			</Link>
+						// 		</div>
 
-							</div>
+						// 	</div>
 
-							<div className="item-slider__image">
-								{/* {item.gallery.map(imgSrc => */}
+						// 	<div className="item-slider__image">
+						// 		{/* {item.gallery.map(imgSrc => */}
 
-								<img key={"1231165654"} style={{ "width": "100%" }} src={item.gallery[0].image} alt="slide" />
-								{/* )} */}
-							</div>
-							<div className="item-slider__description description-item">
-								<div className="description-item__availability">
+						// 		<img key={"1231165654"} style={{ "width": "100%" }} src={item.gallery[0].image} alt="slide" />
+						// 		{/* )} */}
+						// 	</div>
+						// 	<div className="item-slider__description description-item">
+						// 		<div className="description-item__availability">
 
-									{item.availability && <span className='description-item__dots_green'>
-										В наличии
-										<span className='description-item__dots_green_1'></span>
-										<span className='description-item__dots_green_2'></span>
-										<span className='description-item__dots_green_3'></span>
-										<span className='description-item__showRoom'>&nbsp; Есть в шоу-руме</span>
-									</span>}
+						// 			{item.availability && <span className='description-item__dots_green'>
+						// 				В наличии
+						// 				<span className='description-item__dots_green_1'></span>
+						// 				<span className='description-item__dots_green_2'></span>
+						// 				<span className='description-item__dots_green_3'></span>
+						// 				<span className='description-item__showRoom'>&nbsp; Есть в шоу-руме</span>
+						// 			</span>}
 
-									{!item.availability && <span className='description-item__dots_red'>
-										Нет в наличии
-										<span className='description-item__dots_red_1'></span>
-										<span className='description-item__dots_red_2'></span>
-										<span className='description-item__dots_red_3'></span>
-									</span>}
+						// 			{!item.availability && <span className='description-item__dots_red'>
+						// 				Нет в наличии
+						// 				<span className='description-item__dots_red_1'></span>
+						// 				<span className='description-item__dots_red_2'></span>
+						// 				<span className='description-item__dots_red_3'></span>
+						// 			</span>}
 
-									{/* {item.availability === "Осталось мало" && <span className='description-item__dots_orange'>
-										{item.availability}
-										<span className='description-item__dots_orange_1'></span>
-										<span className='description-item__dots_orange_2'></span>
-										<span className='description-item__dots_orange_3'></span>
-									</span>} */}
+						// 			{/* {item.availability === "Осталось мало" && <span className='description-item__dots_orange'>
+						// 				{item.availability}
+						// 				<span className='description-item__dots_orange_1'></span>
+						// 				<span className='description-item__dots_orange_2'></span>
+						// 				<span className='description-item__dots_orange_3'></span>
+						// 			</span>} */}
 
-									{/* {item.availability === "Скоро ожидается" && <span className='description-item__wait'>{item.availability}</span>}
+						// 			{/* {item.availability === "Скоро ожидается" && <span className='description-item__wait'>{item.availability}</span>}
 
-									{item.availability !== "Скоро ожидается" &&
-										<span className='description-item__showRoom'>Есть в шоу-руме</span>} */}
+						// 			{item.availability !== "Скоро ожидается" &&
+						// 				<span className='description-item__showRoom'>Есть в шоу-руме</span>} */}
 
-								</div>
-								{/* let url = '/product/' + encodeURI(name) + "/" + _id; */}
-								<Link to={"/product/" + encodeURI(item.name) + "/" + item._id} className="description-item__name">{item.name}</Link>
-								<div className="description-item__rating">Рейтинг {item.rating}</div>
-								<div className="desription-item__price-button price-button">
-									{item.price.sharePrice ?
-										<div className="price-button__price">
-											<div className='price-button__shareprice'>{item.price.sharePrice}  &#8372;</div>
-											<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
-										</div>
-										:
-										<div className="price-button__price">
-											<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
-										</div>
-									}
-									<div >
-										<button className="price-button__button">Купить</button>
-									</div>
-								</div>
-							</div>
-						</div>
+						// 		</div>
+						// 		{/* let url = '/product/' + encodeURI(name) + "/" + _id; */}
+						// 		<Link to={"/product/" + encodeURI(item.name) + "/" + item._id} className="description-item__name">{item.name}</Link>
+						// 		<div className="description-item__rating">Рейтинг {item.rating}</div>
+						// 		<div className="desription-item__price-button price-button">
+						// 			{item.price.sharePrice ?
+						// 				<div className="price-button__price">
+						// 					<div className='price-button__shareprice'>{item.price.sharePrice}  &#8372;</div>
+						// 					<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
+						// 				</div>
+						// 				:
+						// 				<div className="price-button__price">
+						// 					<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
+						// 				</div>
+						// 			}
+						// 			<div >
+						// 				<button className="price-button__button">Купить</button>
+						// 			</div>
+						// 		</div>
+						// 	</div>
+						// </div>
 					)}
 				</Slider>
 			</div>

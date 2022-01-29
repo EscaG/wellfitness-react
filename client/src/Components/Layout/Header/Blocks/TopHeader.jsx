@@ -1,11 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
 import AdaptiveMenu from "../AdaptiveMenu/AdaptiveMenu";
 import { useSelector } from "react-redux";
 import Modal from "../../ModalWindow/Modal";
 import { LoginForm } from "../../../Pages/Login/LoginForm";
+import Burger from '../../BurgerMenu/Burger';
+import ContentBurgerMenu from '../../BurgerMenu/ContentBurgerMenu';
+// import { openMenu } from '../js/burger';
 
 export default function TopHeader() {
 
@@ -13,9 +16,19 @@ export default function TopHeader() {
 	const isAuth = useSelector(state => state.user.isAuth);
 	const user = useSelector(state => state.user.currentUser);
 	console.log("состояние логина = ", isAuth);
-
+	const [isActiveMenu, setIsActiveMenu] = useState(false);
 	const [activeModal, setActiveModal] = useState(false);
-	const [isModal, setIsModal] = useState(false)
+	const [isModal, setIsModal] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	const contactsHeaderBorder = useRef()
+
+	const closeMenu = () => {
+		// openMenu()
+		// console.log("closemenu");
+		// setIsMenuOpen(true)
+		setIsActiveMenu(false)
+	}
 
 	return (
 		<div className="header__top top-header">
@@ -39,7 +52,23 @@ export default function TopHeader() {
 				{/* <!-- правый блок с контактами --> */}
 				<div className="top-header__column">
 					{/* <-- Адаптивное меню --> */}
-					<AdaptiveMenu></AdaptiveMenu>
+					{/* <AdaptiveMenu
+						border={contactsHeaderBorder}
+						isMenuOpen={isMenuOpen}
+						setIsMenuOpen={setIsMenuOpen}
+					></AdaptiveMenu> */}
+					<Burger
+						isActiveMenu={isActiveMenu}
+						setIsActiveMenu={setIsActiveMenu}
+					/>
+
+					<ContentBurgerMenu
+						isMenuOpen={isMenuOpen}
+						setIsMenuOpen={setIsMenuOpen}
+						border={contactsHeaderBorder}
+						isActiveMenu={isActiveMenu}
+						setIsActiveMenu={setIsActiveMenu}
+					/>
 
 
 					<div className="top-header__contacts contacts-header">
@@ -48,7 +77,7 @@ export default function TopHeader() {
 							<a href="#" className="contacts-header__partner">Become a Partner</a>
 						</div>
 						<div className="contacts-header__column">
-							<div data-da=".adaptive-menu__contacts, 1329, 0" className="contacts-header__border">
+							<div ref={contactsHeaderBorder} data-da=".adaptive-menu__contacts, 1329, 0" className="contacts-header__border">
 								<a href="tel:88001234567" className="contacts-header__phone">+38 (0512) 000-000</a>
 								<select name="" id="" className="contacts-header__city">
 									<option value="">Киев</option>
@@ -66,7 +95,9 @@ export default function TopHeader() {
 									className="contacts-header__login"><span>Войти</span>
 								</button> */}
 							{!isAuth ?
-								<Link to='/login' data-da=" .adaptive-menu__login , 1330, 1"
+								<Link to='/login'
+									onClick={closeMenu}
+									data-da=" .adaptive-menu__login , 1330, 1"
 									className="contacts-header__login"><span>Войти</span>
 								</Link>
 
@@ -86,6 +117,6 @@ export default function TopHeader() {
 				</div>
 
 			</div>
-		</div>
+		</div >
 	)
 }

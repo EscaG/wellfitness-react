@@ -618,6 +618,7 @@ $md4: 575.98;
 			}
 
 			&._active {
+				position: fixed;
 				span {
 					transform: scale(0);
 
@@ -640,22 +641,18 @@ $md4: 575.98;
 			}
 		}
 	}
-	@media (max-width: ($md4+px)) {
-		&__icon-menu {
-			right: 10px;
-			top: 28px;
-		}
-	}
 
 	&__content {
 		overflow: hidden;
-		// position: fixed;
+		position: fixed;
 		padding: 25px 10px;
 		top: 0;
 		right: 0;
-		z-index: 3;
-		width: 100%;
-		min-height: 100%;
+		z-index: 4;
+		// width: 100%;
+		width: 400px;
+		// min-height: 100%;
+		height: 100vh;
 		background-color: #2a2c38;
 		transform: translateX(100%);
 		transition: 0.3s;
@@ -740,6 +737,15 @@ $md4: 575.98;
 			// top: 80px;
 			transform: translateX(-110%);
 			position: absolute;
+			width: 100%;
+		}
+	}
+	@media (max-width: ($md4+px)) {
+		&__icon-menu {
+			right: 10px;
+			top: 28px;
+		}
+		&__content {
 			width: 100%;
 		}
 	}
