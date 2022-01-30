@@ -102,7 +102,9 @@ export default function TopHeader() {
 								</Link>
 
 								:
-								<Link to='/profile/main' data-da=" .adaptive-menu__login , 1330, 1"
+								<Link to='/profile/main'
+									onClick={closeMenu}
+									data-da=" .adaptive-menu__login , 1330, 1"
 									className="contacts-header__persona"><span>{user.name}</span>
 								</Link>
 							}

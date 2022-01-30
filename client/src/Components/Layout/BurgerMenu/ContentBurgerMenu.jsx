@@ -4,10 +4,7 @@ import './contentBurgerMenu.scss';
 
 export default function ContentBurgerMenu({ border, isActiveMenu, setIsActiveMenu }) {
 
-	const [isOpen, setIsOpen] = useState(false);
-	// const burgerRef = useRef();
 	const menuContentRef = useRef();
-	// const adaptiveMenuRef = useRef();
 	const mainMenuRef = useRef();
 	const loginBlockRef = useRef();
 	const subHomeRef = useRef();
@@ -17,9 +14,7 @@ export default function ContentBurgerMenu({ border, isActiveMenu, setIsActiveMen
 	useEffect(() => {
 		console.log("isActiveMenu", isActiveMenu);
 		if (isActiveMenu) {
-			// burgerRef.current.classList.add('_active');
 			menuContentRef.current.classList.add('_active');
-			// adaptiveMenuRef.current.classList.add('_active');
 			document.body.classList.add("lock");
 			border.current.classList.remove('_active')
 			subMenuRemoveDisActive()
@@ -31,55 +26,45 @@ export default function ContentBurgerMenu({ border, isActiveMenu, setIsActiveMen
 	}, [isActiveMenu]);
 
 	const handleMenu = (e) => {
-		// if (adaptiveMenuRef?.current && !adaptiveMenuRef.current.contains(e.target)) {
-		if (isActiveMenu) {
-
-			if (menuContentRef?.current && !menuContentRef.current.contains(e.target)) {
-				setIsActiveMenu(false)
-				closeMenu();
-				console.log("outer click");
-			} else {
-				console.log("inner click");
-			}
+		if (menuContentRef?.current && !menuContentRef.current.contains(e.target) && menuContentRef.current.classList.contains("_active")) {
+			setIsActiveMenu(false);
+			closeMenu();
+			console.log("outer click");
 		}
 	}
 
 	const closeMenu = () => {
-		// burgerRef.current.classList.remove('_active');
 		menuContentRef.current.classList.remove('_active');
-		// adaptiveMenuRef.current.classList.remove('_active');
 		document.body.classList.remove("lock");
-		border.current.classList.remove('_active')
-		subMenuRemoveDisActive()
-		// setIsActiveMenu(false)
-		// console.log("isActiveMenu", isActiveMenu);
+		border.current.classList.remove('_active');
+		subMenuRemoveDisActive();
 	}
 
 
 	const submenuAddDisactive = () => {
-		mainMenuRef.current.classList.add('_disactive')
-		loginBlockRef.current.classList.add('_disactive')
-		border.current.classList.add('_active')
+		mainMenuRef.current.classList.add('_disactive');
+		loginBlockRef.current.classList.add('_disactive');
+		border.current.classList.add('_active');
 	}
 	const subMenuRemoveDisActive = () => {
-		mainMenuRef.current.classList.remove('_disactive')
-		subHomeRef.current.classList.remove('_active')
-		subClubRef.current.classList.remove('_active')
-		loginBlockRef.current.classList.remove('_disactive')
+		mainMenuRef.current.classList.remove('_disactive');
+		subHomeRef.current.classList.remove('_active');
+		subClubRef.current.classList.remove('_active');
+		loginBlockRef.current.classList.remove('_disactive');
 	}
 
 	const menuCatalogHome = () => {
-		submenuAddDisactive()
-		subHomeRef.current.classList.add('_active')
+		submenuAddDisactive();
+		subHomeRef.current.classList.add('_active');
 	}
 	const menuCatalogClub = () => {
-		submenuAddDisactive()
-		subClubRef.current.classList.add('_active')
+		submenuAddDisactive();
+		subClubRef.current.classList.add('_active');
 
 	}
 	const menuCatalogBack = () => {
-		subMenuRemoveDisActive()
-		border.current.classList.remove('_active')
+		subMenuRemoveDisActive();
+		border.current.classList.remove('_active');
 	}
 
 
