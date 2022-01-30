@@ -2,13 +2,11 @@
 import React, { useRef, useState } from 'react'
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
-import AdaptiveMenu from "../AdaptiveMenu/AdaptiveMenu";
 import { useSelector } from "react-redux";
 import Modal from "../../ModalWindow/Modal";
 import { LoginForm } from "../../../Pages/Login/LoginForm";
 import Burger from '../../BurgerMenu/Burger';
 import ContentBurgerMenu from '../../BurgerMenu/ContentBurgerMenu';
-// import { openMenu } from '../js/burger';
 
 export default function TopHeader() {
 
@@ -24,9 +22,6 @@ export default function TopHeader() {
 	const contactsHeaderBorder = useRef()
 
 	const closeMenu = () => {
-		// openMenu()
-		// console.log("closemenu");
-		// setIsMenuOpen(true)
 		setIsActiveMenu(false)
 	}
 
@@ -38,7 +33,7 @@ export default function TopHeader() {
 				</Modal>
 			}
 			<div className="top-header__content _container">
-				{/* <!-- левый блок с логотипом --> */}
+				{/* //todo левый блок с логотипом --> */}
 				<div className="top-header__column top-header__column_logo">
 					<Link to="/" className="top-header__logo"><img src={logo} alt="logo" /></Link>
 					<select data-da=" .adaptive-menu__login , 1329, 0" name="" id="" className="top-header__city">
@@ -49,19 +44,13 @@ export default function TopHeader() {
 						<option value="">Львов</option>
 					</select>
 				</div>
-				{/* <!-- правый блок с контактами --> */}
+				{/* // todo правый блок с контактами  */}
 				<div className="top-header__column">
-					{/* <-- Адаптивное меню --> */}
-					{/* <AdaptiveMenu
-						border={contactsHeaderBorder}
-						isMenuOpen={isMenuOpen}
-						setIsMenuOpen={setIsMenuOpen}
-					></AdaptiveMenu> */}
+					{/* //! Адаптивное меню */}
 					<Burger
 						isActiveMenu={isActiveMenu}
 						setIsActiveMenu={setIsActiveMenu}
 					/>
-
 					<ContentBurgerMenu
 						isMenuOpen={isMenuOpen}
 						setIsMenuOpen={setIsMenuOpen}
@@ -72,6 +61,7 @@ export default function TopHeader() {
 
 
 					<div className="top-header__contacts contacts-header">
+
 						<div data-da=".adaptive-menu__contacts, 1330, 1" className="contacts-header__column">
 							<a href="#" className="contacts-header__diller">Для диллеров</a>
 							<a href="#" className="contacts-header__partner">Become a Partner</a>
@@ -89,18 +79,12 @@ export default function TopHeader() {
 						</div>
 
 						<div className="contacts-header__column">
-
-							{/* <button data-da=" .adaptive-menu__login , 1330, 1"
-									onClick={() => { setIsModal(!isModal); setActiveModal(true) }}
-									className="contacts-header__login"><span>Войти</span>
-								</button> */}
 							{!isAuth ?
 								<Link to='/login'
 									onClick={closeMenu}
 									data-da=" .adaptive-menu__login , 1330, 1"
 									className="contacts-header__login"><span>Войти</span>
 								</Link>
-
 								:
 								<Link to='/profile/main'
 									onClick={closeMenu}
@@ -108,16 +92,11 @@ export default function TopHeader() {
 									className="contacts-header__persona"><span>{user.name}</span>
 								</Link>
 							}
-							{/* <Link to='/login' data-da=" .adaptive-menu__login , 1330, 1"
-								className="contacts-header__login"><span>Войти</span>
-							</Link> */}
-
 						</div>
 
 					</div>
 
 				</div>
-
 			</div>
 		</div >
 	)

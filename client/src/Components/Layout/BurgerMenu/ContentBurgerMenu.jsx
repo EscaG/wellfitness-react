@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './contentBurgerMenu.scss';
 
@@ -12,7 +12,7 @@ export default function ContentBurgerMenu({ border, isActiveMenu, setIsActiveMen
 
 
 	useEffect(() => {
-		console.log("isActiveMenu", isActiveMenu);
+		// console.log("isActiveMenu", isActiveMenu);
 		if (isActiveMenu) {
 			menuContentRef.current.classList.add('_active');
 			document.body.classList.add("lock");
@@ -29,7 +29,7 @@ export default function ContentBurgerMenu({ border, isActiveMenu, setIsActiveMen
 		if (menuContentRef?.current && !menuContentRef.current.contains(e.target) && menuContentRef.current.classList.contains("_active")) {
 			setIsActiveMenu(false);
 			closeMenu();
-			console.log("outer click");
+			// console.log("outer click");
 		}
 	}
 
