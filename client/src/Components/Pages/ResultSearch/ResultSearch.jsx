@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import ProductCardItem from '../../Layout/ProductCardItem/ProductCardItem';
 import SpriteIcons from '../../Layout/SpriteIcons/SpriteIcons';
 import './resultsearch.scss';
 
@@ -27,88 +28,92 @@ export default function ResultSearch() {
 			<div className='page-result-search__wrapper'>
 
 				{products && products.map((item, index) =>
-					<div key={index++} className='promotion__slider-item item-slider'>
+					<ProductCardItem
+						key={item._id}
+						product={item}
+					/>
+					// <div key={index++} className='promotion__slider-item item-slider'>
 
-						<div className="item-slider__icons icons-slider">
-							<div className='icons-slider__list'>
-								<Link to="/" className='icons-slider__item translate'>
-									{/* <img src={iconPercent} alt="credit" /> */}
-									<SpriteIcons icon={"profitable"} />
-								</Link>
-								<Link to="/" className='icons-slider__item translate'>
-									{/* <img src={iconLike} alt="like" /> */}
-									<SpriteIcons icon={"recommend"} />
-								</Link>
-								<Link to="/" className='icons-slider__item translate'>
-									{/* <img src={iconNew} alt="new" /> */}
-									<SpriteIcons icon={"new"} />
-								</Link>
-							</div>
+					// 	<div className="item-slider__icons icons-slider">
+					// 		<div className='icons-slider__list'>
+					// 			<Link to="/" className='icons-slider__item translate'>
+					// 				{/* <img src={iconPercent} alt="credit" /> */}
+					// 				<SpriteIcons icon={"profitable"} />
+					// 			</Link>
+					// 			<Link to="/" className='icons-slider__item translate'>
+					// 				{/* <img src={iconLike} alt="like" /> */}
+					// 				<SpriteIcons icon={"recommend"} />
+					// 			</Link>
+					// 			<Link to="/" className='icons-slider__item translate'>
+					// 				{/* <img src={iconNew} alt="new" /> */}
+					// 				<SpriteIcons icon={"new"} />
+					// 			</Link>
+					// 		</div>
 
-							<div className='icons-slider__list'>
-								<Link className='icons-slider__item icons-slider__item_svg' to="/">
-									<svg className='bottom-footer__column_icons' width="17" height="17" >
-										<SpriteIcons icon="comparison" />
-										{/* <title>comparisons</title>
-										<use xlinkHref={comparison + "#comparison"}></use> */}
-									</svg>
-								</Link>
-								<Link className='icons-slider__item icons-slider__item_svg' to="/">
-									<svg className='bottom-footer__column_icons' width="21" height="17" >
-										<SpriteIcons icon="favorite" />
-										{/* <title>heart</title>
-										<use xlinkHref={heart + "#heart"}></use> */}
-									</svg>
-								</Link>
-							</div>
+					// 		<div className='icons-slider__list'>
+					// 			<Link className='icons-slider__item icons-slider__item_svg' to="/">
+					// 				<svg className='bottom-footer__column_icons' width="17" height="17" >
+					// 					<SpriteIcons icon="comparison" />
+					// 					{/* <title>comparisons</title>
+					// 					<use xlinkHref={comparison + "#comparison"}></use> */}
+					// 				</svg>
+					// 			</Link>
+					// 			<Link className='icons-slider__item icons-slider__item_svg' to="/">
+					// 				<svg className='bottom-footer__column_icons' width="21" height="17" >
+					// 					<SpriteIcons icon="favorite" />
+					// 					{/* <title>heart</title>
+					// 					<use xlinkHref={heart + "#heart"}></use> */}
+					// 				</svg>
+					// 			</Link>
+					// 		</div>
 
-						</div>
+					// 	</div>
 
-						<div className="item-slider__image">
-							{/* {item.gallery.map(imgSrc => */}
+					// 	<div className="item-slider__image">
+					// 		{/* {item.gallery.map(imgSrc => */}
 
-							<img key={"1231165654"} style={{ "width": "100%" }} src={item.gallery[0].image} alt="slide" />
-							{/* )} */}
-						</div>
-						<div className="item-slider__description description-item">
-							<div className="description-item__availability">
+					// 		<img key={"1231165654"} style={{ "width": "100%" }} src={item.gallery[0].image} alt="slide" />
+					// 		{/* )} */}
+					// 	</div>
+					// 	<div className="item-slider__description description-item">
+					// 		<div className="description-item__availability">
 
-								{item.availability && <span className='description-item__dots_green'>
-									В наличии
-									<span className='description-item__dots_green_1'></span>
-									<span className='description-item__dots_green_2'></span>
-									<span className='description-item__dots_green_3'></span>
-									<span className='description-item__showRoom'>&nbsp; Есть в шоу-руме</span>
-								</span>}
+					// 			{item.availability && <span className='description-item__dots_green'>
+					// 				В наличии
+					// 				<span className='description-item__dots_green_1'></span>
+					// 				<span className='description-item__dots_green_2'></span>
+					// 				<span className='description-item__dots_green_3'></span>
+					// 				<span className='description-item__showRoom'>&nbsp; Есть в шоу-руме</span>
+					// 			</span>}
 
-								{!item.availability && <span className='description-item__dots_red'>
-									Нет в наличии
-									<span className='description-item__dots_red_1'></span>
-									<span className='description-item__dots_red_2'></span>
-									<span className='description-item__dots_red_3'></span>
-								</span>}
+					// 			{!item.availability && <span className='description-item__dots_red'>
+					// 				Нет в наличии
+					// 				<span className='description-item__dots_red_1'></span>
+					// 				<span className='description-item__dots_red_2'></span>
+					// 				<span className='description-item__dots_red_3'></span>
+					// 			</span>}
 
 
-							</div>
-							<Link to={"/product/" + encodeURI(item.name) + "/" + item._id} className="description-item__name">{item.name}</Link>
-							<div className="description-item__rating">Рейтинг {item.rating}</div>
-							<div className="desription-item__price-button price-button">
-								{item.price.sharePrice ?
-									<div className="price-button__price">
-										<div className='price-button__shareprice'>{item.price.sharePrice}  &#8372;</div>
-										<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
-									</div>
-									:
-									<div className="price-button__price">
-										<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
-									</div>
-								}
-								<div >
-									<button className="price-button__button">Купить</button>
-								</div>
-							</div>
-						</div>
-					</div>
+					// 		</div>
+					// 		<Link to={"/product/" + encodeURI(item.name) + "/" + item._id} className="description-item__name">{item.name}</Link>
+					// 		<div className="description-item__rating">Рейтинг {item.rating}</div>
+					// 		<div className="desription-item__price-button price-button">
+					// 			{item.price.sharePrice ?
+					// 				<div className="price-button__price">
+					// 					<div className='price-button__shareprice'>{item.price.sharePrice}  &#8372;</div>
+					// 					<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
+					// 				</div>
+					// 				:
+					// 				<div className="price-button__price">
+					// 					<div className='price-button__fullprice'>{item.price.fullPrice} &#8372;</div>
+					// 				</div>
+					// 			}
+					// 			<div >
+					// 				<button className="price-button__button">Купить</button>
+					// 			</div>
+					// 		</div>
+					// 	</div>
+					// </div>
 				)}
 
 			</div>

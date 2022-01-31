@@ -12,7 +12,10 @@ export default function ContentBurgerMenu({ border, isActiveMenu, setIsActiveMen
 
 
 	useEffect(() => {
-		// console.log("isActiveMenu", isActiveMenu);
+		setTimeout(() => {
+
+			menuContentRef.current.style.transition = "0.3s";
+		}, 300)
 		if (isActiveMenu) {
 			menuContentRef.current.classList.add('_active');
 			document.body.classList.add("lock");
@@ -20,16 +23,18 @@ export default function ContentBurgerMenu({ border, isActiveMenu, setIsActiveMen
 			subMenuRemoveDisActive()
 			document.addEventListener('click', (e) => { handleMenu(e) })
 		}
+
 		else {
 			closeMenu();
 		}
+
 	}, [isActiveMenu]);
 
+	//* проверка события на клик, если мимо меню - значит закрыть меню 
 	const handleMenu = (e) => {
 		if (menuContentRef?.current && !menuContentRef.current.contains(e.target) && menuContentRef.current.classList.contains("_active")) {
-			setIsActiveMenu(false);
 			closeMenu();
-			// console.log("outer click");
+			setIsActiveMenu(false);
 		}
 	}
 
@@ -72,7 +77,7 @@ export default function ContentBurgerMenu({ border, isActiveMenu, setIsActiveMen
 
 	return (
 		<div ref={menuContentRef} className="adaptive-menu__content _active">
-			{/* //!-- Блок для логина --> */}
+			{/* //!-- Блок для логина -- */}
 			<div ref={loginBlockRef} className="adaptive-menu__login"></div>
 			<div ref={mainMenuRef} className="adaptive-menu__main-menu">
 				<button
@@ -86,7 +91,7 @@ export default function ContentBurgerMenu({ border, isActiveMenu, setIsActiveMen
 					Для фитнес клубов
 				</button>
 			</div>
-			{/*// !-- Начало блока для подкаталога --> */}
+			{/*// !-- Начало блока для подкаталога -- */}
 			<div ref={subHomeRef} className="subdirectory__container sub_home">
 				<button
 					onClick={menuCatalogBack}

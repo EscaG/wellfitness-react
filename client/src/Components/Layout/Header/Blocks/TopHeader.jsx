@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef, useState } from 'react'
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
@@ -17,7 +16,7 @@ export default function TopHeader() {
 	const [isActiveMenu, setIsActiveMenu] = useState(false);
 	const [activeModal, setActiveModal] = useState(false);
 	const [isModal, setIsModal] = useState(false);
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	// const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const contactsHeaderBorder = useRef()
 
@@ -33,7 +32,7 @@ export default function TopHeader() {
 				</Modal>
 			}
 			<div className="top-header__content _container">
-				{/* //todo левый блок с логотипом --> */}
+				{/* //todo левый блок с логотипом  */}
 				<div className="top-header__column top-header__column_logo">
 					<Link to="/" className="top-header__logo"><img src={logo} alt="logo" /></Link>
 					<select data-da=" .adaptive-menu__login , 1329, 0" name="" id="" className="top-header__city">
@@ -52,8 +51,8 @@ export default function TopHeader() {
 						setIsActiveMenu={setIsActiveMenu}
 					/>
 					<ContentBurgerMenu
-						isMenuOpen={isMenuOpen}
-						setIsMenuOpen={setIsMenuOpen}
+						// isMenuOpen={isMenuOpen}
+						// setIsMenuOpen={setIsMenuOpen}
 						border={contactsHeaderBorder}
 						isActiveMenu={isActiveMenu}
 						setIsActiveMenu={setIsActiveMenu}
@@ -63,8 +62,8 @@ export default function TopHeader() {
 					<div className="top-header__contacts contacts-header">
 
 						<div data-da=".adaptive-menu__contacts, 1330, 1" className="contacts-header__column">
-							<a href="#" className="contacts-header__diller">Для диллеров</a>
-							<a href="#" className="contacts-header__partner">Become a Partner</a>
+							<Link to='/' className="contacts-header__diller">Для диллеров</Link>
+							<Link to='/' className="contacts-header__partner">Become a Partner</Link>
 						</div>
 						<div className="contacts-header__column">
 							<div ref={contactsHeaderBorder} data-da=".adaptive-menu__contacts, 1329, 0" className="contacts-header__border">
@@ -74,7 +73,7 @@ export default function TopHeader() {
 									<option value="">Ник</option>
 									<option value="">Одс</option>
 								</select>
-								<a href="#" className="contacts-header__link"><span>Заказать звонок</span></a>
+								<Link to='/' className="contacts-header__link"><span>Заказать звонок</span></Link>
 							</div>
 						</div>
 

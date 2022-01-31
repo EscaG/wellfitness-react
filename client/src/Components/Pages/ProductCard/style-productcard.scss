@@ -13,3 +13,18 @@
 	height: 100%;
 	overflow-y: scroll;
 }
+#outer-favorite {
+	fill: red;
+}
+#inner-favorite {
+	fill: green;
+}
+#srok {
+	fill: rgba(255, 255, 255, 0);
+	stroke: red;
+	stroke-width: 3px;
+	transition: 0.3s;
+}
+#srok:hover {
+	fill: red;
+}

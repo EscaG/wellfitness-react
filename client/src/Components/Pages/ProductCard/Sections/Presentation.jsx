@@ -28,9 +28,6 @@ export default function Presentation({ product }) {
 		setImageId(gallery && gallery[0].id)
 	}, [product]);
 
-	// console.log(configuration && configuration.weight);
-	// console.log(radioWeight, radioSize);
-
 
 	useEffect(() => {
 		if (!availability) {

@@ -1,7 +1,7 @@
 import "./resetstyle.scss";
 import "./bootstrap.scss"
 import './App.scss';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { checkAuth } from './http/actions/user';
@@ -10,7 +10,7 @@ import { Footer } from "./Components/Layout/Footer/Footer";
 import { Header } from "./Components/Layout/Header/Header";
 import { PageHome } from './Components/Pages/Home/PageHome';
 import PageAbout from './Components/Pages/About/PageAbout';
-import { PageBrands } from "./Components/Pages/Brands/PageBrands";
+// import { PageBrands } from "./Components/Pages/Brands/PageBrands";
 import PageService from "./Components/Pages/Service/PageService";
 import PageUslugi from "./Components/Pages/Uslugi/PageUslugi";
 import PageSupport from "./Components/Pages/Support/PageSupport";
@@ -30,37 +30,48 @@ import Bonuses from "./Components/Pages/Profile/Components/Bonuses";
 import Instructions from "./Components/Pages/Profile/Components/Instructions";
 import Appeals from "./Components/Pages/Profile/Components/Appeals";
 import EditProfile from "./Components/Pages/Profile/Components/EditProfile/EditProfile";
-import ProductCatalog from "./Components/Layout/testproduct/productCatalog";
+// import ProductCatalog from "./Components/Layout/testproduct/productCatalog";
 import ProductHook from "./Components/Layout/testproduct/ProductHook";
 import { getProduct } from "./http/actions/product";
 import ProductCardPage from "./Components/Pages/ProductCard/ProductCardPage";
 import ResultSearch from "./Components/Pages/ResultSearch/ResultSearch";
-// import Modal from "./Components/Layout/ModalWindow/Modal";
+
+
 
 function App() {
-	// const isAuth = useSelector(state => state.user.isAuth);
-	// console.log(isAuth)
 	const dispatch = useDispatch();
-
-	// const [activeModal, setActiveModal] = useState(true);
-
+	const scrollBtnRef = useRef();
+	const rootElement = document.documentElement;
 	useEffect(() => {
 		console.log("APP")
 		dispatch(getProduct());
 		if (localStorage.getItem('token')) dispatch(checkAuth());
-
+		// setInterval(() => {
+		document.addEventListener("scroll", handleScroll, { passive: true })
+		// }, 500);
+		// console.log("высота браузера ",document.documentElement.clientHeight);
+		// console.log("Высота всего документа ",document.documentElement.scrollHeight);
 	}, []);
 
-	// const SignInWrapper = ({ children, currentUser }) => {
-	// 	return currentUser ? <Navigate to="/" replace /> : children;
-	// };
+	const handleScroll = () => {
+		// console.log(window.pageYOffset);
+		if (window.pageYOffset > rootElement.clientHeight - 50) {
+			scrollBtnRef.current.classList.add("showBtn")
+			// console.log("вверх");
+		} else {
+			scrollBtnRef.current.classList.remove("showBtn")
+			// console.log("вниз");
+		}
+	}
 
-	// {/*Условие которое отправляет на логин если вы не зарегестрированы*/}
-	// 				{/*{!isAuth ?*/}
-	// 				{/*	<Route path="/" element={<Navigate to='/login' replace/>}/>*/}
-	// 				{/*	:*/}
-	// 				{/*	<Route path="/" element={<PageHome/>}/>*/}
-	// 				{/*}*/}
+	const scrollToTopClick = (e) => {
+		rootElement.scrollTo({
+			top: 0,
+			behavior: "smooth"
+		});
+	}
+
+
 	return (
 		<BrowserRouter>
 			<Header />
@@ -98,6 +109,13 @@ function App() {
 					</Route>
 				</Routes>
 			</main>
+			<button ref={scrollBtnRef} className="scrollToTop" onClick={scrollToTopClick}>
+
+				<svg width="16" height="35" viewBox="0 0 14 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M1 1.5L12 16L1 30.5" stroke="#F53B49" strokeWidth="5" />
+				</svg>
+
+			</button>
 			<Footer />
 		</BrowserRouter>
 	);

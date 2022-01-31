@@ -98,7 +98,7 @@ export const Footer = () => {
 								<ul className='contacts__list'>
 									<li>
 										<a href="tel:88001234567" className='contacts__link'>+38(044)123-45-67</a>
-										<span className='contacts__descript'>для киева</span>
+										<span className='contacts__descript'>для Киева</span>
 									</li>
 									<li>
 										<a href="tel:88001234567" className='contacts__link'>8(800)123-22-33</a>
