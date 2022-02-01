@@ -5,15 +5,15 @@ import favorites from "../img/favorites.svg";
 import cart from "../img/cart.svg";
 import Modal from '../../ModalWindow/Modal';
 import AutocompleteHeader from '../AutocompleteSearch/AutocompleteHeader';
-import { useDispatch, useSelector } from 'react-redux';
-import { setConditionAutocomplite } from '../../../../http/reducers/modalReducerAutocomplite';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { setConditionAutocomplite } from '../../../../http/reducers/modalReducerAutocomplite';
 
 export default function MiddleHeader() {
 
 	const [modalActive, setModalActive] = useState(false);
-	const isModal = useSelector(state => state.modalAutocomplete.currentCondition);
-	console.log(isModal);
-	const dispatch = useDispatch();
+	// const isModal = useSelector(state => state.modalAutocomplete.currentCondition);
+	// console.log(isModal);
+	// const dispatch = useDispatch();
 
 	return (
 		<div className="header__middle middle-header">
@@ -31,13 +31,23 @@ export default function MiddleHeader() {
 							>
 
 								<button
-									onClick={() => dispatch(setConditionAutocomplite(true))}
+									// onClick={() => dispatch(setConditionAutocomplite(true))}
+									onClick={() => setModalActive(!modalActive)}
 									className="catalog-header__item_search catalog-header__item"
 								>
 
 								</button>
-								{isModal ?
-									<Modal active={isModal}>		<AutocompleteHeader />		</Modal>
+								{modalActive ?
+									<Modal
+										// active={isModal}
+										modalActive={modalActive}
+										setModalActive={setModalActive}
+									>
+										<AutocompleteHeader
+											modalActive={modalActive}
+											setModalActive={setModalActive}
+										/>
+									</Modal>
 									: null}
 							</div>
 

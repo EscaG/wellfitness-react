@@ -2,25 +2,48 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import "./style-autocompleteheader.scss";
 import close from "../img/close.svg";
 import AutocompleteItem from './AutocompleteItem';
-import { useDispatch } from 'react-redux';
-import { setConditionAutocomplite } from '../../../../http/reducers/modalReducerAutocomplite';
+// import { useDispatch } from 'react-redux';
+// import { setConditionAutocomplite } from '../../../../http/reducers/modalReducerAutocomplite';
 import SpriteIcons from '../../SpriteIcons/SpriteIcons';
 import { useNavigate } from 'react-router-dom';
 // import { setSearch } from '../../../../http/reducers/searchReducer';
 
 
-export default function AutocompleteHeader() {
+export default function AutocompleteHeader({ modalActive, setModalActive }) {
 
 	const [searchProduct, setSearchProduct] = useState("");
 	const [products, setProducts] = useState([]);
+	const [arraySearch, setArraySearched] = useState([]);
+	// const [newStringSearch, setnewStringSearch] = useState(null);
 	const searchRef = useRef(null);
 	const navigate = useNavigate();
 	const goProductCard = () => navigate('search/' + searchProduct);
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
+	console.log(arraySearch);
+
 
 	useEffect(() => {
+		// localStorage.removeItem('arraySearch')
 		searchRef.current.focus();
+		if (localStorage.getItem('arraySearch')) {
+			setArraySearched(JSON.parse(localStorage.getItem('arraySearch')))
+		}
+		return (() => setArraySearched([]))
 	}, []);
+
+	useEffect(() => {
+		if (arraySearch.length) {
+			localStorage.setItem('arraySearch', JSON.stringify(arraySearch))
+		}
+	}, [arraySearch]);
+
+	const setToLocal = (string) => {
+		if (!arraySearch.includes(string) && string) {
+			// setnewStringSearch(string);
+			setArraySearched(arraySearch => [...arraySearch, string])
+		}
+	}
+
 
 
 	const changeHandler = useCallback(async (e) => {
@@ -44,6 +67,7 @@ export default function AutocompleteHeader() {
 		}
 	}, 300);
 
+	// console.log(JSON.stringify(localStorage.getItem('searched')));
 	function useDebounce(callback, delay) {
 		const timer = useRef(null);
 		const debounceCallback = useCallback((...args) => {
@@ -57,32 +81,40 @@ export default function AutocompleteHeader() {
 		return debounceCallback;
 	}
 
+
 	const closeModalAutocomplete = () => {
-		dispatch(setConditionAutocomplite(false))
+		// dispatch(setConditionAutocomplite(false))
+		setModalActive(!modalActive)
 	}
+
 	const handlerSearch = (e) => {
 		if (e.keyCode === 13) {
 			// dispatch(setSearch(searchProduct));
 			closeModalAutocomplete();
 			goProductCard()
-			// console.log("enter");
 		}
 	}
+
 	const handleAllSearch = () => {
-		closeModalAutocomplete();
-		goProductCard()
+		if (searchProduct) {
+
+			closeModalAutocomplete();
+			goProductCard()
+		}
 
 	}
+
 
 	return (
 		<div className='autocomplete-header__main'>
 			<div className="autocomplete-header__block">
 				<div className='autocomplete-header__search-container search-container'>
 					<input
+						value={searchProduct}
 						ref={searchRef} onChange={changeHandler} onKeyDown={e => handlerSearch(e)}
 						id='search-autocomplete' type="text" placeholder='Поиск' />
 					<div className='search-container__onsearch'>
-						<button>
+						<button onClick={handleAllSearch}>
 							<svg height="20px" width="20px"><SpriteIcons icon="search" /></svg>
 						</button>
 					</div>
@@ -91,18 +123,42 @@ export default function AutocompleteHeader() {
 					</div>
 				</div>
 				{
-					products.length > 0 ?
+					products.length ?
 						<div className='autocomplete-header__entity-container'>
-							<span>  Найдено {products.length} товара </span>
+							<span>  Найдено товаров {products.length}</span>
 							<button>Для дома</button>
 							<button>Для фитнес клубов</button>
 						</div>
-						: null
+						:
+						<>
+							{arraySearch.length ?
+								<div>
+									<h5>Раннее вы искали:</h5>
+									{arraySearch && [...arraySearch].reverse().map((str, index) =>
+										<div key={index}>
+											{index <= 3 ?
+												<div className='autocomplete-header__old-search'
+													onClick={() => { setSearchProduct(str); searchProducts(str) }}>{str}</div>
+												: null
+											}
+										</div>
+									)}
+								</div>
+								:
+								<div className='goToSearch'>Начните поиск</div>
+							}
+						</>
 				}
 				<ul className='autocomplete-heder-list'>
 					{products.map((product, index) =>
 						<li key={product._id}>
-							<AutocompleteItem key={product._id} product={product} />
+							<AutocompleteItem
+								key={product._id}
+								product={product}
+								setToLocal={setToLocal}
+								modalActive={modalActive}
+								setModalActive={setModalActive}
+							/>
 						</li>
 					)}
 				</ul>

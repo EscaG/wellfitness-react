@@ -17,7 +17,7 @@ export default function Presentation({ product }) {
 	const [radioColorFrame, setRadioColorFrame] = useState(null);
 	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
 	const [imageId, setImageId] = useState("");
-	console.log(product);
+	// console.log(product);
 
 	useLayoutEffect(() => {
 		setRadioSize(configuration && configuration.size);

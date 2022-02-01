@@ -17,7 +17,7 @@ export default function ProductCardPage() {
 	const dispatch = useDispatch();
 	let params = useParams();
 
-	console.log(product);
+	// console.log(product);
 
 	useEffect(() => {
 		dispatch(setConditionAutocomplite(false));
@@ -32,7 +32,7 @@ export default function ProductCardPage() {
 					if (res) { setProduct(res) }
 					document.body.scrollIntoView();
 					// setIsLoad(true);
-					console.log(res);
+					// console.log(res);
 				})
 				.catch(err =>
 					console.log(err))

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SpriteIcons from '../../SpriteIcons/SpriteIcons';
 
-export default function AutocompleteItem({ product }) {
+export default function AutocompleteItem({ modalActive, setModalActive, product, setToLocal }) {
 	const { name, gallery, _id, price, rating } = product;
 	// console.log(name, _id);
 
@@ -17,8 +17,14 @@ export default function AutocompleteItem({ product }) {
 	// let url = "/product/" + slug + "/" + props.item._id;
 	let url = '/product/' + encodeURI(name) + "/" + _id;
 
+	const closeAndSetToLocal = () => {
+		setToLocal(name);
+		setTimeout(() => {
+			setModalActive(!modalActive)
+		}, 100);
+	}
 	return (
-		<Link to={url} className='autocomplete-heder-list__item'>
+		<Link to={url} onClick={() => closeAndSetToLocal()} className='autocomplete-heder-list__item'>
 			<img src={gallery && gallery[0].image} alt={name} />
 			<span to={url} >{name}</span>
 			<div className='autocomplete-heder-list__stars'>

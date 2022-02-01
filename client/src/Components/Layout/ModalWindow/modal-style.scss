@@ -31,8 +31,16 @@
 }
 
 .modal__content.active {
+	overflow: auto;
+
 	transform: scale(1);
 }
 body.block {
 	overflow: hidden;
+}
+@media (max-width: 768px) {
+	.modal__content.active {
+		height: 100vh;
+		border-radius: 0;
+	}
 }

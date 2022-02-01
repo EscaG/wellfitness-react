@@ -43,7 +43,13 @@ export default function ProfilePage() {
 				</section>
 
 				<section className='profile__mycontact mycontact-profile'>
-					{!currentUser.isActivated && <h3 style={{ marginBottom: "20px", color: "red" }}>Активируйте аккаунт</h3>}
+					{!currentUser.isActivated &&
+						<div className='tooltip'>
+							<h3>Активируйте аккаунт</h3>
+							<span className='tooltip__quest'>?</span>
+							<span className='tooltip__answer'>На вашу электронную почту выслано письмо для активации.</span>
+						</div>
+					}
 					<div className='mycontact-profile__name'>{currentUser.surname} {currentUser.name}</div>
 					<div className='mycontact-profile__email'>{currentUser.email}</div>
 					<div className="mycontact-profile__phone">+7 (900) 000-00-00</div>

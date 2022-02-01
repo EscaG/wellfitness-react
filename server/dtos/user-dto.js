@@ -6,6 +6,10 @@ module.exports = class UserDto {
 	name;
 	phone;
 	data;
+	favorites;
+	basket;
+	comparison;
+
 
 	constructor(model) {
 		this.email = model.email;
@@ -15,6 +19,9 @@ module.exports = class UserDto {
 		this.name = model.name;
 		this.phone = model.phone;
 		this.data = model.data;
+		this.favorites = model.favorites;
+		this.basket = model.basket;
+		this.comparison = model.comparison;
 	}
 
 }

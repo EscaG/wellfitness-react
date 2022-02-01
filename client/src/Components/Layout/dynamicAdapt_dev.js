@@ -4,7 +4,7 @@ export default class DynamicAdapt {
 	}
 
 	init() {
-		console.log("adaptive start");
+		// console.log("adaptive start");
 		// массив объектов
 		this.оbjects = [];
 		this.daClassname = '_dynamic_adapt_';
