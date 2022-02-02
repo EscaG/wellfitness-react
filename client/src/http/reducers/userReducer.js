@@ -36,9 +36,8 @@ export default function userReducer(state = defaultState, action) {
 			// return { ...state, currentUser: { ...state.currentUser, ...action.payload }, isAuth: true }
 			return {
 				...state,
-				isLoading: false,
-				// currentUser: action.payload.user,
 				currentUser: action.payload,
+				isLoading: false,
 				isAuth: true,
 				errorMessage: ''
 			};
@@ -60,3 +59,4 @@ export const setUser = user => ({ type: SET_USER, payload: user });
 export const updateUser = res => ({ type: UPDATE_USER, payload: res });
 export const logout = () => ({ type: LOGOUT });
 export const errorUser = (error) => ({ type: ERROR, payload: error });
+// export const updateFavorites = user => ({ type: UPDATE_USER, payload: user });

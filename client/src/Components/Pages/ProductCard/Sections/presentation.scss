@@ -103,8 +103,12 @@
 			color: red;
 		}
 	}
-	&__favorites-icons-hover:hover .inline-svg-icon {
-		fill: red;
+	&__favorites-icons-hover:hover .presentation-icon-favorite {
+		stroke: #f53b49;
+	}
+
+	&__favorites-icons-hover:hover .presentation-icon {
+		fill: #f53b49;
 	}
 	&__name-characteristics {
 		color: #909cb5;
@@ -226,8 +230,19 @@
 	display: none;
 	-webkit-appearance: none;
 }
-.inline-svg-icon {
+.presentation-icon,
+.presentation-icon-favorite {
+	fill: #858fa4;
 	transition: 0.5s;
+}
+.presentation-icon-favorite.active {
+	fill: #f53b49;
+	stroke: #f53b49;
+}
+.presentation-icon-favorite {
+	fill: rgba(255, 255, 255, 0);
+	stroke: #858fa4;
+	stroke-width: 3px;
 }
 .presentation-product {
 	&__configuration {

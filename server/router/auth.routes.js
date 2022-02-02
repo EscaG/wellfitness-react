@@ -16,5 +16,6 @@ router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 router.get('/users', authMiddleware, userController.getUsers);
 router.put('/update', userController.updateUser);
+router.put('/favorites', userController.updateFavorites);
 
 module.exports = router;

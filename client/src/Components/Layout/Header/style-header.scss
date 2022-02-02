@@ -389,6 +389,7 @@ $md4: 575.98;
 		height: 25px;
 		width: 24px;
 		position: relative;
+		background-color: inherit;
 
 		div {
 			position: absolute;
@@ -411,7 +412,7 @@ $md4: 575.98;
 			}
 		}
 
-		&_comparison {
+		&.comparison {
 			use {
 				transition: 0.3s;
 				fill: #fff;
@@ -426,7 +427,7 @@ $md4: 575.98;
 			}
 		}
 
-		&_favorites {
+		&.favorites {
 			use {
 				transition: 0.3s;
 				fill: #fff;
@@ -441,7 +442,7 @@ $md4: 575.98;
 			}
 		}
 
-		&_cart {
+		&.cart {
 			div {
 				top: -2px;
 			}

@@ -42,25 +42,21 @@ function App() {
 	const dispatch = useDispatch();
 	const scrollBtnRef = useRef();
 	const rootElement = document.documentElement;
+
 	useEffect(() => {
 		console.log("APP")
 		dispatch(getProduct());
 		if (localStorage.getItem('token')) dispatch(checkAuth());
-		// setInterval(() => {
 		document.addEventListener("scroll", handleScroll, { passive: true })
-		// }, 500);
 		// console.log("высота браузера ",document.documentElement.clientHeight);
 		// console.log("Высота всего документа ",document.documentElement.scrollHeight);
 	}, []);
 
 	const handleScroll = () => {
-		// console.log(window.pageYOffset);
 		if (window.pageYOffset > rootElement.clientHeight - 50) {
 			scrollBtnRef.current.classList.add("showBtn")
-			// console.log("вверх");
 		} else {
 			scrollBtnRef.current.classList.remove("showBtn")
-			// console.log("вниз");
 		}
 	}
 

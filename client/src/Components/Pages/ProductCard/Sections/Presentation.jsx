@@ -6,9 +6,13 @@ import MainImage from '../../../Layout/SpriteIcons/MainImage';
 import SpriteIcons from '../../../Layout/SpriteIcons/SpriteIcons';
 import './presentation.scss';
 import { Link as LinkScroll } from 'react-scroll';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkAuth, editFavorites } from '../../../../http/actions/user';
 
 export default function Presentation({ product }) {
-	const { name, gallery, price, characteristics, brand, availability, configuration } = product;
+	const user = useSelector(state => state.user.currentUser);
+	const { _id, name, gallery, price, characteristics, brand, availability, configuration
+	} = product;
 	const [previewImage, setPreviewImage] = useState('');
 	const [entity, setEntity] = useState(1);
 	const [radioWeight, setRadioWeight] = useState(null);
@@ -17,7 +21,60 @@ export default function Presentation({ product }) {
 	const [radioColorFrame, setRadioColorFrame] = useState(null);
 	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
 	const [imageId, setImageId] = useState("");
-	// console.log(product);
+	const [favoritesList, setFavoritesList] = useState([]);
+	const [isFavorite, setIsFavorite] = useState(false);
+	const dispatch = useDispatch();
+	// console.log(_id);
+	// console.log("user", user);
+	// console.log(user?.favorites);
+	// console.log(favoritesList);
+
+	useEffect(() => {
+		if (user.favorites) {
+			// console.log("mount user.favorites");
+			setFavoritesList(user.favorites)
+			if (user.favorites.includes(_id)) {
+				// console.log("обновился список");
+				setIsFavorite(true);
+			}
+		}
+	}, [user]);
+
+	useEffect(() => {
+		if (user.favorites) {
+			console.log("обновился продукт");
+			if (user.favorites.includes(_id)) {
+				console.log("favorite true");
+				setIsFavorite(true);
+			} else {
+				setIsFavorite(false);
+			}
+		}
+	}, [product]);
+
+	useEffect(() => {
+		if (favoritesList.length) {
+
+
+		}
+	}, [favoritesList]);
+
+
+
+	const handleToFavorite = (id) => {
+		console.log(favoritesList);
+		if (!favoritesList.includes(id)) {
+			console.log("new id");
+			setFavoritesList(favoritesList => [...favoritesList, id])
+			dispatch(editFavorites(user.email, [...favoritesList, id]));
+		} else {
+			setFavoritesList(favoritesList => favoritesList.filter(i => i !== id));
+			dispatch(editFavorites(user.email, favoritesList.filter(i => i !== id)));
+			setIsFavorite(false)
+			// console.log(favoritesList.filter(i => i !== id));
+			console.log(favoritesList.splice(favoritesList.indexOf(id), 1));
+		}
+	}
 
 	useLayoutEffect(() => {
 		setRadioSize(configuration && configuration.size);
@@ -29,12 +86,6 @@ export default function Presentation({ product }) {
 	}, [product]);
 
 
-	useEffect(() => {
-		if (!availability) {
-			// document.getElementById("pieces-presentation").disabled = true;
-			// document.querySelector(".block-price-presentation__cart-block").style.display = "none";
-		}
-	}, []);
 
 	const showPreview = (id, imgSrc) => {
 		setPreviewImage(imgSrc)
@@ -81,7 +132,7 @@ export default function Presentation({ product }) {
 		setRadioColorUpholstery(e.target.value);
 	}
 
-	const settingsPromotion = {
+	const settingsSlider = {
 		className: "presentation-slider",
 		arrows: true,
 		centerMode: false,
@@ -139,7 +190,7 @@ export default function Presentation({ product }) {
 								<MainImage image={previewImage ? previewImage : gallery && gallery[0].image} />
 							</div>
 							<div className="gallery-view__preview">
-								<Slider {...settingsPromotion}>
+								<Slider {...settingsSlider}>
 									{gallery && gallery.map((imgSrc, index) =>
 										<div onClick={() => showPreview(imgSrc.id, imgSrc.image)} id={imgSrc.id} className={imageId === imgSrc.id ? 'preview-product active' : 'preview-product'} key={Date.now() + index}>
 											<MainImage image={imgSrc.image} />
@@ -168,14 +219,14 @@ export default function Presentation({ product }) {
 							{/* //todo в избранное */}
 							<div>
 								<div className='price-characteristics__favorites-icons'>
-									<div className='price-characteristics__favorites-icons-hover'>
-										<svg className="inline-svg-icon" height="21px" width="24px" >
+									<div onClick={() => handleToFavorite(_id)} className='price-characteristics__favorites-icons-hover'>
+										<svg className={isFavorite ? "presentation-icon-favorite active" : "presentation-icon-favorite"} height="24px" width="24px" >
 											<SpriteIcons icon={"favorite"} />
 										</svg>
 										<span >&nbsp;&nbsp; В избранное</span>
 									</div>
 									<div className='price-characteristics__favorites-icons-hover'>
-										<svg className="inline-svg-icon" height="21px" width="24px" >
+										<svg className="presentation-icon" height="21px" width="24px" >
 											<SpriteIcons icon={"comparison"} />
 										</svg>
 										<span>&nbsp;&nbsp; В сравнение	</span>

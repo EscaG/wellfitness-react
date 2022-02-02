@@ -9,7 +9,7 @@ const UserSchema = new Schema({
 	name: String,
 	phone: String,
 	data: {},
-	fovorites: [],
+	favorites: [],
 	basket: [],
 	comparison: []
 })

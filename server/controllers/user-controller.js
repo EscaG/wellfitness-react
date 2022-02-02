@@ -81,8 +81,6 @@ class UserController {
 	async updateUser(req, res, next) {
 		console.log("update", req.body)
 		try {
-			// const { refreshToken } = req.cookies;
-			// const user = await userService.refresh(refreshToken);
 			const {email,  surname, name, phone, data } = req.body;
 			const userData = await userService.updateUser( email, surname, name, phone, data);
 
@@ -93,6 +91,17 @@ class UserController {
 		}
 	}
 
+	async updateFavorites(req,res,next){
+		console.log("updateFavorites", req.body);
+		try {
+			const {  favorites,email } = req.body;
+			const userData = await userService.favoritesService(favorites,email);
+			res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+			return res.json(userData);
+		}catch (e) {
+			next(e)
+		}
+	}
 
 }
 

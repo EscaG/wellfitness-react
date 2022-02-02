@@ -69,6 +69,17 @@ export const editUser = (email, surname, name, phone, data) => {
 		}
 	}
 }
+export const editFavorites = (email, favorites) => {
+	return async dispatch => {
+		try {
+			const response = await $api.put(API_URL + '/favorites',
+				{ email, favorites });
+			dispatch(updateUser(response.data.user));
+		} catch (error) {
+			dispatch(errorUser(error?.response?.data?.message));
+		}
+	}
+}
 
 // export const editAndUpdateUser = (email, surname, name, phone, data) => {
 // 	return async dispatch => {
