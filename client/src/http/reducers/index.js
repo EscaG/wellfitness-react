@@ -1,17 +1,17 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import favoritesReducer from "./favoritesReducer";
 import productReducer from "./productReducer";
 import userReducer from "./userReducer";
-import modalAutocompliteReducer from "./modalReducerAutocomplite";
-import SearchReducer from "./searchReducer";
+// import SearchReducer from "./searchReducer";
 // import uploadReducer from "./uploadReducer";
 
 const rootReducer = combineReducers({
 	user: userReducer,
 	product: productReducer,
-	modalAutocomplete: modalAutocompliteReducer,
-	search: SearchReducer
+	favorites: favoritesReducer
+	// search: SearchReducer
 	// upload: uploadReducer
 })
 

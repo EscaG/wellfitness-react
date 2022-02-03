@@ -76,6 +76,8 @@ export const PageHome = () => {
 	// const [modalActive, setModalActive] = useState(false);
 	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
 	const [slides, setSlides] = useState([firstSlide, secondSlide, thirdSlide, fourthSlide]);
+
+
 	const newsHome = [
 		{
 			imgSrc: newsHome1,

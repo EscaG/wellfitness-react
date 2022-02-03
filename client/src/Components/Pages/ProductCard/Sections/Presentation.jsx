@@ -8,9 +8,13 @@ import './presentation.scss';
 import { Link as LinkScroll } from 'react-scroll';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth, editFavorites } from '../../../../http/actions/user';
+import { setFavoritesLocal } from '../../../../http/reducers/favoritesReducer';
 
 export default function Presentation({ product }) {
 	const user = useSelector(state => state.user.currentUser);
+	const isAuth = useSelector(state => state.user.isAuth);
+	const isLoadingUser = useSelector(state => state.user.isLoading);
+	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	const { _id, name, gallery, price, characteristics, brand, availability, configuration
 	} = product;
 	const [previewImage, setPreviewImage] = useState('');
@@ -21,29 +25,75 @@ export default function Presentation({ product }) {
 	const [radioColorFrame, setRadioColorFrame] = useState(null);
 	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
 	const [imageId, setImageId] = useState("");
+
 	const [favoritesList, setFavoritesList] = useState([]);
+	const [favoritesListFromLocal, setFavoritesListFromLocal] = useState([]);
 	const [isFavorite, setIsFavorite] = useState(false);
+	const [goUpdateFavorites, setGoUpdateFavorites] = useState(false);
 	const dispatch = useDispatch();
-	// console.log(_id);
-	// console.log("user", user);
-	// console.log(user?.favorites);
-	// console.log(favoritesList);
+
+	// console.log("favoritesListFromLocal", favoritesListFromLocal);
+	console.log("LOCAL", JSON.parse(localStorage.getItem('favorites')));
+	console.log("favoritesList", favoritesList);
+
+	// useEffect(() => {
+	// 	if (localStorage.getItem('favorites')) {
+	// 		console.log("get storage", localStorage.getItem('favorites'))
+	// 		setFavoritesListFromLocal(JSON.parse(localStorage.getItem('favorites')))
+	// 	}
+	// 	if (user.favorites?.length) {
+	// 		console.log("user favorites", user.favorites);
+	// 		// setFavoritesList(Array.from(new Set([...user.favorites, ...favoritesListFromLocal])));
+	// 		setFavoritesList(user.favorites)
+	// 		if (user.favorites.includes(_id)) {
+	// 			setIsFavorite(true);
+	// 		}
+	// 		console.log();
+	// 	} else if (favoritesListFromLocal.includes(_id)) {
+	// 		setIsFavorite(true);
+	// 	}
+	// }, [user]);
+
+	// useEffect(() => {
+	// 	if (goUpdateFavorites && favoritesList.length && localStorage.getItem('favorites')) {
+	// 		console.log(favoritesList);
+	// 		dispatch(editFavorites(user.email, Array.from(new Set([...user.favorites, ...JSON.parse(localStorage.getItem('favorites'))]))));
+	// 		localStorage.removeItem('favorites')
+	// 	}
+	// }, [goUpdateFavorites]);
 
 	useEffect(() => {
-		if (user.favorites) {
-			// console.log("mount user.favorites");
-			setFavoritesList(user.favorites)
+		if (isAuth) {
 			if (user.favorites.includes(_id)) {
-				// console.log("обновился список");
 				setIsFavorite(true);
 			}
 		}
 	}, [user]);
 
 	useEffect(() => {
+		if (favoritesFromRedux.length) {
+			if (favoritesFromRedux.includes(_id)) {
+				setIsFavorite(true);
+			}
+		}
+	}, [favoritesFromRedux]);
+
+
+	// useEffect(() => {
+
+	// 	if (favoritesList.length) {
+	// 		setGoUpdateFavorites(true)
+	// 		if (favoritesList.includes(_id)) {
+	// 			setIsFavorite(true)
+	// 		}
+	// 		console.log("big favoritesList", favoritesList);
+	// 	}
+	// }, [favoritesList])
+
+	useEffect(() => {
 		if (user.favorites) {
-			console.log("обновился продукт");
-			if (user.favorites.includes(_id)) {
+			// console.log("обновился продукт");
+			if (user?.favorites?.includes(_id)) {
 				console.log("favorite true");
 				setIsFavorite(true);
 			} else {
@@ -53,28 +103,76 @@ export default function Presentation({ product }) {
 	}, [product]);
 
 	useEffect(() => {
-		if (favoritesList.length) {
-
-
+		if (!user.favorites) {
+			dispatch(setFavoritesLocal(favoritesListFromLocal))
+			if (favoritesListFromLocal.includes(_id)) {
+				console.log("new product + local");
+				setIsFavorite(true)
+			}
 		}
-	}, [favoritesList]);
+	}, [favoritesListFromLocal]);
 
 
 
 	const handleToFavorite = (id) => {
 		console.log(favoritesList);
-		if (!favoritesList.includes(id)) {
-			console.log("new id");
-			setFavoritesList(favoritesList => [...favoritesList, id])
-			dispatch(editFavorites(user.email, [...favoritesList, id]));
+		if (user.favorites) {
+			if (!user.favorites.includes(id)) {
+				console.log("new favorite to user");
+				// setFavoritesList(favoritesList => [...favoritesList, id])
+				// dispatch(editFavorites(user.email, [...favoritesList, id]));
+				dispatch(editFavorites(user.email, [...user.favorites, id]));
+			} else {
+				// setFavoritesList(favoritesList => favoritesList.filter(i => i !== id));
+				// dispatch(editFavorites(user.email, favoritesList.filter(i => i !== id)));
+				dispatch(editFavorites(user.email, user.favorites.filter(i => i !== id)));
+				setIsFavorite(false)
+				// console.log(favoritesList.splice(favoritesList.indexOf(id), 1));
+			}
 		} else {
-			setFavoritesList(favoritesList => favoritesList.filter(i => i !== id));
-			dispatch(editFavorites(user.email, favoritesList.filter(i => i !== id)));
-			setIsFavorite(false)
-			// console.log(favoritesList.filter(i => i !== id));
-			console.log(favoritesList.splice(favoritesList.indexOf(id), 1));
+			if (!favoritesFromRedux.includes(id)) {
+				console.log("new favorite to local");
+				localStorage.setItem('favorites', JSON.stringify([...favoritesListFromLocal, id]))
+
+				setFavoritesListFromLocal(favoritesListFromLocal => [...favoritesListFromLocal, id])
+				setIsFavorite(true)
+			} else {
+				localStorage.setItem('favorites', JSON.stringify(favoritesListFromLocal.filter(i => i !== id)))
+				setFavoritesListFromLocal(favoritesListFromLocal => favoritesListFromLocal.filter(i => i !== id));
+				setIsFavorite(false)
+			}
 		}
 	}
+
+	// const handleToFavorite = (id) => {
+	// 	console.log(favoritesList);
+	// 	if (user.favorites) {
+	// 		if (!user.favorites.includes(id)) {
+	// 			console.log("new favorite to user");
+	// 			// setFavoritesList(favoritesList => [...favoritesList, id])
+	// 			// dispatch(editFavorites(user.email, [...favoritesList, id]));
+	// 			dispatch(editFavorites(user.email, [...user.favorites, id]));
+	// 		} else {
+	// 			// setFavoritesList(favoritesList => favoritesList.filter(i => i !== id));
+	// 			// dispatch(editFavorites(user.email, favoritesList.filter(i => i !== id)));
+	// 			dispatch(editFavorites(user.email, user.favorites.filter(i => i !== id)));
+	// 			setIsFavorite(false)
+	// 			// console.log(favoritesList.splice(favoritesList.indexOf(id), 1));
+	// 		}
+	// 	} else {
+	// 		if (!favoritesListFromLocal.includes(id)) {
+	// 			console.log("new favorite to local");
+	// 			localStorage.setItem('favorites', JSON.stringify([...favoritesListFromLocal, id]))
+
+	// 			setFavoritesListFromLocal(favoritesListFromLocal => [...favoritesListFromLocal, id])
+	// 			setIsFavorite(true)
+	// 		} else {
+	// 			setFavoritesListFromLocal(favoritesListFromLocal => favoritesListFromLocal.filter(i => i !== id));
+	// 			setIsFavorite(false)
+	// 		}
+	// 	}
+	// }
+
 
 	useLayoutEffect(() => {
 		setRadioSize(configuration && configuration.size);
@@ -496,3 +594,23 @@ export default function Presentation({ product }) {
 		</section >
 	);
 }
+
+
+// function arrayUnique(array) {
+// 	// возвращает еденичные экземпляры ячеек массива
+// 	var a = array.concat();
+// 	for (var i = 0; i < a.length; ++i) {
+// 		for (var j = i + 1; j < a.length; ++j) {
+// 			if (a[i] === a[j])
+// 				a.splice(j--, 1);
+// 		}
+// 	}
+// 	return a;
+// }
+
+// function different(a, b) {
+// 	// возвращает только уникальные ячейки массива
+// 	return a.filter(i => !b.includes(i))
+// 		.concat(b.filter(i => !a.includes(i)))
+// }
+

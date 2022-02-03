@@ -19,7 +19,7 @@ export default function AutocompleteHeader({ modalActive, setModalActive }) {
 	const navigate = useNavigate();
 	const goProductCard = () => navigate('search/' + searchProduct);
 	// const dispatch = useDispatch();
-	console.log(arraySearch);
+	// console.log(arraySearch);
 
 
 	useEffect(() => {
@@ -135,9 +135,9 @@ export default function AutocompleteHeader({ modalActive, setModalActive }) {
 								<div>
 									<h5>Раннее вы искали:</h5>
 									{arraySearch && [...arraySearch].reverse().map((str, index) =>
-										<div key={index}>
+										<div key={index} className='autocomplete-header__old-search'>
 											{index <= 3 ?
-												<div className='autocomplete-header__old-search'
+												<div
 													onClick={() => { setSearchProduct(str); searchProducts(str) }}>{str}</div>
 												: null
 											}

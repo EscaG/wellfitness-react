@@ -7,24 +7,87 @@ import Modal from '../../ModalWindow/Modal';
 import AutocompleteHeader from '../AutocompleteSearch/AutocompleteHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { editFavorites } from '../../../../http/actions/user';
-
+import { setFavoritesLocal } from '../../../../http/reducers/favoritesReducer';
 export default function MiddleHeader() {
 	const user = useSelector(state => state.user.currentUser);
+	const isAuth = useSelector(state => state.user.isAuth);
+	// console.log(favoritesFromRedux);
+	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	const [modalActive, setModalActive] = useState(false);
 	const [favoritesList, setFavoritesList] = useState([]);
 	const dispatch = useDispatch();
+	const [goUpdateFavorites, setGoUpdateFavorites] = useState(false);
+	console.log(favoritesList);
+	console.log(favoritesFromRedux);
+
 	useEffect(() => {
-		if (user.favorites) {
-			setFavoritesList(user.favorites)
+		if (localStorage.getItem('favorites')) {
+			dispatch(setFavoritesLocal(JSON.parse(localStorage.getItem('favorites'))))
+			setFavoritesList(JSON.parse(localStorage.getItem('favorites')))
+			// setFavoritesList(favoritesFromRedux)
 		}
+	}, [])
+
+	useEffect(() => {
+		if (isAuth || user.favorites) {
+			// console.log(Array.from(new Set([...user.favorites, ...favoritesList])));
+			if (localStorage.getItem('favorites')) {
+				setFavoritesList(Array.from(new Set([...user.favorites, ...favoritesList])))
+				localStorage.removeItem('favorites')
+			} else {
+				setFavoritesList(user.favorites)
+				if (!isAuth) {
+
+				}
+				localStorage.removeItem('favorites')
+			}
+		} else if (!favoritesFromRedux.length) {
+			setFavoritesList([])
+			// console.log(favoritesFromRedux.length);
+		}
+
 	}, [user])
+
+	useEffect(() => {
+		if (favoritesFromRedux.length) {
+			console.log("favoritesFromRedux", favoritesFromRedux);
+
+			setFavoritesList(favoritesFromRedux)
+		}
+	}, [favoritesFromRedux]);
+
+
+	useEffect(() => {
+		if (goUpdateFavorites && isAuth) {
+			dispatch(editFavorites(user.email, favoritesList));
+			console.log("remove");
+			localStorage.removeItem('favorites')
+		}
+
+	}, [goUpdateFavorites]);
+
+
+	useEffect(() => {
+		if (isAuth) {
+			console.log(favoritesList);
+			setGoUpdateFavorites(true)
+		}
+	}, [favoritesList])
+
+	// useEffect(() => {
+	// 	if (!isAuth) {
+	// 		localStorage.removeItem('favorites')
+	// 	}
+	// }, [isAuth]);
+
+
+
+
+
 
 	const handleupdateFavorites = (email, favorites) => {
 		dispatch(editFavorites(email, favorites));
 	}
-	// const isModal = useSelector(state => state.modalAutocomplete.currentCondition);
-	// console.log(isModal);
-	// const dispatch = useDispatch();
 
 	return (
 		<div className="header__middle middle-header">
@@ -99,7 +162,11 @@ export default function MiddleHeader() {
 								<use xlinkHref={favorites + "#favorites"}></use>
 							</svg>
 
-							{favoritesList.length > 0 && <div><span>{favoritesList.length}</span></div>}
+							{isAuth ? <div><span>{favoritesList.length}</span></div>
+								:
+								// favoritesFromRedux.length > 0 && <div><span>{favoritesFromRedux.length}</span></div>
+								favoritesList.length > 0 && <div><span>{favoritesList.length}</span></div>
+							}
 						</button></li>
 						<li><button className="actions-header__item cart">
 							<svg width="21" height="26">

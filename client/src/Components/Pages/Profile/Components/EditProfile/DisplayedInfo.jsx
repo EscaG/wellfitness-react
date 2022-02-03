@@ -7,7 +7,7 @@ export default function DisplayedInfo() {
 	return (
 		<div>
 			{
-				isLoading ?
+				!isLoading ?
 					<h1>Загрузка</h1>
 
 					:

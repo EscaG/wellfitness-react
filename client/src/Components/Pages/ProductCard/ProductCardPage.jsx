@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { setConditionAutocomplite } from '../../../http/reducers/modalReducerAutocomplite';
 import PromotionItem from '../../Layout/PromotionItem/PromotionItem';
 import Characteristics from './Sections/Characteristics';
 import Description from './Sections/Description';
@@ -14,25 +12,21 @@ import './style-productcard.scss';
 
 export default function ProductCardPage() {
 	const [product, setProduct] = useState({});
-	const dispatch = useDispatch();
+	const [isLoading, setIsLoading] = useState(false);
 	let params = useParams();
 
-	// console.log(product);
 
 	useEffect(() => {
-		dispatch(setConditionAutocomplite(false));
 		async function getProduct(id) {
-
+			setIsLoading(false)
 			await fetch("/api/product/byid/" + id)
 				.then(res => {
-					// console.log(res);
 					return res.json();
 				})
 				.then(res => {
 					if (res) { setProduct(res) }
 					document.body.scrollIntoView();
-					// setIsLoad(true);
-					// console.log(res);
+					setIsLoading(true)
 				})
 				.catch(err =>
 					console.log(err))
@@ -45,7 +39,12 @@ export default function ProductCardPage() {
 
 	return (
 		<article className='page-productcard'>
-			{product &&
+			{!isLoading ?
+				<div className='loader-block'>
+
+					<div className="loader"></div>
+				</div>
+				:
 				<>
 					<Presentation product={product} />
 					<MenuList />

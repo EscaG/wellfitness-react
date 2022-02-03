@@ -43,6 +43,7 @@ function App() {
 	const scrollBtnRef = useRef();
 	const rootElement = document.documentElement;
 
+
 	useEffect(() => {
 		console.log("APP")
 		dispatch(getProduct());

@@ -28,7 +28,7 @@ export default function userReducer(state = defaultState, action) {
 			return {
 				...state,
 				currentUser: action.payload,
-				isLoading: false,
+				isLoading: true,
 				isAuth: true,
 				errorMessage: ''
 			}
@@ -37,7 +37,7 @@ export default function userReducer(state = defaultState, action) {
 			return {
 				...state,
 				currentUser: action.payload,
-				isLoading: false,
+				isLoading: true,
 				isAuth: true,
 				errorMessage: ''
 			};

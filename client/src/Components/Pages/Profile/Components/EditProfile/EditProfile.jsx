@@ -10,7 +10,7 @@ import DisplayedInfo from './DisplayedInfo';
 
 export default function EditProfile() {
 	const user = useSelector(state => state.user.currentUser);
-	console.log(user);
+	// console.log(user);
 	const dispatch = useDispatch();
 
 	const [isEdit, setIsEdit] = useState(false);
