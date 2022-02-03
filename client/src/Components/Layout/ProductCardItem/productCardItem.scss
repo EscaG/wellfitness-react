@@ -41,33 +41,32 @@
 			transform: translateX(-40px);
 		}
 		&.link-svg {
+			background-color: inherit;
 			margin: 0 0 0 10px;
 		}
-		// use {
-		// 	fill: #858fa4;
+		// &__list:hover .icons-slider__svg {
+		// 	fill: red;
 		// }
-		// &:hover use {
-		// 	fill: #f53b49;
-		// }
-		&__list:hover .icons-slider__svg {
-			fill: red;
-		}
 	}
 }
 
 .icons-slider__svg.favorites {
 	fill: transparent;
-	stroke-width: 3px;
 	stroke: #828282;
+	stroke-width: 3px;
+}
+.icons-slider__svg.active {
+	fill: #f53b49;
+	stroke: #f53b49;
 }
 .icons-slider__svg {
 	fill: #828282;
 }
 .icons-slider__item:hover .icons-slider__svg.comparison {
-	fill: red;
+	fill: #f53b49;
 }
 .icons-slider__item:hover .icons-slider__svg.favorites {
-	stroke: red;
+	stroke: #f53b49;
 }
 .icons-slider__svg {
 	transition: 0.3s;

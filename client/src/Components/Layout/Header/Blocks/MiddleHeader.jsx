@@ -138,15 +138,14 @@ export default function MiddleHeader() {
 							</svg>
 						</button></li>
 						<li><button className="actions-header__item favorites ">
-							<svg width="24" height="21">
+							<svg width="24" height="21" >
 								<title>favorites</title>
 								<use xlinkHref={favorites + "#favorites"}></use>
 							</svg>
-
-							{isAuth ? <div><span>{favoritesList.length && favoritesList.length}</span></div>
+							{isAuth ?
+								favoritesList.length ? <div><span>{favoritesList.length}</span></div> : null
 								:
-								// favoritesFromRedux.length > 0 && <div><span>{favoritesFromRedux.length}</span></div>
-								favoritesList.length && <div><span>{favoritesList.length}</span></div>
+								favoritesList.length ? <div><span>{favoritesList.length}</span></div> : null
 							}
 						</button></li>
 						<li><button className="actions-header__item cart">

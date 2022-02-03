@@ -40,29 +40,4 @@ export default function ResultSearch() {
 }
 
 
-	// const [searchParams, setSearchParams] = useSearchParams();
-	// const dispatch = useDispatch();
-	// const myQuery = searchParams.get('search') || '';
-	// const isSearch = useSelector(state => state.search.currentSearch);
 
-	// useEffect(() => {
-	// 	dispatch(setConditionAutocomplite(false));
-	// 	console.log(localStorage.getItem('search'));
-	// 	if (isSearch) {
-	// 		localStorage.setItem('search', isSearch);
-	// 		setSearchParams({ search: isSearch })
-	// 	} else if (localStorage.getItem('search')) {
-	// 		setSearchParams({ search: localStorage.getItem('search') })
-	// 	}
-	// 	// return (localStorage.removeItem('search'));
-	// }, [])
-
-	// useEffect(() => {
-	// 	dispatch(setConditionAutocomplite(false));
-	// 	if (isSearch) {
-	// 		localStorage.setItem('search', isSearch);
-	// 		setSearchParams({ search: isSearch })
-	// 	} else if (localStorage.getItem('search')) {
-	// 		setSearchParams({ search: localStorage.getItem('search') })
-	// 	}
-	// }, [isSearch]);

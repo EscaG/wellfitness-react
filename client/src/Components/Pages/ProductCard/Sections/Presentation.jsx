@@ -23,8 +23,8 @@ export default function Presentation({ product }) {
 	const [radioColor, setRadioColor] = useState(null);
 	const [radioColorFrame, setRadioColorFrame] = useState(null);
 	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
-	const [imageId, setImageId] = useState("");
 	const [isFavorite, setIsFavorite] = useState(false);
+	const [imageId, setImageId] = useState("");
 	const dispatch = useDispatch();
 
 	// const [favoritesList, setFavoritesList] = useState([]);

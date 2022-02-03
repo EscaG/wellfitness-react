@@ -88,7 +88,7 @@ export default function AutocompleteHeader({ modalActive, setModalActive }) {
 	}
 
 	const handlerSearch = (e) => {
-		if (e.keyCode === 13) {
+		if (e.keyCode === 13 && e.target.value.length > 3) {
 			// dispatch(setSearch(searchProduct));
 			closeModalAutocomplete();
 			goProductCard()

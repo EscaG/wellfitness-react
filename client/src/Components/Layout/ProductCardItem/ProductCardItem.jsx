@@ -1,10 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { editFavorites } from '../../../http/actions/user';
+import { setFavoritesToRedux } from '../../../http/reducers/favoritesReducer';
 import SpriteIcons from '../SpriteIcons/SpriteIcons';
 import './productCardItem.scss';
 
 export default function ProductCardItem({ product }) {
+	const [isFavorite, setIsFavorite] = useState(false);
 	const { _id, name, gallery, availability, rating, price } = product;
+	const user = useSelector(state => state.user.currentUser);
+	const isAuth = useSelector(state => state.user.isAuth);
+	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
+	const dispatch = useDispatch();
+
+
+	useEffect(() => {
+		if (isAuth) {
+			if (user.favorites.includes(_id)) {
+				setIsFavorite(true);
+			}
+		}
+	}, [user]);
+
+	useEffect(() => {
+		if (isAuth) {
+			// console.log("обновился продукт");
+			if (user.favorites.includes(_id)) {
+				// console.log("favorite true");
+				setIsFavorite(true);
+			} else {
+				setIsFavorite(false);
+			}
+		}
+	}, [product]);
+
+
+	useEffect(() => {
+		if (favoritesFromRedux.length) {
+			if (favoritesFromRedux.includes(_id)) {
+				setIsFavorite(true);
+			}
+		}
+	}, [favoritesFromRedux]);
+
+
+
+
+	const handleToFavorite = (id) => {
+		if (user.favorites) {
+			if (!user.favorites.includes(id)) {
+				// console.log("new favorite to user");
+				dispatch(editFavorites(user.email, [...user.favorites, id]));
+			} else {
+				dispatch(editFavorites(user.email, user.favorites.filter(i => i !== id)));
+				setIsFavorite(false)
+			}
+		} else {
+			if (!favoritesFromRedux.includes(id)) {
+				dispatch(setFavoritesToRedux([...favoritesFromRedux, id]))
+				setIsFavorite(true)
+			} else {
+				dispatch(setFavoritesToRedux(favoritesFromRedux.filter(i => i !== id)))
+				setIsFavorite(false)
+			}
+		}
+	}
+
 
 
 	return (
@@ -30,19 +92,23 @@ export default function ProductCardItem({ product }) {
 				</div>
 
 				<div className='icons-slider__list'>
-					<Link className='icons-slider__item link-svg' to="/">
-						<svg width="17" height="17" className='icons-slider__svg comparison'>
+					<button className='icons-slider__item link-svg'
+						onClick={() => handleToFavorite(_id)}
+					>
+						<svg width="17" height="17" className={(isFavorite ? 'acative ' : '') + 'icons-slider__svg comparison'} >
 							<SpriteIcons icon="comparison" />
 						</svg>
-					</Link>
-					<Link className='icons-slider__item link-svg' to="/">
-						<svg width="21" height="17" className='icons-slider__svg favorites'>
+					</button>
+					<button className='icons-slider__item link-svg'
+						onClick={() => handleToFavorite(_id)}
+					>
+						<svg width="21" height="21" className={(isFavorite ? 'active ' : '') + 'icons-slider__svg favorites'} >
 							<SpriteIcons icon="favorite" />
 						</svg>
-					</Link>
-				</div>
+					</button >
+				</div >
 
-			</div>
+			</div >
 
 			<div className="item-slider__image">
 				<img key={"1231165654"} style={{ "width": "100%" }} src={gallery[0].image} alt="slide" />
@@ -85,6 +151,6 @@ export default function ProductCardItem({ product }) {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 }
