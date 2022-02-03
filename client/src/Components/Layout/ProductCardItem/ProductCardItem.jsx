@@ -31,12 +31,12 @@ export default function ProductCardItem({ product }) {
 
 				<div className='icons-slider__list'>
 					<Link className='icons-slider__item link-svg' to="/">
-						<svg width="17" height="17" className='icons-slider__svg'>
+						<svg width="17" height="17" className='icons-slider__svg comparison'>
 							<SpriteIcons icon="comparison" />
 						</svg>
 					</Link>
 					<Link className='icons-slider__item link-svg' to="/">
-						<svg width="21" height="17" className='icons-slider__svg'>
+						<svg width="21" height="17" className='icons-slider__svg favorites'>
 							<SpriteIcons icon="favorite" />
 						</svg>
 					</Link>

@@ -1,17 +1,26 @@
 import React, { useEffect } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import './style-profilepage.scss';
 import { useDispatch } from "react-redux";
 import { logout } from '../../../http/reducers/userReducer';
 import { useSelector } from "react-redux";
 export default function ProfilePage() {
 	const setActiveLink = ({ isActive }) => isActive ? "active-link" : '';
-	const { currentUser, isLoading } = useSelector(state => state.user);
+	const { currentUser, isLoading, isAuth } = useSelector(state => state.user);
+	const location = useLocation();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const goLogin = () => navigate('/login');
 	// console.log(currentUser, isLoading);
 
+	useEffect(() => {
+		if (!isAuth) {
+			setTimeout(() => {
+
+				goLogin()
+			}, 200)
+		}
+	}, [])
 
 	return (
 		<>

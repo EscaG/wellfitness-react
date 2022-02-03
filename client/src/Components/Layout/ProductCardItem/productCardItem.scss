@@ -1,0 +1,147 @@
+.promotion {
+	&__slider-item {
+		// display: grid;
+		// grid-auto-flow: row;
+		// grid-template: auto 1fr minmax(40px, auto) / 1fr;
+
+		overflow: hidden;
+		position: relative;
+		background-color: #fff;
+		border-radius: 6px;
+		transition: 0.3s;
+		&:hover {
+			box-shadow: 0px 0 5px gray;
+		}
+		&:hover .icons-slider__item.translate {
+			transform: translateX(0);
+		}
+	}
+}
+
+.icons-slider {
+	z-index: 1;
+	position: absolute;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	// width: 100%;
+	top: 10px;
+	left: 10px;
+	right: 10px;
+	&__list {
+	}
+	&__item {
+		display: inline-block;
+		margin: 0 10px 0 0;
+		transition: 0.3s;
+		&.translate:nth-child(2) {
+			transform: translateX(-20px);
+		}
+		&.translate:nth-child(3) {
+			transform: translateX(-40px);
+		}
+		&.link-svg {
+			margin: 0 0 0 10px;
+		}
+		// use {
+		// 	fill: #858fa4;
+		// }
+		// &:hover use {
+		// 	fill: #f53b49;
+		// }
+		&__list:hover .icons-slider__svg {
+			fill: red;
+		}
+	}
+}
+
+.icons-slider__svg.favorites {
+	fill: transparent;
+	stroke-width: 3px;
+	stroke: #828282;
+}
+.icons-slider__svg {
+	fill: #828282;
+}
+.icons-slider__item:hover .icons-slider__svg.comparison {
+	fill: red;
+}
+.icons-slider__item:hover .icons-slider__svg.favorites {
+	stroke: red;
+}
+.icons-slider__svg {
+	transition: 0.3s;
+}
+.description-item {
+	padding: 20px;
+	&__availability {
+		margin: 0 0 8px 0;
+	}
+	span {
+		font-size: 12px;
+		display: inline-block;
+	}
+	&__showRoom,
+	&__wait {
+		color: #4b7ee8;
+	}
+	&__name {
+		display: inline-block;
+		margin: 0 0 10px 0;
+		font-size: 16px;
+		color: #1a1a25;
+	}
+	&__dots {
+		&.green {
+			display: inline-block;
+			color: #2fc509;
+			margin: 0 3px 0 0;
+			&__1,
+			&__2,
+			&__3 {
+				margin: 0 0 0 3px;
+				height: 8px;
+				width: 8px;
+				border-radius: 50%;
+				border: 1px solid #2fc509;
+				background-color: #2fc509;
+			}
+		}
+		&.red {
+			display: inline-block;
+			color: #f53b49;
+			margin: 0 3px 0 0;
+			&__1,
+			&__2,
+			&__3 {
+				margin: 0 0 0 3px;
+				height: 8px;
+				width: 8px;
+				border-radius: 50%;
+				border: 1px solid #f53b49;
+			}
+		}
+		&_orange {
+			display: inline-block;
+			color: #f99808;
+			margin: 0 3px 0 0;
+			&_1,
+			&_2,
+			&_3 {
+				margin: 0 0 0 3px;
+				height: 8px;
+				width: 8px;
+				border-radius: 50%;
+				border: 1px solid #f99808;
+			}
+		}
+	}
+	&__rating {
+		font-variation-settings: "wght" 500;
+		color: #909cb5;
+		margin: 0 0 16px 0;
+	}
+	@media (max-width: 576px) {
+		padding: 10px;
+	}
+}

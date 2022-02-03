@@ -61,6 +61,7 @@ function App() {
 		}
 	}
 
+
 	const scrollToTopClick = (e) => {
 		rootElement.scrollTo({
 			top: 0,

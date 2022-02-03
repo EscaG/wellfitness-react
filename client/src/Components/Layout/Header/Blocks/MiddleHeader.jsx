@@ -11,19 +11,19 @@ import { setFavoritesLocal } from '../../../../http/reducers/favoritesReducer';
 export default function MiddleHeader() {
 	const user = useSelector(state => state.user.currentUser);
 	const isAuth = useSelector(state => state.user.isAuth);
-	// console.log(favoritesFromRedux);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
+	// console.log(favoritesFromRedux);
 	const [modalActive, setModalActive] = useState(false);
 	const [favoritesList, setFavoritesList] = useState([]);
 	const dispatch = useDispatch();
 	const [goUpdateFavorites, setGoUpdateFavorites] = useState(false);
-	console.log(favoritesList);
-	console.log(favoritesFromRedux);
+	// console.log(favoritesList);
+	// console.log(favoritesFromRedux);
 
 	useEffect(() => {
 		if (localStorage.getItem('favorites')) {
-			dispatch(setFavoritesLocal(JSON.parse(localStorage.getItem('favorites'))))
 			setFavoritesList(JSON.parse(localStorage.getItem('favorites')))
+			dispatch(setFavoritesLocal(JSON.parse(localStorage.getItem('favorites'))))
 			// setFavoritesList(favoritesFromRedux)
 		}
 	}, [])
@@ -36,22 +36,17 @@ export default function MiddleHeader() {
 				localStorage.removeItem('favorites')
 			} else {
 				setFavoritesList(user.favorites)
-				if (!isAuth) {
-
-				}
 				localStorage.removeItem('favorites')
 			}
 		} else if (!favoritesFromRedux.length) {
 			setFavoritesList([])
-			// console.log(favoritesFromRedux.length);
 		}
-
 	}, [user])
 
 	useEffect(() => {
-		if (favoritesFromRedux.length) {
-			console.log("favoritesFromRedux", favoritesFromRedux);
-
+		console.log("favoritesFromRedux", favoritesFromRedux);
+		if (favoritesFromRedux.length >= 0) {
+			localStorage.setItem('favorites', JSON.stringify(favoritesFromRedux))
 			setFavoritesList(favoritesFromRedux)
 		}
 	}, [favoritesFromRedux]);
@@ -63,31 +58,17 @@ export default function MiddleHeader() {
 			console.log("remove");
 			localStorage.removeItem('favorites')
 		}
-
 	}, [goUpdateFavorites]);
 
 
 	useEffect(() => {
+		console.log(favoritesList);
 		if (isAuth) {
 			console.log(favoritesList);
 			setGoUpdateFavorites(true)
 		}
 	}, [favoritesList])
 
-	// useEffect(() => {
-	// 	if (!isAuth) {
-	// 		localStorage.removeItem('favorites')
-	// 	}
-	// }, [isAuth]);
-
-
-
-
-
-
-	const handleupdateFavorites = (email, favorites) => {
-		dispatch(editFavorites(email, favorites));
-	}
 
 	return (
 		<div className="header__middle middle-header">
@@ -99,13 +80,9 @@ export default function MiddleHeader() {
 						<div className="middle-header__catalog catalog-header">
 							<Link to='/' data-da=".adaptive-menu__main-menu, 1330, 0"
 								className="catalog-header__item_catalog catalog-header__item"><span>Каталог</span></Link>
-							<div
-								style={{ display: "inline-block" }}
-								data-da=".top-header__contacts, 1331, 0"
-							>
-
+							{/* //todo  кнопка поиска с модальным окном, который переезжать в адаптивное меню */}
+							<div style={{ display: "inline-block" }} data-da=".top-header__contacts, 1331, 0">
 								<button
-									// onClick={() => dispatch(setConditionAutocomplite(true))}
 									onClick={() => setModalActive(!modalActive)}
 									className="catalog-header__item_search catalog-header__item"
 								>
@@ -113,7 +90,6 @@ export default function MiddleHeader() {
 								</button>
 								{modalActive ?
 									<Modal
-										// active={isModal}
 										modalActive={modalActive}
 										setModalActive={setModalActive}
 									>
@@ -124,6 +100,7 @@ export default function MiddleHeader() {
 									</Modal>
 									: null}
 							</div>
+							{/*//?  конец блока с кнопкой поиска  */}
 
 						</div>
 					</div>
@@ -162,10 +139,10 @@ export default function MiddleHeader() {
 								<use xlinkHref={favorites + "#favorites"}></use>
 							</svg>
 
-							{isAuth ? <div><span>{favoritesList.length}</span></div>
+							{isAuth ? <div><span>{favoritesList.length && favoritesList.length}</span></div>
 								:
 								// favoritesFromRedux.length > 0 && <div><span>{favoritesFromRedux.length}</span></div>
-								favoritesList.length > 0 && <div><span>{favoritesList.length}</span></div>
+								favoritesList.length && <div><span>{favoritesList.length}</span></div>
 							}
 						</button></li>
 						<li><button className="actions-header__item cart">

@@ -34,7 +34,7 @@ export default function Presentation({ product }) {
 
 	// console.log("favoritesListFromLocal", favoritesListFromLocal);
 	console.log("LOCAL", JSON.parse(localStorage.getItem('favorites')));
-	console.log("favoritesList", favoritesList);
+	// console.log("favoritesList", favoritesList);
 
 	// useEffect(() => {
 	// 	if (localStorage.getItem('favorites')) {
@@ -71,6 +71,19 @@ export default function Presentation({ product }) {
 	}, [user]);
 
 	useEffect(() => {
+		if (isAuth) {
+			// console.log("обновился продукт");
+			if (user.favorites.includes(_id)) {
+				// console.log("favorite true");
+				setIsFavorite(true);
+			} else {
+				setIsFavorite(false);
+			}
+		}
+	}, [product]);
+
+
+	useEffect(() => {
 		if (favoritesFromRedux.length) {
 			if (favoritesFromRedux.includes(_id)) {
 				setIsFavorite(true);
@@ -90,27 +103,18 @@ export default function Presentation({ product }) {
 	// 	}
 	// }, [favoritesList])
 
-	useEffect(() => {
-		if (user.favorites) {
-			// console.log("обновился продукт");
-			if (user?.favorites?.includes(_id)) {
-				console.log("favorite true");
-				setIsFavorite(true);
-			} else {
-				setIsFavorite(false);
-			}
-		}
-	}, [product]);
 
-	useEffect(() => {
-		if (!user.favorites) {
-			dispatch(setFavoritesLocal(favoritesListFromLocal))
-			if (favoritesListFromLocal.includes(_id)) {
-				console.log("new product + local");
-				setIsFavorite(true)
-			}
-		}
-	}, [favoritesListFromLocal]);
+	// ! после загрузки из локалки записывает в редакс
+	// useEffect(() => {
+	// 	if (!isAuth) {
+	// 		dispatch(setFavoritesLocal(favoritesListFromLocal))
+	// 		console.log(favoritesListFromLocal);
+	// 		if (favoritesListFromLocal.includes(_id)) {
+	// 			console.log("new product + local");
+	// 			setIsFavorite(true)
+	// 		}
+	// 	}
+	// }, [favoritesListFromLocal]);
 
 
 
@@ -131,14 +135,17 @@ export default function Presentation({ product }) {
 			}
 		} else {
 			if (!favoritesFromRedux.includes(id)) {
-				console.log("new favorite to local");
-				localStorage.setItem('favorites', JSON.stringify([...favoritesListFromLocal, id]))
+				dispatch(setFavoritesLocal([...favoritesFromRedux, id]))
+				// console.log("new favorite to local");
+				// localStorage.setItem('favorites', JSON.stringify([...favoritesListFromLocal, id]))
 
-				setFavoritesListFromLocal(favoritesListFromLocal => [...favoritesListFromLocal, id])
+				// setFavoritesListFromLocal(favoritesListFromLocal => [...favoritesListFromLocal, id])
 				setIsFavorite(true)
 			} else {
-				localStorage.setItem('favorites', JSON.stringify(favoritesListFromLocal.filter(i => i !== id)))
-				setFavoritesListFromLocal(favoritesListFromLocal => favoritesListFromLocal.filter(i => i !== id));
+				dispatch(setFavoritesLocal(favoritesFromRedux.filter(i => i !== id)))
+				// console.log("remove favorite from local");
+				// localStorage.setItem('favorites', JSON.stringify(favoritesListFromLocal.filter(i => i !== id)))
+				// setFavoritesListFromLocal(favoritesListFromLocal => favoritesListFromLocal.filter(i => i !== id));
 				setIsFavorite(false)
 			}
 		}
@@ -594,23 +601,4 @@ export default function Presentation({ product }) {
 		</section >
 	);
 }
-
-
-// function arrayUnique(array) {
-// 	// возвращает еденичные экземпляры ячеек массива
-// 	var a = array.concat();
-// 	for (var i = 0; i < a.length; ++i) {
-// 		for (var j = i + 1; j < a.length; ++j) {
-// 			if (a[i] === a[j])
-// 				a.splice(j--, 1);
-// 		}
-// 	}
-// 	return a;
-// }
-
-// function different(a, b) {
-// 	// возвращает только уникальные ячейки массива
-// 	return a.filter(i => !b.includes(i))
-// 		.concat(b.filter(i => !a.includes(i)))
-// }
 
