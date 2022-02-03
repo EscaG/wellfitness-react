@@ -20,7 +20,13 @@ export default function ProfilePage() {
 				goLogin()
 			}, 200)
 		}
-	}, [])
+	}, []);
+
+	const handleLogOut = () => {
+		dispatch(logout());
+		goLogin();
+		localStorage.removeItem('favorites')
+	}
 
 	return (
 		<>
@@ -71,7 +77,7 @@ export default function ProfilePage() {
 							<div className='mycontact-profile__email'>{currentUser.email}</div>
 							<div className="mycontact-profile__phone">+7 (900) 000-00-00</div>
 							<NavLink className={'mycontact-profile__settings ' + setActiveLink} to='editprofile'>Редактировать профиль</NavLink>
-							<button className='mycontact-profile__logout' onClick={() => { dispatch(logout()); goLogin() }}>Выйти</button>
+							<button className='mycontact-profile__logout' onClick={() => handleLogOut()}>Выйти</button>
 						</section>
 					</div>
 				</div>

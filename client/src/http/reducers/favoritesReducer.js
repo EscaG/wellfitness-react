@@ -18,4 +18,4 @@ export default function favoritesReducer(state = defaultState, action) {
 	}
 }
 
-export const setFavoritesLocal = flag => ({ type: SET_FAVORITES, payload: flag });
+export const setFavoritesToRedux = flag => ({ type: SET_FAVORITES, payload: flag });

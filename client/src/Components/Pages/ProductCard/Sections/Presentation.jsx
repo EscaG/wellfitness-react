@@ -8,12 +8,11 @@ import './presentation.scss';
 import { Link as LinkScroll } from 'react-scroll';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth, editFavorites } from '../../../../http/actions/user';
-import { setFavoritesLocal } from '../../../../http/reducers/favoritesReducer';
+import { setFavoritesToRedux } from '../../../../http/reducers/favoritesReducer';
 
 export default function Presentation({ product }) {
 	const user = useSelector(state => state.user.currentUser);
 	const isAuth = useSelector(state => state.user.isAuth);
-	const isLoadingUser = useSelector(state => state.user.isLoading);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	const { _id, name, gallery, price, characteristics, brand, availability, configuration
 	} = product;
@@ -25,42 +24,13 @@ export default function Presentation({ product }) {
 	const [radioColorFrame, setRadioColorFrame] = useState(null);
 	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
 	const [imageId, setImageId] = useState("");
-
-	const [favoritesList, setFavoritesList] = useState([]);
-	const [favoritesListFromLocal, setFavoritesListFromLocal] = useState([]);
 	const [isFavorite, setIsFavorite] = useState(false);
-	const [goUpdateFavorites, setGoUpdateFavorites] = useState(false);
 	const dispatch = useDispatch();
 
-	// console.log("favoritesListFromLocal", favoritesListFromLocal);
-	console.log("LOCAL", JSON.parse(localStorage.getItem('favorites')));
-	// console.log("favoritesList", favoritesList);
+	// const [favoritesList, setFavoritesList] = useState([]);
+	// const [favoritesListFromLocal, setFavoritesListFromLocal] = useState([]);
+	// const [goUpdateFavorites, setGoUpdateFavorites] = useState(false);
 
-	// useEffect(() => {
-	// 	if (localStorage.getItem('favorites')) {
-	// 		console.log("get storage", localStorage.getItem('favorites'))
-	// 		setFavoritesListFromLocal(JSON.parse(localStorage.getItem('favorites')))
-	// 	}
-	// 	if (user.favorites?.length) {
-	// 		console.log("user favorites", user.favorites);
-	// 		// setFavoritesList(Array.from(new Set([...user.favorites, ...favoritesListFromLocal])));
-	// 		setFavoritesList(user.favorites)
-	// 		if (user.favorites.includes(_id)) {
-	// 			setIsFavorite(true);
-	// 		}
-	// 		console.log();
-	// 	} else if (favoritesListFromLocal.includes(_id)) {
-	// 		setIsFavorite(true);
-	// 	}
-	// }, [user]);
-
-	// useEffect(() => {
-	// 	if (goUpdateFavorites && favoritesList.length && localStorage.getItem('favorites')) {
-	// 		console.log(favoritesList);
-	// 		dispatch(editFavorites(user.email, Array.from(new Set([...user.favorites, ...JSON.parse(localStorage.getItem('favorites'))]))));
-	// 		localStorage.removeItem('favorites')
-	// 	}
-	// }, [goUpdateFavorites]);
 
 	useEffect(() => {
 		if (isAuth) {
@@ -92,93 +62,27 @@ export default function Presentation({ product }) {
 	}, [favoritesFromRedux]);
 
 
-	// useEffect(() => {
-
-	// 	if (favoritesList.length) {
-	// 		setGoUpdateFavorites(true)
-	// 		if (favoritesList.includes(_id)) {
-	// 			setIsFavorite(true)
-	// 		}
-	// 		console.log("big favoritesList", favoritesList);
-	// 	}
-	// }, [favoritesList])
-
-
-	// ! после загрузки из локалки записывает в редакс
-	// useEffect(() => {
-	// 	if (!isAuth) {
-	// 		dispatch(setFavoritesLocal(favoritesListFromLocal))
-	// 		console.log(favoritesListFromLocal);
-	// 		if (favoritesListFromLocal.includes(_id)) {
-	// 			console.log("new product + local");
-	// 			setIsFavorite(true)
-	// 		}
-	// 	}
-	// }, [favoritesListFromLocal]);
-
 
 
 	const handleToFavorite = (id) => {
-		console.log(favoritesList);
 		if (user.favorites) {
 			if (!user.favorites.includes(id)) {
-				console.log("new favorite to user");
-				// setFavoritesList(favoritesList => [...favoritesList, id])
-				// dispatch(editFavorites(user.email, [...favoritesList, id]));
+				// console.log("new favorite to user");
 				dispatch(editFavorites(user.email, [...user.favorites, id]));
 			} else {
-				// setFavoritesList(favoritesList => favoritesList.filter(i => i !== id));
-				// dispatch(editFavorites(user.email, favoritesList.filter(i => i !== id)));
 				dispatch(editFavorites(user.email, user.favorites.filter(i => i !== id)));
 				setIsFavorite(false)
-				// console.log(favoritesList.splice(favoritesList.indexOf(id), 1));
 			}
 		} else {
 			if (!favoritesFromRedux.includes(id)) {
-				dispatch(setFavoritesLocal([...favoritesFromRedux, id]))
-				// console.log("new favorite to local");
-				// localStorage.setItem('favorites', JSON.stringify([...favoritesListFromLocal, id]))
-
-				// setFavoritesListFromLocal(favoritesListFromLocal => [...favoritesListFromLocal, id])
+				dispatch(setFavoritesToRedux([...favoritesFromRedux, id]))
 				setIsFavorite(true)
 			} else {
-				dispatch(setFavoritesLocal(favoritesFromRedux.filter(i => i !== id)))
-				// console.log("remove favorite from local");
-				// localStorage.setItem('favorites', JSON.stringify(favoritesListFromLocal.filter(i => i !== id)))
-				// setFavoritesListFromLocal(favoritesListFromLocal => favoritesListFromLocal.filter(i => i !== id));
+				dispatch(setFavoritesToRedux(favoritesFromRedux.filter(i => i !== id)))
 				setIsFavorite(false)
 			}
 		}
 	}
-
-	// const handleToFavorite = (id) => {
-	// 	console.log(favoritesList);
-	// 	if (user.favorites) {
-	// 		if (!user.favorites.includes(id)) {
-	// 			console.log("new favorite to user");
-	// 			// setFavoritesList(favoritesList => [...favoritesList, id])
-	// 			// dispatch(editFavorites(user.email, [...favoritesList, id]));
-	// 			dispatch(editFavorites(user.email, [...user.favorites, id]));
-	// 		} else {
-	// 			// setFavoritesList(favoritesList => favoritesList.filter(i => i !== id));
-	// 			// dispatch(editFavorites(user.email, favoritesList.filter(i => i !== id)));
-	// 			dispatch(editFavorites(user.email, user.favorites.filter(i => i !== id)));
-	// 			setIsFavorite(false)
-	// 			// console.log(favoritesList.splice(favoritesList.indexOf(id), 1));
-	// 		}
-	// 	} else {
-	// 		if (!favoritesListFromLocal.includes(id)) {
-	// 			console.log("new favorite to local");
-	// 			localStorage.setItem('favorites', JSON.stringify([...favoritesListFromLocal, id]))
-
-	// 			setFavoritesListFromLocal(favoritesListFromLocal => [...favoritesListFromLocal, id])
-	// 			setIsFavorite(true)
-	// 		} else {
-	// 			setFavoritesListFromLocal(favoritesListFromLocal => favoritesListFromLocal.filter(i => i !== id));
-	// 			setIsFavorite(false)
-	// 		}
-	// 	}
-	// }
 
 
 	useLayoutEffect(() => {

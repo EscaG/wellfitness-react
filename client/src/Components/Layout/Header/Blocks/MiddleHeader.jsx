@@ -7,7 +7,7 @@ import Modal from '../../ModalWindow/Modal';
 import AutocompleteHeader from '../AutocompleteSearch/AutocompleteHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { editFavorites } from '../../../../http/actions/user';
-import { setFavoritesLocal } from '../../../../http/reducers/favoritesReducer';
+import { setFavoritesToRedux } from '../../../../http/reducers/favoritesReducer';
 export default function MiddleHeader() {
 	const user = useSelector(state => state.user.currentUser);
 	const isAuth = useSelector(state => state.user.isAuth);
@@ -23,8 +23,9 @@ export default function MiddleHeader() {
 	useEffect(() => {
 		if (localStorage.getItem('favorites')) {
 			setFavoritesList(JSON.parse(localStorage.getItem('favorites')))
-			dispatch(setFavoritesLocal(JSON.parse(localStorage.getItem('favorites'))))
+			dispatch(setFavoritesToRedux(JSON.parse(localStorage.getItem('favorites'))))
 			// setFavoritesList(favoritesFromRedux)
+			console.log('LOCAL', JSON.parse(localStorage.getItem('favorites')))
 		}
 	}, [])
 
@@ -40,6 +41,9 @@ export default function MiddleHeader() {
 			}
 		} else if (!favoritesFromRedux.length) {
 			setFavoritesList([])
+		}
+		if (!isAuth && !localStorage.getItem('favorites')) {
+			dispatch(setFavoritesToRedux([]))
 		}
 	}, [user])
 
