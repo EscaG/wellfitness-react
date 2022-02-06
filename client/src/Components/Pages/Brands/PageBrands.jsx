@@ -4,14 +4,15 @@ import { Link, Route, Routes } from 'react-router-dom';
 import Modal from "../../Layout/ModalWindow/Modal";
 
 export function PageBrands() {
-	const [activeModel, setActiveModel] = useState(true);
+	// const [activeModel, setActiveModel] = useState(true);
 
 	return (
 		<div>
-			<Link to='login' >Login</Link>
+			Brands
+			{/* <Link to='/login' >Login</Link>
 			<Routes>
-				<Route path="login" element={<Modal active={activeModel} setActive={setActiveModel} />} />
-			</Routes>
+				<Route path="/login" element={<Modal active={activeModel} setActive={setActiveModel} />} />
+			</Routes> */}
 		</div>
 	)
 

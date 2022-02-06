@@ -41,6 +41,7 @@ export default function Presentation({ product }) {
 	}, [user]);
 
 	useEffect(() => {
+		setIsFavorite(false);
 		if (isAuth) {
 			// console.log("обновился продукт");
 			if (user.favorites.includes(_id)) {
@@ -50,6 +51,7 @@ export default function Presentation({ product }) {
 				setIsFavorite(false);
 			}
 		}
+
 	}, [product]);
 
 
@@ -59,7 +61,7 @@ export default function Presentation({ product }) {
 				setIsFavorite(true);
 			}
 		}
-	}, [favoritesFromRedux]);
+	}, [_id, favoritesFromRedux]);
 
 
 
@@ -76,9 +78,11 @@ export default function Presentation({ product }) {
 		} else {
 			if (!favoritesFromRedux.includes(id)) {
 				dispatch(setFavoritesToRedux([...favoritesFromRedux, id]))
+				localStorage.setItem('favorites', JSON.stringify([...favoritesFromRedux, id]))
 				setIsFavorite(true)
 			} else {
 				dispatch(setFavoritesToRedux(favoritesFromRedux.filter(i => i !== id)))
+				localStorage.setItem('favorites', JSON.stringify(favoritesFromRedux.filter(i => i !== id)))
 				setIsFavorite(false)
 			}
 		}

@@ -89,16 +89,17 @@ exports.getById = function (request, response) {
 	let id = request.params.id;
 	console.log("Run GET");
 	ProductModel.findById(id,
-		function (err, allData) {
+		function (err, product) {
 			if (err) {
 				console.log(err);
-				response.json(err);
-				return;
+				 response.status(400).json({success: false, error :'Sorry, error'});;
+
 			}
-			response.json(allData);
+			response.json(product);
 		}
 	);
 }
+
 
 
 exports.seed = function (request, response) {

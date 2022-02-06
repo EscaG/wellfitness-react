@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import comparison from "../img/comparison.svg";
 import favorites from "../img/favorites.svg";
 import cart from "../img/cart.svg";
@@ -8,7 +8,7 @@ import AutocompleteHeader from '../AutocompleteSearch/AutocompleteHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { editFavorites } from '../../../../http/actions/user';
 import { setFavoritesToRedux } from '../../../../http/reducers/favoritesReducer';
-export default function MiddleHeader() {
+export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu }) {
 	const user = useSelector(state => state.user.currentUser);
 	const isAuth = useSelector(state => state.user.isAuth);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
@@ -19,9 +19,12 @@ export default function MiddleHeader() {
 	const [goUpdateFavorites, setGoUpdateFavorites] = useState(false);
 	// console.log(favoritesList);
 	// console.log(favoritesFromRedux);
+	const setActiveLinkFavorites = ({ isActive }) => (isActive ? "active-link " : '') + 'actions-header__item favorites';
+
+
 
 	useEffect(() => {
-		if (localStorage.getItem('favorites')) {
+		if (localStorage.getItem('favorites').length && !isAuth) {
 			setFavoritesList(JSON.parse(localStorage.getItem('favorites')))
 			dispatch(setFavoritesToRedux(JSON.parse(localStorage.getItem('favorites'))))
 			// setFavoritesList(favoritesFromRedux)
@@ -30,48 +33,60 @@ export default function MiddleHeader() {
 	}, [])
 
 	useEffect(() => {
-		if (isAuth || user.favorites) {
-			// console.log(Array.from(new Set([...user.favorites, ...favoritesList])));
-			if (localStorage.getItem('favorites')) {
-				setFavoritesList(Array.from(new Set([...user.favorites, ...favoritesList])))
-				localStorage.removeItem('favorites')
-			} else {
-				setFavoritesList(user.favorites)
-				localStorage.removeItem('favorites')
-			}
-		} else if (!favoritesFromRedux.length) {
-			setFavoritesList([])
-		}
-		if (!isAuth && !localStorage.getItem('favorites')) {
-			dispatch(setFavoritesToRedux([]))
-		}
-	}, [user])
+		// console.log("LOCAL", localStorage.getItem('favorites').length);
+		// console.log("LOCAL", JSON.parse(localStorage.getItem('favorites')).length);
+		// console.log("favoritesList", favoritesList);
+		// console.log("favoritesFromRedux", favoritesFromRedux);
+	})
+
 
 	useEffect(() => {
-		console.log("favoritesFromRedux", favoritesFromRedux);
-		if (favoritesFromRedux.length >= 0) {
-			localStorage.setItem('favorites', JSON.stringify(favoritesFromRedux))
+		if (isAuth) {
+			if (localStorage.getItem('favorites').length) {
+				setFavoritesList(Array.from(new Set([...user.favorites, ...favoritesList])))
+				dispatch(editFavorites(user.email, Array.from(new Set([...user.favorites, ...favoritesList]))))
+				localStorage.setItem('favorites', [])
+				// console.log("sdfgsd");
+			} else {
+				setFavoritesList(user.favorites)
+				localStorage.setItem('favorites', [])
+				// setGoUpdateFavorites(false)
+			}
+		} else if (favoritesFromRedux.length) {
+			setFavoritesList([])
+		}
+		if (isAuth && localStorage.getItem('favorites')) {
+			dispatch(setFavoritesToRedux([]))
+		}
+	}, [isAuth, user])
+
+	useEffect(() => {
+		if (!isAuth) {
+			console.log("USE favoritesFromRedux", favoritesFromRedux);
+			// localStorage.setItem('favorites', JSON.stringify(favoritesFromRedux))
 			setFavoritesList(favoritesFromRedux)
 		}
+
 	}, [favoritesFromRedux]);
 
 
-	useEffect(() => {
-		if (goUpdateFavorites && isAuth) {
-			dispatch(editFavorites(user.email, favoritesList));
-			console.log("remove");
-			localStorage.removeItem('favorites')
-		}
-	}, [goUpdateFavorites]);
+	// useEffect(() => {
+	// 	if (goUpdateFavorites && isAuth) {
+	// 		dispatch(editFavorites(user.email, favoritesList));
+	// 		console.log("remove");
+	// 		localStorage.removeItem('favorites')
+	// 	}
+	// }, [goUpdateFavorites]);
 
 
+
 	useEffect(() => {
-		console.log(favoritesList);
-		if (isAuth) {
-			console.log(favoritesList);
+		// console.log(favoritesList);
+		if (isAuth && !localStorage.getItem('favorites')) {
+			// console.log(favoritesList);
 			setGoUpdateFavorites(true)
 		}
-	}, [favoritesList])
+	}, [favoritesList, isAuth])
 
 
 	return (
@@ -114,14 +129,14 @@ export default function MiddleHeader() {
 
 							<nav className="menu__body">
 								<ul className="menu__list">
-									<li><Link to="/brands" className="menu__link">Бренды</Link></li>
-									<li><Link to="/service" className="menu__link">Сервис</Link></li>
-									<li><Link to="/services" className="menu__link">Услуги</Link></li>
-									<li><Link to="/support" className="menu__link">Поддержка</Link></li>
-									<li><Link to="/about" className="menu__link">О компании</Link></li>
-									<li><Link to="/blog" className="menu__link">Блог</Link></li>
-									<li><Link to="/showroom" className="menu__link">Где купить</Link></li>
-									<li><Link to="/contacts" className="menu__link">Контакты</Link></li>
+									<li><Link onClick={closeMenu} to="/brands" className="menu__link">Бренды</Link></li>
+									<li><Link onClick={closeMenu} to="/service" className="menu__link">Сервис</Link></li>
+									<li><Link onClick={closeMenu} to="/services" className="menu__link">Услуги</Link></li>
+									<li><Link onClick={closeMenu} to="/support" className="menu__link">Поддержка</Link></li>
+									<li><Link onClick={closeMenu} to="/about" className="menu__link">О компании</Link></li>
+									<li><Link onClick={closeMenu} to="/blog" className="menu__link">Блог</Link></li>
+									<li><Link onClick={closeMenu} to="/showroom" className="menu__link">Где купить</Link></li>
+									<li><Link onClick={closeMenu} to="/contacts" className="menu__link">Контакты</Link></li>
 								</ul>
 							</nav>
 						</div>
@@ -137,7 +152,7 @@ export default function MiddleHeader() {
 								<use xlinkHref={comparison + "#comparison"}></use>
 							</svg>
 						</button></li>
-						<li><button className="actions-header__item favorites ">
+						<li><NavLink to='/favorites' className={setActiveLinkFavorites}>
 							<svg width="24" height="21" >
 								<title>favorites</title>
 								<use xlinkHref={favorites + "#favorites"}></use>
@@ -147,7 +162,7 @@ export default function MiddleHeader() {
 								:
 								favoritesList.length ? <div><span>{favoritesList.length}</span></div> : null
 							}
-						</button></li>
+						</NavLink></li>
 						<li><button className="actions-header__item cart">
 							<svg width="21" height="26">
 								<title>cart</title>

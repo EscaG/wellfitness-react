@@ -10,7 +10,6 @@ import { Footer } from "./Components/Layout/Footer/Footer";
 import { Header } from "./Components/Layout/Header/Header";
 import { PageHome } from './Components/Pages/Home/PageHome';
 import PageAbout from './Components/Pages/About/PageAbout';
-// import { PageBrands } from "./Components/Pages/Brands/PageBrands";
 import PageService from "./Components/Pages/Service/PageService";
 import PageUslugi from "./Components/Pages/Uslugi/PageUslugi";
 import PageSupport from "./Components/Pages/Support/PageSupport";
@@ -30,15 +29,18 @@ import Bonuses from "./Components/Pages/Profile/Components/Bonuses";
 import Instructions from "./Components/Pages/Profile/Components/Instructions";
 import Appeals from "./Components/Pages/Profile/Components/Appeals";
 import EditProfile from "./Components/Pages/Profile/Components/EditProfile/EditProfile";
-// import ProductCatalog from "./Components/Layout/testproduct/productCatalog";
-import ProductHook from "./Components/Layout/testproduct/ProductHook";
 import { getProduct } from "./http/actions/product";
 import ProductCardPage from "./Components/Pages/ProductCard/ProductCardPage";
 import ResultSearch from "./Components/Pages/ResultSearch/ResultSearch";
+import Error404 from "./Components/Pages/Error/Error404";
+import FavoritesPage from "./Components/Pages/FavoritesPage/FavoritesPage";
+import ErrorL from "./Components/hoc/ErrorL";
+import { PageBrands } from "./Components/Pages/Brands/PageBrands";
 
 
 
 function App() {
+	localStorage.setItem('favorites', [])
 	const dispatch = useDispatch();
 	const scrollBtnRef = useRef();
 	const rootElement = document.documentElement;
@@ -77,9 +79,7 @@ function App() {
 				<Routes>
 
 					<Route path="/" element={<PageHome />} />
-					{/* <Route path="brands/*" element={<PageBrands />} /> */}
-					{/* <Route path="brands/*" element={<ProductCatalog />} /> */}
-					<Route path="brands/*" element={<ProductHook />} />
+					<Route path="brands" element={<PageBrands />} />
 					<Route path="service" element={<PageService />} />
 					<Route path="services" element={<PageUslugi />} />
 					<Route path="support" element={<PageSupport />} />
@@ -89,6 +89,9 @@ function App() {
 					<Route path="contacts" element={<PageContacts />} />
 					<Route path="forhome" element={<CatalogForHome />} />
 					<Route path="forclub" element={<CatalogForClub />} />
+					<Route path="favorites" element={<FavoritesPage />} />
+
+
 					<Route path="product/:slug/:id" element={<ProductCardPage />} />
 					<Route path="search/:search" element={<ResultSearch />} />
 
@@ -105,6 +108,10 @@ function App() {
 						<Route path="appeals" element={<Appeals />} />
 						<Route path="editprofile" element={<EditProfile />} />
 					</Route>
+					<Route path="404" element={<Error404 />} />
+					<Route path="*" element={<ErrorL >
+						<Error404 />
+					</ErrorL>} />
 				</Routes>
 			</main>
 			<button ref={scrollBtnRef} className="scrollToTop" onClick={scrollToTopClick}>

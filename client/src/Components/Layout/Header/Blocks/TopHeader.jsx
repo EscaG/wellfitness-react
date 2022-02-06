@@ -7,22 +7,22 @@ import { LoginForm } from "../../../Pages/Login/LoginForm";
 import Burger from '../../BurgerMenu/Burger';
 import ContentBurgerMenu from '../../BurgerMenu/ContentBurgerMenu';
 
-export default function TopHeader() {
+export default function TopHeader({ isActiveMenu, setIsActiveMenu, closeMenu }) {
 
 
 	const isAuth = useSelector(state => state.user.isAuth);
 	const user = useSelector(state => state.user.currentUser);
 	console.log("состояние логина = ", isAuth);
-	const [isActiveMenu, setIsActiveMenu] = useState(false);
+	// const [isActiveMenu, setIsActiveMenu] = useState(false);
 	const [activeModal, setActiveModal] = useState(false);
 	const [isModal, setIsModal] = useState(false);
 	// const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const contactsHeaderBorder = useRef()
 
-	const closeMenu = () => {
-		setIsActiveMenu(false)
-	}
+	// const closeMenu = () => {
+	// 	setIsActiveMenu(false)
+	// }
 
 	return (
 		<div className="header__top top-header">

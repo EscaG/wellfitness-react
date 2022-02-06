@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { NavLink, Outlet, useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import './style-profilepage.scss';
 import { useDispatch } from "react-redux";
 import { logout } from '../../../http/reducers/userReducer';
 import { useSelector } from "react-redux";
+import { setFavoritesToRedux } from '../../../http/reducers/favoritesReducer';
 export default function ProfilePage() {
 	const setActiveLink = ({ isActive }) => isActive ? "active-link" : '';
 	const { currentUser, isLoading, isAuth } = useSelector(state => state.user);
-	const location = useLocation();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const goLogin = () => navigate('/login');
@@ -16,7 +16,6 @@ export default function ProfilePage() {
 	useEffect(() => {
 		if (!isAuth) {
 			setTimeout(() => {
-
 				goLogin()
 			}, 200)
 		}
@@ -24,8 +23,9 @@ export default function ProfilePage() {
 
 	const handleLogOut = () => {
 		dispatch(logout());
+		localStorage.setItem('favorites', [])
+		dispatch(setFavoritesToRedux([]))
 		goLogin();
-		localStorage.removeItem('favorites')
 	}
 
 	return (

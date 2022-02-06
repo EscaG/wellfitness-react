@@ -31,6 +31,7 @@ export default function ProductCardItem({ product }) {
 				setIsFavorite(true);
 			} else {
 				setIsFavorite(false);
+				console.log("disactive");
 			}
 		}
 	}, [product]);
@@ -39,7 +40,9 @@ export default function ProductCardItem({ product }) {
 	useEffect(() => {
 		if (favoritesFromRedux.length) {
 			if (favoritesFromRedux.includes(_id)) {
+				// console.log("active");
 				setIsFavorite(true);
+				// console.log(favoritesFromRedux);
 			}
 		}
 	}, [favoritesFromRedux]);
@@ -50,7 +53,6 @@ export default function ProductCardItem({ product }) {
 	const handleToFavorite = (id) => {
 		if (user.favorites) {
 			if (!user.favorites.includes(id)) {
-				// console.log("new favorite to user");
 				dispatch(editFavorites(user.email, [...user.favorites, id]));
 			} else {
 				dispatch(editFavorites(user.email, user.favorites.filter(i => i !== id)));
@@ -58,10 +60,13 @@ export default function ProductCardItem({ product }) {
 			}
 		} else {
 			if (!favoritesFromRedux.includes(id)) {
+				// console.log("new favorite to user");
 				dispatch(setFavoritesToRedux([...favoritesFromRedux, id]))
+				localStorage.setItem('favorites', JSON.stringify([...favoritesFromRedux, id]))
 				setIsFavorite(true)
 			} else {
 				dispatch(setFavoritesToRedux(favoritesFromRedux.filter(i => i !== id)))
+				localStorage.setItem('favorites', JSON.stringify(favoritesFromRedux.filter(i => i !== id)))
 				setIsFavorite(false)
 			}
 		}
@@ -93,9 +98,9 @@ export default function ProductCardItem({ product }) {
 
 				<div className='icons-slider__list'>
 					<button className='icons-slider__item link-svg'
-						onClick={() => handleToFavorite(_id)}
+					// onClick={() => handleToFavorite(_id)}
 					>
-						<svg width="17" height="17" className={(isFavorite ? 'acative ' : '') + 'icons-slider__svg comparison'} >
+						<svg width="17" height="17" className={(isFavorite ? ' ' : '') + 'icons-slider__svg comparison'} >
 							<SpriteIcons icon="comparison" />
 						</svg>
 					</button>

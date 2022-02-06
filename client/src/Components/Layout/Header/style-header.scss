@@ -457,6 +457,11 @@ $md4: 575.98;
 			}
 		}
 	}
+	&__item.active-link.favorites {
+		use {
+			fill: #f53b49;
+		}
+	}
 }
 
 .bottom-header {

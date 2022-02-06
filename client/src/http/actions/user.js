@@ -32,10 +32,10 @@ export const login = (email, password) => {
 				email,
 				password
 			});
-			console.log(response.data.user);
+			// console.log(response.data.user);
 			dispatch(setUser(response.data.user));
 			localStorage.setItem('token', response.data.accessToken);
-			console.log(localStorage.getItem('token'));
+			// console.log(localStorage.getItem('token'));
 		} catch (error) {
 			// console.log(error?.response?.data?.message);
 			dispatch(errorUser(error?.response?.data?.message));
