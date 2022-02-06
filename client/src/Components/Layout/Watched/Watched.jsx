@@ -10,8 +10,10 @@ import watchedSecond from './img/second.png';
 import watchedThird from './img/third.png';
 import watchedFourth from './img/fourth.png';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Watched() {
+	const products = useSelector(state => state.product.currentProduct);
 	const watchedItems = [
 		{
 			image: watchedFirst,
@@ -63,6 +65,7 @@ export default function Watched() {
 		centerMode: true,
 		infinite: true,
 		centerPadding: "0px",
+		lazyLoad: true,
 		slidesToShow: 6,
 		slidesToScroll: 1,
 		speed: 500,
@@ -96,7 +99,7 @@ export default function Watched() {
 				}
 			},
 			{
-				breakpoint: 500,
+				breakpoint: 400,
 				settings: {
 					slidesToShow: 1,
 				}
@@ -108,17 +111,17 @@ export default function Watched() {
 	return (
 		<section className='watched'>
 			<Slider {...settingsPromotion}>
-				{watchedItems.map((item, index) =>
-					<Link key={index++} to='/' className='watched__card'>
+				{products && products.map((item, index) =>
+					<Link key={index++} to={"/product/" + encodeURI(item.name) + "/" + item._id} className='watched__card'>
 						<div className='watched__item-image'>
 
-							<img className='watched__image' src={item.image} alt="watched" />
+							<img className='watched__image' src={item.gallery && item.gallery[0].image} alt="watched" />
 						</div>
 
 						<div className='watched__description'>
-							<div className="watched__title">{item.title}</div>
+							<div className="watched__title">{item.name}</div>
 							<div className="watched__rating">Рейтинг {item.rating}</div>
-							<div className="watched__price">{item.price}</div>
+							<div className="watched__price">{item.price.fullPrice}</div>
 						</div>
 
 					</Link>

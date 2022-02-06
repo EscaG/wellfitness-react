@@ -187,7 +187,7 @@ export default function CatalogForClub() {
 	return (
 		<article className='article-catalogclub catalogforclub-catalog'>
 			<section className='catalogforhome-catalog__section'>
-				<h3 className='article__caption'>Тренажеры фитнес клубов</h3>
+				<h3 className='article__caption'>Для фитнес клубов</h3>
 				<div className='catalogforhome-catalog__grid'>
 
 					{catalogList.map((item, index) =>

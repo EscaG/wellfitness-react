@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function UpdateInfo({ user, updateProfile }) {
+export default function UpdateInfo({ user, updateProfile, updateUserAvatar, setIsEdit }) {
 	const [surname, setSurname] = useState(user.surname);
 	const [name, setName] = useState(user.name);
 	const [phone, setPhone] = useState(user.phone);
@@ -12,7 +12,8 @@ export default function UpdateInfo({ user, updateProfile }) {
 	// const [isEdit, setIsEdit] = useState(false);
 
 	const upToServer = () => {
-		updateProfile(email, surname, name, phone, { birthday, gender, city, address })
+		updateProfile(email, surname, name, phone, { birthday, gender, city, address });
+		updateUserAvatar();
 	}
 
 	return (
@@ -58,7 +59,11 @@ export default function UpdateInfo({ user, updateProfile }) {
 					<input value={address} onChange={(e) => setAddress(e.target.value)} type="text" />
 				</div>
 			</div>
-			<button className='editprofile-block__save-edit' onClick={() => upToServer()}>Сохранить</button>
+			<div style={{ display: "flex", justifyContent: "space-between" }}>
+
+				<button className='editprofile-block__save-edit' onClick={() => upToServer()}>Сохранить</button>
+				<button className='editprofile-block__save-edit' onClick={() => setIsEdit(false)}>Отмена</button>
+			</div>
 		</div>
 	)
 }

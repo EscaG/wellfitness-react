@@ -75,7 +75,7 @@ export default function ProfilePage() {
 							}
 							<div className='mycontact-profile__name'>{currentUser.surname} {currentUser.name}</div>
 							<div className='mycontact-profile__email'>{currentUser.email}</div>
-							<div className="mycontact-profile__phone">+7 (900) 000-00-00</div>
+							<div className="mycontact-profile__phone">{currentUser.phone}</div>
 							<NavLink className={'mycontact-profile__settings ' + setActiveLink} to='editprofile'>Редактировать профиль</NavLink>
 							<button className='mycontact-profile__logout' onClick={() => handleLogOut()}>Выйти</button>
 						</section>

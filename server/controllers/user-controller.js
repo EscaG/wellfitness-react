@@ -97,6 +97,20 @@ class UserController {
 			const {  favorites,email } = req.body;
 			const userData = await userService.favoritesService(favorites,email);
 			res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+			console.log("100 user-controller",userData)
+			return res.json(userData);
+		}catch (e) {
+			next(e)
+		}
+	}
+
+	async updateAvatar(req, res,next) {
+		console.log("Run AVaTAR");
+		try {
+			const {  email,avatar } = req.body;
+			const userData = await userService.avatarUpdate(email,avatar )
+			res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+			console.log("возвращаю юзера",userData)
 			return res.json(userData);
 		}catch (e) {
 			next(e)

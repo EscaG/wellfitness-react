@@ -11,7 +11,8 @@ const UserSchema = new Schema({
 	data: {},
 	favorites: [],
 	basket: [],
-	comparison: []
+	comparison: [],
+	avatar: String
 })
 
 

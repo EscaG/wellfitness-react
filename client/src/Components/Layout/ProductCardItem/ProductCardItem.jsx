@@ -31,7 +31,7 @@ export default function ProductCardItem({ product }) {
 				setIsFavorite(true);
 			} else {
 				setIsFavorite(false);
-				console.log("disactive");
+				// console.log("disactive");
 			}
 		}
 	}, [product]);

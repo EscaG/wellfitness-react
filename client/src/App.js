@@ -40,7 +40,10 @@ import { PageBrands } from "./Components/Pages/Brands/PageBrands";
 
 
 function App() {
-	localStorage.setItem('favorites', [])
+	if (!localStorage.getItem('favorites')) {
+		localStorage.setItem('favorites', [])
+	}
+	// localStorage.clear()
 	const dispatch = useDispatch();
 	const scrollBtnRef = useRef();
 	const rootElement = document.documentElement;

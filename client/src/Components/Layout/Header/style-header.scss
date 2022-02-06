@@ -207,8 +207,7 @@ $md4: 575.98;
 		margin: 0 0 0 30px;
 	}
 
-	&__login:after,
-	&__persona:after {
+	&__login:after {
 		position: absolute;
 		right: 0;
 		content: "";
@@ -218,16 +217,22 @@ $md4: 575.98;
 	&__login:after {
 		background: url("img/user_guest.svg") left no-repeat;
 	}
-	&__persona:after {
-		background: url("img/persona.png") left no-repeat;
+	&__persona {
+		padding: 0;
+		margin: 0 0 0 10px;
+		img {
+			margin: 0 0 0 10px;
+			height: 30px;
+			width: 30px;
+			border-radius: 50%;
+			border: 2px solid #858fa4;
+		}
+		.flex {
+			display: flex;
+			align-items: center;
+		}
 	}
 }
-
-// .line-header {
-// 	background: rgba(133, 143, 164, 0.15);
-// 	height: 1px;
-// 	width: 100%;
-// }
 
 // ! Средняя часть хежера ========================================================
 .middle-header {

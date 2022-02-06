@@ -25,15 +25,16 @@ export default function PromotionItem() {
 	const settingsPromotion = {
 		className: "center promotion-slider",
 		arrows: true,
+		autoplay: true,
+		autoplaySpeed: 2000,
 		centerMode: true,
-		infinite: true,
 		centerPadding: "100px",
+		infinite: true,
+		lazyLoad: true,
+		initialSlide: 1,
 		slidesToShow: 4,
 		slidesToScroll: 1,
 		speed: 500,
-		autoplay: true,
-		autoplaySpeed: 2000,
-		initialSlide: 1,
 		waitForAnimate: false,
 		responsive: [
 			{

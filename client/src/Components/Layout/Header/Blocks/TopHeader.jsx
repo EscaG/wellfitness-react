@@ -88,7 +88,11 @@ export default function TopHeader({ isActiveMenu, setIsActiveMenu, closeMenu }) 
 								<Link to='/profile/main'
 									onClick={closeMenu}
 									data-da=" .adaptive-menu__login , 1330, 1"
-									className="contacts-header__persona"><span>{user.name}</span>
+									className="contacts-header__persona">
+									<span className='contacts-header__persona flex'>
+										<span>{user.name}</span>
+										<img src={user.avatar && user.avatar} alt={user.name} />
+									</span>
 								</Link>
 							}
 						</div>

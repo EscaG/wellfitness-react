@@ -5,6 +5,7 @@ const mailService = require('../service/mail-service');
 const tokenService = require('../service/token-service');
 const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
+const fileController = require("../controllers/fileController");
 
 class UserService {
 
@@ -113,7 +114,55 @@ class UserService {
 		return {...tokens, user: userDto}
 	}
 
+	async avatarUpdate(email,avatar){
+		// const user = new UserModel({email,avatar});
+		const getAvatar = await fileController.moveGallery(avatar, "/storage/users/avatar_");
+		await UserModel.updateOne({email}, {avatar:getAvatar});
+		const user = await UserModel.findOne({ email });
+		// console.log("user after update", user)
+		if (!user) {
+			throw ApiError.BadRequest('Пользователь с таким email не найден');
+		}
+		const userDto = new UserDto(user);
+		const tokens = await tokenService.generateTokens({...userDto});
+		// console.log("128 user-service ",userDto)
+		await tokenService.saveToken(userDto.id, tokens.refreshToken);
+		console.log({...tokens, user: userDto})
+		return {...tokens, user: userDto}
+	}
+
 
 }
 
 module.exports = new UserService();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

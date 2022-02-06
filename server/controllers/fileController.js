@@ -4,29 +4,31 @@ const ext = require("mime-types"); // анализ типа файла
 
 
 
+
 exports.moveGallery = function (gallery, path) {
 	console.log("Move files", gallery, path);
-	for (let i = 0; i < gallery.length; i++) {
-		if (gallery[i].startsWith("/upload/")) { //Если путь к картинке начинается с аплоад
-			let newPlace = gallery[i].replace("/upload/", path) // поставим новый путь
+	// for (let i = 0; i < gallery.length; i++) {
+		if (gallery.startsWith("/upload/")) { //Если путь к картинке начинается с аплоад
+			let newPlace = gallery.replace("/upload/", path) // поставим новый путь
 			console.log("Мы находимся" + __dirname);
 			fs.rename(
-				__dirname + "/../public" + gallery[i],
+				__dirname + "/../public" + gallery,
 				__dirname + "/../public" + newPlace,
 				function (err) {
 					if (err) {
 						console.log("Error move gallery", err);
 					}
 				});
-			gallery[i] = newPlace;
+			gallery = newPlace;
 		}
-	}
+	// }
+	console.log("готовый адрес картинки" , gallery)
 	return gallery;
 }
 
 exports.createFile = function (request, response) {
 	console.log("Start work with file");
-	console.log(request.file);
+	// console.log(request.file);
 	let newFileName = request.file.filename + "." + ext.extension(request.file.mimetype)
 	fs.rename(
 		request.file.path,

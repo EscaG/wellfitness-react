@@ -50,6 +50,7 @@ export const checkAuth = () => {
 			const response = await $api.get(API_URL + '/refresh',
 				{ withCredentials: true }
 			);
+			console.log(response);
 			dispatch(setUser(response.data.user));
 			localStorage.setItem('token', response.data.accessToken);
 		} catch (error) {
@@ -74,6 +75,20 @@ export const editFavorites = (email, favorites) => {
 		try {
 			const response = await $api.put(API_URL + '/favorites',
 				{ email, favorites });
+			dispatch(updateUser(response.data.user));
+		} catch (error) {
+			dispatch(errorUser(error?.response?.data?.message));
+		}
+	}
+}
+export const editAvatar = (email, avatar) => {
+	console.log("redux avatar");
+	return async dispatch => {
+		try {
+			const response = await $api.put("http://localhost:5000" + API_URL + '/avatar',
+				{ email, avatar });
+			console.log(response);
+			console.log(response.data.user);
 			dispatch(updateUser(response.data.user));
 		} catch (error) {
 			dispatch(errorUser(error?.response?.data?.message));

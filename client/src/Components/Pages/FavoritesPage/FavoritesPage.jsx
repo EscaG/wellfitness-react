@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ProductCardItem from '../../Layout/ProductCardItem/ProductCardItem';
+import Watched from '../../Layout/Watched/Watched';
 
 export default function FavoritesPage() {
 	const [productsFavorites, setProductsFavorites] = useState([]);
@@ -12,6 +13,7 @@ export default function FavoritesPage() {
 	const navigate = useNavigate();
 	const { currentUser, isAuth, isLoading } = useSelector(state => state.user);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
+	const API_URL = process.env.REACT_APP_BASE_URL;
 	// const goError = () => navigate('/404', { replace: true });
 	// console.log(currentUser);
 
@@ -54,7 +56,7 @@ export default function FavoritesPage() {
 	function promAll(favorites) {
 		if (favorites.length) {
 			Promise.all(
-				favorites.map(id => fetch('/api/product/byid/' + id)
+				favorites.map(id => fetch(API_URL + '/product/byid/' + id)
 					.then(val => val.json())
 					.then(val => {
 						if (!productsFavorites.map(v => v._id).includes(val._id)) {
@@ -74,10 +76,15 @@ export default function FavoritesPage() {
 
 	return (
 		<article className='favorites-page'>
-			<div className='grid-wrapper-favorites'>
+			<h1 className='favorites-page__title'>Избранное</h1>
+			<div className='favorites-page__grid'>
 				{productsFavorites.map((product, index) =>
 					<ProductCardItem key={product._id} product={product} />
 				)}
+			</div>
+			<div className='favorites-page__watched'>
+				<h2 className='favorites-page__watched-title'>Вы смотрели</h2>
+				<Watched />
 			</div>
 		</article>
 	);

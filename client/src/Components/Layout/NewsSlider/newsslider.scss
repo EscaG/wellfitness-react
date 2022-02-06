@@ -1,0 +1,44 @@
+.news {
+	max-width: 1410px;
+	padding: 0 20px;
+	margin: 110px auto 60px auto;
+	&__title {
+		margin: 0 0 30px 0;
+		display: flex;
+		align-items: center;
+	}
+	&__blog {
+		font-size: 20px;
+		color: #828282;
+		font-variation-settings: "wght" 800;
+	}
+	&__caption {
+		margin: 0 40px 0 0;
+	}
+	&__slider {
+		margin: 0 0 30px;
+	}
+	&__card {
+		display: flex;
+		flex-direction: column;
+		color: #384255;
+	}
+	&__item-image {
+		margin: 0 0 20px 0;
+	}
+	&__image {
+		width: 100%;
+	}
+	&__title-card {
+		margin: 0 0 10px 0;
+		font-size: 20px;
+		font-variation-settings: "wght" 800;
+	}
+	&__description {
+		margin: 0 0 10px 0;
+		font-size: 16px;
+	}
+	&__date {
+		opacity: 0.5;
+	}
+}

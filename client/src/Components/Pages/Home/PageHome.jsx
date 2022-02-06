@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
-import PromotionItem from '../../Layout/PromotionItem/PromotionItem';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './style-pageHome.scss';
 import './slick.css';
+import PromotionItem from '../../Layout/PromotionItem/PromotionItem';
 import firstSlide from './img/slider/first-slide.png';
 import secondSlide from './img/slider/second-slide.png';
 import thirdSlide from './img/slider/third-slide.png';
@@ -64,58 +64,18 @@ import arrowlink from './img/icons/arrow-link.svg';
 
 import partner from './img/partner.png';
 
-import newsHome1 from './img/news/news-home1.jpg';
-import newsHome2 from './img/news/news-home2.jpg';
-import newsHome3 from './img/news/news-home3.jpg';
-import newsHome4 from './img/news/news-home4.jpg';
-// import Modal from '../../Layout/ModalWindow/Modal';
+
 import IdeasSection from '../../Layout/IdeasSection/IdeasSection';
+import NewsSlider from '../../Layout/NewsSlider/NewsSlider';
 
 
 export const PageHome = () => {
 	// const [modalActive, setModalActive] = useState(false);
 	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
-	const [slides, setSlides] = useState([firstSlide, secondSlide, thirdSlide, fourthSlide]);
+	const slides = [firstSlide, secondSlide, thirdSlide, fourthSlide];
 
 
-	const newsHome = [
-		{
-			imgSrc: newsHome1,
-			title: "В продажу поступили тренажеры Nautilus",
-			description: "Представляем тренажеры Nautilus 626 серии.",
-			date: "2021.07.18",
-		},
-		{
-			imgSrc: newsHome2,
-			title: "В продажу поступили тренажеры Nautilus",
-			description: "Представляем тренажеры Nautilus 626 серии.",
-			date: "2021.07.18",
-		},
-		{
-			imgSrc: newsHome3,
-			title: "В продажу поступили тренажеры Nautilus",
-			description: "Представляем тренажеры Nautilus 626 серии.",
-			date: "2021.07.18",
-		},
-		{
-			imgSrc: newsHome4,
-			title: "В продажу поступили тренажеры Nautilus",
-			description: "Представляем тренажеры Nautilus 626 серии.",
-			date: "2021.07.18",
-		},
-		{
-			imgSrc: newsHome1,
-			title: "В продажу поступили тренажеры Nautilus",
-			description: "Представляем тренажеры Nautilus 626 серии.",
-			date: "2021.07.18",
-		},
-		{
-			imgSrc: newsHome2,
-			title: "В продажу поступили тренажеры Nautilus",
-			description: "Представляем тренажеры Nautilus 626 серии.",
-			date: "2021.07.18",
-		},
-	]
+
 	const helpHome = [{
 		imgSrc: helpCall,
 		width: "59",
@@ -152,76 +112,74 @@ export const PageHome = () => {
 		description: "Оставьте заявку на посещение шоу-рума в Москве.",
 		link: "Записаться"
 	}]
-	const [homeImages, setHomeImages] =
-		useState([{
-			imgSrc: treadmill,
-			name: "Беговые дорожки"
-		},
-		{
-			imgSrc: eleptic,
-			name: "Эллиптические тренажеры"
-		},
-		{
-			imgSrc: velo,
-			name: "Велотренажеры"
-		},
-		{
-			imgSrc: ski,
-			name: "Горнолыжные тренажеры"
-		},
-		{
-			imgSrc: power,
-			name: "Силовые тренажеры"
-		},
-		{
-			imgSrc: rowing,
-			name: "Гребные тренажеры"
-		},
-		{
-			imgSrc: trampoline,
-			name: "Батуты"
-		},
-		{
-			imgSrc: tables,
-			name: "Игровые столы"
-		},
-		{
-			imgSrc: armchair,
-			name: "Массажные кресла"
-		},
-		{
-			imgSrc: fitness,
-			name: "Фитнес аксессуары"
-		}]);
-	const [clubImages, setClubImages] =
-		useState([{
-			imgSrc: cardio,
-			name: "Профессиональные кардиотренажеры"
-		},
-		{
-			imgSrc: block,
-			name: "Грузоблочные тренажеры"
-		},
-		{
-			imgSrc: free,
-			name: "Тренажеры на свободных весах"
-		},
-		{
-			imgSrc: functional,
-			name: "Функциональный тренинг"
-		},
-		{
-			imgSrc: massage,
-			name: "Wellness, СПА, Массаж"
-		},
-		{
-			imgSrc: medicine,
-			name: "Спортивная медицина и реабилитация"
-		},
-		{
-			imgSrc: gantel,
-			name: "Свободные веса"
-		}]);
+	const homeImages = [{
+		imgSrc: treadmill,
+		name: "Беговые дорожки"
+	},
+	{
+		imgSrc: eleptic,
+		name: "Эллиптические тренажеры"
+	},
+	{
+		imgSrc: velo,
+		name: "Велотренажеры"
+	},
+	{
+		imgSrc: ski,
+		name: "Горнолыжные тренажеры"
+	},
+	{
+		imgSrc: power,
+		name: "Силовые тренажеры"
+	},
+	{
+		imgSrc: rowing,
+		name: "Гребные тренажеры"
+	},
+	{
+		imgSrc: trampoline,
+		name: "Батуты"
+	},
+	{
+		imgSrc: tables,
+		name: "Игровые столы"
+	},
+	{
+		imgSrc: armchair,
+		name: "Массажные кресла"
+	},
+	{
+		imgSrc: fitness,
+		name: "Фитнес аксессуары"
+	}];
+	const clubImages = [{
+		imgSrc: cardio,
+		name: "Профессиональные кардиотренажеры"
+	},
+	{
+		imgSrc: block,
+		name: "Грузоблочные тренажеры"
+	},
+	{
+		imgSrc: free,
+		name: "Тренажеры на свободных весах"
+	},
+	{
+		imgSrc: functional,
+		name: "Функциональный тренинг"
+	},
+	{
+		imgSrc: massage,
+		name: "Wellness, СПА, Массаж"
+	},
+	{
+		imgSrc: medicine,
+		name: "Спортивная медицина и реабилитация"
+	},
+	{
+		imgSrc: gantel,
+		name: "Свободные веса"
+	}];
 
 	const settings = {
 		dots: false,
@@ -237,55 +195,7 @@ export const PageHome = () => {
 		pauseOnHover: true,
 		fade: true
 	};
-	const settingsPromotion = {
-		className: "center promotion-slider",
-		arrows: true,
-		centerMode: true,
-		infinite: true,
-		centerPadding: "100px",
-		slidesToShow: 4,
-		slidesToScroll: 1,
-		speed: 500,
-		autoplay: true,
-		autoplaySpeed: 2000,
-		initialSlide: 1,
-		responsive: [
-			{
-				breakpoint: 1400,
-				settings: {
-					slidesToShow: 3,
-				}
-			},
-			{
-				breakpoint: 1100,
-				settings: {
-					slidesToShow: 2,
-				}
-			},
-			{
-				breakpoint: 992,
-				settings: {
-					centerPadding: "70px",
-					slidesToShow: 2,
-					initialSlide: 1
-				}
-			},
-			{
-				breakpoint: 768,
-				settings: {
-					centerPadding: "0px",
-					slidesToShow: 2,
-				}
-			},
-			{
-				breakpoint: 576,
-				settings: {
-					centerPadding: "0px",
-					slidesToShow: 1,
-				}
-			}
-		]
-	}
+
 
 
 	return (
@@ -440,13 +350,9 @@ export const PageHome = () => {
 				</div>
 			</section	>
 			{/* //! НОВОСТИ */}
-			<section className="section-news__home-page news-home">
-				<div className='news-home__title'>
-					<h3 className='article__caption news-home__caption'>Новости</h3>
-					<Link className='news-home__blog' to="/">Блог</Link>
-				</div>
-				<div className="news-home__slider">
-					<Slider {...settingsPromotion}>
+
+			<NewsSlider />
+			{/* <Slider {...settingsPromotion}>
 						{newsHome.map((item, index) =>
 							<div className='news-home__card ' key={index++}>
 								<div className='news-home__item-image'>
@@ -459,11 +365,9 @@ export const PageHome = () => {
 								</div>
 							</div>
 						)}
-					</Slider>
-				</div>
-				<Link className='article__link' to='/'>Все новости</Link>
-			</section>
-		</div>
+					</Slider> */}
+
+		</div >
 	)
 
 }

@@ -158,9 +158,9 @@ export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu 
 								<use xlinkHref={favorites + "#favorites"}></use>
 							</svg>
 							{isAuth ?
-								favoritesList.length ? <div><span>{favoritesList.length}</span></div> : null
+								favoritesList && favoritesList.length ? <div><span>{favoritesList.length}</span></div> : null
 								:
-								favoritesList.length ? <div><span>{favoritesList.length}</span></div> : null
+								favoritesList && favoritesList.length ? <div><span>{favoritesList.length}</span></div> : null
 							}
 						</NavLink></li>
 						<li><button className="actions-header__item cart">

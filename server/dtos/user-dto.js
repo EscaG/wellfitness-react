@@ -9,6 +9,7 @@ module.exports = class UserDto {
 	favorites;
 	basket;
 	comparison;
+	avatar;
 
 
 	constructor(model) {
@@ -22,6 +23,7 @@ module.exports = class UserDto {
 		this.favorites = model.favorites;
 		this.basket = model.basket;
 		this.comparison = model.comparison;
+		this.avatar = model.avatar;
 	}
 
 }
