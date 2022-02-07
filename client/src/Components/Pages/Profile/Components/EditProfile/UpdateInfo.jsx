@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
+import { useJsApiLoader } from '@react-google-maps/api';
+import GoogleAutocomplete from '../../../../Layout/GoogleAutocomplete/GoogleAutocomplete';
+const libraries = ['places'];
 export default function UpdateInfo({ user, updateProfile, updateUserAvatar, setIsEdit }) {
 	const [surname, setSurname] = useState(user.surname);
 	const [name, setName] = useState(user.name);
@@ -10,7 +12,19 @@ export default function UpdateInfo({ user, updateProfile, updateUserAvatar, setI
 	const [city, setCity] = useState(user?.data?.city && user.data.city);
 	const [address, setAddress] = useState(user?.data?.address && user.data.address);
 	// const [isEdit, setIsEdit] = useState(false);
+	const genderRef = useRef();
 
+	const GOOGLE_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+	const { isLoaded: isLoadedMap } = useJsApiLoader({
+		id: 'google-map-script',
+		googleMapsApiKey: GOOGLE_KEY,
+		libraries
+	})
+
+
+	useEffect(() => {
+		setGender(genderRef.current.value)
+	}, [])
 	const upToServer = () => {
 		updateProfile(email, surname, name, phone, { birthday, gender, city, address });
 		updateUserAvatar();
@@ -45,18 +59,19 @@ export default function UpdateInfo({ user, updateProfile, updateUserAvatar, setI
 					{/* <span>Пол</span>
 					<input value={gender} onChange={(e) => setGender(e.target.value)} type="text" /> */}
 					<span>Пол</span>
-					<select id="gender" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} >
+					<select ref={genderRef} id="gender" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} >
 						<option value="Мужской">Мужской</option>
 						<option value="Женский">Женский</option>
 					</select>
 				</div>
-				<div>
+				{/* <div>
 					<span>город</span>
 					<input value={city} onChange={(e) => setCity(e.target.value)} type="text" />
-				</div>
+				</div> */}
 				<div className='grid-editprofile__address'>
 					<span>Адрес</span>
-					<input value={address} onChange={(e) => setAddress(e.target.value)} type="text" />
+					{/* <input value={address} onChange={(e) => setAddress(e.target.value)} type="text" /> */}
+					<GoogleAutocomplete isLoaded={isLoadedMap} setAddress={setAddress} address={address} />
 				</div>
 			</div>
 			<div style={{ display: "flex", justifyContent: "space-between" }}>

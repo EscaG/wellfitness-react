@@ -51,10 +51,14 @@ function App() {
 					<Route path="about" element={<PageAbout />} />
 					<Route path="blog" element={<PageBlog />} />
 					<Route path="showroom" element={<PageShowroom />} />
-					<Route path="contacts" element={<PageContacts />} />
 					<Route path="forhome" element={<CatalogForHome />} />
 					<Route path="forclub" element={<CatalogForClub />} />
 
+					<Route path="contacts" element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<PageContacts />
+						</React.Suspense>
+					} />
 					<Route path="favorites" element={
 						<React.Suspense fallback={<SpinnerLoad />}>
 							<FavoritesPage />
@@ -81,6 +85,7 @@ function App() {
 						<Route path="appeals" element={<Appeals />} />
 						<Route path="editprofile" element={<EditProfile />} />
 					</Route>
+
 					<Route path="404" element={<Error404 />} />
 					<Route path="*" element={<ErrorL >
 						<Error404 />
