@@ -1,13 +1,10 @@
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./resetstyle.scss";
 import "./bootstrap.scss"
 import './App.scss';
-import React, { useEffect, useRef } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { checkAuth } from './http/actions/user';
 
-import { Footer } from "./Components/Layout/Footer/Footer";
-import { Header } from "./Components/Layout/Header/Header";
+
 import { PageHome } from './Components/Pages/Home/PageHome';
 import PageAbout from './Components/Pages/About/PageAbout';
 import PageService from "./Components/Pages/Service/PageService";
@@ -29,59 +26,24 @@ import Bonuses from "./Components/Pages/Profile/Components/Bonuses";
 import Instructions from "./Components/Pages/Profile/Components/Instructions";
 import Appeals from "./Components/Pages/Profile/Components/Appeals";
 import EditProfile from "./Components/Pages/Profile/Components/EditProfile/EditProfile";
-import { getProduct } from "./http/actions/product";
-import ProductCardPage from "./Components/Pages/ProductCard/ProductCardPage";
 import ResultSearch from "./Components/Pages/ResultSearch/ResultSearch";
 import Error404 from "./Components/Pages/Error/Error404";
-import FavoritesPage from "./Components/Pages/FavoritesPage/FavoritesPage";
 import ErrorL from "./Components/hoc/ErrorL";
-import { PageBrands } from "./Components/Pages/Brands/PageBrands";
+import PageBrands from "./Components/Pages/Brands/PageBrands";
+import Layout from './Components/hoc/Layout';
+import SpinnerLoad from './Components/Layout/SpinnerLoad/SpinnerLoad';
 
 
-
+const ProductCardPage = React.lazy(() => import("./Components/Pages/ProductCard/ProductCardPage"))
+const FavoritesPage = React.lazy(() => import("./Components/Pages/FavoritesPage/FavoritesPage"));
 function App() {
-	if (!localStorage.getItem('favorites')) {
-		localStorage.setItem('favorites', [])
-	}
-	// localStorage.clear()
-	const dispatch = useDispatch();
-	const scrollBtnRef = useRef();
-	const rootElement = document.documentElement;
-
-
-	useEffect(() => {
-		console.log("APP")
-		dispatch(getProduct());
-		if (localStorage.getItem('token')) dispatch(checkAuth());
-		document.addEventListener("scroll", handleScroll, { passive: true })
-		// console.log("высота браузера ",document.documentElement.clientHeight);
-		// console.log("Высота всего документа ",document.documentElement.scrollHeight);
-	}, []);
-
-	const handleScroll = () => {
-		if (window.pageYOffset > rootElement.clientHeight - 50) {
-			scrollBtnRef.current.classList.add("showBtn")
-		} else {
-			scrollBtnRef.current.classList.remove("showBtn")
-		}
-	}
-
-
-	const scrollToTopClick = (e) => {
-		rootElement.scrollTo({
-			top: 0,
-			behavior: "smooth"
-		});
-	}
-
 
 	return (
 		<BrowserRouter>
-			<Header />
-			<main className="page">
-				<Routes>
+			<Routes>
 
-					<Route path="/" element={<PageHome />} />
+				<Route path="/" element={<Layout />} >
+					<Route index element={<PageHome />} />
 					<Route path="brands" element={<PageBrands />} />
 					<Route path="service" element={<PageService />} />
 					<Route path="services" element={<PageUslugi />} />
@@ -92,10 +54,18 @@ function App() {
 					<Route path="contacts" element={<PageContacts />} />
 					<Route path="forhome" element={<CatalogForHome />} />
 					<Route path="forclub" element={<CatalogForClub />} />
-					<Route path="favorites" element={<FavoritesPage />} />
 
+					<Route path="favorites" element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<FavoritesPage />
+						</React.Suspense>
+					} />
+					<Route path="product/:slug/:id" element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<ProductCardPage />
+						</React.Suspense>
+					} />
 
-					<Route path="product/:slug/:id" element={<ProductCardPage />} />
 					<Route path="search/:search" element={<ResultSearch />} />
 
 					<Route path="login" element={<LoginForm />} />
@@ -115,17 +85,11 @@ function App() {
 					<Route path="*" element={<ErrorL >
 						<Error404 />
 					</ErrorL>} />
-				</Routes>
-			</main>
-			<button ref={scrollBtnRef} className="scrollToTop" onClick={scrollToTopClick}>
+				</Route>
 
-				<svg width="16" height="35" viewBox="0 0 14 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M1 1.5L12 16L1 30.5" stroke="#F53B49" strokeWidth="5" />
-				</svg>
-
-			</button>
-			<Footer />
+			</Routes>
 		</BrowserRouter>
+
 	);
 }
 

@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PromotionItem from '../../Layout/PromotionItem/PromotionItem';
+import SpinnerLoad from '../../Layout/SpinnerLoad/SpinnerLoad';
 import Characteristics from './Sections/Characteristics';
 import Description from './Sections/Description';
 import FeedBack from './Sections/FeedBack';
@@ -43,10 +44,7 @@ export default function ProductCardPage() {
 	return (
 		<article className='page-productcard'>
 			{!isLoading ?
-				<div className='loader-block'>
-
-					<div className="loader"></div>
-				</div>
+				<SpinnerLoad />
 				:
 				<>
 					<Presentation product={product} />

@@ -337,7 +337,7 @@ export const PageHome = () => {
 
 					<Link className='article__link about-home__link' to='/'>Подробнее о компании</Link>
 				</div>
-				<div className="about-home__empty"></div>
+				<div className="about-home__empty">				</div>
 			</section>
 			{/* //!  СТАНЬ НАШИМ ПАРТНЕРОМ */}
 			<section className="section-partner__home-page partner-home">

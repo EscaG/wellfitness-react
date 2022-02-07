@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react';
+import './contacts.scss';
 
-export default class PageContacts extends Component {
-	render() {
-		return (
-			<div>
-				Contacts
-			</div>
-		)
-	}
+
+export default function PageContacts() {
+	return (
+		<section className='contacts-page'>
+
+		</section>
+	);
 }
+

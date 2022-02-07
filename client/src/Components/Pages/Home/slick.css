@@ -54,3 +54,9 @@
 		right: 30px;
 	}	
 } */
+.block{
+	overflow: hidden;
+}
+.block.active{
+	overflow: visible;
+}

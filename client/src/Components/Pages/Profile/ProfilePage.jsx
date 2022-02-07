@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { logout } from '../../../http/reducers/userReducer';
 import { useSelector } from "react-redux";
 import { setFavoritesToRedux } from '../../../http/reducers/favoritesReducer';
+import SpinnerLoad from '../../Layout/SpinnerLoad/SpinnerLoad';
 export default function ProfilePage() {
 	const setActiveLink = ({ isActive }) => isActive ? "active-link" : '';
 	const { currentUser, isLoading, isAuth } = useSelector(state => state.user);
@@ -31,9 +32,7 @@ export default function ProfilePage() {
 	return (
 		<>
 			{!isLoading ?
-				<div className='loader-block'>
-					<div className="loader"></div>
-				</div>
+				<SpinnerLoad />
 				:
 				<div className='page-profile profile'>
 					<h1 className='profile__title'>Личный кабинет</h1>

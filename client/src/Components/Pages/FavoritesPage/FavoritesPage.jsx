@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ProductCardItem from '../../Layout/ProductCardItem/ProductCardItem';
 import Watched from '../../Layout/Watched/Watched';
+import SpinnerLoad from '../../Layout/SpinnerLoad/SpinnerLoad';
 
 export default function FavoritesPage() {
 	const [productsFavorites, setProductsFavorites] = useState([]);
@@ -71,17 +72,31 @@ export default function FavoritesPage() {
 		}
 	}
 
-
-
-
-
 	return (
 		<article className='favorites-page'>
 			<h1 className='favorites-page__title'>Избранное</h1>
 			<div className='favorites-page__grid'>
-				{productsFavorites.map((product, index) =>
-					<ProductCardItem key={product._id} product={product} />
-				)}
+
+				{isLoading ?
+					<>
+						{
+							productsFavorites.map((product, index) =>
+								<ProductCardItem key={product._id} product={product} />
+							)
+						}
+
+					</>
+					: productsFavorites.length ?
+						<>
+							{
+								productsFavorites.map((product, index) =>
+									<ProductCardItem key={product._id} product={product} />
+								)
+							}
+
+						</> :
+						<SpinnerLoad />
+				}
 			</div>
 			<div className='favorites-page__watched'>
 				<h2 className='favorites-page__watched-title'>Вы смотрели</h2>

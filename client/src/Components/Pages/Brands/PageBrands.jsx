@@ -27,7 +27,7 @@ import brand23 from './brands/brand23.png';
 
 
 
-export function PageBrands() {
+export default function PageBrands() {
 
 	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11,
 		brand12, brand13, brand14, brand15, brand16, brand17, brand18, brand19, brand20, brand21, brand22, brand23];
