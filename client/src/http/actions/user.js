@@ -85,10 +85,8 @@ export const editAvatar = (email, avatar) => {
 	console.log("redux avatar");
 	return async dispatch => {
 		try {
-			const response = await $api.put("http://localhost:5000" + API_URL + '/avatar',
+			const response = await $api.put(API_URL + '/avatar',
 				{ email, avatar });
-			console.log(response);
-			console.log(response.data.user);
 			dispatch(updateUser(response.data.user));
 		} catch (error) {
 			dispatch(errorUser(error?.response?.data?.message));
@@ -96,20 +94,7 @@ export const editAvatar = (email, avatar) => {
 	}
 }
 
-// export const editAndUpdateUser = (email, surname, name, phone, data) => {
-// 	return async dispatch => {
-// 		try {
-// 			const response = await $api.put(API_URL + '/update',
-// 				{ email, surname, name, phone, data });
-// 			dispatch(updateUser(response.data.user));
-// 			const responseAuth = await $api.get(API_URL + '/refresh');
-// 			dispatch(setUser(responseAuth.data.user));
-// 			localStorage.setItem('token', responseAuth.data.accessToken);
-// 		} catch (error) {
 
-// 		}
-// 	}
-// }
 
 
 

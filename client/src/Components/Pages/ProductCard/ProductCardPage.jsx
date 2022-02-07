@@ -14,6 +14,7 @@ import './style-productcard.scss';
 export default function ProductCardPage() {
 	const [product, setProduct] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
+	const API_URL = process.env.REACT_APP_BASE_URL;
 	const navigate = useNavigate();
 	const goError = () => navigate('/404', { replace: true });
 	let params = useParams();
@@ -22,7 +23,7 @@ export default function ProductCardPage() {
 		async function getProduct(id) {
 			setIsLoading(false)
 			try {
-				const response = await axios.get("/api/product/byid/" + id)
+				const response = await axios.get(API_URL + "/product/byid/" + id)
 				setIsLoading(true)
 				if (response) { setProduct(response.data) }
 				setIsLoading(true)
@@ -32,20 +33,6 @@ export default function ProductCardPage() {
 				goError()
 				console.log(error.message);
 			};
-
-			// await fetch("/api/product/byid/" + id)
-			// 	.then(res => {
-			// 		console.log(res);
-			// 		return res.json();
-			// 	})
-			// 	.then(res => {
-			// 		if (res) { setProduct(res) }
-			// 		document.body.scrollIntoView();
-			// 		setIsLoading(true)
-			// 	})
-			// 	.catch(err =>
-			// 		console.log(err))
-
 		}
 		getProduct(params.id)
 

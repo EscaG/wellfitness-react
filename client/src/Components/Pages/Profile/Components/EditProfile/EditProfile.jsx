@@ -10,14 +10,16 @@ import DisplayedInfo from './DisplayedInfo';
 import { useRef } from 'react';
 
 export default function EditProfile() {
+	const API_URL = process.env.REACT_APP_BASE_URL;
 	const [isEdit, setIsEdit] = useState(false);
 	const [filePath, setFilePath] = useState(null);
-	// const avatarInputRef = useRef();
 	const user = useSelector(state => state.user.currentUser);
-	// console.log(user);
 	const avatarImgRef = useRef();
 	const dispatch = useDispatch();
 
+	useEffect(() => {
+		document.body.scrollIntoView({ behavior: 'smooth' });
+	}, []);
 
 	const updateProfile = async (email, surname, name, phone, { birthday, gender, city, address }) => {
 		setIsEdit(false);
@@ -41,19 +43,14 @@ export default function EditProfile() {
 			let formData = new FormData();
 			formData.append("fileData", e.target.files[0]);
 			console.log(formData);
-			fetch("http://localhost:5000/api/files",
+			fetch(API_URL + "/files",
 				{
 					method: 'POST',
 					body: formData
 				})
 				.then(response => response.text())
 				.then(fileName => {
-					// console.log(fileName);
 					setFilePath("/upload/" + fileName)
-					// updateUserAvatar("/upload/" + fileName)
-					// const item = this.state.item;
-					// item.gallery.push("/upload/" + fileName); // размещаю информацию о файле с папкой
-					// this.setState({ item }); // обновляю информацию
 				})
 				.catch(err => console.log(err));
 		}
@@ -70,8 +67,6 @@ export default function EditProfile() {
 	return (
 		<section className='edit-profile'>
 			<div className='edit-profile__block-avatar avatar-block'>
-				{/* <img src={profile} alt="profile" /> */}
-
 				<label id='avatar-label' htmlFor='avatar'>
 					<img ref={avatarImgRef} src={user.avatar ? user.avatar : profile} alt="avatar" />
 				</label>

@@ -28,18 +28,15 @@ class UserService {
 	}
 
 	async activate(activationlink) {
-		console.log("activationLink", activationlink)
+		// console.log("activationLink", activationlink)
 		const user = await UserModel.findOne({activationlink});
-		console.log("user", user.activationlink);
+		// console.log("user", user.activationlink);
 
 		if (!user) {
 			throw ApiError.BadRequest('Некорректная ссылка активации');
 		}
 		user.isActivated = true;
 		user.save();
-		// await user.save(function (err) {
-		// 	console.log(err);
-		// });
 	}
 
 	async login(email, password) {
@@ -115,19 +112,16 @@ class UserService {
 	}
 
 	async avatarUpdate(email,avatar){
-		// const user = new UserModel({email,avatar});
 		const getAvatar = await fileController.moveGallery(avatar, "/storage/users/avatar_");
 		await UserModel.updateOne({email}, {avatar:getAvatar});
 		const user = await UserModel.findOne({ email });
-		// console.log("user after update", user)
 		if (!user) {
 			throw ApiError.BadRequest('Пользователь с таким email не найден');
 		}
 		const userDto = new UserDto(user);
 		const tokens = await tokenService.generateTokens({...userDto});
-		// console.log("128 user-service ",userDto)
+
 		await tokenService.saveToken(userDto.id, tokens.refreshToken);
-		console.log({...tokens, user: userDto})
 		return {...tokens, user: userDto}
 	}
 

@@ -16,6 +16,9 @@ export default function FavoritesPage() {
 	const API_URL = process.env.REACT_APP_BASE_URL;
 	// const goError = () => navigate('/404', { replace: true });
 	// console.log(currentUser);
+	useEffect(() => {
+		document.body.scrollIntoView();
+	}, []);
 
 	useEffect(() => {
 		if (isAuth) {
@@ -68,9 +71,7 @@ export default function FavoritesPage() {
 		}
 	}
 
-	useEffect(() => {
-		document.body.scrollIntoView();
-	}, []);
+
 
 
 

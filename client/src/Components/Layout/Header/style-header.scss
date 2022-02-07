@@ -488,10 +488,10 @@ $md4: 575.98;
 	max-width: 1440px;
 	padding: 0 15px 0 15px;
 
-	select {
-		background-image: url("img/arrow_white.png");
-		background-size: 8px;
-	}
+	// select {
+	// 	background-image: url("img/arrow_white.png");
+	// 	background-size: 8px;
+	// }
 
 	select option {
 		font-weight: normal;
@@ -546,7 +546,7 @@ $md4: 575.98;
 		width: 8px;
 		position: absolute;
 		right: 0px;
-		top: 25%;
+		top: 15%;
 		background-image: url("img/arrow_white.png");
 		// background-size: 8px;
 		background-repeat: no-repeat;
