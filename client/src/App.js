@@ -32,6 +32,7 @@ import ErrorL from "./Components/hoc/ErrorL";
 import PageBrands from "./Components/Pages/Brands/PageBrands";
 import Layout from './Components/hoc/Layout';
 import SpinnerLoad from './Components/Layout/SpinnerLoad/SpinnerLoad';
+import Categories from './Components/Pages/Categories/Categories';
 
 
 const ProductCardPage = React.lazy(() => import("./Components/Pages/ProductCard/ProductCardPage"))
@@ -70,6 +71,7 @@ function App() {
 						</React.Suspense>
 					} />
 
+					<Route path="categories/:from/:to" element={<Categories />} />
 					<Route path="search/:search" element={<ResultSearch />} />
 
 					<Route path="login" element={<LoginForm />} />

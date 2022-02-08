@@ -50,7 +50,7 @@ export const checkAuth = () => {
 			const response = await $api.get(API_URL + '/refresh',
 				{ withCredentials: true }
 			);
-			console.log(response);
+			// console.log(response);
 			dispatch(setUser(response.data.user));
 			localStorage.setItem('token', response.data.accessToken);
 		} catch (error) {

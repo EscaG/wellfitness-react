@@ -53,7 +53,7 @@ export default function CatalogForHome() {
 		},
 		{
 			image: forhome2,
-			title: "Силовые тренажеры   ",
+			title: "Силовые тренажеры",
 			items: [
 				{
 					name: "Мультистанции ",
@@ -201,10 +201,13 @@ export default function CatalogForHome() {
 							</div>
 
 							<div className="catalog__price">
-								<Link className='catalog__title' to='/'>{item.title}</Link>
+								<Link
+									className='catalog__title'
+									to={"/categories/forhome/" + encodeURI(item.title)}
+								>{item.title}</Link>
 								<div className='catalog__list-forhome list-forhome'>
 									{item.items.map((piece, index) =>
-										<Link key={item.title + index++} to="/" className='list-forhome__item'>
+										<Link key={item.title + index++} to={"/categories/forhome/" + encodeURI(piece.name)} className='list-forhome__item'>
 											<span>{piece.name}</span>
 											<span className='list-forhome__amount'>{piece.pices}</span>
 										</Link>

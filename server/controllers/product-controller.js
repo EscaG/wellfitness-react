@@ -85,6 +85,27 @@ exports.autocomplete = function (request, response) {
 
 	//response.send("Ok");
 }
+exports.category = function (request, response) {
+	const category = request.query.category;
+	// /api/product?category=Samsung
+	console.log("category: " + category);
+	// if (category.length < 2) {
+	// 	response.json([]);
+	// 	return;
+	// }
+	ProductModel.find({category: {$regex: category, "$options": "-i"}},
+		function (err, allData) {
+			if (err) {
+				console.log(err);
+				response.json(err);
+				return;
+			}
+			response.json(allData);
+		}
+	);
+
+	//response.send("Ok");
+}
 exports.getById = function (request, response) {
 	let id = request.params.id;
 	console.log("Run GET");
@@ -105,6 +126,8 @@ exports.getById = function (request, response) {
 exports.seed = function (request, response) {
 	console.log("SEED");
 	let product1 = new ProductModel();
+	product1.type = ['forhome'];
+	product1.category = ['Кардиотренажеры','Силовые тренажеры'];
 	product1.brand ="/storage/brands/bowflex.png";
 	product1.name = "Беговая дорожка CardioPower S20";
 	product1.availability = false;
@@ -120,9 +143,9 @@ exports.seed = function (request, response) {
 	]
 	product1.gallery = [
 		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
-		{id: "a"+ uuid.v4(),
 			image: "/storage/products/second.png"},
+		{id: "a"+ uuid.v4(),
+			image: "/storage/products/first.png"},
 		{id: "a"+ uuid.v4(),
 			image: "/storage/products/third.png"},
 		{id: "a"+ uuid.v4(),
@@ -230,6 +253,7 @@ exports.seed = function (request, response) {
 	product1.save();
 
 	let product2 = new ProductModel();
+	product2.category = ['Кардиотренажеры','Силовые тренажеры'];
 	product2.brand ="/storage/brands/boxingbar.png";
 	product2.name = "Беговая дорожка CardioPower S10";
 	product2.availability = true;
@@ -370,11 +394,11 @@ exports.seed = function (request, response) {
 	];
 	product3.gallery = [
 		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
+			image: "/storage/products/third.png"},
 		{id: "a"+ uuid.v4(),
 			image: "/storage/products/second.png"},
 		{id: "a"+ uuid.v4(),
-			image: "/storage/products/third.png"},
+			image: "/storage/products/first.png"},
 		{id: "a"+ uuid.v4(),
 			image: "/storage/products/fourth.png"},
 		{id: "a"+ uuid.v4(),
@@ -495,7 +519,7 @@ exports.seed = function (request, response) {
 	];
 	product4.gallery = [
 		{id: "a"+ uuid.v4(),
-			image: "/storage/products/first.png"},
+			image: "/storage/products/fourth.png"},
 		{id: "a"+ uuid.v4(),
 			image: "/storage/products/second.png"},
 		{id: "a"+ uuid.v4(),

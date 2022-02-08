@@ -144,6 +144,9 @@
 .article__link.autocomplete {
 	background-color: inherit;
 }
+.article__link:hover.autocomplete {
+	background-color: #f53b49;
+}
 
 .goToSearch {
 	font-size: 18px;
