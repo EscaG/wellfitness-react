@@ -19,13 +19,14 @@ class MailService {
 		await this.transporter.sendMail({
 			from: process.env.SMTP_USER,
 			to,
-			subject: 'Активация аккаунта ' + process.env.API_URL,
+			subject: 'Активация аккаунта на сайте: wellfitness.herokuapp.com',
 			text: '',
 			html:
 				`
 					<div>
-						<h1>Для активации перейдите по ссылке</h1>
-						<a href='${link}'>wellfitness</a> 
+						<h1>Для активации учетной записи перейдите по ссылке</h1>
+						<a href='${link}'>Well Fitness</a> 
+						<h4>А после активации мы вас будем спамить ненужными акция и рекламами всякого хлама</h4>
 					</div>
 				`
 		})

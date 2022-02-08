@@ -3,6 +3,16 @@ import { useJsApiLoader } from '@react-google-maps/api';
 import { Map } from '../../Layout/GoogleMaps/Map';
 import './contacts.scss';
 import { useState } from 'react';
+
+
+import cityCener from './location-citycenter.png';
+import AddressShop from '../../Layout/AddressShop/AddressShop';
+import ContactsOffice from './sections/ContactsOffice';
+import ContactsSales from './sections/ContactsSales';
+import ContactsAccounting from './sections/ContactsAccounting';
+import ContactsService from './sections/ContactsService';
+import ContactsOfficeKiev from './sections/ContactsOfficeKiev';
+import AddressShopKiev from '../../Layout/AddressShop/AddressShopKiev';
 const libraries = ['places'];
 
 export default function PageContacts() {
@@ -25,6 +35,7 @@ export default function PageContacts() {
 		lat: 50.45558370296045,
 		lng: 30.51640964849236
 	};
+	// const [city, setCity] = useState(kiev);
 
 	// let arr = [{
 	// 	lat: 46.968460649408755,
@@ -50,7 +61,7 @@ export default function PageContacts() {
 	}
 
 	return (
-		<section className='contacts-page'>
+		<article className='contacts-page'>
 			<h1 className='contacts-page__title'>Контакты</h1>
 			<div className='contacts-page__cities'>
 				<button
@@ -64,40 +75,62 @@ export default function PageContacts() {
 					id='contacts-kiev'
 				>Контакты в Киеве</button>
 			</div>
-			<div className='contacts-page__shop-contacts contacts-shop'>
-				<div>
-					<h2 className='contacts-shop__name'>Фирменный магазин <br /> Well Fitness</h2>
-					<div className="contacts-shop__address-box box-address">
-						<div>
-							<div className='box-address__address'>
-								Москва, ТРК VEGAS Крокус Сити, <br />
-								м. Мякинино, ул. Международная 12,<br />
-								66 км МКАД
-							</div>
-							<a className="box-address__phone" href="tel:88001234567">+8 (800) 677-56-32</a><br />
-							<a className="box-address__email" href="mailto:info@wellfitness.ru">wellfitness@wellfit.ru</a><br />
-							<button className='box-address__drive'>Как проехать</button><br />
-							<button className='article__link box-address__write'>Написать нам</button>
-						</div>
-						<div className='box-address__work-time'>
-							<div className='box-address__work-text'>Режим работы </div>
-							<div>10:00 – 21:00</div>
-						</div>
-					</div>
-				</div>
-				<div></div>
-			</div>
-			<div>
-				{/* {isLoadedMap
+			{/* //todoСекция с адресным блоком */}
+			{isBtnNykolaev ?
+				<AddressShop />
+				:
+				<AddressShopKiev />
+			}
+			{/* //!Секция с картой */}
+			<section className='contacts-map'>
+				{isLoadedMap
 					?
 					<Map
 						center={city}
 					/>
 					: <h2>Loading</h2>
-				} */}
-			</div>
+				}
+			</section>
+			{/* //todo офисы */}
+			<section className='contacts-page__office office-contacts'>
+				{/* //* главный офис */}
+				{isBtnNykolaev ?
+					<ContactsOffice />
+					:
+					<ContactsOfficeKiev />
+				}
+				{/* //* отдел продаж */}
+				<ContactsSales />
+				{/* //* отдел бухгалтерии */}
+				<ContactsAccounting />
+				{/* //* Сервисная служба */}
+				<ContactsService />
+			</section>
+			<section className='contacts-page__warehouse warehouse-contacts'>
+				<h2 className='warehouse-contacts__title'>Склады</h2>
+				<div className='warehouse-contacts__cards'>
+					<div>
+						<h3>Склад, Николаев</h3>
+						<div>
+							г. Николаев, <br />
+							ул. Лягина 4, <br />
+							Там за туманами
+						</div>
+						<a href="tel:88001234567">8 (800) 667-56-32</a>
+					</div>
+					<div>
+						<h3>Дополнительный, склад Киев</h3>
+						<div>
+							г. Киев, <br />
+							ул. Разбитый Фонарей<br />
+							Вечными пьяными
+						</div>
+						<a href="tel:+380445569412">+38 (044) 556-94-12</a>
+					</div>
+				</div>
+			</section>
 
-		</section>
+		</article>
 	);
 }
 

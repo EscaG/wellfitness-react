@@ -25,65 +25,192 @@
 		}
 	}
 }
-.contacts-shop {
-	display: flex;
-	padding: 40px;
-	border-radius: 6px;
-	background-color: #fff;
-	& > div {
+.contacts-map {
+	padding: 0 0 30px 0;
+	margin: 0 0 30px 0;
+	border-bottom: 1px solid rgba(133, 143, 164, 0.2);
+}
+.office-contacts {
+	&__address-block {
+		padding: 0 0 30px 0;
+		margin: 0 0 30px 0;
+		border-bottom: 1px solid rgba(133, 143, 164, 0.2);
+		display: flex;
+	}
+}
+.address-sales,
+.address-accounting,
+.address-service {
+	&__email-block {
+		flex: 1;
+		a {
+			margin: 0 0 2px 0;
+			display: inline-block;
+			color: #384255;
+			font-size: 16px;
+			font-style: WazzardM, serif;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	&__desc-email {
+		margin: 0 0 10px 0;
+		color: #909cb5;
+	}
+}
+.address-office,
+.address-office-kiev,
+.address-sales,
+.address-accounting,
+.address-service {
+	& > div:first-child {
 		flex: 1;
 	}
-	&__name {
-		margin: 0 0 20px 0;
+	&__address-wrapper {
+		display: flex;
+		& > div {
+			flex: 1;
+		}
+	}
+	&__title {
 		font-size: 30px;
 		font-variation-settings: "wght" 700;
 	}
-	&__address-box {
-		display: flex;
-		justify-content: space-between;
-		& > div {
-			// flex: 1;
+	&__title-small {
+		margin: 0 0 20px 0;
+		font-size: 16px;
+		font-variation-settings: "wght" 500;
+	}
+	&__address {
+		margin: 0 0 20px 0;
+		font-size: 20px;
+		line-height: 1.2;
+	}
+	&__work-time {
+		font-size: 16px;
+		margin: 0 0 20px 0;
+		span {
+			display: inline-block;
+			margin: 0 0 3px 0;
+		}
+	}
+	&__background-img {
+		flex: 1;
+		height: 250px;
+		background: url("./location-citycenter.png") center / cover no-repeat;
+	}
+	&__tel {
+		margin: 0 0 20px 0;
+		a {
+			color: #384255;
+			font-size: 17px;
+			font-variation-settings: "wght" 700;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	.address-office-kiev {
+		&__background-img {
+			background: url("./location-kiev.png") center / cover no-repeat;
 		}
 	}
 }
-.box-address {
-	overflow: hidden;
-	&__address {
-		margin: 0 0 10px 0;
-		font-size: 16px;
+.warehouse-contacts {
+	&__cards {
+		display: grid;
+		grid-template: 1fr/ 1fr 1fr;
+		gap: 20px;
+		& > div {
+			flex: 1;
+			padding: 30px;
+			border-radius: 6px;
+			background-color: #fff;
+		}
 	}
-
-	&__phone,
-	&__email,
-	&__drive {
-		display: inline-block;
-		margin: 0 0 10px 0;
+}
+@media (max-width: 992px) {
+	.contacts-page {
+		padding: 80px 15px 50px 15px;
+		&__title {
+			font-size: 34px;
+		}
 	}
-	&__phone {
-		color: #384255;
-		font-size: 20px;
-		font-variation-settings: "wght" 700;
+	.address-office,
+	.address-office-kiev,
+	.address-sales,
+	.address-accounting,
+	.address-service {
+		&__work-time {
+			span {
+				display: block;
+			}
+		}
 	}
-	&__email {
-		color: #384255;
-		font-family: WazzardM, serif;
-		font-size: 16px;
+}
+@media (max-width: 768px) {
+	.contacts-page {
+		padding: 50px 15px 50px 15px;
+		&__title {
+			padding: 0 0 15px 0;
+			margin: 0 0 20px 0;
+			font-size: 30px;
+		}
 	}
-	&__drive {
-		margin: 0 0 30px 0;
-		background-color: inherit;
-		color: #4b7ee8;
-		font-size: 14px;
-		font-variation-settings: "wght" 700;
+	.address-sales {
+		&__address-wrapper {
+			& > div {
+				flex: unset;
+			}
+		}
 	}
-	&__write {
-		color: #fff;
-		background-color: #f53b49;
+	.address-office,
+	.address-office-kiev,
+	.address-sales,
+	.address-accounting,
+	.address-service {
+		&__address-wrapper {
+			flex-direction: column;
+		}
+		&__background-img {
+			flex: 2;
+		}
 	}
-	&__work-time {
-		padding: 0 50px;
+}
+@media (max-width: 576px) {
+	.contacts-page {
+		padding: 30px 15px 50px 15px;
+		&__title {
+			padding: 0 0 15px 0;
+			margin: 0 0 20px 0;
+			font-size: 26px;
+		}
+		&__cities {
+			margin: 0 0 20px;
+			button {
+				width: 100%;
+				margin: 0 0 10px 0;
+			}
+		}
 	}
-	&__work-text {
-		margin: 0 0 10px 0;
+	.address-office {
+		flex-direction: column;
+		&__address-wrapper {
+			flex-direction: row;
+		}
+		&__background-img {
+			flex: unset;
+			height: 200px;
+		}
+	}
+	.address-sales,
+	.address-office-kiev,
+	.address-accounting,
+	.address-service {
+		flex-direction: column;
+		&__address-wrapper {
+			flex-direction: column;
+		}
 	}
 }

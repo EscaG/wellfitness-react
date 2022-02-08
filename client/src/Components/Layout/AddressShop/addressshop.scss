@@ -1,0 +1,152 @@
+.contacts-shop {
+	overflow: hidden;
+	display: flex;
+	margin: 0 0 30px 0;
+	border-radius: 6px;
+	background-color: #fff;
+	& > div {
+		flex: 1;
+	}
+	&__padding {
+		padding: 40px;
+	}
+	&__name {
+		margin: 0 0 20px 0;
+		font-size: 30px;
+		font-variation-settings: "wght" 700;
+	}
+	&__address-box {
+	}
+}
+.box-address {
+	display: flex;
+
+	justify-content: space-between;
+	& > div {
+		// flex: 1;
+	}
+
+	&__address {
+		margin: 0 0 10px 0;
+		font-size: 16px;
+		line-height: 1.2;
+	}
+
+	&__phone,
+	&__email,
+	&__drive {
+		display: inline-block;
+		margin: 0 0 10px 0;
+	}
+	&__phone {
+		color: #384255;
+		font-size: 20px;
+		font-variation-settings: "wght" 700;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	&__email {
+		color: #384255;
+		font-family: WazzardM, serif;
+		font-size: 16px;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	&__drive {
+		margin: 0 0 30px 0;
+		background-color: inherit;
+		color: #4b7ee8;
+		font-size: 14px;
+		font-variation-settings: "wght" 700;
+	}
+	&__write {
+		color: #fff;
+		background-color: #f53b49;
+	}
+	&__work-time {
+		padding: 0 50px;
+	}
+	&__work-text {
+		margin: 0 0 10px 0;
+	}
+	&__item-image {
+		height: 100%;
+		background: url("./city-parad.jpg") center / cover no-repeat;
+	}
+	&__item-image-kiev {
+		height: 100%;
+		background: url("./metro-kiev.jpg") center / cover no-repeat;
+	}
+}
+@media (max-width: 992px) {
+	.contacts-shop {
+		&__name {
+			font-size: 26px;
+		}
+		&__padding {
+			padding: 40px 0 40px 40px;
+		}
+	}
+	.box-address {
+		flex-direction: column;
+		&__work-time {
+			padding: 0;
+			margin: 0 0 10px 0;
+		}
+	}
+}
+@media (max-width: 768px) {
+	.contacts-shop {
+		// padding: 30px;
+		flex-direction: column-reverse;
+		&__name {
+			font-size: 30px;
+		}
+		&__padding {
+			padding: 30px;
+		}
+	}
+	.box-address {
+		&__item-image,
+		&__item-image-kiev {
+			height: 300px;
+			// margin: 0 0 20px 0;
+		}
+	}
+}
+@media (max-width: 576px) {
+	.contacts-shop {
+		// padding: 30px;
+		&__name {
+			font-size: 24px;
+		}
+		&__padding {
+			padding: 25px;
+		}
+	}
+	.box-address {
+		&__item-image,
+		&__item-image-kiev {
+			height: 230px;
+		}
+	}
+}
+@media (max-width: 400px) {
+	.contacts-shop {
+		// padding: 15px;
+		&__name {
+			// font-size: 22px;
+		}
+		&__padding {
+			padding: 15px;
+		}
+	}
+	.box-address {
+		&__item-image,
+		&__item-image-kiev {
+			height: 200px;
+		}
+	}
+}
