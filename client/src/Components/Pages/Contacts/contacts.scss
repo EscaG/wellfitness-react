@@ -3,4 +3,87 @@
 	margin: auto;
 	max-width: 1440px;
 	min-height: 75vh;
+	color: #384255;
+	&__title {
+		padding: 0 0 20px 0;
+		margin: 0 0 30px 0;
+		color: #1a1a25;
+		font-size: 38px;
+		font-variation-settings: "wght" 800;
+		border-bottom: 1px solid rgba(133, 143, 164, 0.2);
+	}
+	&__cities {
+		flex: 1;
+		margin: 0 0 30px;
+		button {
+			margin: 0 12px 0 0;
+			background-color: inherit;
+		}
+		.article__link.active {
+			background-color: #f53b49;
+			color: #fff;
+		}
+	}
+}
+.contacts-shop {
+	display: flex;
+	padding: 40px;
+	border-radius: 6px;
+	background-color: #fff;
+	& > div {
+		flex: 1;
+	}
+	&__name {
+		margin: 0 0 20px 0;
+		font-size: 30px;
+		font-variation-settings: "wght" 700;
+	}
+	&__address-box {
+		display: flex;
+		justify-content: space-between;
+		& > div {
+			// flex: 1;
+		}
+	}
+}
+.box-address {
+	overflow: hidden;
+	&__address {
+		margin: 0 0 10px 0;
+		font-size: 16px;
+	}
+
+	&__phone,
+	&__email,
+	&__drive {
+		display: inline-block;
+		margin: 0 0 10px 0;
+	}
+	&__phone {
+		color: #384255;
+		font-size: 20px;
+		font-variation-settings: "wght" 700;
+	}
+	&__email {
+		color: #384255;
+		font-family: WazzardM, serif;
+		font-size: 16px;
+	}
+	&__drive {
+		margin: 0 0 30px 0;
+		background-color: inherit;
+		color: #4b7ee8;
+		font-size: 14px;
+		font-variation-settings: "wght" 700;
+	}
+	&__write {
+		color: #fff;
+		background-color: #f53b49;
+	}
+	&__work-time {
+		padding: 0 50px;
+	}
+	&__work-text {
+		margin: 0 0 10px 0;
+	}
 }

@@ -5,7 +5,7 @@ import './map.css';
 import MyMarker from '../MyMarker/MyMarker';
 
 
-export function Map({ center }) {
+export function Map({ center, markers }) {
 
 	const mapRef = useRef(undefined);
 	const containerStyle = {
@@ -35,23 +35,29 @@ export function Map({ center }) {
 		// fullscreenControl: false
 	}
 
+
 	return (
 		<div className='map'>
 
 			<GoogleMap
 				options={options}
 				mapContainerStyle={containerStyle}
-				center={center[0]}
-				zoom={13}
+				center={center}
+				zoom={12}
 				onLoad={onLoad}
 				onUnmount={onUnmount}
 			>
-				{center.map((pos, index) =>
+				{markers?.length ? markers.map((pos, index) =>
 					<MyMarker
 						key={pos.lat}
 						position={pos}
 					/>
-				)}
+				)
+					:
+					<MyMarker
+						position={center}
+					/>
+				}
 
 			</GoogleMap>
 		</div>
