@@ -2,12 +2,12 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import './presentation.scss';
 import MainImage from '../../../Layout/SpriteIcons/MainImage';
 import SpriteIcons from '../../../Layout/SpriteIcons/SpriteIcons';
-import './presentation.scss';
 import { Link as LinkScroll } from 'react-scroll';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkAuth, editFavorites } from '../../../../http/actions/user';
+import { editFavorites } from '../../../../http/actions/user';
 import { setFavoritesToRedux } from '../../../../http/reducers/favoritesReducer';
 
 export default function Presentation({ product }) {

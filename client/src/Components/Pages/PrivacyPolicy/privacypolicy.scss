@@ -1,0 +1,45 @@
+.privacy-policy {
+	padding: 50px 15px 50px 15px;
+
+	margin: auto;
+	max-width: 1440px;
+	color: #384255;
+	&__title {
+		padding: 0px 0px 20px 0px;
+		margin: 0px 0px 30px 0px;
+		font-size: 38px;
+		font-variation-settings: "wght" 800;
+		color: #1a1a25;
+		border-bottom: 1px solid rgba(133, 143, 164, 0.2);
+	}
+	ul {
+		margin: 0px 0px 20px 0px;
+	}
+	ul li {
+		list-style-type: decimal;
+		font-size: 20px;
+		font-variation-settings: "wght" 800;
+		div {
+			margin: 20px 0;
+			font-size: initial;
+			font-variation-settings: initial;
+			p {
+				line-height: 1.2;
+				font-size: 18px;
+				span {
+					display: block;
+				}
+			}
+		}
+	}
+	section {
+		margin: auto;
+		max-width: 930px;
+	}
+}
+.article__link.policy {
+	background-color: inherit;
+}
+.article__link:hover.policy {
+	background-color: #f53b49;
+}

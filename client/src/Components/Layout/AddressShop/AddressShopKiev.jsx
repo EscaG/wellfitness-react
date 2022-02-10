@@ -1,7 +1,9 @@
 import React from 'react';
 import './addressshop.scss';
+import { Link as LinkScroll } from 'react-scroll';
 
 export default function AddressShopKiev() {
+
 	return (
 		<section className='contacts-page__shop-contacts contacts-shop'>
 			<div className='contacts-shop__padding'>
@@ -22,7 +24,9 @@ export default function AddressShopKiev() {
 					</div>
 				</div>
 				<button className='box-address__drive'>Как проехать</button><br />
-				<button className='article__link box-address__write'>Написать нам</button>
+				<LinkScroll
+					to='contacts-form' smooth={true} spy={true} duration={500} offset={-30}
+					className='article__link box-address__write'>Написать нам</LinkScroll>
 			</div>
 			<div>
 				{/* //todo картинка */}

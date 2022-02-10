@@ -4,6 +4,7 @@
 	margin: 0 0 30px 0;
 	border-radius: 6px;
 	background-color: #fff;
+
 	& > div {
 		flex: 1;
 	}
@@ -62,6 +63,7 @@
 		font-variation-settings: "wght" 700;
 	}
 	&__write {
+		cursor: pointer;
 		color: #fff;
 		background-color: #f53b49;
 	}

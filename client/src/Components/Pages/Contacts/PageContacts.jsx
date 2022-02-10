@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { Map } from '../../Layout/GoogleMaps/Map';
 import './contacts.scss';
 import { useState } from 'react';
 
 
-import cityCener from './location-citycenter.png';
+// import cityCener from './location-citycenter.png';
 import AddressShop from '../../Layout/AddressShop/AddressShop';
 import ContactsOffice from './sections/ContactsOffice';
 import ContactsSales from './sections/ContactsSales';
@@ -14,6 +14,7 @@ import ContactsService from './sections/ContactsService';
 import ContactsOfficeKiev from './sections/ContactsOfficeKiev';
 import AddressShopKiev from '../../Layout/AddressShop/AddressShopKiev';
 import ContactsWareHous from './sections/ContactsWareHous';
+import WriteToUs from './sections/WriteToUs/WriteToUs';
 const libraries = ['places'];
 
 export default function PageContacts() {
@@ -46,31 +47,9 @@ export default function PageContacts() {
 	// 	lat: 46.96814128814943,
 	// 	lng: 32.002101538777104
 	// },	]
-	useEffect(() => {
-		send();
-	}, []);
 
-	const send = () => {
-		// this.setState({ isLoaded: false })
-		fetch("/api/sendTelegram/",
-			{
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ body: 'body', name: 'Vasya', tel: '1222323' })
-			}
-		)
-			.then(res => {
-				console.log("Result:", res);
-				return res.json();
-			})
-			.then(data => {
-				console.log(data);
-				// this.setState({ isLoaded: true })
-			})
-			.catch(err => {
-				// this.setState({ error: err, isLoaded: true })
-			})
-	}
+
+
 
 	const handleCity = (e) => {
 		if (e.target.id === "contacts-nykolaev") {
@@ -132,7 +111,7 @@ export default function PageContacts() {
 				<ContactsService />
 			</section>
 			<ContactsWareHous />
-
+			<WriteToUs />
 		</article>
 	);
 }

@@ -24,10 +24,10 @@ import Instructions from "./Components/Pages/Profile/Components/Instructions";
 import Appeals from "./Components/Pages/Profile/Components/Appeals";
 import EditProfile from "./Components/Pages/Profile/Components/EditProfile/EditProfile";
 import ResultSearch from "./Components/Pages/ResultSearch/ResultSearch";
-import Error404 from "./Components/Pages/Error/Error404";
 import ErrorL from "./Components/hoc/ErrorL";
 import Layout from './Components/hoc/Layout';
 import SpinnerLoad from './Components/Layout/SpinnerLoad/SpinnerLoad';
+
 
 
 const PageBrands = lazy(() => import("./Components/Pages/Brands/PageBrands"));
@@ -38,6 +38,8 @@ const CatalogForHome = lazy(() => import("./Components/Pages/CatalogForHome/Cata
 const CatalogForClub = lazy(() => import("./Components/Pages/CatalogForClub/CatalogForClub"));
 
 const Categories = lazy(() => import('./Components/Pages/Categories/Categories'));
+const PrivacyPolicy = lazy(() => import('./Components/Pages/PrivacyPolicy/PrivacyPolicy'));
+const Error404 = lazy(() => import("./Components/Pages/Error/Error404"));
 
 function App() {
 
@@ -108,10 +110,26 @@ function App() {
 						<Route path="editprofile" element={<EditProfile />} />
 					</Route>
 
-					<Route path="404" element={<Error404 />} />
-					<Route path="*" element={<ErrorL >
-						<Error404 />
-					</ErrorL>} />
+					<Route path='privacy-policy' element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<PrivacyPolicy />
+						</React.Suspense>
+					} />
+
+					<Route path="404" element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<Error404 />
+						</React.Suspense>
+					} />
+
+					<Route path="*" element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<ErrorL >
+								<Error404 />
+							</ErrorL>
+						</React.Suspense>
+					} />
+
 				</Route>
 
 			</Routes>
