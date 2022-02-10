@@ -4,7 +4,7 @@ import SpriteIcons from '../SpriteIcons/SpriteIcons';
 import './prodview.scss';
 
 export default function ProductViewe({ product, closeAndSetToLocal }) {
-	const { name, gallery, _id, price, rating } = product;
+	const { name, gallery, _id, price, rating } = product || {};
 	let url = '/product/' + encodeURI(name) + "/" + _id;
 
 

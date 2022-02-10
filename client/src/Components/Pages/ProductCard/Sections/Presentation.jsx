@@ -219,7 +219,7 @@ export default function Presentation({ product }) {
 						{/* //todo бренд */}
 						<div className='configaration-all__brand'>
 							<div>
-								<img src={brand} alt="brand" />
+								<img src={brand && brand.image} alt="brand" />
 							</div>
 							<div>
 								<SpriteIcons icon={"profitable"} />

@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 
 export default function Watched() {
 	const products = useSelector(state => state.product.currentProduct);
+
 	const watchedItems = [
 		{
 			image: watchedFirst,
@@ -66,7 +67,7 @@ export default function Watched() {
 		infinite: true,
 		centerPadding: "0px",
 		lazyLoad: true,
-		slidesToShow: 6,
+		slidesToShow: products.length > 6 ? 6 : products.length - 1,
 		slidesToScroll: 1,
 		speed: 500,
 		autoplay: true,

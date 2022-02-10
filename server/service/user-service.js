@@ -66,7 +66,7 @@ class UserService {
 		const userData = tokenService.validateRefreshToken(refreshToken);
 		const tokenFromDb = await tokenService.findToken(refreshToken);
 
-		console.log("user = ", userData);
+		// console.log("user = ", userData);
 		console.log("refresh = ", refreshToken);
 		console.log("tokenFromDb = ", tokenFromDb);
 

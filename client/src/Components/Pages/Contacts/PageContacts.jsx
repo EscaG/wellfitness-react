@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { Map } from '../../Layout/GoogleMaps/Map';
 import './contacts.scss';
@@ -46,7 +46,31 @@ export default function PageContacts() {
 	// 	lat: 46.96814128814943,
 	// 	lng: 32.002101538777104
 	// },	]
+	useEffect(() => {
+		send();
+	}, []);
 
+	const send = () => {
+		// this.setState({ isLoaded: false })
+		fetch("/api/sendTelegram/",
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ body: 'body', name: 'Vasya', tel: '1222323' })
+			}
+		)
+			.then(res => {
+				console.log("Result:", res);
+				return res.json();
+			})
+			.then(data => {
+				console.log(data);
+				// this.setState({ isLoaded: true })
+			})
+			.catch(err => {
+				// this.setState({ error: err, isLoaded: true })
+			})
+	}
 
 	const handleCity = (e) => {
 		if (e.target.id === "contacts-nykolaev") {

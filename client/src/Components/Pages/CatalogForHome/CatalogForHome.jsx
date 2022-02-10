@@ -196,18 +196,25 @@ export default function CatalogForHome() {
 					{catalogList.map((item, index) =>
 						<div className='catalog__card' key={index}>
 
-							<div className='catalog__item-image'>
+							<Link
+								to={"/categories/forhome/" + encodeURI(item.title)}
+								className='catalog__item-image'
+							>
 								<img className='catalog__image' src={item.image} alt="training" />
-							</div>
+							</Link>
 
 							<div className="catalog__price">
 								<Link
-									className='catalog__title'
 									to={"/categories/forhome/" + encodeURI(item.title)}
+									className='catalog__title'
 								>{item.title}</Link>
 								<div className='catalog__list-forhome list-forhome'>
 									{item.items.map((piece, index) =>
-										<Link key={item.title + index++} to={"/categories/forhome/" + encodeURI(piece.name)} className='list-forhome__item'>
+										<Link
+											to={"/categories/forhome/" + encodeURI(piece.name)}
+											key={item.title + index++}
+											className='list-forhome__item'
+										>
 											<span>{piece.name}</span>
 											<span className='list-forhome__amount'>{piece.pices}</span>
 										</Link>

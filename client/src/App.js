@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./resetstyle.scss";
 import "./bootstrap.scss"
@@ -12,9 +12,6 @@ import PageUslugi from "./Components/Pages/Uslugi/PageUslugi";
 import PageSupport from "./Components/Pages/Support/PageSupport";
 import PageBlog from "./Components/Pages/Blog/PageBlog";
 import PageShowroom from "./Components/Pages/Showroom/PageShowroom";
-import PageContacts from "./Components/Pages/Contacts/PageContacts";
-import CatalogForHome from "./Components/Pages/CatalogForHome/CatalogForHome";
-import CatalogForClub from "./Components/Pages/CatalogForClub/CatalogForClub";
 import { LoginForm } from "./Components/Pages/Login/LoginForm";
 import RegistrationForm from "./Components/Pages/Login/RegistrationForm";
 import ProfilePage from "./Components/Pages/Profile/ProfilePage";
@@ -29,14 +26,19 @@ import EditProfile from "./Components/Pages/Profile/Components/EditProfile/EditP
 import ResultSearch from "./Components/Pages/ResultSearch/ResultSearch";
 import Error404 from "./Components/Pages/Error/Error404";
 import ErrorL from "./Components/hoc/ErrorL";
-import PageBrands from "./Components/Pages/Brands/PageBrands";
 import Layout from './Components/hoc/Layout';
 import SpinnerLoad from './Components/Layout/SpinnerLoad/SpinnerLoad';
-import Categories from './Components/Pages/Categories/Categories';
 
 
-const ProductCardPage = React.lazy(() => import("./Components/Pages/ProductCard/ProductCardPage"))
-const FavoritesPage = React.lazy(() => import("./Components/Pages/FavoritesPage/FavoritesPage"));
+const PageBrands = lazy(() => import("./Components/Pages/Brands/PageBrands"));
+const PageContacts = lazy(() => import("./Components/Pages/Contacts/PageContacts"));
+const ProductCardPage = lazy(() => import("./Components/Pages/ProductCard/ProductCardPage"))
+const FavoritesPage = lazy(() => import("./Components/Pages/FavoritesPage/FavoritesPage"));
+const CatalogForHome = lazy(() => import("./Components/Pages/CatalogForHome/CatalogForHome"));
+const CatalogForClub = lazy(() => import("./Components/Pages/CatalogForClub/CatalogForClub"));
+
+const Categories = lazy(() => import('./Components/Pages/Categories/Categories'));
+
 function App() {
 
 	return (
@@ -45,15 +47,29 @@ function App() {
 
 				<Route path="/" element={<Layout />} >
 					<Route index element={<PageHome />} />
-					<Route path="brands" element={<PageBrands />} />
 					<Route path="service" element={<PageService />} />
 					<Route path="services" element={<PageUslugi />} />
 					<Route path="support" element={<PageSupport />} />
 					<Route path="about" element={<PageAbout />} />
 					<Route path="blog" element={<PageBlog />} />
 					<Route path="showroom" element={<PageShowroom />} />
-					<Route path="forhome" element={<CatalogForHome />} />
-					<Route path="forclub" element={<CatalogForClub />} />
+
+					<Route path="brands" element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<PageBrands />
+						</React.Suspense>
+					} />
+
+					<Route path="forhome" element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<CatalogForHome />
+						</React.Suspense>
+					} />
+					<Route path="forclub" element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<CatalogForClub />
+						</React.Suspense>
+					} />
 
 					<Route path="contacts" element={
 						<React.Suspense fallback={<SpinnerLoad />}>
@@ -71,7 +87,11 @@ function App() {
 						</React.Suspense>
 					} />
 
-					<Route path="categories/:from/:to" element={<Categories />} />
+					<Route path="categories/:from/:to" element={
+						<React.Suspense fallback={<SpinnerLoad />}>
+							<Categories />
+						</React.Suspense>
+					} />
 					<Route path="search/:search" element={<ResultSearch />} />
 
 					<Route path="login" element={<LoginForm />} />

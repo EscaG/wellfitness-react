@@ -31,13 +31,6 @@ import gantel from './img/club/gantel.png';
 import medicine from './img/club/medicine.png';
 import massage from './img/club/massage.png';
 
-
-// import bannerFirst from './img/banner/banner1.png';
-// import bannerSecond from './img/banner/banner2.png';
-// import bannerThird from './img/banner/banner3.png';
-// import bannerFourth from './img/banner/banner4.png';
-// import bannerFifth from './img/banner/banner5.png';
-
 import brand1 from './img/brands/brand1.png';
 import brand2 from './img/brands/brand2.png';
 import brand3 from './img/brands/brand3.png';
@@ -64,17 +57,19 @@ import arrowlink from './img/icons/arrow-link.svg';
 
 import partner from './img/partner.png';
 
-
 import IdeasSection from '../../Layout/IdeasSection/IdeasSection';
 import NewsSlider from '../../Layout/NewsSlider/NewsSlider';
-
+import ForHome from './Components/ForHome';
+import ForClub from './Components/ForClub';
+import BrandsHome from './Components/BrandsHome';
+import HelpClient from './Components/HelpClient';
+import AboutHome from './Components/AboutHome';
+import OurPartner from './Components/OurPartner';
 
 export const PageHome = () => {
-	// const [modalActive, setModalActive] = useState(false);
+
 	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
 	const slides = [firstSlide, secondSlide, thirdSlide, fourthSlide];
-
-
 
 	const helpHome = [{
 		imgSrc: helpCall,
@@ -217,37 +212,27 @@ export const PageHome = () => {
 				<div className='article-home home'>
 					<h3 className='article__caption'>Тренажеры для дома</h3>
 					<div className='grid__home setting-home'>
-
 						{homeImages.map((img, index) =>
-							<Link
-								className={"grid__item_i" + index + " grid__item"}
-								key={index++}
-								to="/">
-								<h3 className={"grid__item_header" + index + " grid__item_header"}>{img.name}</h3>
-								<img className={"grid__item_image_m" + index + " grid__item_image"} src={img.imgSrc} alt="home training" />
-							</Link>
+							<ForHome
+								key={index}
+								img={img}
+								index={index}
+							/>
 						)}
-
 					</div>
 					<Link to="/" className='article__link' href="#">Все категории</Link>
 				</div>
-
 				{/* //todo каталог для клуба */}
-
 				<div className='article-club club'>
 					<h3 className='article__caption'>Для фитнес клубов</h3>
 					<div className='grid__club seetting-club'>
-
 						{clubImages.map((img, index) =>
-							<Link
-								className={"grid__item_i" + index + " grid__item grid__item_club" + index}
-								key={index++}
-								to="/">
-								<h3 className={"grid__item_header" + index + " grid__item_header grid__item_header_club" + index}>{img.name}</h3>
-								<img className={"grid__item_image_m" + index + " grid__item_image grid__item_image_club" + index} src={img.imgSrc} alt="home training" />
-							</Link>
+							<ForClub
+								key={index}
+								img={img}
+								index={index}
+							/>
 						)}
-
 					</div>
 					<Link to="/" className='article__link' href="#">Все категории</Link>
 				</div>
@@ -256,116 +241,31 @@ export const PageHome = () => {
 			</article>
 			{/* //!  ИДЕИ И ПОДБОРКИ */}
 			<IdeasSection />
-
 			<div className="section-brands section-brands__cap">
 				<h3 className='article__caption '>Популярные бренды</h3>
 			</div>
 			{/* //!  БРЕНДЫ */}
-			<section className="section-brands__home-page section-brands">
-				<ul className="section-brands__list">
-					<li className="section-brands__item">
-						<Link to="/">Беговые дорожки</Link>
-					</li>
-					<li className="section-brands__item">
-						<Link to="/">Эллиптические тренажеры</Link>
-					</li>
-					<li className="section-brands__item">
-						<Link to="/">Велотренажеры</Link>
-					</li>
-					<li className="section-brands__item">
-						<Link to="/">Силовые тренажеры</Link>
-					</li>
-					<li className="section-brands__item">
-						<Link to="/">Батуты</Link>
-					</li>
-					<li className="section-brands__item">
-						<Link to="/">Игровые столы</Link>
-					</li>
-				</ul>
-				<div className="section-brands__brands-list-home brands-list-home">
-					{brands.map(item =>
-						<div key={item} className="brands-list-home__item">
-							<img className='brands-list-home__image' src={item} alt="" />
-						</div>
-					)}
-				</div>
-			</section>
+			<BrandsHome
+				brands={brands}
+			/>
 			<div className="section-brands section-brands__hr">
-				<Link className='article__link' to="/">Все бренды</Link>
+				<Link className='article__link' to="/brands">Все бренды</Link>
 			</div>
 			{/* //!  ПОМОЩЬ ПОКУПАТЕЛЮ */}
-			<section className='section-help__home-page help-home'>
-				{helpHome.map((item, index) =>
-					<div className='help-home__card' key={index}>
-						<div className='help-home__main main-helphome'>
-
-							<svg className={"main-helphome__" + item.imgId} width={item.width} height={item.height}>
-								<title>heart</title>
-								<use xlinkHref={item.imgSrc + "#" + item.imgId}></use>
-							</svg>
-							<h3 className='main-helphome__header'>{item.header}</h3>
-							<p className='main-helphome__description'>{item.description}</p>
-							<div className='main-helphome__link'>
-								<Link to="/">{item.link}</Link>
-								<svg className='' width="9" height="11">
-									<title>heart</title>
-									<use xlinkHref={arrowlink + "#arrow-link"}></use>
-								</svg>
-							</div>
-						</div>
-						<div className='help-home__hover'><img src={phone} alt="phone" /></div>
-					</div>
-				)}
-			</section>
+			<HelpClient
+				helpHome={helpHome}
+				arrowlink={arrowlink}
+				phone={phone}
+			/>
 			{/* //!  О КОМПАНИИ */}
-			<section className="section-about__home-page about-home">
-				<div className="about-home__presentation">
-					<h4 className='article__caption about-home__title'>О компании</h4>
-					<div className='about-home__subtitle'>
-						Надежный партнер с 2005 года для сотен компаний от Калининграда до Владивостока.
-					</div>
-
-					<div className='about-home__description'>
-						<p>
-							Оптима Импорт — один из самых крупных импортеров фитнес-оборудования, эксклюзивно представляет на российском рынке ведущих мировых производителей: Sole Fitness, Optima Fitness, Halley, Marcy, SKI Simulator и др.
-						</p>
-						<br />
-						<p>
-							Мы предлагаем широкий спектр самой современной и качественной продукции как для домашнего, так и для коммерческого фитнеса.
-						</p>
-					</div>
-
-					<Link className='article__link about-home__link' to='/'>Подробнее о компании</Link>
-				</div>
-				<div className="about-home__empty">				</div>
-			</section>
+			<AboutHome />
 			{/* //!  СТАНЬ НАШИМ ПАРТНЕРОМ */}
-			<section className="section-partner__home-page partner-home">
-				<div className='partner-home__left'>
-					<img className='partner-home__image' src={partner} alt="partner" />
-				</div>
-				<div className='partner-home__right'>
-					<div>Станьте нашим партнером <span className='partner-home__right_red'>и получите возможность</span> представлять нашу продукцию в вашем регионе.</div>
-					<Link className='article__link partner-home__link' to='/'>Стать партнером</Link>
-				</div>
-			</section	>
+			<OurPartner
+				partner={partner}
+			/>
 			{/* //! НОВОСТИ */}
-
 			<NewsSlider />
-			{/* <Slider {...settingsPromotion}>
-						{newsHome.map((item, index) =>
-							<div className='news-home__card ' key={index++}>
-								<div className='news-home__item-image'>
-									<img className='news-home__image' src={item.imgSrc} alt="news" />
-								</div>
-								<div>
-									<h4 className='news-home__title-card'>{item.title}</h4>
-									<p className='news-home__description'>{item.description}</p>
-									<span className='news-home__date'>{item.date}</span>
-								</div>
-							</div>
-						)}
-					</Slider> */}
+
 
 		</div >
 	)

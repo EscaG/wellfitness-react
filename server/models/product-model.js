@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Product = new Schema({
-	type:[], // для дома или для фитнес клубов
-	category:[], // станки ,массажные кресла, резинки
-	brand: String,
+	type: [], // для дома или для фитнес клубов
+	category: [], // станки ,массажные кресла, резинки
+	type: String,
+	brand: {}, // name, image
 	name: String,
 	availability: Boolean,
 	gallery: [],
@@ -17,26 +18,26 @@ const Product = new Schema({
 	configuration: {
 		size: String,
 		weight: String,
-		color:String,
+		color: String,
 		frameColor: String,
 		upholsteryColor: String
 	},
-	characteristics:{
-		main:{
+	characteristics: {
+		main: {
 			name: String,
-			list:[] //{id,name, value}
+			list: [] //{id,name, value}
 		},
 		multimedia: {
 			name: String,
-			list:[] //{id,name, value}
+			list: [] //{id,name, value}
 		},
-		additional:{
+		additional: {
 			name: String,
-			list:[] //{id,name, value}
+			list: [] //{id,name, value}
 		}
 	},
 	presentation: [], //{id,name,image,value}
-	slider:[]
+	slider: []
 })
 
 module.exports = mongoose.model("Product", Product);

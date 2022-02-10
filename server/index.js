@@ -7,6 +7,7 @@ const authRouter = require('./router/auth.routes');
 const productRouterFood = require('./router/productRout');
 const productRouter = require('./router/product.routes');
 const fileRouter = require('./router/file.routes');
+const telegramRouter = require('./router/telegram.routes');
 const path = require('path');
 const multer = require('multer');
 // var logger = require('morgan');
@@ -28,6 +29,7 @@ app.use('/api', authRouter);
 app.use('/api', productRouter);
 app.use('/api', productRouterFood);
 app.use('/api', fileRouter);
+app.use('/api', telegramRouter);
 app.use(errorMiddleware);
 // выгрузка index.html для всех запросов на хосте
 if (process.env.NODE_ENV === 'production') {
