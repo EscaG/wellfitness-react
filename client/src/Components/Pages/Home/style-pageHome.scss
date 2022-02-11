@@ -51,6 +51,11 @@
 			font-size: 22px;
 		}
 	}
+	@media (max-width: 576px) {
+		&__caption {
+			text-align: center;
+		}
+	}
 }
 
 .grid {
@@ -114,7 +119,7 @@
 		&_image {
 			height: 100%;
 			@media (max-width: 768px) {
-				height: 80%;
+				height: 75%;
 				&_m0,
 				&_m1 {
 					height: 100%;
@@ -162,7 +167,7 @@
 .club {
 	margin: 120px 0 120px 0;
 	@media (max-width: 768px) {
-		margin: 70px 0 0 0;
+		margin: 70px 0 30px 0;
 	}
 }
 .grid {

@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { editFavorites } from '../../../http/actions/user';
+import { editBasket, editFavorites } from '../../../http/actions/user';
 import { setFavoritesToRedux } from '../../../http/reducers/favoritesReducer';
 import SpriteIcons from '../SpriteIcons/SpriteIcons';
 import './productCardItem.scss';
 
 export default function ProductCardItem({ product }) {
 	const [isFavorite, setIsFavorite] = useState(false);
+	const [isBasket, setIsBasket] = useState(false);
+
 	const { _id, name, gallery, availability, rating, price } = product;
 	const user = useSelector(state => state.user.currentUser);
 	const isAuth = useSelector(state => state.user.isAuth);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	const dispatch = useDispatch();
-
+	// console.log(user);
 
 	useEffect(() => {
 		if (isAuth) {
 			if (user.favorites.includes(_id)) {
 				setIsFavorite(true);
+			}
+			if (product) {
+				haveInBasket(_id)
 			}
 		}
 	}, [user]);
@@ -47,7 +52,14 @@ export default function ProductCardItem({ product }) {
 		}
 	}, [favoritesFromRedux]);
 
-
+	function haveInBasket(id) {
+		// console.log('haveInBasket', id);
+		if (!user.basket.some(i => i.id === id)) {
+			setIsBasket(false)
+		} else {
+			setIsBasket(true)
+		}
+	}
 
 
 	const handleToFavorite = (id) => {
@@ -72,7 +84,24 @@ export default function ProductCardItem({ product }) {
 		}
 	}
 
+	const handleToBasket = (id) => {
+		if (user.basket) {
+			if (user.basket.length > 0) {
+				if (!user.basket.some(i => i.id === id)) {
+					console.log("добавил в корзину", id);
+					dispatch(editBasket(user.email, [...user.basket, { amount: 1, id }]))
+					setIsBasket(true)
+				} else {
+					console.log('удалил из корзины', id);
+					dispatch(editBasket(user.email, user.basket.filter(i => i.id !== id)))
+					setIsBasket(false)
+				}
+			} else {
+				dispatch(editBasket(user.email, [...user.basket, { amount: 1, id }]))
+			}
 
+		}
+	}
 
 	return (
 		<div key={_id} className='promotion__slider-item item-slider'>
@@ -152,7 +181,18 @@ export default function ProductCardItem({ product }) {
 						</div>
 					}
 					<div >
-						<button className="price-button__button">Купить</button>
+						{!isBasket ?
+							<button
+								onClick={() => handleToBasket(_id)}
+								className="price-button__button">Купить</button>
+
+							:
+							<Link
+								className="active price-button__button "
+								to={'/basket'}
+							>Оформить
+							</Link>
+						}
 					</div>
 				</div>
 			</div>

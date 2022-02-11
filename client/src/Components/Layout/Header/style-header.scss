@@ -468,6 +468,11 @@ $md4: 575.98;
 			fill: #f53b49;
 		}
 	}
+	&__item.active-link.cart {
+		use {
+			stroke: #f53b49;
+		}
+	}
 }
 
 .bottom-header {

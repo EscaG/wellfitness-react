@@ -48,7 +48,7 @@ export default function CatalogForClub() {
 		},
 		{
 			image: forhome2,
-			title: "Силовые тренажеры   ",
+			title: "Силовые тренажеры",
 			items: [
 				{
 					name: "Грузоблочные",

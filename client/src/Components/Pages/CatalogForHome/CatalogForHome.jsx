@@ -16,6 +16,7 @@ import Watched from '../../Layout/Watched/Watched';
 
 
 export default function CatalogForHome() {
+
 	const catalogList = [
 		{
 			image: forhome1,
@@ -187,6 +188,7 @@ export default function CatalogForHome() {
 		},
 
 	]
+
 	return (
 		<article className='article-catalogforhome catalogforhome-catalog'>
 			<section className='catalogforhome-catalog__section'>

@@ -10,8 +10,8 @@ import SpinnerLoad from '../../Layout/SpinnerLoad/SpinnerLoad';
 
 export default function FavoritesPage() {
 	const [productsFavorites, setProductsFavorites] = useState([]);
-	const [isLoad, setIsLoad] = useState(false);
-	const navigate = useNavigate();
+	// const [isLoad, setIsLoad] = useState(false);
+	// const navigate = useNavigate();
 	const { currentUser, isAuth, isLoading } = useSelector(state => state.user);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	const API_URL = process.env.REACT_APP_BASE_URL;

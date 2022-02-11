@@ -17,6 +17,7 @@ router.get('/refresh', userController.refresh);
 router.get('/users', authMiddleware, userController.getUsers);
 router.put('/update', userController.updateUser);
 router.put('/favorites', userController.updateFavorites);
+router.put('/basket', userController.updateBasket);
 router.put('/avatar', userController.updateAvatar);
 
 module.exports = router;

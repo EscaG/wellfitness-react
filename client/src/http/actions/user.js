@@ -81,6 +81,18 @@ export const editFavorites = (email, favorites) => {
 		}
 	}
 }
+export const editBasket = (email, basket) => {
+	return async dispatch => {
+		try {
+			const response = await $api.put(API_URL + '/basket',
+				{ email, basket });
+			dispatch(updateUser(response.data.user));
+		} catch (error) {
+			dispatch(errorUser(error?.response?.data?.message));
+		}
+	}
+}
+
 export const editAvatar = (email, avatar) => {
 	console.log("redux avatar");
 	return async dispatch => {

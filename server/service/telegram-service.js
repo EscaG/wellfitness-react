@@ -5,8 +5,8 @@ let offset = 0;
 exports.listenTGBot = function () {
 	console.log("Go To TG");
 
-	let Bot_token = "2069433667:AAGpLTxaYV3r1Y_cWvjIVZCwdU-h8eeKRhI";
-	let my_chat_id = "923506713"; // My TG
+	let Bot_token = process.env.TELEGRAM_TOKEN;
+	let my_chat_id = process.env.TELEGRAM_BOT_ID;
 
 	let url = "https://api.telegram.org/bot" + Bot_token;
 
@@ -34,9 +34,9 @@ exports.listenTGBot = function () {
 					fetch(url + "/sendMessage?chat_id=" + chat_id + "&text=" + text)
 						.catch(err => console.log(err));
 
-					let MyText = encodeURI( "user " + first_name +" send msg: \n" + msg );
+					let MyText = encodeURI("user " + first_name + " send msg: \n" + msg);
 					fetch(url + "/sendMessage?chat_id=" + my_chat_id + "&text=" + MyText)
-						.catch(err =>console.log(err));
+						.catch(err => console.log(err));
 				}
 			}
 		})

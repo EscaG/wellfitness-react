@@ -113,7 +113,7 @@ export default function Watched() {
 		<section className='watched'>
 			<Slider {...settingsPromotion}>
 				{products && products.map((item, index) =>
-					<Link key={index++} to={"/product/" + encodeURI(item.name) + "/" + item._id} className='watched__card'>
+					<Link key={item._id} to={"/product/" + encodeURI(item.name) + "/" + item._id} className='watched__card'>
 						<div className='watched__item-image'>
 
 							<img className='watched__image' src={item.gallery && item.gallery[0].image} alt="watched" />

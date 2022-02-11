@@ -85,49 +85,39 @@ class UserService {
 
 	async updateUser(email, surname, name, phone, data) {
 		await UserModel.updateOne({email}, {surname, name, phone, data});
-
-		const user = await UserModel.findOne({email});
-		if (!user) {
-			throw ApiError.BadRequest('Пользователь с таким email не найден');
-		}
-		const userDto = new UserDto(user);
-		const tokens = await tokenService.generateTokens({...userDto});
-
-		await tokenService.saveToken(userDto.id, tokens.refreshToken);
-		return {...tokens, user: userDto}
+		return update(email);
 	}
 
 	async favoritesService(favorites,email) {
 		await UserModel.updateOne({email}, {favorites});
-		// console.log(user)
-		const user = await UserModel.findOne({ email });
-		if (!user) {
-			throw ApiError.BadRequest('Пользователь с таким email не найден');
-		}
-		const userDto = new UserDto(user);
-		const tokens = await tokenService.generateTokens({...userDto});
+		return update(email);
+	}
 
-		await tokenService.saveToken(userDto.id, tokens.refreshToken);
-		return {...tokens, user: userDto}
+	async basketService(basket,email) {
+		await UserModel.updateOne({email}, {basket});
+		return update(email);
 	}
 
 	async avatarUpdate(email,avatar){
 		const getAvatar = await fileController.moveGallery(avatar, "/storage/users/avatar_");
 		await UserModel.updateOne({email}, {avatar:getAvatar});
-		const user = await UserModel.findOne({ email });
-		if (!user) {
-			throw ApiError.BadRequest('Пользователь с таким email не найден');
-		}
-		const userDto = new UserDto(user);
-		const tokens = await tokenService.generateTokens({...userDto});
-
-		await tokenService.saveToken(userDto.id, tokens.refreshToken);
-		return {...tokens, user: userDto}
+		return update(email);
 	}
-
 
 }
 
+
+async function  update(email) {
+	const user = await UserModel.findOne({ email });
+	if (!user) {
+		throw ApiError.BadRequest('Пользователь с таким email не найден');
+	}
+	const userDto = new UserDto(user);
+	const tokens = await tokenService.generateTokens({...userDto});
+
+	await tokenService.saveToken(userDto.id, tokens.refreshToken);
+	return {...tokens, user: userDto}
+}
 module.exports = new UserService();
 
 

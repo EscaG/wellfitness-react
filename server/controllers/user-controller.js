@@ -104,6 +104,19 @@ class UserController {
 		}
 	}
 
+	async updateBasket(req,res,next){
+		console.log("update BASKET", req.body);
+		try {
+			const {  basket,email } = req.body;
+			const userData = await userService.basketService(basket,email);
+			res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+			console.log("113 user-controller",userData)
+			return res.json(userData);
+		}catch (e) {
+			next(e)
+		}
+	}
+
 	async updateAvatar(req, res,next) {
 		console.log("Run AVaTAR");
 		try {

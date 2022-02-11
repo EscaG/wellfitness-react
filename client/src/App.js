@@ -22,13 +22,14 @@ import Discount from "./Components/Pages/Profile/Components/Discount";
 import Bonuses from "./Components/Pages/Profile/Components/Bonuses";
 import Instructions from "./Components/Pages/Profile/Components/Instructions";
 import Appeals from "./Components/Pages/Profile/Components/Appeals";
-import EditProfile from "./Components/Pages/Profile/Components/EditProfile/EditProfile";
 import ResultSearch from "./Components/Pages/ResultSearch/ResultSearch";
 import ErrorL from "./Components/hoc/ErrorL";
 import Layout from './Components/hoc/Layout';
 import SpinnerLoad from './Components/Layout/SpinnerLoad/SpinnerLoad';
+import Basket from './Components/Pages/Basket/Basket';
 
 
+const EditProfile = lazy(() => import("./Components/Pages/Profile/Components/EditProfile/EditProfile"));
 
 const PageBrands = lazy(() => import("./Components/Pages/Brands/PageBrands"));
 const PageContacts = lazy(() => import("./Components/Pages/Contacts/PageContacts"));
@@ -83,6 +84,7 @@ function App() {
 							<FavoritesPage />
 						</React.Suspense>
 					} />
+					<Route path='basket' element={<Basket />} />
 					<Route path="product/:slug/:id" element={
 						<React.Suspense fallback={<SpinnerLoad />}>
 							<ProductCardPage />
@@ -107,7 +109,11 @@ function App() {
 						<Route path="bonuses" element={<Bonuses />} />
 						<Route path="instructions" element={<Instructions />} />
 						<Route path="appeals" element={<Appeals />} />
-						<Route path="editprofile" element={<EditProfile />} />
+						<Route path="editprofile" element={
+							<React.Suspense fallback={<SpinnerLoad />}>
+								<EditProfile />
+							</React.Suspense>
+						} />
 					</Route>
 
 					<Route path='privacy-policy' element={

@@ -20,6 +20,7 @@ export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu 
 	// console.log(favoritesList);
 	// console.log(favoritesFromRedux);
 	const setActiveLinkFavorites = ({ isActive }) => (isActive ? "active-link " : '') + 'actions-header__item favorites';
+	const setActiveLinkBasket = ({ isActive }) => (isActive ? "active-link " : '') + 'actions-header__item cart';
 
 
 
@@ -163,13 +164,16 @@ export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu 
 								favoritesList && favoritesList.length ? <div><span>{favoritesList.length}</span></div> : null
 							}
 						</NavLink></li>
-						<li><button className="actions-header__item cart">
+						<li><NavLink to='/basket' className={setActiveLinkBasket}>
 							<svg width="21" height="26">
 								<title>cart</title>
 								<use xlinkHref={cart + "#cart"}></use>
 							</svg>
-							<div><span>1</span></div>
-						</button></li>
+							{isAuth ?
+								user?.basket && user?.basket?.length ? <div><span>{user.basket.length}</span></div> : null
+								: ''
+							}
+						</NavLink></li>
 					</ul>
 				</div>
 			</div>

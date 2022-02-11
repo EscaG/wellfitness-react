@@ -7,8 +7,9 @@ import MainImage from '../../../Layout/SpriteIcons/MainImage';
 import SpriteIcons from '../../../Layout/SpriteIcons/SpriteIcons';
 import { Link as LinkScroll } from 'react-scroll';
 import { useDispatch, useSelector } from 'react-redux';
-import { editFavorites } from '../../../../http/actions/user';
+import { editBasket, editFavorites } from '../../../../http/actions/user';
 import { setFavoritesToRedux } from '../../../../http/reducers/favoritesReducer';
+import { Link } from 'react-router-dom';
 
 export default function Presentation({ product }) {
 	const user = useSelector(state => state.user.currentUser);
@@ -24,6 +25,7 @@ export default function Presentation({ product }) {
 	const [radioColorFrame, setRadioColorFrame] = useState(null);
 	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
 	const [isFavorite, setIsFavorite] = useState(false);
+	const [isBasket, setIsBasket] = useState(false);
 	const [imageId, setImageId] = useState("");
 	const dispatch = useDispatch();
 
@@ -31,14 +33,35 @@ export default function Presentation({ product }) {
 	// const [favoritesListFromLocal, setFavoritesListFromLocal] = useState([]);
 	// const [goUpdateFavorites, setGoUpdateFavorites] = useState(false);
 
+	// console.log(user);
 
 	useEffect(() => {
 		if (isAuth) {
 			if (user.favorites.includes(_id)) {
 				setIsFavorite(true);
 			}
+			if (product) {
+				haveInBasket(_id)
+			}
+			console.log('isBasket', isBasket);
+			console.log("корзина", user.basket);
 		}
 	}, [user]);
+
+
+
+
+	function haveInBasket(id) {
+		// console.log('haveInBasket', id);
+		if (!user.basket.some(i => i.id === id)) {
+			setIsBasket(false)
+		} else {
+			setIsBasket(true)
+		}
+	}
+
+
+
 
 	useEffect(() => {
 		setIsFavorite(false);
@@ -88,6 +111,25 @@ export default function Presentation({ product }) {
 		}
 	}
 
+
+	const handleToBasket = (id) => {
+		if (user.basket) {
+			if (user.basket.length > 0) {
+				if (!user.basket.some(i => i.id === id)) {
+					console.log("добавил в корзину", id);
+					dispatch(editBasket(user.email, [...user.basket, { amount: entity, id }]))
+					setIsBasket(true)
+				} else {
+					console.log('удалил из корзины', id);
+					dispatch(editBasket(user.email, user.basket.filter(i => i.id !== id)))
+					setIsBasket(false)
+				}
+			} else {
+				dispatch(editBasket(user.email, [...user.basket, { amount: entity, id }]))
+			}
+
+		}
+	}
 
 	useLayoutEffect(() => {
 		setRadioSize(configuration && configuration.size);
@@ -232,7 +274,9 @@ export default function Presentation({ product }) {
 							{/* //todo в избранное */}
 							<div>
 								<div className='price-characteristics__favorites-icons'>
-									<div onClick={() => handleToFavorite(_id)} className='price-characteristics__favorites-icons-hover'>
+									<div
+										onClick={() => handleToFavorite(_id)}  //! тогл избранного 
+										className='price-characteristics__favorites-icons-hover'>
 										<svg className={isFavorite ? "presentation-icon-favorite active" : "presentation-icon-favorite"} height="24px" width="24px" >
 											<SpriteIcons icon={"favorite"} />
 										</svg>
@@ -294,7 +338,20 @@ export default function Presentation({ product }) {
 										<button className='cart-presentation__symbol' onClick={() => incrementEntity()}>+</button>
 									</div>
 									<div>
-										<button className="price-button__button cart-presentation__btn">В корзину</button>
+										{!isBasket ?
+
+											<button
+												onClick={() => handleToBasket(_id)} //! в корзину
+												className="price-button__button cart-presentation__btn">
+												В корзину
+											</button>
+											:
+											<Link
+												className="active price-button__button cart-presentation__btn"
+												to={'/basket'}
+											>Оформить
+											</Link>
+										}
 									</div>
 								</div>
 							</div>

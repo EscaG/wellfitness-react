@@ -144,3 +144,13 @@
 		padding: 10px;
 	}
 }
+
+.price-button__button.active {
+	padding: 0px 0px 0px 45px;
+	display: flex;
+	text-align: right;
+	// justify-content: space-between;
+	width: 150px;
+	align-items: center;
+	background-color: lime;
+}

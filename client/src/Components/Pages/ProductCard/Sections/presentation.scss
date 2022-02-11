@@ -218,6 +218,15 @@
 	&__btn {
 		width: 140px;
 	}
+	&__btn.active {
+		padding: 0px 0px 0px 45px;
+		display: flex;
+		text-align: right;
+		// justify-content: space-between;
+		width: 150px;
+		align-items: center;
+		background-color: lime;
+	}
 }
 #pieces-presentation {
 	min-width: 5px;

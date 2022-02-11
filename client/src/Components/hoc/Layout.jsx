@@ -46,7 +46,7 @@ export default function Layout() {
 			</main>
 			<button ref={scrollBtnRef} className="scrollToTop" onClick={scrollToTopClick}>
 
-				<svg width="16" height="35" viewBox="0 0 14 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<svg width="12" height="35" viewBox="0 0 14 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M1 1.5L12 16L1 30.5" stroke="#F53B49" strokeWidth="5" />
 				</svg>
 

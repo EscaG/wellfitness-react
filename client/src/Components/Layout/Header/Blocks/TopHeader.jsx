@@ -7,12 +7,15 @@ import { LoginForm } from "../../../Pages/Login/LoginForm";
 import Burger from '../../BurgerMenu/Burger';
 import ContentBurgerMenu from '../../BurgerMenu/ContentBurgerMenu';
 
+import userGuest from '../img/user_guest.svg';
+
 export default function TopHeader({ isActiveMenu, setIsActiveMenu, closeMenu }) {
 
 
 	const isAuth = useSelector(state => state.user.isAuth);
 	const user = useSelector(state => state.user.currentUser);
 	console.log("состояние логина = ", isAuth);
+	// console.log(user);
 	// const [isActiveMenu, setIsActiveMenu] = useState(false);
 	const [activeModal, setActiveModal] = useState(false);
 	const [isModal, setIsModal] = useState(false);
@@ -91,7 +94,7 @@ export default function TopHeader({ isActiveMenu, setIsActiveMenu, closeMenu }) 
 									className="contacts-header__persona">
 									<span className='contacts-header__persona flex'>
 										<span>{user.name}</span>
-										<img src={user.avatar && user.avatar} alt={user.name} />
+										<img src={user.avatar ? user.avatar : userGuest} alt={user.name} />
 									</span>
 								</Link>
 							}

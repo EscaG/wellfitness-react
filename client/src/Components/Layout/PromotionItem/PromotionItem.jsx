@@ -78,8 +78,11 @@ export default function PromotionItem() {
 		<div className="article-promotion promotion" id='promotion-layout'>
 			<div className='promotion__header'>
 				<h3 className="article__caption promotion__header flex">Акция</h3>
-				<Link className='promotion__header link' to="/" >Новинки</Link>
-				<Link className='promotion__header link' to="/" >Мы рекомендуем</Link>
+				<div>
+
+					<Link className='promotion__header link' to="/" >Новинки</Link>
+					<Link className='promotion__header link' to="/" >Мы рекомендуем</Link>
+				</div>
 			</div>
 			<div className='promotion__slider'>
 
