@@ -5,42 +5,42 @@ import "./bootstrap.scss"
 import './App.scss';
 
 
-import { PageHome } from './Components/Pages/Home/PageHome';
-import PageAbout from './Components/Pages/About/PageAbout';
-import PageService from "./Components/Pages/Service/PageService";
-import PageUslugi from "./Components/Pages/Uslugi/PageUslugi";
-import PageSupport from "./Components/Pages/Support/PageSupport";
-import PageBlog from "./Components/Pages/Blog/PageBlog";
-import PageShowroom from "./Components/Pages/Showroom/PageShowroom";
-import { LoginForm } from "./Components/Pages/Login/LoginForm";
-import RegistrationForm from "./Components/Pages/Login/RegistrationForm";
-import ProfilePage from "./Components/Pages/Profile/ProfilePage";
-import MyProfile from "./Components/Pages/Profile/Components/MyProfile";
-import Delivery from "./Components/Pages/Profile/Components/Delivery";
-import Orders from "./Components/Pages/Profile/Components/Orders";
-import Discount from "./Components/Pages/Profile/Components/Discount";
-import Bonuses from "./Components/Pages/Profile/Components/Bonuses";
-import Instructions from "./Components/Pages/Profile/Components/Instructions";
-import Appeals from "./Components/Pages/Profile/Components/Appeals";
-import ResultSearch from "./Components/Pages/ResultSearch/ResultSearch";
-import ErrorL from "./Components/hoc/ErrorL";
+import { PageHome } from './Pages/Home/PageHome';
+import PageAbout from './Pages/About/PageAbout';
+import PageService from "./Pages/Service/PageService";
+import PageUslugi from "./Pages/Uslugi/PageUslugi";
+import PageSupport from "./Pages/Support/PageSupport";
+import PageBlog from "./Pages/Blog/PageBlog";
+import PageShowroom from "./Pages/Showroom/PageShowroom";
+import { LoginForm } from "./Pages/Login/LoginForm";
+import RegistrationForm from "./Pages/Login/RegistrationForm";
+import ProfilePage from "./Pages/Profile/ProfilePage";
+import MyProfile from "./Pages/Profile/Components/MyProfile";
+import Delivery from "./Pages/Profile/Components/Delivery";
+import Orders from "./Pages/Profile/Components/Orders";
+import Discount from "./Pages/Profile/Components/Discount";
+import Bonuses from "./Pages/Profile/Components/Bonuses";
+import Instructions from "./Pages/Profile/Components/Instructions";
+import Appeals from "./Pages/Profile/Components/Appeals";
+import ResultSearch from "./Pages/ResultSearch/ResultSearch";
+import Error from "./Components/hoc/Error";
 import Layout from './Components/hoc/Layout';
 import SpinnerLoad from './Components/Layout/SpinnerLoad/SpinnerLoad';
-import Basket from './Components/Pages/Basket/Basket';
+import BasketPage from './Pages/BasketPage/BasketPage';
 
 
-const EditProfile = lazy(() => import("./Components/Pages/Profile/Components/EditProfile/EditProfile"));
+const EditProfile = lazy(() => import("./Pages/Profile/Components/EditProfile/EditProfile"));
 
-const PageBrands = lazy(() => import("./Components/Pages/Brands/PageBrands"));
-const PageContacts = lazy(() => import("./Components/Pages/Contacts/PageContacts"));
-const ProductCardPage = lazy(() => import("./Components/Pages/ProductCard/ProductCardPage"))
-const FavoritesPage = lazy(() => import("./Components/Pages/FavoritesPage/FavoritesPage"));
-const CatalogForHome = lazy(() => import("./Components/Pages/CatalogForHome/CatalogForHome"));
-const CatalogForClub = lazy(() => import("./Components/Pages/CatalogForClub/CatalogForClub"));
+const PageBrands = lazy(() => import("./Pages/Brands/PageBrands"));
+const PageContacts = lazy(() => import("./Pages/Contacts/PageContacts"));
+const ProductCardPage = lazy(() => import("./Pages/ProductCard/ProductCardPage"))
+const FavoritesPage = lazy(() => import("./Pages/FavoritesPage/FavoritesPage"));
+const CatalogForHome = lazy(() => import("./Pages/CatalogForHome/CatalogForHome"));
+const CatalogForClub = lazy(() => import("./Pages/CatalogForClub/CatalogForClub"));
 
-const Categories = lazy(() => import('./Components/Pages/Categories/Categories'));
-const PrivacyPolicy = lazy(() => import('./Components/Pages/PrivacyPolicy/PrivacyPolicy'));
-const Error404 = lazy(() => import("./Components/Pages/Error/Error404"));
+const Categories = lazy(() => import('./Pages/Categories/Categories'));
+const PrivacyPolicy = lazy(() => import('./Pages/PrivacyPolicy/PrivacyPolicy'));
+const Error404 = lazy(() => import("./Pages/Error404/Error404"));
 
 function App() {
 
@@ -84,7 +84,7 @@ function App() {
 							<FavoritesPage />
 						</React.Suspense>
 					} />
-					<Route path='basket' element={<Basket />} />
+					<Route path='basket' element={<BasketPage />} />
 					<Route path="product/:slug/:id" element={
 						<React.Suspense fallback={<SpinnerLoad />}>
 							<ProductCardPage />
@@ -130,9 +130,9 @@ function App() {
 
 					<Route path="*" element={
 						<React.Suspense fallback={<SpinnerLoad />}>
-							<ErrorL >
+							<Error >
 								<Error404 />
-							</ErrorL>
+							</Error>
 						</React.Suspense>
 					} />
 

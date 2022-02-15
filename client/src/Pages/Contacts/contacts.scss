@@ -1,0 +1,248 @@
+.contacts-page {
+	padding: 100px 15px 50px 15px;
+	margin: auto;
+	max-width: 1440px;
+	min-height: 75vh;
+	color: #384255;
+	&__title {
+		padding: 0 0 20px 0;
+		margin: 0 0 30px 0;
+		color: #1a1a25;
+		font-size: 38px;
+		font-variation-settings: "wght" 800;
+		border-bottom: 1px solid rgba(133, 143, 164, 0.2);
+	}
+	&__cities {
+		flex: 1;
+		margin: 0 0 30px;
+		button {
+			margin: 0 12px 0 0;
+			background-color: inherit;
+		}
+		.article__link.active {
+			background-color: #f53b49;
+			color: #fff;
+		}
+	}
+}
+.contacts-map {
+	padding: 0 0 30px 0;
+	margin: 0 0 30px 0;
+	border-bottom: 1px solid rgba(133, 143, 164, 0.2);
+}
+.office-contacts {
+	&__address-block {
+		padding: 0 0 30px 0;
+		margin: 0 0 30px 0;
+		border-bottom: 1px solid rgba(133, 143, 164, 0.2);
+		display: flex;
+	}
+}
+.address-sales,
+.address-accounting,
+.address-service {
+	&__email-block {
+		flex: 1;
+		a {
+			margin: 0 0 2px 0;
+			display: inline-block;
+			color: #384255;
+			font-size: 16px;
+			font-style: WazzardM, serif;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	&__desc-email {
+		margin: 0 0 10px 0;
+		color: #909cb5;
+	}
+}
+.address-office,
+.address-office-kiev,
+.address-sales,
+.address-accounting,
+.address-service {
+	& > div:first-child {
+		flex: 1;
+	}
+	&__address-wrapper {
+		display: flex;
+		& > div {
+			flex: 1;
+		}
+	}
+	&__title {
+		font-size: 30px;
+		font-variation-settings: "wght" 700;
+	}
+	&__title-small {
+		margin: 0 0 20px 0;
+		font-size: 16px;
+		font-variation-settings: "wght" 500;
+	}
+	&__address {
+		margin: 0 0 20px 0;
+		font-size: 20px;
+		line-height: 1.2;
+	}
+	&__work-time {
+		font-size: 16px;
+		margin: 0 0 20px 0;
+		span {
+			display: inline-block;
+			margin: 0 0 3px 0;
+		}
+	}
+	&__background-img {
+		flex: 1;
+		height: 250px;
+		background: url("location-citycenter.png") center / cover no-repeat;
+	}
+	&__tel {
+		margin: 0 0 20px 0;
+		a {
+			color: #384255;
+			font-size: 17px;
+			font-variation-settings: "wght" 700;
+		}
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	.address-office-kiev {
+		&__background-img {
+			background: url("location-kiev.png") center / cover no-repeat;
+		}
+	}
+}
+.warehouse-contacts {
+	margin: 0px 0px 30px 0px;
+
+	&__title {
+		margin: 0 0 20px 0;
+		font-size: 38px;
+		font-variation-settings: "wght" 700;
+	}
+	&__cards {
+		display: grid;
+		grid-template: 1fr/ 1fr 1fr;
+		gap: 20px;
+		& > div {
+			flex: 1;
+			padding: 30px;
+			border-radius: 6px;
+			background-color: #fff;
+		}
+	}
+	&__address {
+		margin: 0 0 12px 0;
+		line-height: 1.3;
+	}
+	&__name {
+		margin: 0 0 12px 0;
+		font-size: 20px;
+		font-variation-settings: "wght" 800;
+	}
+	a {
+		color: #384255;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+}
+@media (max-width: 992px) {
+	.contacts-page {
+		padding: 80px 15px 50px 15px;
+		&__title {
+			font-size: 34px;
+		}
+	}
+	.address-office,
+	.address-office-kiev,
+	.address-sales,
+	.address-accounting,
+	.address-service {
+		&__work-time {
+			span {
+				display: block;
+			}
+		}
+	}
+	.warehouse-contacts {
+		&__name {
+			font-size: 18px;
+		}
+	}
+}
+@media (max-width: 768px) {
+	.contacts-page {
+		padding: 50px 15px 50px 15px;
+		&__title {
+			padding: 0 0 15px 0;
+			margin: 0 0 20px 0;
+			font-size: 30px;
+		}
+	}
+	.address-sales {
+		&__address-wrapper {
+			& > div {
+				flex: unset;
+			}
+		}
+	}
+	.address-office,
+	.address-office-kiev,
+	.address-sales,
+	.address-accounting,
+	.address-service {
+		&__address-wrapper {
+			flex-direction: column;
+		}
+		&__background-img {
+			flex: 2;
+		}
+	}
+}
+@media (max-width: 576px) {
+	.contacts-page {
+		padding: 30px 15px 50px 15px;
+		&__title {
+			padding: 0 0 15px 0;
+			margin: 0 0 20px 0;
+			font-size: 26px;
+		}
+		&__cities {
+			margin: 0 0 20px;
+			button {
+				width: 100%;
+				margin: 0 0 10px 0;
+			}
+		}
+	}
+	.address-office {
+		flex-direction: column;
+		&__address-wrapper {
+			flex-direction: row;
+		}
+		&__background-img {
+			flex: unset;
+			height: 200px;
+		}
+	}
+	.address-sales,
+	.address-office-kiev,
+	.address-accounting,
+	.address-service {
+		flex-direction: column;
+		&__address-wrapper {
+			flex-direction: column;
+		}
+	}
+	.warehouse-contacts {
+		&__cards {
+			grid-template: 1fr 1fr/ 1fr;
+		}
+	}
+}

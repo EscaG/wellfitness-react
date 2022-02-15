@@ -16,7 +16,7 @@ exports.moveGallery = function (gallery, path) {
 				__dirname + "/../public" + newPlace,
 				function (err) {
 					if (err) {
-						console.log("Error move gallery", err);
+						console.log("Error404 move gallery", err);
 					}
 				});
 			gallery = newPlace;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ProductViewe from '../../ProductViewe/ProductViewe';
+import ProductCardSearch from '../../ProductCardSearch/ProductCardSearch';
 import SpriteIcons from '../../SpriteIcons/SpriteIcons';
 
 export default function AutocompleteItem({ modalActive, setModalActive, product, setToLocal }) {
@@ -28,7 +28,7 @@ export default function AutocompleteItem({ modalActive, setModalActive, product,
 	return (
 		// <div className='autocomplete-heder-list-block'>
 
-		<ProductViewe product={product} closeAndSetToLocal={closeAndSetToLocal} />
+		<ProductCardSearch product={product} closeAndSetToLocal={closeAndSetToLocal} />
 		// </div>
 	)
 

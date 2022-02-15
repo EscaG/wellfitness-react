@@ -6,19 +6,11 @@ import "slick-carousel/slick/slick-theme.css";
 import './slick.css';
 import './style-promotionsection.scss';
 
-// import iconPercent from './img/icons/percent.png';
-// import iconLike from './img/icons/like.png';
-// import iconNew from './img/icons/new.png';
-
-// import heart from './img/icons/heart.svg';
-// import comparison from './img/icons/comparison.svg';
 
 import { useSelector } from 'react-redux';
 import ProductCardItem from '../ProductCardItem/ProductCardItem';
 
 export default function PromotionItem() {
-	// const [isLoaded, setIsLoaded] = useState(false);
-	// const [error, setError] = useState("");
 
 	const products = useSelector(state => state.product.currentProduct);
 

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
 import { useSelector } from "react-redux";
 import Modal from "../../ModalWindow/Modal";
-import { LoginForm } from "../../../Pages/Login/LoginForm";
+import { LoginForm } from "../../../../Pages/Login/LoginForm";
 import Burger from '../../BurgerMenu/Burger';
 import ContentBurgerMenu from '../../BurgerMenu/ContentBurgerMenu';
 
