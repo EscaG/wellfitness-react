@@ -1,0 +1,15 @@
+.icons-slider__svg {
+	transition: 0.3s;
+}
+.icons-slider__svg.favorites {
+	fill: transparent;
+	stroke: #828282;
+	stroke-width: 3px;
+}
+.icons-slider__svg.active {
+	fill: #f53b49;
+	stroke: #f53b49;
+}
+.icons-slider__item:hover .icons-slider__svg.favorites {
+	stroke: #f53b49;
+}

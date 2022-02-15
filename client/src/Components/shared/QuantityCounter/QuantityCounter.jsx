@@ -1,12 +1,7 @@
 import React from 'react';
 import './quantitycounter.scss';
 
-
-
-
 export default function QuantityCounter({ amount, setAmount }) {
-	// const [amount, setAmount] = useState(1);
-
 
 	const onChangeEntity = (e) => {
 		let myNumber = Number(e.target.value);

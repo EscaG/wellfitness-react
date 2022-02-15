@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import ButtonFavorites from '../../shared/ButtonFavorites/ButtonFavorites';
 import QuantityCounter from '../../shared/QuantityCounter/QuantityCounter';
 import './ProductCardBasket.scss';
 
 export default function ProductCardBasket({ product, amountP }) {
-	const { name, gallery } = product;
+	const { _id, name, gallery } = product;
 
 	const [amount, setAmount] = useState(1);
 
@@ -24,6 +25,9 @@ export default function ProductCardBasket({ product, amountP }) {
 			<QuantityCounter
 				amount={amount}
 				setAmount={setAmount}
+			/>
+			<ButtonFavorites
+				id={_id}
 			/>
 		</div>
 	)

@@ -8,7 +8,9 @@ import AutocompleteHeader from '../AutocompleteSearch/AutocompleteHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { editFavorites } from '../../../../http/actions/user';
 import { setFavoritesToRedux } from '../../../../http/reducers/favoritesReducer';
+
 export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu }) {
+
 	const user = useSelector(state => state.user.currentUser);
 	const isAuth = useSelector(state => state.user.isAuth);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
@@ -17,8 +19,8 @@ export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu 
 	const [favoritesList, setFavoritesList] = useState([]);
 	const dispatch = useDispatch();
 	const [goUpdateFavorites, setGoUpdateFavorites] = useState(false);
-	// console.log(favoritesList);
-	// console.log(favoritesFromRedux);
+
+
 	const setActiveLinkFavorites = ({ isActive }) => (isActive ? "active-link " : '') + 'actions-header__item favorites';
 	const setActiveLinkBasket = ({ isActive }) => (isActive ? "active-link " : '') + 'actions-header__item cart';
 
@@ -33,12 +35,6 @@ export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu 
 		}
 	}, [])
 
-	useEffect(() => {
-		// console.log("LOCAL", localStorage.getItem('favorites').length);
-		// console.log("LOCAL", JSON.parse(localStorage.getItem('favorites')).length);
-		// console.log("favoritesList", favoritesList);
-		// console.log("favoritesFromRedux", favoritesFromRedux);
-	})
 
 
 	useEffect(() => {
@@ -67,7 +63,6 @@ export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu 
 			// localStorage.setItem('favorites', JSON.stringify(favoritesFromRedux))
 			setFavoritesList(favoritesFromRedux)
 		}
-
 	}, [favoritesFromRedux]);
 
 

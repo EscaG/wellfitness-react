@@ -1,56 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { editBasket, editFavorites } from '../../../http/actions/user';
-import { setFavoritesToRedux } from '../../../http/reducers/favoritesReducer';
+import { editBasket } from '../../../http/actions/user';
+import ButtonFavorites from '../../shared/ButtonFavorites/ButtonFavorites';
 import SpriteIcons from '../SpriteIcons/SpriteIcons';
 import './productCardItem.scss';
 
 export default function ProductCardItem({ product }) {
-	const [isFavorite, setIsFavorite] = useState(false);
+	const [isComparison, setIsComparison] = useState(false);
 	const [isBasket, setIsBasket] = useState(false);
 
 	const { _id, name, gallery, availability, rating, price } = product;
 	const user = useSelector(state => state.user.currentUser);
 	const isAuth = useSelector(state => state.user.isAuth);
-	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	const dispatch = useDispatch();
-	// console.log(user);
 
 	useEffect(() => {
 		if (isAuth) {
-			if (user.favorites.includes(_id)) {
-				setIsFavorite(true);
-			}
 			if (product) {
 				haveInBasket(_id)
 			}
 		}
 	}, [user]);
-
-	useEffect(() => {
-		if (isAuth) {
-			// console.log("обновился продукт");
-			if (user.favorites.includes(_id)) {
-				// console.log("favorite true");
-				setIsFavorite(true);
-			} else {
-				setIsFavorite(false);
-				// console.log("disactive");
-			}
-		}
-	}, [product]);
-
-
-	useEffect(() => {
-		if (favoritesFromRedux.length) {
-			if (favoritesFromRedux.includes(_id)) {
-				// console.log("active");
-				setIsFavorite(true);
-				// console.log(favoritesFromRedux);
-			}
-		}
-	}, [favoritesFromRedux]);
 
 	function haveInBasket(id) {
 		// console.log('haveInBasket', id);
@@ -58,29 +29,6 @@ export default function ProductCardItem({ product }) {
 			setIsBasket(false)
 		} else {
 			setIsBasket(true)
-		}
-	}
-
-
-	const handleToFavorite = (id) => {
-		if (user.favorites) {
-			if (!user.favorites.includes(id)) {
-				dispatch(editFavorites(user.email, [...user.favorites, id]));
-			} else {
-				dispatch(editFavorites(user.email, user.favorites.filter(i => i !== id)));
-				setIsFavorite(false)
-			}
-		} else {
-			if (!favoritesFromRedux.includes(id)) {
-				// console.log("new favorite to user");
-				dispatch(setFavoritesToRedux([...favoritesFromRedux, id]))
-				localStorage.setItem('favorites', JSON.stringify([...favoritesFromRedux, id]))
-				setIsFavorite(true)
-			} else {
-				dispatch(setFavoritesToRedux(favoritesFromRedux.filter(i => i !== id)))
-				localStorage.setItem('favorites', JSON.stringify(favoritesFromRedux.filter(i => i !== id)))
-				setIsFavorite(false)
-			}
 		}
 	}
 
@@ -129,17 +77,14 @@ export default function ProductCardItem({ product }) {
 					<button className='icons-slider__item link-svg'
 					// onClick={() => handleToFavorite(_id)}
 					>
-						<svg width="17" height="17" className={(isFavorite ? ' ' : '') + 'icons-slider__svg comparison'} >
+						<svg width="17" height="17" className={(isComparison ? ' ' : '') + 'icons-slider__svg comparison'} >
 							<SpriteIcons icon="comparison" />
 						</svg>
 					</button>
-					<button className='icons-slider__item link-svg'
-						onClick={() => handleToFavorite(_id)}
-					>
-						<svg width="21" height="21" className={(isFavorite ? 'active ' : '') + 'icons-slider__svg favorites'} >
-							<SpriteIcons icon="favorite" />
-						</svg>
-					</button >
+
+					<ButtonFavorites
+						id={_id}
+					/>
 				</div >
 
 			</div >
