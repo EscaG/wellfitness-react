@@ -7,12 +7,13 @@ import MainImage from '../../../Components/Layout/SpriteIcons/MainImage';
 import SpriteIcons from '../../../Components/Layout/SpriteIcons/SpriteIcons';
 import { Link as LinkScroll } from 'react-scroll';
 import { useDispatch, useSelector } from 'react-redux';
-import { editBasket, editFavorites } from '../../../http/actions/user';
-import { setFavoritesToRedux } from '../../../http/reducers/favoritesReducer';
+import { editBasket } from '../../../http/actions/user';
+// import { setFavoritesToRedux } from '../../../http/reducers/favoritesReducer';
 import { Link } from 'react-router-dom';
 import QuantityCounter from '../../../Components/shared/QuantityCounter/QuantityCounter';
-import { addProductToBasket, addToBasket } from '../../../http/reducers/basket-reducer';
+import { addProductToBasket, addToBasketRedux } from '../../../http/reducers/basket-reducer';
 import ButtonFavorites from '../../../Components/shared/ButtonFavorites/ButtonFavorites';
+import ButtonBasket from '../../../Components/shared/ButtonBasket/ButtonBasket';
 
 const settingsSlider = {
 	className: "presentation-slider",
@@ -71,48 +72,32 @@ const Presentation = memo(({ product }) => {
 	const [radioColorFrame, setRadioColorFrame] = useState(null);
 	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
 	// const [isFavorite, setIsFavorite] = useState(false);
-	const [isBasket, setIsBasket] = useState(false);
 	const [imageId, setImageId] = useState("");
 	const dispatch = useDispatch();
 
 
-	useEffect(() => {
-		if (isAuth) {
-			basketAmount(user.basket)
-		}
-	}, [product, user]);
 
 
-	function basketAmount(basket) {
-		for (let i = 0; i < basket.length; i++) {
-			if (basket[i].id === _id) {
-				setAmount(basket[i].amount);
-				setIsBasket(true);
-				return;
-			}
-		}
-	}
+	// const handleToBasket = (id) => {
+	// 	if (user.basket) {
+	// 		if (user.basket.length > 0) {
+	// 			if (!user.basket.some(i => i.id === id)) {
+	// 				console.log("добавил в корзину", id);
+	// 				dispatch(editBasket(user.email, [...user.basket, { amount: amount, id }]))
+	// 				setIsBasket(true)
+	// 			} else {
+	// 				console.log('удалил из корзины', id);
+	// 				dispatch(editBasket(user.email, user.basket.filter(i => i.id !== id)))
+	// 				setIsBasket(false)
+	// 			}
+	// 		} else {
+	// 			dispatch(editBasket(user.email, [...user.basket, { amount: amount, id }]))
+	// 		}
 
-	const handleToBasket = (id) => {
-		if (user.basket) {
-			if (user.basket.length > 0) {
-				if (!user.basket.some(i => i.id === id)) {
-					console.log("добавил в корзину", id);
-					dispatch(editBasket(user.email, [...user.basket, { amount: amount, id }]))
-					setIsBasket(true)
-				} else {
-					console.log('удалил из корзины', id);
-					dispatch(editBasket(user.email, user.basket.filter(i => i.id !== id)))
-					setIsBasket(false)
-				}
-			} else {
-				dispatch(editBasket(user.email, [...user.basket, { amount: amount, id }]))
-			}
-
-		} else {
-			dispatch(addToBasket({ product, amount }))
-		}
-	}
+	// 	} else {
+	// 		dispatch(addToBasketRedux({ product, amount }))
+	// 	}
+	// }
 
 
 
@@ -266,7 +251,7 @@ const Presentation = memo(({ product }) => {
 										amount={amount}
 										setAmount={setAmount}
 									/>
-									<div>
+									{/* <div>
 										{!isBasket ?
 											<button
 												onClick={() => handleToBasket(_id)} //! в корзину
@@ -281,7 +266,16 @@ const Presentation = memo(({ product }) => {
 											>Оформить
 											</button>
 										}
-									</div>
+									</div> */}
+									<ButtonBasket
+										_id={_id}
+										user={user}
+										isAuth={isAuth}
+										isLoading={isLoading}
+										amount={amount}
+										setAmount={setAmount}
+										product={product}
+									/>
 								</div>
 							</div>
 						</div>

@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { editFavorites } from '../../../http/actions/user';
 import { setFavoritesToRedux } from '../../../http/reducers/favoritesReducer';
 import SpriteIcons from '../../Layout/SpriteIcons/SpriteIcons';
@@ -8,16 +8,11 @@ import './buttonfavorites.scss';
 const ButtonFavorites = memo(({ id, children, user, isAuth, isLoading, favoritesFromRedux }) => {
 
 	const [isFavorite, setIsFavorite] = useState(false);
-	// const [isBasket, setIsBasket] = useState(false);
 
-	// const { id, name, gallery, availability, rating, price } = product;
-	// const user = useSelector(state => state.user.currentUser);
-	// const isAuth = useSelector(state => state.user.isAuth);
-	// const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	const dispatch = useDispatch();
 
 
-	console.log(user, isAuth, isLoading);
+	// console.log(user, isAuth, isLoading);
 
 	useEffect(() => {
 		if (isAuth) {

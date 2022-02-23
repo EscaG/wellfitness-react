@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import ProductCardItem from '../../Components/Layout/ProductCardItem/ProductCardItem';
-// import ProductCardSearch from '../../Layout/ProductCardSearch/ProductCardSearch';
 import SpinnerLoad from '../../Components/Layout/SpinnerLoad/SpinnerLoad';
 import Watched from '../../Components/Layout/Watched/Watched';
 import './categories.scss';
@@ -12,7 +12,8 @@ export default function Categories() {
 	const [products, setProducts] = useState([]);
 	const [brands, setBrands] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(true);
-
+	const { isAuth, isLoading, currentUser } = useSelector(state => state.user);
+	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	let { from, to } = useParams();
 	useEffect(() => {
 		document.body.scrollIntoView()
@@ -76,6 +77,10 @@ export default function Categories() {
 							<ProductCardItem
 								key={product._id}
 								product={product}
+								user={currentUser}
+								isAuth={isAuth}
+								isLoading={isLoading}
+								favoritesFromRedux={favoritesFromRedux}
 							/>)
 							:
 							null

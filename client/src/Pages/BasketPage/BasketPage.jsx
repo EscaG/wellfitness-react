@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCardBasket from '../../Components/Layout/ProductCardBasket/ProductCardBasket';
-import ProductCardItem from '../../Components/Layout/ProductCardItem/ProductCardItem';
+// import ProductCardItem from '../../Components/Layout/ProductCardItem/ProductCardItem';
 import { clearBasket } from '../../http/reducers/basket-reducer';
 import './basket.scss';
 
@@ -18,10 +18,6 @@ export default function BasketPage() {
 
 	const inBasket = Object.keys(items).map(key =>
 		items[key]
-		// return {
-		// 	product: items[key][0],
-		// 	amount: items[key].length
-		// };
 	)
 	console.log(inBasket);
 	useEffect(() => {
@@ -98,19 +94,19 @@ export default function BasketPage() {
 				:
 				null} */}
 			<button onClick={handleClear}>Clear</button>
-			{inBasket.length ? inBasket.map((product, index) =>
+			{inBasket.length
 
-				<ProductCardBasket
-					key={product.product._id}
-					product={product.product}
-					amountP={product.amount}
-					user={currentUser}
-					isAuth={isAuth}
-					isLoading={isLoading}
-					favoritesFromRedux={favoritesFromRedux}
-				/>
-			)
-
+				? inBasket.map((product, index) =>
+					<ProductCardBasket
+						key={product.product._id}
+						product={product.product}
+						amountP={product.amount}
+						user={currentUser}
+						isAuth={isAuth}
+						isLoading={isLoading}
+						favoritesFromRedux={favoritesFromRedux}
+					/>
+				)
 				: null}
 
 			<h4>Общая сумма {totalPrice}

@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { editBasket } from '../../../http/actions/user';
+import ButtonBasket from '../../shared/ButtonBasket/ButtonBasket';
 // import { basketAdd } from '../../../http/reducers/basket-reducer';
 import ButtonFavorites from '../../shared/ButtonFavorites/ButtonFavorites';
 import SpriteIcons from '../SpriteIcons/SpriteIcons';
@@ -10,7 +11,7 @@ import './productCardItem.scss';
 const ProductCardItem = memo(({ product, user, isAuth, isLoading, favoritesFromRedux }) => {
 	const [isComparison, setIsComparison] = useState(false);
 	const [isBasket, setIsBasket] = useState(false);
-
+	const [amount, setAmount] = useState(1);
 	const { _id, name, gallery, availability, rating, price } = product;
 	// const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	// const user = useSelector(state => state.user.currentUser);
@@ -142,7 +143,7 @@ const ProductCardItem = memo(({ product, user, isAuth, isLoading, favoritesFromR
 						</div>
 					}
 					<div >
-						{!isBasket ?
+						{/* {!isBasket ?
 							<button
 								onClick={() => handleToBasket(_id)}
 								className="price-button__button">Купить</button>
@@ -153,7 +154,17 @@ const ProductCardItem = memo(({ product, user, isAuth, isLoading, favoritesFromR
 								to={'/basket'}
 							>Оформить
 							</Link>
-						}
+						} */}
+						<ButtonBasket
+							user={user}
+							isAuth={isAuth}
+							isLoading={isLoading}
+							_id={_id}
+							product={product}
+							amount={amount}
+							setAmount={setAmount}
+						/>
+
 					</div>
 				</div>
 			</div>

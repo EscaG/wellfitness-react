@@ -1,0 +1,45 @@
+.price-button {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	&__price {
+		font-size: 17px;
+		font-variation-settings: "wght" 700;
+		color: #1a1a25;
+	}
+	&__fullprice {
+	}
+	&__shareprice + &__fullprice {
+		font-size: 16px;
+		font-variation-settings: "wght" 400;
+		color: #1a1a25;
+		text-decoration: line-through;
+	}
+	&__button {
+		padding: 0 0 0 30px;
+		width: 121px;
+		height: 49px;
+		border-radius: 4px;
+		font-variation-settings: "wght" 700;
+		color: #fff;
+		background: #f53b49;
+		background-image: url("../../../assets/cart.svg");
+		background-repeat: no-repeat;
+		background-position: 20px 13px;
+	}
+}
+
+.cart-presentation {
+	&__btn {
+		width: 140px;
+	}
+	&__btn.active {
+		padding: 0px 0px 0px 45px;
+		display: flex;
+		text-align: right;
+		// justify-content: space-between;
+		width: 150px;
+		align-items: center;
+		background-color: lime;
+	}
+}
