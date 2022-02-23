@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import IdeasSection from '../../Components/Layout/IdeasSection/IdeasSection';
 import NewsSlider from '../../Components/Layout/NewsSlider/NewsSlider';
@@ -8,6 +9,8 @@ import './resultsearch.scss';
 
 export default function ResultSearch() {
 	const [products, setProducts] = useState(null);
+	const { currentUser, isAuth, isLoading } = useSelector(state => state.user);
+	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	let params = useParams();
 
 	useEffect(() => {
@@ -34,6 +37,10 @@ export default function ResultSearch() {
 						<ProductCardItem
 							key={item._id}
 							product={item}
+							user={currentUser}
+							isAuth={isAuth}
+							isLoading={isLoading}
+							favoritesFromRedux={favoritesFromRedux}
 						/>
 					)}
 				</div>

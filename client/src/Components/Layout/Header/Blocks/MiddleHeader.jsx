@@ -14,6 +14,8 @@ export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu 
 	const user = useSelector(state => state.user.currentUser);
 	const isAuth = useSelector(state => state.user.isAuth);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
+	const { totalCount } = useSelector(({ basket }) => basket);
+	console.log(totalCount);
 	// console.log(favoritesFromRedux);
 	const [modalActive, setModalActive] = useState(false);
 	const [favoritesList, setFavoritesList] = useState([]);
@@ -40,13 +42,15 @@ export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu 
 	useEffect(() => {
 		if (isAuth) {
 			if (localStorage.getItem('favorites').length) {
-				setFavoritesList(Array.from(new Set([...user.favorites, ...favoritesList])))
-				dispatch(editFavorites(user.email, Array.from(new Set([...user.favorites, ...favoritesList]))))
-				localStorage.setItem('favorites', [])
+				setFavoritesList(Array.from(new Set([...user.favorites, ...favoritesList])));
+				dispatch(editFavorites(user.email, Array.from(new Set([...user.favorites, ...favoritesList]))));
+				localStorage.setItem('favorites', []);
 				// console.log("sdfgsd");
+				dispatch(setFavoritesToRedux([]));
 			} else {
-				setFavoritesList(user.favorites)
-				localStorage.setItem('favorites', [])
+				setFavoritesList(user.favorites);
+				localStorage.setItem('favorites', []);
+				dispatch(setFavoritesToRedux([]));
 				// setGoUpdateFavorites(false)
 			}
 		} else if (favoritesFromRedux.length) {
@@ -165,8 +169,9 @@ export default function MiddleHeader({ isActiveMenu, setIsActiveMenu, closeMenu 
 								<use xlinkHref={cart + "#cart"}></use>
 							</svg>
 							{isAuth ?
-								user?.basket && user?.basket?.length ? <div><span>{user.basket.length}</span></div> : null
-								: ''
+								user?.basket && user?.basket?.length
+									? <div><span>{user.basket.length}</span></div> : null
+								: totalCount ? <div><span>{totalCount}</span></div> : null
 							}
 						</NavLink></li>
 					</ul>

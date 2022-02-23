@@ -2,11 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import "./style-autocompleteheader.scss";
 import close from "../img/close.svg";
 import AutocompleteItem from './AutocompleteItem';
-// import { useDispatch } from 'react-redux';
-// import { setConditionAutocomplite } from '../../../../http/reducers/modalReducerAutocomplite';
 import SpriteIcons from '../../SpriteIcons/SpriteIcons';
 import { useNavigate } from 'react-router-dom';
-// import { setSearch } from '../../../../http/reducers/searchReducer';
 
 
 export default function AutocompleteHeader({ modalActive, setModalActive }) {
@@ -14,16 +11,13 @@ export default function AutocompleteHeader({ modalActive, setModalActive }) {
 	const [searchProduct, setSearchProduct] = useState("");
 	const [products, setProducts] = useState([]);
 	const [arraySearch, setArraySearched] = useState([]);
-	// const [newStringSearch, setnewStringSearch] = useState(null);
 	const searchRef = useRef(null);
 	const navigate = useNavigate();
 	const goProductCard = () => navigate('search/' + searchProduct);
-	// const dispatch = useDispatch();
-	// console.log(arraySearch);
+
 
 
 	useEffect(() => {
-		// localStorage.removeItem('arraySearch')
 		searchRef.current.focus();
 		if (localStorage.getItem('arraySearch')) {
 			setArraySearched(JSON.parse(localStorage.getItem('arraySearch')))
@@ -39,7 +33,6 @@ export default function AutocompleteHeader({ modalActive, setModalActive }) {
 
 	const setToLocal = (string) => {
 		if (!arraySearch.includes(string) && string) {
-			// setnewStringSearch(string);
 			setArraySearched(arraySearch => [...arraySearch, string])
 		}
 	}
@@ -67,7 +60,6 @@ export default function AutocompleteHeader({ modalActive, setModalActive }) {
 		}
 	}, 300);
 
-	// console.log(JSON.stringify(localStorage.getItem('searched')));
 	function useDebounce(callback, delay) {
 		const timer = useRef(null);
 		const debounceCallback = useCallback((...args) => {
@@ -83,13 +75,11 @@ export default function AutocompleteHeader({ modalActive, setModalActive }) {
 
 
 	const closeModalAutocomplete = () => {
-		// dispatch(setConditionAutocomplite(false))
 		setModalActive(!modalActive)
 	}
 
 	const handlerSearch = (e) => {
-		if (e.keyCode === 13 && e.target.value.length > 3) {
-			// dispatch(setSearch(searchProduct));
+		if (e.keyCode === 13 && e.target.value.length >= 3) {
 			closeModalAutocomplete();
 			goProductCard()
 		}

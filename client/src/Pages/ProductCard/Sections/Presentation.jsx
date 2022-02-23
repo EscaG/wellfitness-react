@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { memo, useEffect, useLayoutEffect, useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,13 +11,58 @@ import { editBasket, editFavorites } from '../../../http/actions/user';
 import { setFavoritesToRedux } from '../../../http/reducers/favoritesReducer';
 import { Link } from 'react-router-dom';
 import QuantityCounter from '../../../Components/shared/QuantityCounter/QuantityCounter';
+import { addProductToBasket, addToBasket } from '../../../http/reducers/basket-reducer';
+import ButtonFavorites from '../../../Components/shared/ButtonFavorites/ButtonFavorites';
 
-export default function Presentation({ product }) {
+const settingsSlider = {
+	className: "presentation-slider",
+	arrows: true,
+	centerMode: false,
+	infinite: true,
+	slidesToShow: 6,
+	slidesToScroll: 1,
+	waitForAnimate: false,
+	speed: 500,
+	autoplay: false,
+	autoplaySpeed: 2000,
+	initialSlide: 0,
+	responsive: [
+		{
+			breakpoint: 1300,
+			settings: {
+				slidesToShow: 5,
+			}
+		},
+
+		{
+			breakpoint: 992,
+			settings: {
+				slidesToShow: 5,
+			}
+		},
+		{
+			breakpoint: 768,
+			settings: {
+				slidesToShow: 6,
+			}
+		},
+		{
+			breakpoint: 576,
+			settings: {
+				slidesToShow: 5,
+			}
+		}
+	]
+}
+
+const Presentation = memo(({ product }) => {
+
 	const user = useSelector(state => state.user.currentUser);
-	const isAuth = useSelector(state => state.user.isAuth);
+	const { isAuth, isLoading } = useSelector(state => state.user);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	const { _id, name, gallery, price, characteristics, brand, availability, configuration
 	} = product;
+
 	const [previewImage, setPreviewImage] = useState('');
 	const [amount, setAmount] = useState(1);
 	const [radioWeight, setRadioWeight] = useState(null);
@@ -25,35 +70,15 @@ export default function Presentation({ product }) {
 	const [radioColor, setRadioColor] = useState(null);
 	const [radioColorFrame, setRadioColorFrame] = useState(null);
 	const [radioColorUpholstery, setRadioColorUpholstery] = useState(null);
-	const [isFavorite, setIsFavorite] = useState(false);
+	// const [isFavorite, setIsFavorite] = useState(false);
 	const [isBasket, setIsBasket] = useState(false);
 	const [imageId, setImageId] = useState("");
 	const dispatch = useDispatch();
 
-	// const [favoritesList, setFavoritesList] = useState([]);
-	// const [favoritesListFromLocal, setFavoritesListFromLocal] = useState([]);
-	// const [goUpdateFavorites, setGoUpdateFavorites] = useState(false);
-
-	// console.log(user);
-
-	console.log('isBasket', isBasket);
-	console.log("корзина", user.basket);
 
 	useEffect(() => {
-		setIsFavorite(false);
 		if (isAuth) {
-			if (user.favorites.includes(_id)) {
-				setIsFavorite(true);
-			} else {
-				setIsFavorite(false);
-			}
 			basketAmount(user.basket)
-			// if (user.basket.some(i => i.id === _id)) {
-
-			// 	setIsBasket(true)
-			// } else {
-			// 	setIsBasket(false)
-			// }
 		}
 	}, [product, user]);
 
@@ -66,43 +91,7 @@ export default function Presentation({ product }) {
 				return;
 			}
 		}
-		// setIsBasket(false);
 	}
-
-
-	useEffect(() => {
-		if (favoritesFromRedux.length) {
-			if (favoritesFromRedux.includes(_id)) {
-				setIsFavorite(true);
-			}
-		}
-	}, [_id, favoritesFromRedux]);
-
-
-
-
-	const handleToFavorite = (id) => {
-		if (user.favorites) {
-			if (!user.favorites.includes(id)) {
-				// console.log("new favorite to user");
-				dispatch(editFavorites(user.email, [...user.favorites, id]));
-			} else {
-				dispatch(editFavorites(user.email, user.favorites.filter(i => i !== id)));
-				setIsFavorite(false)
-			}
-		} else {
-			if (!favoritesFromRedux.includes(id)) {
-				dispatch(setFavoritesToRedux([...favoritesFromRedux, id]))
-				localStorage.setItem('favorites', JSON.stringify([...favoritesFromRedux, id]))
-				setIsFavorite(true)
-			} else {
-				dispatch(setFavoritesToRedux(favoritesFromRedux.filter(i => i !== id)))
-				localStorage.setItem('favorites', JSON.stringify(favoritesFromRedux.filter(i => i !== id)))
-				setIsFavorite(false)
-			}
-		}
-	}
-
 
 	const handleToBasket = (id) => {
 		if (user.basket) {
@@ -120,8 +109,12 @@ export default function Presentation({ product }) {
 				dispatch(editBasket(user.email, [...user.basket, { amount: amount, id }]))
 			}
 
+		} else {
+			dispatch(addToBasket({ product, amount }))
 		}
 	}
+
+
 
 	useLayoutEffect(() => {
 		setRadioSize(configuration && configuration.size);
@@ -158,46 +151,6 @@ export default function Presentation({ product }) {
 		setRadioColorUpholstery(e.target.value);
 	}
 
-	const settingsSlider = {
-		className: "presentation-slider",
-		arrows: true,
-		centerMode: false,
-		infinite: true,
-		slidesToShow: 6,
-		slidesToScroll: 1,
-		waitForAnimate: false,
-		speed: 500,
-		autoplay: false,
-		autoplaySpeed: 2000,
-		initialSlide: 0,
-		responsive: [
-			{
-				breakpoint: 1300,
-				settings: {
-					slidesToShow: 5,
-				}
-			},
-
-			{
-				breakpoint: 992,
-				settings: {
-					slidesToShow: 5,
-				}
-			},
-			{
-				breakpoint: 768,
-				settings: {
-					slidesToShow: 6,
-				}
-			},
-			{
-				breakpoint: 576,
-				settings: {
-					slidesToShow: 5,
-				}
-			}
-		]
-	}
 
 	return (
 		<section className='page-productcard__presentation presentation-product'>
@@ -245,14 +198,19 @@ export default function Presentation({ product }) {
 							{/* //todo в избранное */}
 							<div>
 								<div className='price-characteristics__favorites-icons'>
-									<div
-										onClick={() => handleToFavorite(_id)}  //! toggle Избранное
-										className='price-characteristics__favorites-icons-hover'>
-										<svg className={isFavorite ? "presentation-icon-favorite active" : "presentation-icon-favorite"} height="24px" width="24px" >
-											<SpriteIcons icon={"favorite"} />
-										</svg>
-										<span >&nbsp;&nbsp; В избранное</span>
+									{/* //! toggle Избранное */}
+									<div className='price-characteristics__favorites-icons-hover'>
+										<ButtonFavorites
+											id={_id}
+											user={user}
+											isAuth={isAuth}
+											isLoading={isLoading}
+											favoritesFromRedux={favoritesFromRedux}
+										>
+											<span >&nbsp;&nbsp; В избранное</span>
+										</ButtonFavorites>
 									</div>
+
 									<div className='price-characteristics__favorites-icons-hover'>
 										<svg className="presentation-icon" height="21px" width="24px" >
 											<SpriteIcons icon={"comparison"} />
@@ -303,18 +261,13 @@ export default function Presentation({ product }) {
 									}
 								</div>
 								<div className="block-price-presentation__cart-block cart-presentation">
-									{/* <div className='cart-presentation__wrapper'>
-										<button className='cart-presentation__symbol' onClick={() => decrementEntity()}>-</button>
-										<input type="number" id='pieces-presentation' value={amount} onChange={(e) => onChangeEntity(e)} min="1" max="99" />
-										<button className='cart-presentation__symbol' onClick={() => incrementEntity()}>+</button>
-									</div> */}
 									<QuantityCounter
+										product={product}
 										amount={amount}
 										setAmount={setAmount}
 									/>
 									<div>
 										{!isBasket ?
-
 											<button
 												onClick={() => handleToBasket(_id)} //! в корзину
 												className="price-button__button cart-presentation__btn">
@@ -542,4 +495,29 @@ export default function Presentation({ product }) {
 		</section >
 	);
 }
+)
+export default Presentation;
 
+
+
+// const handleToFavorite = (id) => {
+// 	if (user.favorites) {
+// 		if (!user.favorites.includes(id)) {
+// 			// console.log("new favorite to user");
+// 			dispatch(editFavorites(user.email, [...user.favorites, id]));
+// 		} else {
+// 			dispatch(editFavorites(user.email, user.favorites.filter(i => i !== id)));
+// 			setIsFavorite(false)
+// 		}
+// 	} else {
+// 		if (!favoritesFromRedux.includes(id)) {
+// 			dispatch(setFavoritesToRedux([...favoritesFromRedux, id]))
+// 			localStorage.setItem('favorites', JSON.stringify([...favoritesFromRedux, id]))
+// 			setIsFavorite(true)
+// 		} else {
+// 			dispatch(setFavoritesToRedux(favoritesFromRedux.filter(i => i !== id)))
+// 			localStorage.setItem('favorites', JSON.stringify(favoritesFromRedux.filter(i => i !== id)))
+// 			setIsFavorite(false)
+// 		}
+// 	}
+// }

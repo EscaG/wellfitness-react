@@ -1,7 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addToBasket } from '../../../http/reducers/basket-reducer';
 import './quantitycounter.scss';
 
-export default function QuantityCounter({ amount, setAmount }) {
+export default function QuantityCounter({ amount, setAmount, product }) {
+	const dispatch = useDispatch();
+
 
 	const onChangeEntity = (e) => {
 		let myNumber = Number(e.target.value);
@@ -17,12 +21,14 @@ export default function QuantityCounter({ amount, setAmount }) {
 	const incrementEntity = () => {
 		if (amount < 99) {
 			setAmount(amount => amount + 1)
+			dispatch(addToBasket({ product, amount: amount + 1 }))
 		}
 	}
 
 	const decrementEntity = () => {
 		if (amount > 1) {
 			setAmount(amount => amount - 1)
+			dispatch(addToBasket({ product, amount: amount - 1 }))
 		}
 	}
 

@@ -1,4 +1,3 @@
-// import $api from "../http/http";
 import $api from "../http";
 
 const API_URL = process.env.REACT_APP_BASE_URL;
@@ -59,4 +58,3 @@ export const setUser = user => ({ type: SET_USER, payload: user });
 export const updateUser = res => ({ type: UPDATE_USER, payload: res });
 export const logout = () => ({ type: LOGOUT });
 export const errorUser = (error) => ({ type: ERROR, payload: error });
-// export const updateFavorites = user => ({ type: UPDATE_USER, payload: user });

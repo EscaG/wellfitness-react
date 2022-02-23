@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { editBasket } from '../../../http/actions/user';
+// import { basketAdd } from '../../../http/reducers/basket-reducer';
 import ButtonFavorites from '../../shared/ButtonFavorites/ButtonFavorites';
 import SpriteIcons from '../SpriteIcons/SpriteIcons';
 import './productCardItem.scss';
 
-export default function ProductCardItem({ product }) {
+const ProductCardItem = memo(({ product, user, isAuth, isLoading, favoritesFromRedux }) => {
 	const [isComparison, setIsComparison] = useState(false);
 	const [isBasket, setIsBasket] = useState(false);
 
 	const { _id, name, gallery, availability, rating, price } = product;
-	const user = useSelector(state => state.user.currentUser);
-	const isAuth = useSelector(state => state.user.isAuth);
+	// const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
+	// const user = useSelector(state => state.user.currentUser);
+	// const { isAuth, isLoading } = useSelector(state => state.user);
+	const basketRedux = useSelector(state => state.basket.items);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -32,6 +35,11 @@ export default function ProductCardItem({ product }) {
 		}
 	}
 
+	useEffect(() => {
+		// console.log(basketRedux);
+	}, [basketRedux])
+
+
 	const handleToBasket = (id) => {
 		if (user.basket) {
 			if (user.basket.length > 0) {
@@ -48,6 +56,10 @@ export default function ProductCardItem({ product }) {
 				dispatch(editBasket(user.email, [...user.basket, { amount: 1, id }]))
 			}
 
+		} else {
+			// if (!basketRedux.some(product => product?.id === id)) {
+			// 	dispatch(basketAdd({ amount: 1, id }))
+			// }
 		}
 	}
 
@@ -84,6 +96,10 @@ export default function ProductCardItem({ product }) {
 
 					<ButtonFavorites
 						id={_id}
+						user={user}
+						isAuth={isAuth}
+						isLoading={isLoading}
+						favoritesFromRedux={favoritesFromRedux}
 					/>
 				</div >
 
@@ -143,4 +159,5 @@ export default function ProductCardItem({ product }) {
 			</div>
 		</div >
 	);
-}
+})
+export default ProductCardItem;

@@ -66,130 +66,135 @@ import HelpClient from './Components/HelpClient';
 import AboutHome from './Components/AboutHome';
 import OurPartner from './Components/OurPartner';
 
+
+
+
+const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
+const slides = [firstSlide, secondSlide, thirdSlide, fourthSlide];
+
+const helpHome = [{
+	imgSrc: helpCall,
+	width: "59",
+	height: "59",
+	imgId: "help-call",
+	header: "Помощь покупателю",
+	description: "Узнайте как приобрести товар, способы доставки и оплаты, а также условия гарантии.",
+	link: "Подробнее"
+},
+{
+	imgSrc: helpHand,
+	width: "60",
+	height: "60",
+	imgId: "help-hand",
+	header: "Заявка на сервис",
+	description: "Оставьте заявку на проведение гарантийного и постгарантийного ремонта.",
+	link: "Оставить заявку"
+},
+{
+	imgSrc: helpHelp,
+	width: "59",
+	height: "59",
+	imgId: "help-help",
+	header: "Личный кабинет партнера B2B",
+	description: "Личный кабинет дилера с доступом к информационным материалам.",
+	link: "Стать партнером"
+},
+{
+	imgSrc: helpSport,
+	width: "64",
+	height: "55",
+	imgId: "help-sport",
+	header: "Выставочный зал",
+	description: "Оставьте заявку на посещение шоу-рума в Москве.",
+	link: "Записаться"
+}]
+const homeImages = [{
+	imgSrc: treadmill,
+	name: "Беговые дорожки"
+},
+{
+	imgSrc: eleptic,
+	name: "Эллиптические тренажеры"
+},
+{
+	imgSrc: velo,
+	name: "Велотренажеры"
+},
+{
+	imgSrc: ski,
+	name: "Горнолыжные тренажеры"
+},
+{
+	imgSrc: power,
+	name: "Силовые тренажеры"
+},
+{
+	imgSrc: rowing,
+	name: "Гребные тренажеры"
+},
+{
+	imgSrc: trampoline,
+	name: "Батуты"
+},
+{
+	imgSrc: tables,
+	name: "Игровые столы"
+},
+{
+	imgSrc: armchair,
+	name: "Массажные кресла"
+},
+{
+	imgSrc: fitness,
+	name: "Фитнес аксессуары"
+}];
+const clubImages = [{
+	imgSrc: cardio,
+	name: "Профессиональные кардиотренажеры"
+},
+{
+	imgSrc: block,
+	name: "Грузоблочные тренажеры"
+},
+{
+	imgSrc: free,
+	name: "Тренажеры на свободных весах"
+},
+{
+	imgSrc: functional,
+	name: "Функциональный тренинг"
+},
+{
+	imgSrc: massage,
+	name: "Wellness, СПА, Массаж"
+},
+{
+	imgSrc: medicine,
+	name: "Спортивная медицина и реабилитация"
+},
+{
+	imgSrc: gantel,
+	name: "Свободные веса"
+}];
+
+const settings = {
+	dots: false,
+	arrows: false,
+	infinite: true,
+	speed: 1000,
+	slidesToShow: 1,
+	slidesToScroll: 1,
+	swipeToSlide: true,
+	waitForAnimate: false,
+	autoplay: true,
+	autoplaySpeed: 3000,
+	pauseOnHover: true,
+	fade: true
+};
+
+
 export const PageHome = () => {
 
-	const brands = [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10, brand11, brand12, brand13, brand14, brand15];
-	const slides = [firstSlide, secondSlide, thirdSlide, fourthSlide];
-
-	const helpHome = [{
-		imgSrc: helpCall,
-		width: "59",
-		height: "59",
-		imgId: "help-call",
-		header: "Помощь покупателю",
-		description: "Узнайте как приобрести товар, способы доставки и оплаты, а также условия гарантии.",
-		link: "Подробнее"
-	},
-	{
-		imgSrc: helpHand,
-		width: "60",
-		height: "60",
-		imgId: "help-hand",
-		header: "Заявка на сервис",
-		description: "Оставьте заявку на проведение гарантийного и постгарантийного ремонта.",
-		link: "Оставить заявку"
-	},
-	{
-		imgSrc: helpHelp,
-		width: "59",
-		height: "59",
-		imgId: "help-help",
-		header: "Личный кабинет партнера B2B",
-		description: "Личный кабинет дилера с доступом к информационным материалам.",
-		link: "Стать партнером"
-	},
-	{
-		imgSrc: helpSport,
-		width: "64",
-		height: "55",
-		imgId: "help-sport",
-		header: "Выставочный зал",
-		description: "Оставьте заявку на посещение шоу-рума в Москве.",
-		link: "Записаться"
-	}]
-	const homeImages = [{
-		imgSrc: treadmill,
-		name: "Беговые дорожки"
-	},
-	{
-		imgSrc: eleptic,
-		name: "Эллиптические тренажеры"
-	},
-	{
-		imgSrc: velo,
-		name: "Велотренажеры"
-	},
-	{
-		imgSrc: ski,
-		name: "Горнолыжные тренажеры"
-	},
-	{
-		imgSrc: power,
-		name: "Силовые тренажеры"
-	},
-	{
-		imgSrc: rowing,
-		name: "Гребные тренажеры"
-	},
-	{
-		imgSrc: trampoline,
-		name: "Батуты"
-	},
-	{
-		imgSrc: tables,
-		name: "Игровые столы"
-	},
-	{
-		imgSrc: armchair,
-		name: "Массажные кресла"
-	},
-	{
-		imgSrc: fitness,
-		name: "Фитнес аксессуары"
-	}];
-	const clubImages = [{
-		imgSrc: cardio,
-		name: "Профессиональные кардиотренажеры"
-	},
-	{
-		imgSrc: block,
-		name: "Грузоблочные тренажеры"
-	},
-	{
-		imgSrc: free,
-		name: "Тренажеры на свободных весах"
-	},
-	{
-		imgSrc: functional,
-		name: "Функциональный тренинг"
-	},
-	{
-		imgSrc: massage,
-		name: "Wellness, СПА, Массаж"
-	},
-	{
-		imgSrc: medicine,
-		name: "Спортивная медицина и реабилитация"
-	},
-	{
-		imgSrc: gantel,
-		name: "Свободные веса"
-	}];
-
-	const settings = {
-		dots: false,
-		arrows: false,
-		infinite: true,
-		speed: 1000,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		swipeToSlide: true,
-		waitForAnimate: false,
-		autoplay: true,
-		autoplaySpeed: 3000,
-		pauseOnHover: true,
-		fade: true
-	};
 
 
 

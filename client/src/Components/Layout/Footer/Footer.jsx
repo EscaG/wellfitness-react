@@ -61,7 +61,7 @@ export const Footer = () => {
 									<li className="nav-footer__item"><Link to="/" >Бизнес планирование</Link></li>
 									<li className="nav-footer__item"><Link to="/" >Лизинг</Link></li>
 									<li className="nav-footer__item"><Link to="/" >Trade-IN</Link></li>
-									<li className="nav-footer__item"><Link to="/" >Врассрочну</Link></li>
+									<li className="nav-footer__item"><Link to="/" >В рассрочку</Link></li>
 								</ul>
 							</div>
 							<div className="menu-bottom__column col-6 col-xs-6 col-sm-3 col-md-3 col-lg-3">

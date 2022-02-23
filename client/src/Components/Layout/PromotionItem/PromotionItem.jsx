@@ -1,70 +1,71 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
+import { useSelector } from 'react-redux';
+import ProductCardItem from '../ProductCardItem/ProductCardItem';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './slick.css';
 import './style-promotionsection.scss';
 
 
-import { useSelector } from 'react-redux';
-import ProductCardItem from '../ProductCardItem/ProductCardItem';
+const settingsPromotion = {
+	className: "center promotion-slider",
+	arrows: true,
+	autoplay: true,
+	autoplaySpeed: 2000,
+	centerMode: true,
+	centerPadding: "100px",
+	infinite: true,
+	lazyLoad: true,
+	initialSlide: 1,
+	slidesToShow: 4,
+	slidesToScroll: 1,
+	speed: 500,
+	waitForAnimate: false,
+	responsive: [
+		{
+			breakpoint: 1400,
+			settings: {
+				slidesToShow: 3,
+			}
+		},
+		{
+			breakpoint: 1100,
+			settings: {
+				slidesToShow: 2,
+			}
+		},
+		{
+			breakpoint: 992,
+			settings: {
+				centerPadding: "70px",
+				slidesToShow: 2,
+				initialSlide: 1
+			}
+		},
+		{
+			breakpoint: 768,
+			settings: {
+				centerPadding: "0px",
+				slidesToShow: 2,
+			}
+		},
+		{
+			breakpoint: 576,
+			settings: {
+				centerPadding: "0px",
+				slidesToShow: 1,
+			}
+		}
+	]
+}
 
-export default function PromotionItem() {
+const PromotionItem = memo(() => {
 
 	const products = useSelector(state => state.product.currentProduct);
-
-	const settingsPromotion = {
-		className: "center promotion-slider",
-		arrows: true,
-		autoplay: true,
-		autoplaySpeed: 2000,
-		centerMode: true,
-		centerPadding: "100px",
-		infinite: true,
-		lazyLoad: true,
-		initialSlide: 1,
-		slidesToShow: 4,
-		slidesToScroll: 1,
-		speed: 500,
-		waitForAnimate: false,
-		responsive: [
-			{
-				breakpoint: 1400,
-				settings: {
-					slidesToShow: 3,
-				}
-			},
-			{
-				breakpoint: 1100,
-				settings: {
-					slidesToShow: 2,
-				}
-			},
-			{
-				breakpoint: 992,
-				settings: {
-					centerPadding: "70px",
-					slidesToShow: 2,
-					initialSlide: 1
-				}
-			},
-			{
-				breakpoint: 768,
-				settings: {
-					centerPadding: "0px",
-					slidesToShow: 2,
-				}
-			},
-			{
-				breakpoint: 576,
-				settings: {
-					centerPadding: "0px",
-					slidesToShow: 1,
-				}
-			}
-		]
-	}
+	const { isAuth, isLoading, currentUser } = useSelector(state => state.user);
+	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 
 	return (
 		<div className="article-promotion promotion" id='promotion-layout'>
@@ -84,6 +85,10 @@ export default function PromotionItem() {
 						<ProductCardItem
 							key={product._id}
 							product={product}
+							user={currentUser}
+							isAuth={isAuth}
+							isLoading={isLoading}
+							favoritesFromRedux={favoritesFromRedux}
 						/>
 					)}
 				</Slider>
@@ -91,10 +96,10 @@ export default function PromotionItem() {
 			<Link to="/" className='article__link' href="#">Все товары по акции</Link>
 		</div>
 	)
-}
+})
 
 
-
+export default PromotionItem;
 
 
 

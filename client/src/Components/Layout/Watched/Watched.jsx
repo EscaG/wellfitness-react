@@ -12,7 +12,7 @@ import watchedFourth from './img/fourth.png';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export default function Watched() {
+const Watched = React.memo(() => {
 	const products = useSelector(state => state.product.currentProduct);
 
 	const watchedItems = [
@@ -130,4 +130,6 @@ export default function Watched() {
 			</Slider>
 		</section>
 	)
-}
+})
+
+export default Watched;

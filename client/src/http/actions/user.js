@@ -1,8 +1,6 @@
-// import axios from 'axios';
 import { errorUser, setUser, updateUser } from '../reducers/userReducer';
 import $api from "../http";
-// import {AuthResponse} from "../http/models/response/AuthResponse";
-// import {API_URL} from "../http/http";
+
 const API_URL = process.env.REACT_APP_BASE_URL;
 
 

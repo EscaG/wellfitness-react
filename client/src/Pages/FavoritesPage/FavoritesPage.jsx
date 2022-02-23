@@ -15,6 +15,7 @@ export default function FavoritesPage() {
 	const { currentUser, isAuth, isLoading } = useSelector(state => state.user);
 	const favoritesFromRedux = useSelector(state => state.favorites.currentFavorites);
 	const API_URL = process.env.REACT_APP_BASE_URL;
+	const [isLoad, setIsLoad] = useState(true)
 	// const goError = () => navigate('/404', { replace: true });
 	// console.log(currentUser);
 	useEffect(() => {
@@ -29,7 +30,10 @@ export default function FavoritesPage() {
 
 	useEffect(() => {
 		if (isAuth) {
-			setProductsFavorites(def(productsFavorites, currentUser.favorites))
+			// setProductsFavorites(def(productsFavorites, currentUser.favorites))
+			setProductsFavorites(productsFavorites =>
+				productsFavorites.filter(favorite => currentUser.favorites.some(id => id === favorite._id))
+			)
 		}
 	}, [currentUser]);
 
@@ -56,9 +60,10 @@ export default function FavoritesPage() {
 		return arr;
 	}
 
-
+	console.log(productsFavorites);
 	function promAll(favorites) {
 		if (favorites.length) {
+			setIsLoad(false)
 			Promise.all(
 				favorites.map(id => fetch(API_URL + '/product/byid/' + id)
 					.then(val => val.json())
@@ -69,35 +74,45 @@ export default function FavoritesPage() {
 					}
 					))
 			);
+			setIsLoad(true)
 		}
 	}
 
 	return (
 		<article className='favorites-page'>
 			<h1 className='favorites-page__title'>Избранное</h1>
-			<div className='favorites-page__grid'>
+			{isLoad ?
 
-				{isLoading ?
+				// <>
+				// 	{
+				// 		productsFavorites.map((product, index) =>
+				// 			<ProductCardItem key={product._id} product={product} />
+				// 		)
+				// 	}
+
+				// </>
+				// : 
+				// productsFavorites.length ?
+				<div className='favorites-page__grid'>
+
 					<>
 						{
 							productsFavorites.map((product, index) =>
-								<ProductCardItem key={product._id} product={product} />
+								<ProductCardItem
+									key={product._id}
+									product={product}
+									user={currentUser}
+									isAuth={isAuth}
+									isLoading={isLoading}
+									favoritesFromRedux={favoritesFromRedux}
+								/>
 							)
 						}
 
 					</>
-					: productsFavorites.length ?
-						<>
-							{
-								productsFavorites.map((product, index) =>
-									<ProductCardItem key={product._id} product={product} />
-								)
-							}
-
-						</> :
-						<SpinnerLoad />
-				}
-			</div>
+				</div>
+				: <SpinnerLoad />
+			}
 			<div className='favorites-page__watched'>
 				<h2 className='favorites-page__watched-title'>Вы смотрели</h2>
 				<Watched />
