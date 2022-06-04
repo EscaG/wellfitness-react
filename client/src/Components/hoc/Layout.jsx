@@ -17,7 +17,7 @@ export default function Layout() {
 
 
 	useEffect(() => {
-		console.log("APP")
+		console.log("APP + check")
 		dispatch(getProduct());
 		if (localStorage.getItem('token')) dispatch(checkAuth());
 		document.addEventListener("scroll", handleScroll, { passive: true })

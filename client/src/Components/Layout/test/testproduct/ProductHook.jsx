@@ -47,9 +47,10 @@ export default function ProductHook() {
 	}
 
 	const update = (item) => {
-		const items = items;
-		items[items.indexOf(i => i._id === item._id)] = item;
-		setItems(items);
+		// const items = items;
+		// items[items.indexOf(i => i._id === item._id)] = item;
+		setItems(items => items[items.indexOf(i => i._id === item._id)] = item);
+		// setState(arr.map(item => item.id === newItem.id ? {…newItem} : item))
 		setIsLoaded(false);
 
 		fetch(BASE_URL + "/productsfood",

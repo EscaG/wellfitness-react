@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-const DB_URI = "mongodb+srv://fitness:Acorn4ika@wellfitness.skx4x.mongodb.net/WellFitness?retryWrites=true&w=majority";
+const DB_URI = process.env.DB_URI;
 const start = async () => {
 	try {
 		await mongoose.connect(DB_URI, {
